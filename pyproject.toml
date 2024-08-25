@@ -28,3 +28,8 @@ dev-dependencies = [
     "cibuildwheel>=2.20.0",
     "scikit-build-core>=0.10.5",
 ]
+
+[tool.pytest.ini_options]
+addopts = [
+    "--ignore=extern"
+]
