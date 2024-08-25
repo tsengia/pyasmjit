@@ -4,6 +4,6 @@ project(pyasmjit LANGUAGES CXX)
 add_subdirectory(extern/asmjit)
 add_subdirectory(extern/pybind11)
 
-pybind11_add_module(_core MODULE src/main.cpp src/core.cpp src/x86.cpp)
+pybind11_add_module(_core MODULE src/gen/pyasmjit.cpp)
 target_link_libraries(_core PRIVATE asmjit::asmjit)
 install(TARGETS _core DESTINATION .)
