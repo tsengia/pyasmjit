@@ -1,0 +1,12 @@
+build
+.venv
+*.exe
+*.dll
+*.zip
+*.tar.gz
+*.xz
+*.7z
+*.o
+*.a
+*.so
+*~
