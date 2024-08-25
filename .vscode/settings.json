@@ -1,5 +1,11 @@
 {
     "cSpell.words": [
         "ASMJIT"
-    ]
+    ],
+    "files.associations": {
+        "chrono": "cpp",
+        "optional": "cpp",
+        "format": "cpp",
+        "system_error": "cpp"
+    }
 }
