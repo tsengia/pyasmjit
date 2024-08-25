@@ -5,7 +5,8 @@
             "includePath": [
                 "${workspaceFolder}/**",
                 "${workspaceFolder}/extern/pybind11/include",
-                "${workspaceFolder}/extern/asmjit/src"
+                "${workspaceFolder}/extern/asmjit/src",
+                "/usr/include/python3.12"
             ],
             "defines": [
                 "_DEBUG",
