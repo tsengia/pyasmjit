@@ -8,7 +8,28 @@ namespace py = pybind11;
 void init_core(py::module_ &m) {
     py::class_<asmjit::CodeHolder>(m, "CodeHolder")
         .def(py::init<>())
-        .def("hasBaseAddress", &asmjit::CodeHolder::hasBaseAddress);
+        .def("hasBaseAddress", &asmjit::CodeHolder::hasBaseAddress)
+        .def("reset", &asmjit::CodeHolder::reset)
+        .def("arch", &asmjit::CodeHolder::arch)
+        .def("cpuFeatures", &asmjit::CodeHolder::cpuFeatures);
+
+    py::enum_<asmjit::Arch>(m, "Arch")
+        .value("Unknown", asmjit::Arch::kUnknown, "Unknown or uninitialized ISA.")
+        .value("X86", asmjit::Arch::kX86, "32-bit X86 ISA.")
+        .value("X64", asmjit::Arch::kX64, "64-bit X86 ISA also known as X64, X86_64, and AMD64.")
+        .value("RISCV32", asmjit::Arch::kRISCV32, "32-bit RISC-V ISA.")
+        .value("RISCV64", asmjit::Arch::kRISCV64, "64-bit RISC-V ISA.")
+        .value("ARM", asmjit::Arch::kARM, "32-bit ARM ISA (little endian).")
+        .value("AArch64", asmjit::Arch::kAArch64, "64-bit ARM ISA in (little endian).")
+        .value("Thumb", asmjit::Arch::kThumb, "32-bit ARM ISA in Thumb mode (little endian).")
+        .value("MIPS32_LE", asmjit::Arch::kMIPS32_LE, "32-bit MIPS ISA in (little endian).")
+        .value("MIPS64_LE", asmjit::Arch::kMIPS64_LE, "64-bit MIPS ISA in (little endian).")
+        .value("ARM_BE", asmjit::Arch::kARM_BE, "32-bit ARM ISA (big endian).")
+        .value("AArch64_BE", asmjit::Arch::kAArch64_BE, "64-bit ARM ISA in (big endian).")
+        .value("Thumb_BE", asmjit::Arch::kThumb_BE, "32-bit ARM ISA in Thumb mode (big endian).")
+        .value("MIPS32_BE", asmjit::Arch::kMIPS32_BE, "32-bit MIPS ISA in (big endian).")
+        .value("MIPS64_BE", asmjit::Arch::kMIPS64_BE, "64-bit MIPS ISA in (big endian).")
+        .export_values();
 
     py::enum_<asmjit::ErrorCode>(m, "ErrorCode")
         .value("ErrorOk", asmjit::ErrorCode::kErrorOk, "No error (success).")
