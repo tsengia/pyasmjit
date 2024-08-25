@@ -10,7 +10,7 @@ dependencies = [ ]
 [project.optional-dependencies]
 dev = [
     "pybind11>=2.13.5",
-    "ruff>=0.6.2"
+    "ruff>=0.6.2",
     "cibuildwheel>=2.20.0",
     "scikit-build-core>=0.10.5",
 ]

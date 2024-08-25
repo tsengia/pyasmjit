@@ -3,5 +3,10 @@
 	"build": {
 		"dockerfile": "Dockerfile",
 		"context": "../"
-	}
+	},
+	"mounts": [
+		{"type": "bind", "source": "${env:HOME}${env:USERPROFILE}/.gnupg/pubring.kbx", "target": "/root/.gnupg/pubring.kbx"},
+		{"type": "bind", "source": "${env:HOME}${env:USERPROFILE}/.gnupg/private-keys-v1.d", "target": "/root/.gnupg/private-keys-v1.d"},
+		{"type": "bind", "source": "${env:HOME}${env:USERPROFILE}/.gnupg/trustdb.gpg", "target": "/root/.gnupg/trustdb.gpg"}
+	]
 }
