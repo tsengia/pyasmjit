@@ -12,4 +12,4 @@ RUN apt-get update -y && \
 RUN python3 -m pip install --break-system-packages uv
 ADD pyproject.toml .
 ADD uv.lock .
-RUN uv sync --all-extras --no-install-project
+RUN uv venv && uv sync --all-extras --no-install-project
