@@ -4,7 +4,8 @@
             "name": "Win32",
             "includePath": [
                 "${workspaceFolder}/**",
-                "${workspaceFolder}/.venv/Lib/site-packages/pybind11/include"
+                "${workspaceFolder}/extern/pybind11/include",
+                "${workspaceFolder}/extern/asmjit/src"
             ],
             "defines": [
                 "_DEBUG",
