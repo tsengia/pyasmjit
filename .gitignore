@@ -12,3 +12,4 @@ build
 *~
 *.whl
 wheelhouse
+__pycache__
