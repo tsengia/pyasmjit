@@ -1,18 +1,15 @@
-FROM mcr.microsoft.com/devcontainers/cpp:1-debian-11
+FROM ubuntu:noble
 
-ARG REINSTALL_CMAKE_VERSION_FROM_SOURCE="none"
+# Install C/C++ dev tools and basic tools (git, cmake, ripgrep, etc.)
+RUN apt-get update -y && \
+    apt-get install -y --no-install-recommends \
+        build-essential cmake git \
+        python3-pip python3-dev  \
+        ripgrep  && \
+    apt-get clean
 
-# Optionally install the cmake for vcpkg
-COPY ./reinstall-cmake.sh /tmp/
-
-RUN if [ "${REINSTALL_CMAKE_VERSION_FROM_SOURCE}" != "none" ]; then \
-        chmod +x /tmp/reinstall-cmake.sh && /tmp/reinstall-cmake.sh ${REINSTALL_CMAKE_VERSION_FROM_SOURCE}; \
-    fi \
-    && rm -f /tmp/reinstall-cmake.sh
-
-# [Optional] Uncomment this section to install additional vcpkg ports.
-# RUN su vscode -c "${VCPKG_ROOT}/vcpkg install <your-port-name-here>"
-
-# [Optional] Uncomment this section to install additional packages.
-# RUN apt-get update && export DEBIAN_FRONTEND=noninteractive \
-#     && apt-get -y install --no-install-recommends <your-package-list-here>
+# Install python packages
+RUN python3 -m pip install --break-system-packages uv
+ADD pyproject.toml .
+ADD uv.lock .
+RUN uv sync --all-extras --no-install-project
