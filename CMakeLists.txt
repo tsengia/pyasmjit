@@ -8,6 +8,6 @@ file(GLOB_RECURSE BinderGeneratedSourceCode RELATIVE "${CMAKE_CURRENT_SOURCE_DIR
 
 message("Sources: ${BinderGeneratedSourceCode}")
 
-pybind11_add_module(_core MODULE ${BinderGeneratedSourceCode})
-target_link_libraries(_core PRIVATE asmjit::asmjit)
-install(TARGETS _core DESTINATION .)
+pybind11_add_module(_pyasmjit MODULE ${BinderGeneratedSourceCode})
+target_link_libraries(_pyasmjit PRIVATE asmjit::asmjit)
+install(TARGETS _pyasmjit DESTINATION .)
