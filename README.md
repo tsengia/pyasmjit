@@ -1,6 +1,29 @@
 # pyasmjit
 Python 3.7+ bindings for [asmjit](https://github.com/asmjit/asmjit).
 
+```python
+from pyasmjit import CodeHolder, JitRuntime
+from pyasmjit.x86 import Assembler
+
+rt = JitRuntime()
+c = CodeHolder(rt.environment())
+
+a = Assembler(c)
+zbp = a.zbp()
+zsp = a.zsp()
+a.push(zbp)
+a.mov(zbp, zsp)
+
+# TODO: Patch assembler to auto-cast ints + floats + bytes + char to Immutable values
+a.sub(zsp, pyasmjit.asmjit.Imm(32))
+
+# TODO: Fix imports to allow for referencing registers by static name
+a.xor_(pyasmjit.asmjit.x86.eax(), pyasmjit.asmjit.x86.eax())
+a.mov(zsp, zbp)
+a.pop(zbp)
+a.ret()
+```
+
 ## Build Instructions
 Code generation through [binder](https://cppbinder.readthedocs.io/en/latest/config.html).
 
