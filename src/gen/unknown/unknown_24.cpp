@@ -49,19 +49,7 @@ void bind_unknown_unknown_24(std::function< pybind11::module &(std::string const
 	}
 	{ // asmjit::CodeHolder file: line:714
 		pybind11::class_<asmjit::CodeHolder, std::shared_ptr<asmjit::CodeHolder>> cl(M("asmjit"), "CodeHolder", "Holds assembled code and data (including sections, labels, and relocation information).\n\n CodeHolder connects emitters with their targets. It provides them interface that can be used to query information\n about the target environment (architecture, etc...) and API to create labels, sections, relocations, and to write\n data to a  which is always part of  More than one emitter can be attached to a single\n CodeHolder instance at a time, which is used in practice\n\n CodeHolder provides interface for all emitter types. Assemblers use CodeHolder to write into  and\n higher level emitters like Builder and Compiler use CodeHolder to manage labels and sections so higher level code\n can be serialized to Assembler by  and \n\n In order to use CodeHolder, it must be first initialized by  After the CodeHolder has been successfully\n initialized it can be used to hold assembled code, sections, labels, relocations, and to attach / detach code\n emitters. After the end of code generation it can be used to query physical locations of labels and to relocate\n the assembled code into the right address.\n\n \n  has an ability to attach an  however, the error handler is not triggered\n by  itself, it's instead propagated to all emitters that attach to it.");
-
-
-
-
-
-
-
-
-
-
-
-
-
+		cl.def(pybind11::init());
 		cl.def("isInitialized", (bool (asmjit::CodeHolder::*)() const) &asmjit::CodeHolder::isInitialized, "Tests whether the `CodeHolder` has been initialized.\n\n Emitters can be only attached to initialized `CodeHolder` instances.\n\nC++: asmjit::CodeHolder::isInitialized() const --> bool");
 		cl.def("init", [](asmjit::CodeHolder &o, const class asmjit::Environment & a0) -> unsigned int { return o.init(a0); }, "", pybind11::arg("environment"));
 		cl.def("init", (unsigned int (asmjit::CodeHolder::*)(const class asmjit::Environment &, unsigned long)) &asmjit::CodeHolder::init, "Initializes CodeHolder to hold code described by the given `environment` and `baseAddress`.\n\nC++: asmjit::CodeHolder::init(const class asmjit::Environment &, unsigned long) --> unsigned int", pybind11::arg("environment"), pybind11::arg("baseAddress"));
