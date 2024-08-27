@@ -1,5 +1,5 @@
 from __future__ import annotations
 
-from ._pyasmjit import CodeHolder
+from ._pyasmjit import asmjit
 
-__all__ = ["CodeHolder"]
+__all__ = ["asmjit"]
