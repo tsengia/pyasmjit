@@ -15,52 +15,94 @@
 
 void bind_unknown_unknown_50(std::function< pybind11::module &(std::string const &namespace_) > &M)
 {
-	// asmjit::x86::regs::gpb(unsigned int) file: line:383
-	M("asmjit::x86::regs").def("gpb", (class asmjit::x86::GpbLo (*)(unsigned int)) &asmjit::x86::regs::gpb, "Creates an 8-bit low GPB register operand.\n\nC++: asmjit::x86::regs::gpb(unsigned int) --> class asmjit::x86::GpbLo", pybind11::arg("rId"));
+	// asmjit::x86::ptr(const class asmjit::x86::Gp &, int, unsigned int) file: line:967
+	M("asmjit::x86").def("ptr", [](const class asmjit::x86::Gp & a0) -> asmjit::x86::Mem { return asmjit::x86::ptr(a0); }, "", pybind11::arg("base"));
+	M("asmjit::x86").def("ptr", [](const class asmjit::x86::Gp & a0, int const & a1) -> asmjit::x86::Mem { return asmjit::x86::ptr(a0, a1); }, "", pybind11::arg("base"), pybind11::arg("offset"));
+	M("asmjit::x86").def("ptr", (class asmjit::x86::Mem (*)(const class asmjit::x86::Gp &, int, unsigned int)) &asmjit::x86::ptr, "Creates `[base.reg + offset]` memory operand.\n\nC++: asmjit::x86::ptr(const class asmjit::x86::Gp &, int, unsigned int) --> class asmjit::x86::Mem", pybind11::arg("base"), pybind11::arg("offset"), pybind11::arg("size"));
 
-	// asmjit::x86::regs::gpb_lo(unsigned int) file: line:385
-	M("asmjit::x86::regs").def("gpb_lo", (class asmjit::x86::GpbLo (*)(unsigned int)) &asmjit::x86::regs::gpb_lo, "Creates an 8-bit low GPB register operand.\n\nC++: asmjit::x86::regs::gpb_lo(unsigned int) --> class asmjit::x86::GpbLo", pybind11::arg("rId"));
+	// asmjit::x86::ptr(const class asmjit::x86::Gp &, const class asmjit::x86::Gp &, unsigned int, int, unsigned int) file: line:971
+	M("asmjit::x86").def("ptr", [](const class asmjit::x86::Gp & a0, const class asmjit::x86::Gp & a1) -> asmjit::x86::Mem { return asmjit::x86::ptr(a0, a1); }, "", pybind11::arg("base"), pybind11::arg("index"));
+	M("asmjit::x86").def("ptr", [](const class asmjit::x86::Gp & a0, const class asmjit::x86::Gp & a1, unsigned int const & a2) -> asmjit::x86::Mem { return asmjit::x86::ptr(a0, a1, a2); }, "", pybind11::arg("base"), pybind11::arg("index"), pybind11::arg("shift"));
+	M("asmjit::x86").def("ptr", [](const class asmjit::x86::Gp & a0, const class asmjit::x86::Gp & a1, unsigned int const & a2, int const & a3) -> asmjit::x86::Mem { return asmjit::x86::ptr(a0, a1, a2, a3); }, "", pybind11::arg("base"), pybind11::arg("index"), pybind11::arg("shift"), pybind11::arg("offset"));
+	M("asmjit::x86").def("ptr", (class asmjit::x86::Mem (*)(const class asmjit::x86::Gp &, const class asmjit::x86::Gp &, unsigned int, int, unsigned int)) &asmjit::x86::ptr, "Creates `[base.reg + (index << shift) + offset]` memory operand (scalar index).\n\nC++: asmjit::x86::ptr(const class asmjit::x86::Gp &, const class asmjit::x86::Gp &, unsigned int, int, unsigned int) --> class asmjit::x86::Mem", pybind11::arg("base"), pybind11::arg("index"), pybind11::arg("shift"), pybind11::arg("offset"), pybind11::arg("size"));
 
-	// asmjit::x86::regs::gpb_hi(unsigned int) file: line:387
-	M("asmjit::x86::regs").def("gpb_hi", (class asmjit::x86::GpbHi (*)(unsigned int)) &asmjit::x86::regs::gpb_hi, "Creates an 8-bit high GPB register operand.\n\nC++: asmjit::x86::regs::gpb_hi(unsigned int) --> class asmjit::x86::GpbHi", pybind11::arg("rId"));
+	// asmjit::x86::ptr(const class asmjit::x86::Gp &, const class asmjit::x86::Vec &, unsigned int, int, unsigned int) file: line:975
+	M("asmjit::x86").def("ptr", [](const class asmjit::x86::Gp & a0, const class asmjit::x86::Vec & a1) -> asmjit::x86::Mem { return asmjit::x86::ptr(a0, a1); }, "", pybind11::arg("base"), pybind11::arg("index"));
+	M("asmjit::x86").def("ptr", [](const class asmjit::x86::Gp & a0, const class asmjit::x86::Vec & a1, unsigned int const & a2) -> asmjit::x86::Mem { return asmjit::x86::ptr(a0, a1, a2); }, "", pybind11::arg("base"), pybind11::arg("index"), pybind11::arg("shift"));
+	M("asmjit::x86").def("ptr", [](const class asmjit::x86::Gp & a0, const class asmjit::x86::Vec & a1, unsigned int const & a2, int const & a3) -> asmjit::x86::Mem { return asmjit::x86::ptr(a0, a1, a2, a3); }, "", pybind11::arg("base"), pybind11::arg("index"), pybind11::arg("shift"), pybind11::arg("offset"));
+	M("asmjit::x86").def("ptr", (class asmjit::x86::Mem (*)(const class asmjit::x86::Gp &, const class asmjit::x86::Vec &, unsigned int, int, unsigned int)) &asmjit::x86::ptr, "Creates `[base.reg + (index << shift) + offset]` memory operand (vector index).\n\nC++: asmjit::x86::ptr(const class asmjit::x86::Gp &, const class asmjit::x86::Vec &, unsigned int, int, unsigned int) --> class asmjit::x86::Mem", pybind11::arg("base"), pybind11::arg("index"), pybind11::arg("shift"), pybind11::arg("offset"), pybind11::arg("size"));
 
-	// asmjit::x86::regs::gpw(unsigned int) file: line:389
-	M("asmjit::x86::regs").def("gpw", (class asmjit::x86::Gpw (*)(unsigned int)) &asmjit::x86::regs::gpw, "Creates a 16-bit GPW register operand.\n\nC++: asmjit::x86::regs::gpw(unsigned int) --> class asmjit::x86::Gpw", pybind11::arg("rId"));
+	// asmjit::x86::ptr(const class asmjit::Label &, int, unsigned int) file: line:980
+	M("asmjit::x86").def("ptr", [](const class asmjit::Label & a0) -> asmjit::x86::Mem { return asmjit::x86::ptr(a0); }, "", pybind11::arg("base"));
+	M("asmjit::x86").def("ptr", [](const class asmjit::Label & a0, int const & a1) -> asmjit::x86::Mem { return asmjit::x86::ptr(a0, a1); }, "", pybind11::arg("base"), pybind11::arg("offset"));
+	M("asmjit::x86").def("ptr", (class asmjit::x86::Mem (*)(const class asmjit::Label &, int, unsigned int)) &asmjit::x86::ptr, "Creates `[base + offset]` memory operand.\n\nC++: asmjit::x86::ptr(const class asmjit::Label &, int, unsigned int) --> class asmjit::x86::Mem", pybind11::arg("base"), pybind11::arg("offset"), pybind11::arg("size"));
 
-	// asmjit::x86::regs::gpd(unsigned int) file: line:391
-	M("asmjit::x86::regs").def("gpd", (class asmjit::x86::Gpd (*)(unsigned int)) &asmjit::x86::regs::gpd, "Creates a 32-bit GPD register operand.\n\nC++: asmjit::x86::regs::gpd(unsigned int) --> class asmjit::x86::Gpd", pybind11::arg("rId"));
+	// asmjit::x86::ptr(const class asmjit::Label &, const class asmjit::x86::Gp &, unsigned int, int, unsigned int) file: line:984
+	M("asmjit::x86").def("ptr", [](const class asmjit::Label & a0, const class asmjit::x86::Gp & a1) -> asmjit::x86::Mem { return asmjit::x86::ptr(a0, a1); }, "", pybind11::arg("base"), pybind11::arg("index"));
+	M("asmjit::x86").def("ptr", [](const class asmjit::Label & a0, const class asmjit::x86::Gp & a1, unsigned int const & a2) -> asmjit::x86::Mem { return asmjit::x86::ptr(a0, a1, a2); }, "", pybind11::arg("base"), pybind11::arg("index"), pybind11::arg("shift"));
+	M("asmjit::x86").def("ptr", [](const class asmjit::Label & a0, const class asmjit::x86::Gp & a1, unsigned int const & a2, int const & a3) -> asmjit::x86::Mem { return asmjit::x86::ptr(a0, a1, a2, a3); }, "", pybind11::arg("base"), pybind11::arg("index"), pybind11::arg("shift"), pybind11::arg("offset"));
+	M("asmjit::x86").def("ptr", (class asmjit::x86::Mem (*)(const class asmjit::Label &, const class asmjit::x86::Gp &, unsigned int, int, unsigned int)) &asmjit::x86::ptr, "Creates `[base + (index << shift) + offset]` memory operand.\n\nC++: asmjit::x86::ptr(const class asmjit::Label &, const class asmjit::x86::Gp &, unsigned int, int, unsigned int) --> class asmjit::x86::Mem", pybind11::arg("base"), pybind11::arg("index"), pybind11::arg("shift"), pybind11::arg("offset"), pybind11::arg("size"));
 
-	// asmjit::x86::regs::gpq(unsigned int) file: line:393
-	M("asmjit::x86::regs").def("gpq", (class asmjit::x86::Gpq (*)(unsigned int)) &asmjit::x86::regs::gpq, "Creates a 64-bit GPQ register operand (64-bit).\n\nC++: asmjit::x86::regs::gpq(unsigned int) --> class asmjit::x86::Gpq", pybind11::arg("rId"));
+	// asmjit::x86::ptr(const class asmjit::Label &, const class asmjit::x86::Vec &, unsigned int, int, unsigned int) file: line:988
+	M("asmjit::x86").def("ptr", [](const class asmjit::Label & a0, const class asmjit::x86::Vec & a1) -> asmjit::x86::Mem { return asmjit::x86::ptr(a0, a1); }, "", pybind11::arg("base"), pybind11::arg("index"));
+	M("asmjit::x86").def("ptr", [](const class asmjit::Label & a0, const class asmjit::x86::Vec & a1, unsigned int const & a2) -> asmjit::x86::Mem { return asmjit::x86::ptr(a0, a1, a2); }, "", pybind11::arg("base"), pybind11::arg("index"), pybind11::arg("shift"));
+	M("asmjit::x86").def("ptr", [](const class asmjit::Label & a0, const class asmjit::x86::Vec & a1, unsigned int const & a2, int const & a3) -> asmjit::x86::Mem { return asmjit::x86::ptr(a0, a1, a2, a3); }, "", pybind11::arg("base"), pybind11::arg("index"), pybind11::arg("shift"), pybind11::arg("offset"));
+	M("asmjit::x86").def("ptr", (class asmjit::x86::Mem (*)(const class asmjit::Label &, const class asmjit::x86::Vec &, unsigned int, int, unsigned int)) &asmjit::x86::ptr, "Creates `[base + (index << shift) + offset]` memory operand.\n\nC++: asmjit::x86::ptr(const class asmjit::Label &, const class asmjit::x86::Vec &, unsigned int, int, unsigned int) --> class asmjit::x86::Mem", pybind11::arg("base"), pybind11::arg("index"), pybind11::arg("shift"), pybind11::arg("offset"), pybind11::arg("size"));
 
-	// asmjit::x86::regs::xmm(unsigned int) file: line:395
-	M("asmjit::x86::regs").def("xmm", (class asmjit::x86::Xmm (*)(unsigned int)) &asmjit::x86::regs::xmm, "Creates a 128-bit XMM register operand.\n\nC++: asmjit::x86::regs::xmm(unsigned int) --> class asmjit::x86::Xmm", pybind11::arg("rId"));
+	// asmjit::x86::ptr(const class asmjit::x86::Rip &, int, unsigned int) file: line:993
+	M("asmjit::x86").def("ptr", [](const class asmjit::x86::Rip & a0) -> asmjit::x86::Mem { return asmjit::x86::ptr(a0); }, "", pybind11::arg("rip_"));
+	M("asmjit::x86").def("ptr", [](const class asmjit::x86::Rip & a0, int const & a1) -> asmjit::x86::Mem { return asmjit::x86::ptr(a0, a1); }, "", pybind11::arg("rip_"), pybind11::arg("offset"));
+	M("asmjit::x86").def("ptr", (class asmjit::x86::Mem (*)(const class asmjit::x86::Rip &, int, unsigned int)) &asmjit::x86::ptr, "Creates `[rip + offset]` memory operand.\n\nC++: asmjit::x86::ptr(const class asmjit::x86::Rip &, int, unsigned int) --> class asmjit::x86::Mem", pybind11::arg("rip_"), pybind11::arg("offset"), pybind11::arg("size"));
 
-	// asmjit::x86::regs::ymm(unsigned int) file: line:397
-	M("asmjit::x86::regs").def("ymm", (class asmjit::x86::Ymm (*)(unsigned int)) &asmjit::x86::regs::ymm, "Creates a 256-bit YMM register operand.\n\nC++: asmjit::x86::regs::ymm(unsigned int) --> class asmjit::x86::Ymm", pybind11::arg("rId"));
+	// asmjit::x86::ptr(unsigned long, unsigned int) file: line:998
+	M("asmjit::x86").def("ptr", [](unsigned long const & a0) -> asmjit::x86::Mem { return asmjit::x86::ptr(a0); }, "", pybind11::arg("base"));
+	M("asmjit::x86").def("ptr", (class asmjit::x86::Mem (*)(unsigned long, unsigned int)) &asmjit::x86::ptr, "Creates `[base]` absolute memory operand.\n\nC++: asmjit::x86::ptr(unsigned long, unsigned int) --> class asmjit::x86::Mem", pybind11::arg("base"), pybind11::arg("size"));
 
-	// asmjit::x86::regs::zmm(unsigned int) file: line:399
-	M("asmjit::x86::regs").def("zmm", (class asmjit::x86::Zmm (*)(unsigned int)) &asmjit::x86::regs::zmm, "Creates a 512-bit ZMM register operand.\n\nC++: asmjit::x86::regs::zmm(unsigned int) --> class asmjit::x86::Zmm", pybind11::arg("rId"));
+	// asmjit::x86::ptr(unsigned long, const class asmjit::x86::Reg &, unsigned int, unsigned int) file: line:1002
+	M("asmjit::x86").def("ptr", [](unsigned long const & a0, const class asmjit::x86::Reg & a1) -> asmjit::x86::Mem { return asmjit::x86::ptr(a0, a1); }, "", pybind11::arg("base"), pybind11::arg("index"));
+	M("asmjit::x86").def("ptr", [](unsigned long const & a0, const class asmjit::x86::Reg & a1, unsigned int const & a2) -> asmjit::x86::Mem { return asmjit::x86::ptr(a0, a1, a2); }, "", pybind11::arg("base"), pybind11::arg("index"), pybind11::arg("shift"));
+	M("asmjit::x86").def("ptr", (class asmjit::x86::Mem (*)(unsigned long, const class asmjit::x86::Reg &, unsigned int, unsigned int)) &asmjit::x86::ptr, "Creates `[base + (index.reg << shift)]` absolute memory operand.\n\nC++: asmjit::x86::ptr(unsigned long, const class asmjit::x86::Reg &, unsigned int, unsigned int) --> class asmjit::x86::Mem", pybind11::arg("base"), pybind11::arg("index"), pybind11::arg("shift"), pybind11::arg("size"));
 
-	// asmjit::x86::regs::mm(unsigned int) file: line:401
-	M("asmjit::x86::regs").def("mm", (class asmjit::x86::Mm (*)(unsigned int)) &asmjit::x86::regs::mm, "Creates a 64-bit Mm register operand.\n\nC++: asmjit::x86::regs::mm(unsigned int) --> class asmjit::x86::Mm", pybind11::arg("rId"));
+	// asmjit::x86::ptr(unsigned long, const class asmjit::x86::Vec &, unsigned int, unsigned int) file: line:1006
+	M("asmjit::x86").def("ptr", [](unsigned long const & a0, const class asmjit::x86::Vec & a1) -> asmjit::x86::Mem { return asmjit::x86::ptr(a0, a1); }, "", pybind11::arg("base"), pybind11::arg("index"));
+	M("asmjit::x86").def("ptr", [](unsigned long const & a0, const class asmjit::x86::Vec & a1, unsigned int const & a2) -> asmjit::x86::Mem { return asmjit::x86::ptr(a0, a1, a2); }, "", pybind11::arg("base"), pybind11::arg("index"), pybind11::arg("shift"));
+	M("asmjit::x86").def("ptr", (class asmjit::x86::Mem (*)(unsigned long, const class asmjit::x86::Vec &, unsigned int, unsigned int)) &asmjit::x86::ptr, "Creates `[base + (index.reg << shift)]` absolute memory operand.\n\nC++: asmjit::x86::ptr(unsigned long, const class asmjit::x86::Vec &, unsigned int, unsigned int) --> class asmjit::x86::Mem", pybind11::arg("base"), pybind11::arg("index"), pybind11::arg("shift"), pybind11::arg("size"));
 
-	// asmjit::x86::regs::k(unsigned int) file: line:403
-	M("asmjit::x86::regs").def("k", (class asmjit::x86::KReg (*)(unsigned int)) &asmjit::x86::regs::k, "Creates a 64-bit K register operand.\n\nC++: asmjit::x86::regs::k(unsigned int) --> class asmjit::x86::KReg", pybind11::arg("rId"));
+	// asmjit::x86::ptr_abs(unsigned long, unsigned int) file: line:1011
+	M("asmjit::x86").def("ptr_abs", [](unsigned long const & a0) -> asmjit::x86::Mem { return asmjit::x86::ptr_abs(a0); }, "", pybind11::arg("base"));
+	M("asmjit::x86").def("ptr_abs", (class asmjit::x86::Mem (*)(unsigned long, unsigned int)) &asmjit::x86::ptr_abs, "Creates `[base]` absolute memory operand (absolute).\n\nC++: asmjit::x86::ptr_abs(unsigned long, unsigned int) --> class asmjit::x86::Mem", pybind11::arg("base"), pybind11::arg("size"));
 
-	// asmjit::x86::regs::cr(unsigned int) file: line:405
-	M("asmjit::x86::regs").def("cr", (class asmjit::x86::CReg (*)(unsigned int)) &asmjit::x86::regs::cr, "Creates a 32-bit or 64-bit control register operand.\n\nC++: asmjit::x86::regs::cr(unsigned int) --> class asmjit::x86::CReg", pybind11::arg("rId"));
+	// asmjit::x86::ptr_abs(unsigned long, const class asmjit::x86::Reg &, unsigned int, unsigned int) file: line:1015
+	M("asmjit::x86").def("ptr_abs", [](unsigned long const & a0, const class asmjit::x86::Reg & a1) -> asmjit::x86::Mem { return asmjit::x86::ptr_abs(a0, a1); }, "", pybind11::arg("base"), pybind11::arg("index"));
+	M("asmjit::x86").def("ptr_abs", [](unsigned long const & a0, const class asmjit::x86::Reg & a1, unsigned int const & a2) -> asmjit::x86::Mem { return asmjit::x86::ptr_abs(a0, a1, a2); }, "", pybind11::arg("base"), pybind11::arg("index"), pybind11::arg("shift"));
+	M("asmjit::x86").def("ptr_abs", (class asmjit::x86::Mem (*)(unsigned long, const class asmjit::x86::Reg &, unsigned int, unsigned int)) &asmjit::x86::ptr_abs, "Creates `[base + (index.reg << shift)]` absolute memory operand (absolute).\n\nC++: asmjit::x86::ptr_abs(unsigned long, const class asmjit::x86::Reg &, unsigned int, unsigned int) --> class asmjit::x86::Mem", pybind11::arg("base"), pybind11::arg("index"), pybind11::arg("shift"), pybind11::arg("size"));
 
-	// asmjit::x86::regs::dr(unsigned int) file: line:407
-	M("asmjit::x86::regs").def("dr", (class asmjit::x86::DReg (*)(unsigned int)) &asmjit::x86::regs::dr, "Creates a 32-bit or 64-bit debug register operand.\n\nC++: asmjit::x86::regs::dr(unsigned int) --> class asmjit::x86::DReg", pybind11::arg("rId"));
+	// asmjit::x86::ptr_abs(unsigned long, const class asmjit::x86::Vec &, unsigned int, unsigned int) file: line:1019
+	M("asmjit::x86").def("ptr_abs", [](unsigned long const & a0, const class asmjit::x86::Vec & a1) -> asmjit::x86::Mem { return asmjit::x86::ptr_abs(a0, a1); }, "", pybind11::arg("base"), pybind11::arg("index"));
+	M("asmjit::x86").def("ptr_abs", [](unsigned long const & a0, const class asmjit::x86::Vec & a1, unsigned int const & a2) -> asmjit::x86::Mem { return asmjit::x86::ptr_abs(a0, a1, a2); }, "", pybind11::arg("base"), pybind11::arg("index"), pybind11::arg("shift"));
+	M("asmjit::x86").def("ptr_abs", (class asmjit::x86::Mem (*)(unsigned long, const class asmjit::x86::Vec &, unsigned int, unsigned int)) &asmjit::x86::ptr_abs, "Creates `[base + (index.reg << shift)]` absolute memory operand (absolute).\n\nC++: asmjit::x86::ptr_abs(unsigned long, const class asmjit::x86::Vec &, unsigned int, unsigned int) --> class asmjit::x86::Mem", pybind11::arg("base"), pybind11::arg("index"), pybind11::arg("shift"), pybind11::arg("size"));
 
-	// asmjit::x86::regs::st(unsigned int) file: line:409
-	M("asmjit::x86::regs").def("st", (class asmjit::x86::St (*)(unsigned int)) &asmjit::x86::regs::st, "Creates an 80-bit st register operand.\n\nC++: asmjit::x86::regs::st(unsigned int) --> class asmjit::x86::St", pybind11::arg("rId"));
+	// asmjit::x86::ptr_rel(unsigned long, unsigned int) file: line:1024
+	M("asmjit::x86").def("ptr_rel", [](unsigned long const & a0) -> asmjit::x86::Mem { return asmjit::x86::ptr_rel(a0); }, "", pybind11::arg("base"));
+	M("asmjit::x86").def("ptr_rel", (class asmjit::x86::Mem (*)(unsigned long, unsigned int)) &asmjit::x86::ptr_rel, "Creates `[base]` relative memory operand (relative).\n\nC++: asmjit::x86::ptr_rel(unsigned long, unsigned int) --> class asmjit::x86::Mem", pybind11::arg("base"), pybind11::arg("size"));
 
-	// asmjit::x86::regs::bnd(unsigned int) file: line:411
-	M("asmjit::x86::regs").def("bnd", (class asmjit::x86::Bnd (*)(unsigned int)) &asmjit::x86::regs::bnd, "Creates a 128-bit bound register operand.\n\nC++: asmjit::x86::regs::bnd(unsigned int) --> class asmjit::x86::Bnd", pybind11::arg("rId"));
+	// asmjit::x86::ptr_rel(unsigned long, const class asmjit::x86::Reg &, unsigned int, unsigned int) file: line:1028
+	M("asmjit::x86").def("ptr_rel", [](unsigned long const & a0, const class asmjit::x86::Reg & a1) -> asmjit::x86::Mem { return asmjit::x86::ptr_rel(a0, a1); }, "", pybind11::arg("base"), pybind11::arg("index"));
+	M("asmjit::x86").def("ptr_rel", [](unsigned long const & a0, const class asmjit::x86::Reg & a1, unsigned int const & a2) -> asmjit::x86::Mem { return asmjit::x86::ptr_rel(a0, a1, a2); }, "", pybind11::arg("base"), pybind11::arg("index"), pybind11::arg("shift"));
+	M("asmjit::x86").def("ptr_rel", (class asmjit::x86::Mem (*)(unsigned long, const class asmjit::x86::Reg &, unsigned int, unsigned int)) &asmjit::x86::ptr_rel, "Creates `[base + (index.reg << shift)]` relative memory operand (relative).\n\nC++: asmjit::x86::ptr_rel(unsigned long, const class asmjit::x86::Reg &, unsigned int, unsigned int) --> class asmjit::x86::Mem", pybind11::arg("base"), pybind11::arg("index"), pybind11::arg("shift"), pybind11::arg("size"));
 
-	// asmjit::x86::regs::tmm(unsigned int) file: line:413
-	M("asmjit::x86::regs").def("tmm", (class asmjit::x86::Tmm (*)(unsigned int)) &asmjit::x86::regs::tmm, "Creates a TMM register operand.\n\nC++: asmjit::x86::regs::tmm(unsigned int) --> class asmjit::x86::Tmm", pybind11::arg("rId"));
+	// asmjit::x86::ptr_rel(unsigned long, const class asmjit::x86::Vec &, unsigned int, unsigned int) file: line:1032
+	M("asmjit::x86").def("ptr_rel", [](unsigned long const & a0, const class asmjit::x86::Vec & a1) -> asmjit::x86::Mem { return asmjit::x86::ptr_rel(a0, a1); }, "", pybind11::arg("base"), pybind11::arg("index"));
+	M("asmjit::x86").def("ptr_rel", [](unsigned long const & a0, const class asmjit::x86::Vec & a1, unsigned int const & a2) -> asmjit::x86::Mem { return asmjit::x86::ptr_rel(a0, a1, a2); }, "", pybind11::arg("base"), pybind11::arg("index"), pybind11::arg("shift"));
+	M("asmjit::x86").def("ptr_rel", (class asmjit::x86::Mem (*)(unsigned long, const class asmjit::x86::Vec &, unsigned int, unsigned int)) &asmjit::x86::ptr_rel, "Creates `[base + (index.reg << shift)]` relative memory operand (relative).\n\nC++: asmjit::x86::ptr_rel(unsigned long, const class asmjit::x86::Vec &, unsigned int, unsigned int) --> class asmjit::x86::Mem", pybind11::arg("base"), pybind11::arg("index"), pybind11::arg("shift"), pybind11::arg("size"));
+
+	// asmjit::x86::ptr_8(const class asmjit::x86::Gp &, int) file: line:1104
+	M("asmjit::x86").def("ptr_8", [](const class asmjit::x86::Gp & a0) -> asmjit::x86::Mem { return asmjit::x86::ptr_8(a0); }, "", pybind11::arg("base"));
+	M("asmjit::x86").def("ptr_8", (class asmjit::x86::Mem (*)(const class asmjit::x86::Gp &, int)) &asmjit::x86::ptr_8, "C++: asmjit::x86::ptr_8(const class asmjit::x86::Gp &, int) --> class asmjit::x86::Mem", pybind11::arg("base"), pybind11::arg("offset"));
+
+	// asmjit::x86::ptr_8(const class asmjit::x86::Gp &, const class asmjit::x86::Gp &, unsigned int, int) file: line:1104
+	M("asmjit::x86").def("ptr_8", [](const class asmjit::x86::Gp & a0, const class asmjit::x86::Gp & a1) -> asmjit::x86::Mem { return asmjit::x86::ptr_8(a0, a1); }, "", pybind11::arg("base"), pybind11::arg("index"));
+	M("asmjit::x86").def("ptr_8", [](const class asmjit::x86::Gp & a0, const class asmjit::x86::Gp & a1, unsigned int const & a2) -> asmjit::x86::Mem { return asmjit::x86::ptr_8(a0, a1, a2); }, "", pybind11::arg("base"), pybind11::arg("index"), pybind11::arg("shift"));
+	M("asmjit::x86").def("ptr_8", (class asmjit::x86::Mem (*)(const class asmjit::x86::Gp &, const class asmjit::x86::Gp &, unsigned int, int)) &asmjit::x86::ptr_8, "C++: asmjit::x86::ptr_8(const class asmjit::x86::Gp &, const class asmjit::x86::Gp &, unsigned int, int) --> class asmjit::x86::Mem", pybind11::arg("base"), pybind11::arg("index"), pybind11::arg("shift"), pybind11::arg("offset"));
 
 }

@@ -1,3 +1,4 @@
+#include <sstream> // __str__
 
 #include <functional>
 #include <pybind11/pybind11.h>
@@ -15,109 +16,36 @@
 
 void bind_unknown_unknown_64(std::function< pybind11::module &(std::string const &namespace_) > &M)
 {
-	// asmjit::x86::xmmword_ptr_rel(unsigned long) file: line:300
-	M("asmjit::x86").def("xmmword_ptr_rel", (class asmjit::x86::Mem (*)(unsigned long)) &asmjit::x86::xmmword_ptr_rel, "C++: asmjit::x86::xmmword_ptr_rel(unsigned long) --> class asmjit::x86::Mem", pybind11::arg("base"));
-
-	// asmjit::x86::xmmword_ptr_rel(unsigned long, const class asmjit::x86::Gp &, unsigned int) file: line:301
-	M("asmjit::x86").def("xmmword_ptr_rel", [](unsigned long const & a0, const class asmjit::x86::Gp & a1) -> asmjit::x86::Mem { return asmjit::x86::xmmword_ptr_rel(a0, a1); }, "", pybind11::arg("base"), pybind11::arg("index"));
-	M("asmjit::x86").def("xmmword_ptr_rel", (class asmjit::x86::Mem (*)(unsigned long, const class asmjit::x86::Gp &, unsigned int)) &asmjit::x86::xmmword_ptr_rel, "C++: asmjit::x86::xmmword_ptr_rel(unsigned long, const class asmjit::x86::Gp &, unsigned int) --> class asmjit::x86::Mem", pybind11::arg("base"), pybind11::arg("index"), pybind11::arg("shift"));
-
-	// asmjit::x86::xmmword_ptr_rel(unsigned long, const class asmjit::x86::Vec &, unsigned int) file: line:302
-	M("asmjit::x86").def("xmmword_ptr_rel", [](unsigned long const & a0, const class asmjit::x86::Vec & a1) -> asmjit::x86::Mem { return asmjit::x86::xmmword_ptr_rel(a0, a1); }, "", pybind11::arg("base"), pybind11::arg("index"));
-	M("asmjit::x86").def("xmmword_ptr_rel", (class asmjit::x86::Mem (*)(unsigned long, const class asmjit::x86::Vec &, unsigned int)) &asmjit::x86::xmmword_ptr_rel, "C++: asmjit::x86::xmmword_ptr_rel(unsigned long, const class asmjit::x86::Vec &, unsigned int) --> class asmjit::x86::Mem", pybind11::arg("base"), pybind11::arg("index"), pybind11::arg("shift"));
-
-	// asmjit::x86::ymmword_ptr(const class asmjit::x86::Gp &, int) file: line:1126
-	M("asmjit::x86").def("ymmword_ptr", [](const class asmjit::x86::Gp & a0) -> asmjit::x86::Mem { return asmjit::x86::ymmword_ptr(a0); }, "", pybind11::arg("base"));
-	M("asmjit::x86").def("ymmword_ptr", (class asmjit::x86::Mem (*)(const class asmjit::x86::Gp &, int)) &asmjit::x86::ymmword_ptr, "C++: asmjit::x86::ymmword_ptr(const class asmjit::x86::Gp &, int) --> class asmjit::x86::Mem", pybind11::arg("base"), pybind11::arg("offset"));
-
-	// asmjit::x86::ymmword_ptr(const class asmjit::x86::Gp &, const class asmjit::x86::Gp &, unsigned int, int) file: line:1126
-	M("asmjit::x86").def("ymmword_ptr", [](const class asmjit::x86::Gp & a0, const class asmjit::x86::Gp & a1) -> asmjit::x86::Mem { return asmjit::x86::ymmword_ptr(a0, a1); }, "", pybind11::arg("base"), pybind11::arg("index"));
-	M("asmjit::x86").def("ymmword_ptr", [](const class asmjit::x86::Gp & a0, const class asmjit::x86::Gp & a1, unsigned int const & a2) -> asmjit::x86::Mem { return asmjit::x86::ymmword_ptr(a0, a1, a2); }, "", pybind11::arg("base"), pybind11::arg("index"), pybind11::arg("shift"));
-	M("asmjit::x86").def("ymmword_ptr", (class asmjit::x86::Mem (*)(const class asmjit::x86::Gp &, const class asmjit::x86::Gp &, unsigned int, int)) &asmjit::x86::ymmword_ptr, "C++: asmjit::x86::ymmword_ptr(const class asmjit::x86::Gp &, const class asmjit::x86::Gp &, unsigned int, int) --> class asmjit::x86::Mem", pybind11::arg("base"), pybind11::arg("index"), pybind11::arg("shift"), pybind11::arg("offset"));
-
-	// asmjit::x86::ymmword_ptr(const class asmjit::x86::Gp &, const class asmjit::x86::Vec &, unsigned int, int) file: line:1126
-	M("asmjit::x86").def("ymmword_ptr", [](const class asmjit::x86::Gp & a0, const class asmjit::x86::Vec & a1) -> asmjit::x86::Mem { return asmjit::x86::ymmword_ptr(a0, a1); }, "", pybind11::arg("base"), pybind11::arg("index"));
-	M("asmjit::x86").def("ymmword_ptr", [](const class asmjit::x86::Gp & a0, const class asmjit::x86::Vec & a1, unsigned int const & a2) -> asmjit::x86::Mem { return asmjit::x86::ymmword_ptr(a0, a1, a2); }, "", pybind11::arg("base"), pybind11::arg("index"), pybind11::arg("shift"));
-	M("asmjit::x86").def("ymmword_ptr", (class asmjit::x86::Mem (*)(const class asmjit::x86::Gp &, const class asmjit::x86::Vec &, unsigned int, int)) &asmjit::x86::ymmword_ptr, "C++: asmjit::x86::ymmword_ptr(const class asmjit::x86::Gp &, const class asmjit::x86::Vec &, unsigned int, int) --> class asmjit::x86::Mem", pybind11::arg("base"), pybind11::arg("index"), pybind11::arg("shift"), pybind11::arg("offset"));
-
-	// asmjit::x86::ymmword_ptr(const class asmjit::Label &, int) file: line:1126
-	M("asmjit::x86").def("ymmword_ptr", [](const class asmjit::Label & a0) -> asmjit::x86::Mem { return asmjit::x86::ymmword_ptr(a0); }, "", pybind11::arg("base"));
-	M("asmjit::x86").def("ymmword_ptr", (class asmjit::x86::Mem (*)(const class asmjit::Label &, int)) &asmjit::x86::ymmword_ptr, "C++: asmjit::x86::ymmword_ptr(const class asmjit::Label &, int) --> class asmjit::x86::Mem", pybind11::arg("base"), pybind11::arg("offset"));
-
-	// asmjit::x86::ymmword_ptr(const class asmjit::Label &, const class asmjit::x86::Gp &, unsigned int, int) file: line:1126
-	M("asmjit::x86").def("ymmword_ptr", [](const class asmjit::Label & a0, const class asmjit::x86::Gp & a1) -> asmjit::x86::Mem { return asmjit::x86::ymmword_ptr(a0, a1); }, "", pybind11::arg("base"), pybind11::arg("index"));
-	M("asmjit::x86").def("ymmword_ptr", [](const class asmjit::Label & a0, const class asmjit::x86::Gp & a1, unsigned int const & a2) -> asmjit::x86::Mem { return asmjit::x86::ymmword_ptr(a0, a1, a2); }, "", pybind11::arg("base"), pybind11::arg("index"), pybind11::arg("shift"));
-	M("asmjit::x86").def("ymmword_ptr", (class asmjit::x86::Mem (*)(const class asmjit::Label &, const class asmjit::x86::Gp &, unsigned int, int)) &asmjit::x86::ymmword_ptr, "C++: asmjit::x86::ymmword_ptr(const class asmjit::Label &, const class asmjit::x86::Gp &, unsigned int, int) --> class asmjit::x86::Mem", pybind11::arg("base"), pybind11::arg("index"), pybind11::arg("shift"), pybind11::arg("offset"));
-
-	// asmjit::x86::ymmword_ptr(const class asmjit::x86::Rip &, int) file: line:1126
-	M("asmjit::x86").def("ymmword_ptr", [](const class asmjit::x86::Rip & a0) -> asmjit::x86::Mem { return asmjit::x86::ymmword_ptr(a0); }, "", pybind11::arg("rip_"));
-	M("asmjit::x86").def("ymmword_ptr", (class asmjit::x86::Mem (*)(const class asmjit::x86::Rip &, int)) &asmjit::x86::ymmword_ptr, "C++: asmjit::x86::ymmword_ptr(const class asmjit::x86::Rip &, int) --> class asmjit::x86::Mem", pybind11::arg("rip_"), pybind11::arg("offset"));
-
-	// asmjit::x86::ymmword_ptr(unsigned long) file: line:1126
-	M("asmjit::x86").def("ymmword_ptr", (class asmjit::x86::Mem (*)(unsigned long)) &asmjit::x86::ymmword_ptr, "C++: asmjit::x86::ymmword_ptr(unsigned long) --> class asmjit::x86::Mem", pybind11::arg("base"));
-
-	// asmjit::x86::ymmword_ptr(unsigned long, const class asmjit::x86::Gp &, unsigned int) file: line:1126
-	M("asmjit::x86").def("ymmword_ptr", [](unsigned long const & a0, const class asmjit::x86::Gp & a1) -> asmjit::x86::Mem { return asmjit::x86::ymmword_ptr(a0, a1); }, "", pybind11::arg("base"), pybind11::arg("index"));
-	M("asmjit::x86").def("ymmword_ptr", (class asmjit::x86::Mem (*)(unsigned long, const class asmjit::x86::Gp &, unsigned int)) &asmjit::x86::ymmword_ptr, "C++: asmjit::x86::ymmword_ptr(unsigned long, const class asmjit::x86::Gp &, unsigned int) --> class asmjit::x86::Mem", pybind11::arg("base"), pybind11::arg("index"), pybind11::arg("shift"));
-
-	// asmjit::x86::ymmword_ptr(unsigned long, const class asmjit::x86::Vec &, unsigned int) file: line:1126
-	M("asmjit::x86").def("ymmword_ptr", [](unsigned long const & a0, const class asmjit::x86::Vec & a1) -> asmjit::x86::Mem { return asmjit::x86::ymmword_ptr(a0, a1); }, "", pybind11::arg("base"), pybind11::arg("index"));
-	M("asmjit::x86").def("ymmword_ptr", (class asmjit::x86::Mem (*)(unsigned long, const class asmjit::x86::Vec &, unsigned int)) &asmjit::x86::ymmword_ptr, "C++: asmjit::x86::ymmword_ptr(unsigned long, const class asmjit::x86::Vec &, unsigned int) --> class asmjit::x86::Mem", pybind11::arg("base"), pybind11::arg("index"), pybind11::arg("shift"));
-
-	// asmjit::x86::ymmword_ptr_abs(unsigned long) file: line:303
-	M("asmjit::x86").def("ymmword_ptr_abs", (class asmjit::x86::Mem (*)(unsigned long)) &asmjit::x86::ymmword_ptr_abs, "C++: asmjit::x86::ymmword_ptr_abs(unsigned long) --> class asmjit::x86::Mem", pybind11::arg("base"));
-
-	// asmjit::x86::ymmword_ptr_abs(unsigned long, const class asmjit::x86::Gp &, unsigned int) file: line:304
-	M("asmjit::x86").def("ymmword_ptr_abs", [](unsigned long const & a0, const class asmjit::x86::Gp & a1) -> asmjit::x86::Mem { return asmjit::x86::ymmword_ptr_abs(a0, a1); }, "", pybind11::arg("base"), pybind11::arg("index"));
-	M("asmjit::x86").def("ymmword_ptr_abs", (class asmjit::x86::Mem (*)(unsigned long, const class asmjit::x86::Gp &, unsigned int)) &asmjit::x86::ymmword_ptr_abs, "C++: asmjit::x86::ymmword_ptr_abs(unsigned long, const class asmjit::x86::Gp &, unsigned int) --> class asmjit::x86::Mem", pybind11::arg("base"), pybind11::arg("index"), pybind11::arg("shift"));
-
-	// asmjit::x86::ymmword_ptr_abs(unsigned long, const class asmjit::x86::Vec &, unsigned int) file: line:305
-	M("asmjit::x86").def("ymmword_ptr_abs", [](unsigned long const & a0, const class asmjit::x86::Vec & a1) -> asmjit::x86::Mem { return asmjit::x86::ymmword_ptr_abs(a0, a1); }, "", pybind11::arg("base"), pybind11::arg("index"));
-	M("asmjit::x86").def("ymmword_ptr_abs", (class asmjit::x86::Mem (*)(unsigned long, const class asmjit::x86::Vec &, unsigned int)) &asmjit::x86::ymmword_ptr_abs, "C++: asmjit::x86::ymmword_ptr_abs(unsigned long, const class asmjit::x86::Vec &, unsigned int) --> class asmjit::x86::Mem", pybind11::arg("base"), pybind11::arg("index"), pybind11::arg("shift"));
-
-	// asmjit::x86::ymmword_ptr_rel(unsigned long) file: line:306
-	M("asmjit::x86").def("ymmword_ptr_rel", (class asmjit::x86::Mem (*)(unsigned long)) &asmjit::x86::ymmword_ptr_rel, "C++: asmjit::x86::ymmword_ptr_rel(unsigned long) --> class asmjit::x86::Mem", pybind11::arg("base"));
-
-	// asmjit::x86::ymmword_ptr_rel(unsigned long, const class asmjit::x86::Gp &, unsigned int) file: line:307
-	M("asmjit::x86").def("ymmword_ptr_rel", [](unsigned long const & a0, const class asmjit::x86::Gp & a1) -> asmjit::x86::Mem { return asmjit::x86::ymmword_ptr_rel(a0, a1); }, "", pybind11::arg("base"), pybind11::arg("index"));
-	M("asmjit::x86").def("ymmword_ptr_rel", (class asmjit::x86::Mem (*)(unsigned long, const class asmjit::x86::Gp &, unsigned int)) &asmjit::x86::ymmword_ptr_rel, "C++: asmjit::x86::ymmword_ptr_rel(unsigned long, const class asmjit::x86::Gp &, unsigned int) --> class asmjit::x86::Mem", pybind11::arg("base"), pybind11::arg("index"), pybind11::arg("shift"));
-
-	// asmjit::x86::ymmword_ptr_rel(unsigned long, const class asmjit::x86::Vec &, unsigned int) file: line:308
-	M("asmjit::x86").def("ymmword_ptr_rel", [](unsigned long const & a0, const class asmjit::x86::Vec & a1) -> asmjit::x86::Mem { return asmjit::x86::ymmword_ptr_rel(a0, a1); }, "", pybind11::arg("base"), pybind11::arg("index"));
-	M("asmjit::x86").def("ymmword_ptr_rel", (class asmjit::x86::Mem (*)(unsigned long, const class asmjit::x86::Vec &, unsigned int)) &asmjit::x86::ymmword_ptr_rel, "C++: asmjit::x86::ymmword_ptr_rel(unsigned long, const class asmjit::x86::Vec &, unsigned int) --> class asmjit::x86::Mem", pybind11::arg("base"), pybind11::arg("index"), pybind11::arg("shift"));
-
-	// asmjit::x86::zmmword_ptr(const class asmjit::x86::Gp &, int) file: line:1127
-	M("asmjit::x86").def("zmmword_ptr", [](const class asmjit::x86::Gp & a0) -> asmjit::x86::Mem { return asmjit::x86::zmmword_ptr(a0); }, "", pybind11::arg("base"));
-	M("asmjit::x86").def("zmmword_ptr", (class asmjit::x86::Mem (*)(const class asmjit::x86::Gp &, int)) &asmjit::x86::zmmword_ptr, "C++: asmjit::x86::zmmword_ptr(const class asmjit::x86::Gp &, int) --> class asmjit::x86::Mem", pybind11::arg("base"), pybind11::arg("offset"));
-
-	// asmjit::x86::zmmword_ptr(const class asmjit::x86::Gp &, const class asmjit::x86::Gp &, unsigned int, int) file: line:1127
-	M("asmjit::x86").def("zmmword_ptr", [](const class asmjit::x86::Gp & a0, const class asmjit::x86::Gp & a1) -> asmjit::x86::Mem { return asmjit::x86::zmmword_ptr(a0, a1); }, "", pybind11::arg("base"), pybind11::arg("index"));
-	M("asmjit::x86").def("zmmword_ptr", [](const class asmjit::x86::Gp & a0, const class asmjit::x86::Gp & a1, unsigned int const & a2) -> asmjit::x86::Mem { return asmjit::x86::zmmword_ptr(a0, a1, a2); }, "", pybind11::arg("base"), pybind11::arg("index"), pybind11::arg("shift"));
-	M("asmjit::x86").def("zmmword_ptr", (class asmjit::x86::Mem (*)(const class asmjit::x86::Gp &, const class asmjit::x86::Gp &, unsigned int, int)) &asmjit::x86::zmmword_ptr, "C++: asmjit::x86::zmmword_ptr(const class asmjit::x86::Gp &, const class asmjit::x86::Gp &, unsigned int, int) --> class asmjit::x86::Mem", pybind11::arg("base"), pybind11::arg("index"), pybind11::arg("shift"), pybind11::arg("offset"));
-
-	// asmjit::x86::zmmword_ptr(const class asmjit::x86::Gp &, const class asmjit::x86::Vec &, unsigned int, int) file: line:1127
-	M("asmjit::x86").def("zmmword_ptr", [](const class asmjit::x86::Gp & a0, const class asmjit::x86::Vec & a1) -> asmjit::x86::Mem { return asmjit::x86::zmmword_ptr(a0, a1); }, "", pybind11::arg("base"), pybind11::arg("index"));
-	M("asmjit::x86").def("zmmword_ptr", [](const class asmjit::x86::Gp & a0, const class asmjit::x86::Vec & a1, unsigned int const & a2) -> asmjit::x86::Mem { return asmjit::x86::zmmword_ptr(a0, a1, a2); }, "", pybind11::arg("base"), pybind11::arg("index"), pybind11::arg("shift"));
-	M("asmjit::x86").def("zmmword_ptr", (class asmjit::x86::Mem (*)(const class asmjit::x86::Gp &, const class asmjit::x86::Vec &, unsigned int, int)) &asmjit::x86::zmmword_ptr, "C++: asmjit::x86::zmmword_ptr(const class asmjit::x86::Gp &, const class asmjit::x86::Vec &, unsigned int, int) --> class asmjit::x86::Mem", pybind11::arg("base"), pybind11::arg("index"), pybind11::arg("shift"), pybind11::arg("offset"));
-
-	// asmjit::x86::zmmword_ptr(const class asmjit::Label &, int) file: line:1127
-	M("asmjit::x86").def("zmmword_ptr", [](const class asmjit::Label & a0) -> asmjit::x86::Mem { return asmjit::x86::zmmword_ptr(a0); }, "", pybind11::arg("base"));
-	M("asmjit::x86").def("zmmword_ptr", (class asmjit::x86::Mem (*)(const class asmjit::Label &, int)) &asmjit::x86::zmmword_ptr, "C++: asmjit::x86::zmmword_ptr(const class asmjit::Label &, int) --> class asmjit::x86::Mem", pybind11::arg("base"), pybind11::arg("offset"));
-
-	// asmjit::x86::zmmword_ptr(const class asmjit::Label &, const class asmjit::x86::Gp &, unsigned int, int) file: line:1127
-	M("asmjit::x86").def("zmmword_ptr", [](const class asmjit::Label & a0, const class asmjit::x86::Gp & a1) -> asmjit::x86::Mem { return asmjit::x86::zmmword_ptr(a0, a1); }, "", pybind11::arg("base"), pybind11::arg("index"));
-	M("asmjit::x86").def("zmmword_ptr", [](const class asmjit::Label & a0, const class asmjit::x86::Gp & a1, unsigned int const & a2) -> asmjit::x86::Mem { return asmjit::x86::zmmword_ptr(a0, a1, a2); }, "", pybind11::arg("base"), pybind11::arg("index"), pybind11::arg("shift"));
-	M("asmjit::x86").def("zmmword_ptr", (class asmjit::x86::Mem (*)(const class asmjit::Label &, const class asmjit::x86::Gp &, unsigned int, int)) &asmjit::x86::zmmword_ptr, "C++: asmjit::x86::zmmword_ptr(const class asmjit::Label &, const class asmjit::x86::Gp &, unsigned int, int) --> class asmjit::x86::Mem", pybind11::arg("base"), pybind11::arg("index"), pybind11::arg("shift"), pybind11::arg("offset"));
-
-	// asmjit::x86::zmmword_ptr(const class asmjit::x86::Rip &, int) file: line:1127
-	M("asmjit::x86").def("zmmword_ptr", [](const class asmjit::x86::Rip & a0) -> asmjit::x86::Mem { return asmjit::x86::zmmword_ptr(a0); }, "", pybind11::arg("rip_"));
-	M("asmjit::x86").def("zmmword_ptr", (class asmjit::x86::Mem (*)(const class asmjit::x86::Rip &, int)) &asmjit::x86::zmmword_ptr, "C++: asmjit::x86::zmmword_ptr(const class asmjit::x86::Rip &, int) --> class asmjit::x86::Mem", pybind11::arg("rip_"), pybind11::arg("offset"));
-
-	// asmjit::x86::zmmword_ptr(unsigned long) file: line:1127
-	M("asmjit::x86").def("zmmword_ptr", (class asmjit::x86::Mem (*)(unsigned long)) &asmjit::x86::zmmword_ptr, "C++: asmjit::x86::zmmword_ptr(unsigned long) --> class asmjit::x86::Mem", pybind11::arg("base"));
-
-	// asmjit::x86::zmmword_ptr(unsigned long, const class asmjit::x86::Gp &, unsigned int) file: line:1127
-	M("asmjit::x86").def("zmmword_ptr", [](unsigned long const & a0, const class asmjit::x86::Gp & a1) -> asmjit::x86::Mem { return asmjit::x86::zmmword_ptr(a0, a1); }, "", pybind11::arg("base"), pybind11::arg("index"));
-	M("asmjit::x86").def("zmmword_ptr", (class asmjit::x86::Mem (*)(unsigned long, const class asmjit::x86::Gp &, unsigned int)) &asmjit::x86::zmmword_ptr, "C++: asmjit::x86::zmmword_ptr(unsigned long, const class asmjit::x86::Gp &, unsigned int) --> class asmjit::x86::Mem", pybind11::arg("base"), pybind11::arg("index"), pybind11::arg("shift"));
-
+	{ // asmjit::TypeUtils::TypeIdOfT file: line:416
+		pybind11::class_<asmjit::TypeUtils::TypeIdOfT<asmjit::x86::Gpb>, std::shared_ptr<asmjit::TypeUtils::TypeIdOfT<asmjit::x86::Gpb>>> cl(M("asmjit::TypeUtils"), "TypeIdOfT_asmjit_x86_Gpb_t", "");
+		cl.def( pybind11::init( [](){ return new asmjit::TypeUtils::TypeIdOfT<asmjit::x86::Gpb>(); } ) );
+	}
+	{ // asmjit::TypeUtils::TypeIdOfT file: line:416
+		pybind11::class_<asmjit::TypeUtils::TypeIdOfT<asmjit::x86::Gpw>, std::shared_ptr<asmjit::TypeUtils::TypeIdOfT<asmjit::x86::Gpw>>> cl(M("asmjit::TypeUtils"), "TypeIdOfT_asmjit_x86_Gpw_t", "");
+		cl.def( pybind11::init( [](){ return new asmjit::TypeUtils::TypeIdOfT<asmjit::x86::Gpw>(); } ) );
+	}
+	{ // asmjit::TypeUtils::TypeIdOfT file: line:416
+		pybind11::class_<asmjit::TypeUtils::TypeIdOfT<asmjit::x86::Gpd>, std::shared_ptr<asmjit::TypeUtils::TypeIdOfT<asmjit::x86::Gpd>>> cl(M("asmjit::TypeUtils"), "TypeIdOfT_asmjit_x86_Gpd_t", "");
+		cl.def( pybind11::init( [](){ return new asmjit::TypeUtils::TypeIdOfT<asmjit::x86::Gpd>(); } ) );
+	}
+	{ // asmjit::TypeUtils::TypeIdOfT file: line:416
+		pybind11::class_<asmjit::TypeUtils::TypeIdOfT<asmjit::x86::Gpq>, std::shared_ptr<asmjit::TypeUtils::TypeIdOfT<asmjit::x86::Gpq>>> cl(M("asmjit::TypeUtils"), "TypeIdOfT_asmjit_x86_Gpq_t", "");
+		cl.def( pybind11::init( [](){ return new asmjit::TypeUtils::TypeIdOfT<asmjit::x86::Gpq>(); } ) );
+	}
+	{ // asmjit::TypeUtils::TypeIdOfT file: line:416
+		pybind11::class_<asmjit::TypeUtils::TypeIdOfT<asmjit::x86::Mm>, std::shared_ptr<asmjit::TypeUtils::TypeIdOfT<asmjit::x86::Mm>>> cl(M("asmjit::TypeUtils"), "TypeIdOfT_asmjit_x86_Mm_t", "");
+		cl.def( pybind11::init( [](){ return new asmjit::TypeUtils::TypeIdOfT<asmjit::x86::Mm>(); } ) );
+	}
+	{ // asmjit::TypeUtils::TypeIdOfT file: line:416
+		pybind11::class_<asmjit::TypeUtils::TypeIdOfT<asmjit::x86::Xmm>, std::shared_ptr<asmjit::TypeUtils::TypeIdOfT<asmjit::x86::Xmm>>> cl(M("asmjit::TypeUtils"), "TypeIdOfT_asmjit_x86_Xmm_t", "");
+		cl.def( pybind11::init( [](){ return new asmjit::TypeUtils::TypeIdOfT<asmjit::x86::Xmm>(); } ) );
+	}
+	{ // asmjit::TypeUtils::TypeIdOfT file: line:416
+		pybind11::class_<asmjit::TypeUtils::TypeIdOfT<asmjit::x86::Ymm>, std::shared_ptr<asmjit::TypeUtils::TypeIdOfT<asmjit::x86::Ymm>>> cl(M("asmjit::TypeUtils"), "TypeIdOfT_asmjit_x86_Ymm_t", "");
+		cl.def( pybind11::init( [](){ return new asmjit::TypeUtils::TypeIdOfT<asmjit::x86::Ymm>(); } ) );
+	}
+	{ // asmjit::TypeUtils::TypeIdOfT file: line:416
+		pybind11::class_<asmjit::TypeUtils::TypeIdOfT<asmjit::x86::Zmm>, std::shared_ptr<asmjit::TypeUtils::TypeIdOfT<asmjit::x86::Zmm>>> cl(M("asmjit::TypeUtils"), "TypeIdOfT_asmjit_x86_Zmm_t", "");
+		cl.def( pybind11::init( [](){ return new asmjit::TypeUtils::TypeIdOfT<asmjit::x86::Zmm>(); } ) );
+	}
 }

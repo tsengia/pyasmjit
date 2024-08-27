@@ -1,3 +1,4 @@
+#include <cstdio>
 #include <sstream> // __str__
 
 #include <functional>
@@ -14,105 +15,160 @@
 	PYBIND11_MAKE_OPAQUE(std::shared_ptr<void>)
 #endif
 
+// asmjit::JitRuntime file: line:27
+struct PyCallBack_asmjit_JitRuntime : public asmjit::JitRuntime {
+	using asmjit::JitRuntime::JitRuntime;
+
+	unsigned int _release(void * a0) throw() override {
+		pybind11::gil_scoped_acquire gil;
+		pybind11::function overload = pybind11::get_overload(static_cast<const asmjit::JitRuntime *>(this), "_release");
+		if (overload) {
+			auto o = overload.operator()<pybind11::return_value_policy::reference>(a0);
+			if (pybind11::detail::cast_is_temporary_value_reference<unsigned int>::value) {
+				static pybind11::detail::override_caster_t<unsigned int> caster;
+				return pybind11::detail::cast_ref<unsigned int>(std::move(o), caster);
+			}
+			return pybind11::detail::cast_safe<unsigned int>(std::move(o));
+		}
+		return JitRuntime::_release(a0);
+	}
+};
+
+// asmjit::Logger file: line:28
+struct PyCallBack_asmjit_Logger : public asmjit::Logger {
+	using asmjit::Logger::Logger;
+
+	unsigned int _log(const char * a0, unsigned long a1) throw() override {
+		pybind11::gil_scoped_acquire gil;
+		pybind11::function overload = pybind11::get_overload(static_cast<const asmjit::Logger *>(this), "_log");
+		if (overload) {
+			auto o = overload.operator()<pybind11::return_value_policy::reference>(a0, a1);
+			if (pybind11::detail::cast_is_temporary_value_reference<unsigned int>::value) {
+				static pybind11::detail::override_caster_t<unsigned int> caster;
+				return pybind11::detail::cast_ref<unsigned int>(std::move(o), caster);
+			}
+			return pybind11::detail::cast_safe<unsigned int>(std::move(o));
+		}
+		return Logger::_log(a0, a1);
+	}
+};
+
+// asmjit::FileLogger file: line:110
+struct PyCallBack_asmjit_FileLogger : public asmjit::FileLogger {
+	using asmjit::FileLogger::FileLogger;
+
+	unsigned int _log(const char * a0, unsigned long a1) throw() override {
+		pybind11::gil_scoped_acquire gil;
+		pybind11::function overload = pybind11::get_overload(static_cast<const asmjit::FileLogger *>(this), "_log");
+		if (overload) {
+			auto o = overload.operator()<pybind11::return_value_policy::reference>(a0, a1);
+			if (pybind11::detail::cast_is_temporary_value_reference<unsigned int>::value) {
+				static pybind11::detail::override_caster_t<unsigned int> caster;
+				return pybind11::detail::cast_ref<unsigned int>(std::move(o), caster);
+			}
+			return pybind11::detail::cast_safe<unsigned int>(std::move(o));
+		}
+		return FileLogger::_log(a0, a1);
+	}
+};
+
+// asmjit::StringLogger file: line:145
+struct PyCallBack_asmjit_StringLogger : public asmjit::StringLogger {
+	using asmjit::StringLogger::StringLogger;
+
+	unsigned int _log(const char * a0, unsigned long a1) throw() override {
+		pybind11::gil_scoped_acquire gil;
+		pybind11::function overload = pybind11::get_overload(static_cast<const asmjit::StringLogger *>(this), "_log");
+		if (overload) {
+			auto o = overload.operator()<pybind11::return_value_policy::reference>(a0, a1);
+			if (pybind11::detail::cast_is_temporary_value_reference<unsigned int>::value) {
+				static pybind11::detail::override_caster_t<unsigned int> caster;
+				return pybind11::detail::cast_ref<unsigned int>(std::move(o), caster);
+			}
+			return pybind11::detail::cast_safe<unsigned int>(std::move(o));
+		}
+		return StringLogger::_log(a0, a1);
+	}
+};
+
 void bind_unknown_unknown_39(std::function< pybind11::module &(std::string const &namespace_) > &M)
 {
-	// asmjit::VirtMem::CachePolicy file: line:24
-	pybind11::enum_<asmjit::VirtMem::CachePolicy>(M("asmjit::VirtMem"), "CachePolicy", "Describes whether instruction cache should be flushed after a write operation.")
-		.value("kDefault", asmjit::VirtMem::CachePolicy::kDefault)
-		.value("kFlushAfterWrite", asmjit::VirtMem::CachePolicy::kFlushAfterWrite)
-		.value("kNeverFlush", asmjit::VirtMem::CachePolicy::kNeverFlush);
+	{ // asmjit::JitRuntime file: line:27
+		pybind11::class_<asmjit::JitRuntime, std::shared_ptr<asmjit::JitRuntime>, PyCallBack_asmjit_JitRuntime, asmjit::Target> cl(M("asmjit"), "JitRuntime", "JIT execution runtime is a special `Target` that is designed to store and execute a generated code.\n\n JIT runtime is the easiest way of using AsmJit as it abstracts allocation and deallocation of virtual memory\n where executable code can be placed and from which it can be executed as well.");
+		cl.def( pybind11::init( [](){ return new asmjit::JitRuntime(); }, [](){ return new PyCallBack_asmjit_JitRuntime(); } ), "doc");
+		cl.def( pybind11::init<const struct asmjit::JitAllocator::CreateParams *>(), pybind11::arg("params") );
 
-;
 
-	// asmjit::VirtMem::flushInstructionCache(void *, unsigned long) file: line:42
-	M("asmjit::VirtMem").def("flushInstructionCache", (void (*)(void *, unsigned long)) &asmjit::VirtMem::flushInstructionCache, "Flushes instruction cache in the given region.\n\n Only useful on non-x86 architectures, however, it's a good practice to call it on any platform to make your\n code more portable.\n\nC++: asmjit::VirtMem::flushInstructionCache(void *, unsigned long) --> void", pybind11::arg("p"), pybind11::arg("size"));
+		cl.def("reset", [](asmjit::JitRuntime &o) -> void { return o.reset(); }, "");
+		cl.def("reset", (void (asmjit::JitRuntime::*)(enum asmjit::ResetPolicy)) &asmjit::JitRuntime::reset, "Resets the  freeing everything that was allocated by it.\n\n Depending on `resetPolicy` the currently held memory can be either freed entirely when ResetPolicy::kHard is used,\n or the allocator can keep some of it for next allocations when ResetPolicy::kSoft is used, which is the default\n behavior.\n\nC++: asmjit::JitRuntime::reset(enum asmjit::ResetPolicy) --> void", pybind11::arg("resetPolicy"));
+		cl.def("allocator", (class asmjit::JitAllocator * (asmjit::JitRuntime::*)() const) &asmjit::JitRuntime::allocator, "Returns the associated `JitAllocator`.\n\nC++: asmjit::JitRuntime::allocator() const --> class asmjit::JitAllocator *", pybind11::return_value_policy::automatic);
 
-	{ // asmjit::VirtMem::Info file: line:45
-		pybind11::class_<asmjit::VirtMem::Info, std::shared_ptr<asmjit::VirtMem::Info>> cl(M("asmjit::VirtMem"), "Info", "Virtual memory information.");
-		cl.def( pybind11::init( [](){ return new asmjit::VirtMem::Info(); } ) );
-		cl.def_readwrite("pageSize", &asmjit::VirtMem::Info::pageSize);
-		cl.def_readwrite("pageGranularity", &asmjit::VirtMem::Info::pageGranularity);
 	}
-	// asmjit::VirtMem::info() file: line:53
-	M("asmjit::VirtMem").def("info", (struct asmjit::VirtMem::Info (*)()) &asmjit::VirtMem::info, "Returns virtual memory information, see `VirtMem::Info` for more details.\n\nC++: asmjit::VirtMem::info() --> struct asmjit::VirtMem::Info");
+	{ // asmjit::Logger file: line:28
+		pybind11::class_<asmjit::Logger, std::shared_ptr<asmjit::Logger>, PyCallBack_asmjit_Logger> cl(M("asmjit"), "Logger", "Logging interface.\n\n This class can be inherited and reimplemented to fit into your own logging needs. When reimplementing a logger\n use  method to log customize the output.\n\n There are two `Logger` implementations offered by AsmJit:\n   -  - logs into a `FILE*`.\n   -  - concatenates all logs into a ");
+		cl.def( pybind11::init( [](){ return new asmjit::Logger(); }, [](){ return new PyCallBack_asmjit_Logger(); } ) );
 
-	// asmjit::VirtMem::largePageSize() file: line:62
-	M("asmjit::VirtMem").def("largePageSize", (unsigned long (*)()) &asmjit::VirtMem::largePageSize, "Returns the size of the smallest large page supported.\n\n AsmJit only uses the smallest large page at the moment as these are usually perfectly sized for executable\n memory allocation (standard size is 2MB, but different sizes are possible).\n\n Returns either the detected large page size or 0, if large page support is either not supported by AsmJit\n or not accessible to the process.\n\nC++: asmjit::VirtMem::largePageSize() --> unsigned long");
+		cl.def("options", (class asmjit::FormatOptions & (asmjit::Logger::*)()) &asmjit::Logger::options, "Returns  of this logger.\n\nC++: asmjit::Logger::options() --> class asmjit::FormatOptions &", pybind11::return_value_policy::automatic);
+		cl.def("setOptions", (void (asmjit::Logger::*)(const class asmjit::FormatOptions &)) &asmjit::Logger::setOptions, "Sets formatting options of this Logger to `options`.\n\nC++: asmjit::Logger::setOptions(const class asmjit::FormatOptions &) --> void", pybind11::arg("options"));
+		cl.def("resetOptions", (void (asmjit::Logger::*)()) &asmjit::Logger::resetOptions, "Resets formatting options of this Logger to defaults.\n\nC++: asmjit::Logger::resetOptions() --> void");
+		cl.def("flags", (enum asmjit::FormatFlags (asmjit::Logger::*)() const) &asmjit::Logger::flags, "Returns formatting flags.\n\nC++: asmjit::Logger::flags() const --> enum asmjit::FormatFlags");
+		cl.def("hasFlag", (bool (asmjit::Logger::*)(enum asmjit::FormatFlags) const) &asmjit::Logger::hasFlag, "Tests whether the logger has the given `flag` enabled.\n\nC++: asmjit::Logger::hasFlag(enum asmjit::FormatFlags) const --> bool", pybind11::arg("flag"));
+		cl.def("setFlags", (void (asmjit::Logger::*)(enum asmjit::FormatFlags)) &asmjit::Logger::setFlags, "Sets formatting flags to `flags`.\n\nC++: asmjit::Logger::setFlags(enum asmjit::FormatFlags) --> void", pybind11::arg("flags"));
+		cl.def("addFlags", (void (asmjit::Logger::*)(enum asmjit::FormatFlags)) &asmjit::Logger::addFlags, "Enables the given formatting `flags`.\n\nC++: asmjit::Logger::addFlags(enum asmjit::FormatFlags) --> void", pybind11::arg("flags"));
+		cl.def("clearFlags", (void (asmjit::Logger::*)(enum asmjit::FormatFlags)) &asmjit::Logger::clearFlags, "Disables the given formatting `flags`.\n\nC++: asmjit::Logger::clearFlags(enum asmjit::FormatFlags) --> void", pybind11::arg("flags"));
+		cl.def("indentation", (unsigned int (asmjit::Logger::*)(enum asmjit::FormatIndentationGroup) const) &asmjit::Logger::indentation, "Returns indentation of a given indentation `group`.\n\nC++: asmjit::Logger::indentation(enum asmjit::FormatIndentationGroup) const --> unsigned int", pybind11::arg("type"));
+		cl.def("setIndentation", (void (asmjit::Logger::*)(enum asmjit::FormatIndentationGroup, unsigned int)) &asmjit::Logger::setIndentation, "Sets indentation of the given indentation `group` to `n` spaces.\n\nC++: asmjit::Logger::setIndentation(enum asmjit::FormatIndentationGroup, unsigned int) --> void", pybind11::arg("type"), pybind11::arg("n"));
+		cl.def("resetIndentation", (void (asmjit::Logger::*)(enum asmjit::FormatIndentationGroup)) &asmjit::Logger::resetIndentation, "Resets indentation of the given indentation `group` to 0 spaces.\n\nC++: asmjit::Logger::resetIndentation(enum asmjit::FormatIndentationGroup) --> void", pybind11::arg("type"));
+		cl.def("padding", (unsigned long (asmjit::Logger::*)(enum asmjit::FormatPaddingGroup) const) &asmjit::Logger::padding, "Returns padding of a given padding `group`.\n\nC++: asmjit::Logger::padding(enum asmjit::FormatPaddingGroup) const --> unsigned long", pybind11::arg("type"));
+		cl.def("setPadding", (void (asmjit::Logger::*)(enum asmjit::FormatPaddingGroup, unsigned int)) &asmjit::Logger::setPadding, "Sets padding of a given padding `group` to `n`.\n\nC++: asmjit::Logger::setPadding(enum asmjit::FormatPaddingGroup, unsigned int) --> void", pybind11::arg("type"), pybind11::arg("n"));
+		cl.def("resetPadding", (void (asmjit::Logger::*)(enum asmjit::FormatPaddingGroup)) &asmjit::Logger::resetPadding, "Resets padding of a given padding `group` to 0, which means that a default will be used.\n\nC++: asmjit::Logger::resetPadding(enum asmjit::FormatPaddingGroup) --> void", pybind11::arg("type"));
 
-	// asmjit::VirtMem::MemoryFlags file: line:65
-	pybind11::enum_<asmjit::VirtMem::MemoryFlags>(M("asmjit::VirtMem"), "MemoryFlags", "Virtual memory access and mmap-specific flags.")
-		.value("kNone", asmjit::VirtMem::MemoryFlags::kNone)
-		.value("kAccessRead", asmjit::VirtMem::MemoryFlags::kAccessRead)
-		.value("kAccessWrite", asmjit::VirtMem::MemoryFlags::kAccessWrite)
-		.value("kAccessExecute", asmjit::VirtMem::MemoryFlags::kAccessExecute)
-		.value("kAccessReadWrite", asmjit::VirtMem::MemoryFlags::kAccessReadWrite)
-		.value("kAccessRW", asmjit::VirtMem::MemoryFlags::kAccessRW)
-		.value("kAccessRX", asmjit::VirtMem::MemoryFlags::kAccessRX)
-		.value("kAccessRWX", asmjit::VirtMem::MemoryFlags::kAccessRWX)
-		.value("kMMapEnableMapJit", asmjit::VirtMem::MemoryFlags::kMMapEnableMapJit)
-		.value("kMMapMaxAccessRead", asmjit::VirtMem::MemoryFlags::kMMapMaxAccessRead)
-		.value("kMMapMaxAccessWrite", asmjit::VirtMem::MemoryFlags::kMMapMaxAccessWrite)
-		.value("kMMapMaxAccessExecute", asmjit::VirtMem::MemoryFlags::kMMapMaxAccessExecute)
-		.value("kMMapMaxAccessReadWrite", asmjit::VirtMem::MemoryFlags::kMMapMaxAccessReadWrite)
-		.value("kMMapMaxAccessRW", asmjit::VirtMem::MemoryFlags::kMMapMaxAccessRW)
-		.value("kMMapMaxAccessRX", asmjit::VirtMem::MemoryFlags::kMMapMaxAccessRX)
-		.value("kMMapMaxAccessRWX", asmjit::VirtMem::MemoryFlags::kMMapMaxAccessRWX)
-		.value("kMapShared", asmjit::VirtMem::MemoryFlags::kMapShared)
-		.value("kMMapLargePages", asmjit::VirtMem::MemoryFlags::kMMapLargePages)
-		.value("kMappingPreferTmp", asmjit::VirtMem::MemoryFlags::kMappingPreferTmp);
-
-;
-
-	// asmjit::VirtMem::release(void *, unsigned long) file: line:173
-	M("asmjit::VirtMem").def("release", (unsigned int (*)(void *, unsigned long)) &asmjit::VirtMem::release, "Releases virtual memory previously allocated by \n\n \n The size must be the same as used by  If the size is not the same value the call\n will fail on any POSIX system, but pass on Windows, because it's implemented differently.\n\nC++: asmjit::VirtMem::release(void *, unsigned long) --> unsigned int", pybind11::arg("p"), pybind11::arg("size"));
-
-	// asmjit::VirtMem::protect(void *, unsigned long, enum asmjit::VirtMem::MemoryFlags) file: line:176
-	M("asmjit::VirtMem").def("protect", (unsigned int (*)(void *, unsigned long, enum asmjit::VirtMem::MemoryFlags)) &asmjit::VirtMem::protect, "A cross-platform wrapper around `mprotect()` (POSIX) and `VirtualProtect()` (Windows).\n\nC++: asmjit::VirtMem::protect(void *, unsigned long, enum asmjit::VirtMem::MemoryFlags) --> unsigned int", pybind11::arg("p"), pybind11::arg("size"), pybind11::arg("flags"));
-
-	{ // asmjit::VirtMem::DualMapping file: line:181
-		pybind11::class_<asmjit::VirtMem::DualMapping, std::shared_ptr<asmjit::VirtMem::DualMapping>> cl(M("asmjit::VirtMem"), "DualMapping", "Dual memory mapping used to map an anonymous memory into two memory regions where one region is read-only, but\n executable, and the second region is read+write, but not executable. See  for\n more details.");
-		cl.def( pybind11::init( [](){ return new asmjit::VirtMem::DualMapping(); } ) );
+		cl.def("log", [](asmjit::Logger &o, const char * a0) -> unsigned int { return o.log(a0); }, "", pybind11::arg("data"));
+		cl.def("log", (unsigned int (asmjit::Logger::*)(const char *, unsigned long)) &asmjit::Logger::log, "Logs string `str`, which is either null terminated or having size `size`.\n\nC++: asmjit::Logger::log(const char *, unsigned long) --> unsigned int", pybind11::arg("data"), pybind11::arg("size"));
+		cl.def("logf", [](asmjit::Logger &o, const char * a0) -> unsigned int { return o.logf(a0); }, "", pybind11::arg("fmt"));
 	}
-	// asmjit::VirtMem::allocDualMapping(struct asmjit::VirtMem::DualMapping *, unsigned long, enum asmjit::VirtMem::MemoryFlags) file: line:198
-	M("asmjit::VirtMem").def("allocDualMapping", (unsigned int (*)(struct asmjit::VirtMem::DualMapping *, unsigned long, enum asmjit::VirtMem::MemoryFlags)) &asmjit::VirtMem::allocDualMapping, "Allocates virtual memory and creates two views of it where the first view has no write access. This is an addition\n to the API that should be used in cases in which the operating system either enforces W^X security policy or the\n application wants to use this policy by default to improve security and prevent an accidental (or purposed)\n self-modifying code.\n\n The memory returned in the `dm` are two independent mappings of the same shared memory region. You must use\n  to release it when it's no longer needed. Never use `VirtMem::release()` to\n release the memory returned by `allocDualMapping()` as that would fail on Windows.\n\n \n Both pointers in `dm` would be set to `nullptr` if the function fails.\n\nC++: asmjit::VirtMem::allocDualMapping(struct asmjit::VirtMem::DualMapping *, unsigned long, enum asmjit::VirtMem::MemoryFlags) --> unsigned int", pybind11::arg("dm"), pybind11::arg("size"), pybind11::arg("flags"));
+	{ // asmjit::FileLogger file: line:110
+		pybind11::class_<asmjit::FileLogger, std::shared_ptr<asmjit::FileLogger>, PyCallBack_asmjit_FileLogger, asmjit::Logger> cl(M("asmjit"), "FileLogger", "Logger that can log to a `FILE*`.");
+		cl.def( pybind11::init( [](){ return new asmjit::FileLogger(); }, [](){ return new PyCallBack_asmjit_FileLogger(); } ), "doc");
+		cl.def( pybind11::init<struct _IO_FILE *>(), pybind11::arg("file") );
 
-	// asmjit::VirtMem::releaseDualMapping(struct asmjit::VirtMem::DualMapping *, unsigned long) file: line:203
-	M("asmjit::VirtMem").def("releaseDualMapping", (unsigned int (*)(struct asmjit::VirtMem::DualMapping *, unsigned long)) &asmjit::VirtMem::releaseDualMapping, "Releases virtual memory mapping previously allocated by \n\n \n Both pointers in `dm` would be set to `nullptr` if the function succeeds.\n\nC++: asmjit::VirtMem::releaseDualMapping(struct asmjit::VirtMem::DualMapping *, unsigned long) --> unsigned int", pybind11::arg("dm"), pybind11::arg("size"));
+		cl.def("file", (struct _IO_FILE * (asmjit::FileLogger::*)() const) &asmjit::FileLogger::file, "Returns the logging output stream or null if the logger has no output stream.\n\nC++: asmjit::FileLogger::file() const --> struct _IO_FILE *", pybind11::return_value_policy::automatic);
+		cl.def("setFile", (void (asmjit::FileLogger::*)(struct _IO_FILE *)) &asmjit::FileLogger::setFile, "Sets the logging output stream to `stream` or null.\n\n \n If the `file` is null the logging will be disabled. When a logger is attached to `CodeHolder` or any\n emitter the logging API will always be called regardless of the output file. This means that if you really\n want to disable logging at emitter level you must not attach a logger to it.\n\nC++: asmjit::FileLogger::setFile(struct _IO_FILE *) --> void", pybind11::arg("file"));
 
-	// asmjit::VirtMem::HardenedRuntimeFlags file: line:206
-	pybind11::enum_<asmjit::VirtMem::HardenedRuntimeFlags>(M("asmjit::VirtMem"), "HardenedRuntimeFlags", "Hardened runtime flags.")
-		.value("kNone", asmjit::VirtMem::HardenedRuntimeFlags::kNone)
-		.value("kEnabled", asmjit::VirtMem::HardenedRuntimeFlags::kEnabled)
-		.value("kMapJit", asmjit::VirtMem::HardenedRuntimeFlags::kMapJit)
-		.value("kDualMapping", asmjit::VirtMem::HardenedRuntimeFlags::kDualMapping);
 
-;
-
-	{ // asmjit::VirtMem::HardenedRuntimeInfo file: line:228
-		pybind11::class_<asmjit::VirtMem::HardenedRuntimeInfo, std::shared_ptr<asmjit::VirtMem::HardenedRuntimeInfo>> cl(M("asmjit::VirtMem"), "HardenedRuntimeInfo", "Hardened runtime information.");
-		cl.def( pybind11::init( [](){ return new asmjit::VirtMem::HardenedRuntimeInfo(); } ) );
-		cl.def_readwrite("flags", &asmjit::VirtMem::HardenedRuntimeInfo::flags);
-		cl.def("hasFlag", (bool (asmjit::VirtMem::HardenedRuntimeInfo::*)(enum asmjit::VirtMem::HardenedRuntimeFlags) const) &asmjit::VirtMem::HardenedRuntimeInfo::hasFlag, "Tests whether the hardened runtime `flag` is set.\n\nC++: asmjit::VirtMem::HardenedRuntimeInfo::hasFlag(enum asmjit::VirtMem::HardenedRuntimeFlags) const --> bool", pybind11::arg("flag"));
 	}
-	// asmjit::VirtMem::hardenedRuntimeInfo() file: line:247
-	M("asmjit::VirtMem").def("hardenedRuntimeInfo", (struct asmjit::VirtMem::HardenedRuntimeInfo (*)()) &asmjit::VirtMem::hardenedRuntimeInfo, "Returns runtime features provided by the OS.\n\nC++: asmjit::VirtMem::hardenedRuntimeInfo() --> struct asmjit::VirtMem::HardenedRuntimeInfo");
+	{ // asmjit::StringLogger file: line:145
+		pybind11::class_<asmjit::StringLogger, std::shared_ptr<asmjit::StringLogger>, PyCallBack_asmjit_StringLogger, asmjit::Logger> cl(M("asmjit"), "StringLogger", "Logger that stores everything in an internal string buffer.");
+		cl.def( pybind11::init( [](){ return new asmjit::StringLogger(); }, [](){ return new PyCallBack_asmjit_StringLogger(); } ) );
 
-	// asmjit::VirtMem::ProtectJitAccess file: line:250
-	pybind11::enum_<asmjit::VirtMem::ProtectJitAccess>(M("asmjit::VirtMem"), "ProtectJitAccess", "Values that can be used with `protectJitMemory()` function.")
-		.value("kReadWrite", asmjit::VirtMem::ProtectJitAccess::kReadWrite)
-		.value("kReadExecute", asmjit::VirtMem::ProtectJitAccess::kReadExecute);
-
-;
-
-	// asmjit::VirtMem::protectJitMemory(enum asmjit::VirtMem::ProtectJitAccess) file: line:275
-	M("asmjit::VirtMem").def("protectJitMemory", (void (*)(enum asmjit::VirtMem::ProtectJitAccess)) &asmjit::VirtMem::protectJitMemory, "Protects access of memory mapped with MAP_JIT flag for the current thread.\n\n \n This feature is only available on Apple hardware (AArch64) at the moment and uses a non-portable\n `pthread_jit_write_protect_np()` call when available.\n\n This function must be called before and after a memory mapped with MAP_JIT flag is modified. Example:\n\n ```\n void* codePtr = ...;\n size_t codeSize = ...;\n\n VirtMem::protectJitMemory(VirtMem::ProtectJitAccess::kReadWrite);\n memcpy(codePtr, source, codeSize);\n VirtMem::protectJitMemory(VirtMem::ProtectJitAccess::kReadExecute);\n VirtMem::flushInstructionCache(codePtr, codeSize);\n ```\n\n See  which makes it simpler than the code above.\n\nC++: asmjit::VirtMem::protectJitMemory(enum asmjit::VirtMem::ProtectJitAccess) --> void", pybind11::arg("access"));
-
-	{ // asmjit::VirtMem::ProtectJitReadWriteScope file: line:282
-		pybind11::class_<asmjit::VirtMem::ProtectJitReadWriteScope, std::shared_ptr<asmjit::VirtMem::ProtectJitReadWriteScope>> cl(M("asmjit::VirtMem"), "ProtectJitReadWriteScope", "JIT protection scope that prepares the given memory block to be written to in the current thread.\n\n It calls `VirtMem::protectJitMemory(VirtMem::ProtectJitAccess::kReadWrite)` at construction time and\n `VirtMem::protectJitMemory(VirtMem::ProtectJitAccess::kReadExecute)` combined with `flushInstructionCache()`\n in destructor. The purpose of this class is to make writing to JIT memory easier.");
-		cl.def( pybind11::init( [](void * a0, unsigned long const & a1){ return new asmjit::VirtMem::ProtectJitReadWriteScope(a0, a1); } ), "doc" , pybind11::arg("rxPtr"), pybind11::arg("size"));
-		cl.def( pybind11::init<void *, unsigned long, enum asmjit::VirtMem::CachePolicy>(), pybind11::arg("rxPtr"), pybind11::arg("size"), pybind11::arg("policy") );
+		cl.def("data", (const char * (asmjit::StringLogger::*)() const) &asmjit::StringLogger::data, "Returns aggregated logger data as `char*` pointer.\n\n The pointer is owned by `StringLogger`, it can't be modified or freed.\n\nC++: asmjit::StringLogger::data() const --> const char *", pybind11::return_value_policy::automatic);
+		cl.def("dataSize", (unsigned long (asmjit::StringLogger::*)() const) &asmjit::StringLogger::dataSize, "Returns size of the data returned by `data()`.\n\nC++: asmjit::StringLogger::dataSize() const --> unsigned long");
+		cl.def("clear", (void (asmjit::StringLogger::*)()) &asmjit::StringLogger::clear, "Clears the accumulated logger data.\n\nC++: asmjit::StringLogger::clear() --> void");
 
 
+	}
+	{ // asmjit::ZoneStackBase file: line:17
+		pybind11::class_<asmjit::ZoneStackBase, std::shared_ptr<asmjit::ZoneStackBase>> cl(M("asmjit"), "ZoneStackBase", "Base class used by ");
+		cl.def( pybind11::init( [](){ return new asmjit::ZoneStackBase(); } ) );
+		cl.def("isInitialized", (bool (asmjit::ZoneStackBase::*)() const) &asmjit::ZoneStackBase::isInitialized, "C++: asmjit::ZoneStackBase::isInitialized() const --> bool");
+		cl.def("reset", (unsigned int (asmjit::ZoneStackBase::*)()) &asmjit::ZoneStackBase::reset, "C++: asmjit::ZoneStackBase::reset() --> unsigned int");
+		cl.def("empty", (bool (asmjit::ZoneStackBase::*)() const) &asmjit::ZoneStackBase::empty, "C++: asmjit::ZoneStackBase::empty() const --> bool");
+
+
+
+		{ // asmjit::ZoneStackBase::Block file: line:39
+			auto & enclosing_class = cl;
+			pybind11::class_<asmjit::ZoneStackBase::Block, std::shared_ptr<asmjit::ZoneStackBase::Block>> cl(enclosing_class, "Block", "\\{");
+			cl.def( pybind11::init( [](){ return new asmjit::ZoneStackBase::Block(); } ) );
+			cl.def("start", (void * (asmjit::ZoneStackBase::Block::*)() const) &asmjit::ZoneStackBase::Block::start<void>, "C++: asmjit::ZoneStackBase::Block::start() const --> void *", pybind11::return_value_policy::automatic);
+			cl.def("end", (void * (asmjit::ZoneStackBase::Block::*)() const) &asmjit::ZoneStackBase::Block::end<void>, "C++: asmjit::ZoneStackBase::Block::end() const --> void *", pybind11::return_value_policy::automatic);
+			cl.def("data", (void * (asmjit::ZoneStackBase::Block::*)() const) &asmjit::ZoneStackBase::Block::data<void>, "C++: asmjit::ZoneStackBase::Block::data() const --> void *", pybind11::return_value_policy::automatic);
+			cl.def("empty", (bool (asmjit::ZoneStackBase::Block::*)() const) &asmjit::ZoneStackBase::Block::empty, "C++: asmjit::ZoneStackBase::Block::empty() const --> bool");
+			cl.def("prev", (struct asmjit::ZoneStackBase::Block * (asmjit::ZoneStackBase::Block::*)() const) &asmjit::ZoneStackBase::Block::prev, "C++: asmjit::ZoneStackBase::Block::prev() const --> struct asmjit::ZoneStackBase::Block *", pybind11::return_value_policy::automatic);
+			cl.def("next", (struct asmjit::ZoneStackBase::Block * (asmjit::ZoneStackBase::Block::*)() const) &asmjit::ZoneStackBase::Block::next, "C++: asmjit::ZoneStackBase::Block::next() const --> struct asmjit::ZoneStackBase::Block *", pybind11::return_value_policy::automatic);
+			cl.def("setPrev", (void (asmjit::ZoneStackBase::Block::*)(struct asmjit::ZoneStackBase::Block *)) &asmjit::ZoneStackBase::Block::setPrev, "C++: asmjit::ZoneStackBase::Block::setPrev(struct asmjit::ZoneStackBase::Block *) --> void", pybind11::arg("block"));
+			cl.def("setNext", (void (asmjit::ZoneStackBase::Block::*)(struct asmjit::ZoneStackBase::Block *)) &asmjit::ZoneStackBase::Block::setNext, "C++: asmjit::ZoneStackBase::Block::setNext(struct asmjit::ZoneStackBase::Block *) --> void", pybind11::arg("block"));
+		}
 
 	}
 }

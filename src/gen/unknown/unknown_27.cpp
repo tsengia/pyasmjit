@@ -1,4 +1,3 @@
-#include <sstream> // __str__
 
 #include <functional>
 #include <pybind11/pybind11.h>
@@ -16,40 +15,17 @@
 
 void bind_unknown_unknown_27(std::function< pybind11::module &(std::string const &namespace_) > &M)
 {
-	// asmjit::InstRWFlags file: line:654
-	pybind11::enum_<asmjit::InstRWFlags>(M("asmjit"), "InstRWFlags", "Flags used by ")
-		.value("kNone", asmjit::InstRWFlags::kNone)
-		.value("kMovOp", asmjit::InstRWFlags::kMovOp);
+	// asmjit::InstAPI::stringToInstId(enum asmjit::Arch, const char *, unsigned long) file: line:782
+	M("asmjit::InstAPI").def("stringToInstId", (unsigned int (*)(enum asmjit::Arch, const char *, unsigned long)) &asmjit::InstAPI::stringToInstId, "Parses an instruction name in the given string `s`. Length is specified by `len` argument, which can be\n `SIZE_MAX` if `s` is known to be null terminated.\n\n Returns the parsed instruction id or  if no such instruction exists.\n\nC++: asmjit::InstAPI::stringToInstId(enum asmjit::Arch, const char *, unsigned long) --> unsigned int", pybind11::arg("arch"), pybind11::arg("s"), pybind11::arg("len"));
 
-;
+	// asmjit::InstAPI::validate(enum asmjit::Arch, const class asmjit::BaseInst &, const struct asmjit::Operand_ *, unsigned long, enum asmjit::ValidationFlags) file: line:787
+	M("asmjit::InstAPI").def("validate", [](enum asmjit::Arch const & a0, const class asmjit::BaseInst & a1, const struct asmjit::Operand_ * a2, unsigned long const & a3) -> unsigned int { return asmjit::InstAPI::validate(a0, a1, a2, a3); }, "", pybind11::arg("arch"), pybind11::arg("inst"), pybind11::arg("operands"), pybind11::arg("opCount"));
+	M("asmjit::InstAPI").def("validate", (unsigned int (*)(enum asmjit::Arch, const class asmjit::BaseInst &, const struct asmjit::Operand_ *, unsigned long, enum asmjit::ValidationFlags)) &asmjit::InstAPI::validate, "Validates the given instruction considering the given `validationFlags`.\n\nC++: asmjit::InstAPI::validate(enum asmjit::Arch, const class asmjit::BaseInst &, const struct asmjit::Operand_ *, unsigned long, enum asmjit::ValidationFlags) --> unsigned int", pybind11::arg("arch"), pybind11::arg("inst"), pybind11::arg("operands"), pybind11::arg("opCount"), pybind11::arg("validationFlags"));
 
-	{ // asmjit::InstRWInfo file: line:666
-		pybind11::class_<asmjit::InstRWInfo, std::shared_ptr<asmjit::InstRWInfo>> cl(M("asmjit"), "InstRWInfo", "Read/Write information of an instruction.");
-		cl.def( pybind11::init( [](){ return new asmjit::InstRWInfo(); } ) );
+	// asmjit::InstAPI::queryRWInfo(enum asmjit::Arch, const class asmjit::BaseInst &, const struct asmjit::Operand_ *, unsigned long, struct asmjit::InstRWInfo *) file: line:792
+	M("asmjit::InstAPI").def("queryRWInfo", (unsigned int (*)(enum asmjit::Arch, const class asmjit::BaseInst &, const struct asmjit::Operand_ *, unsigned long, struct asmjit::InstRWInfo *)) &asmjit::InstAPI::queryRWInfo, "Gets Read/Write information of the given instruction.\n\nC++: asmjit::InstAPI::queryRWInfo(enum asmjit::Arch, const class asmjit::BaseInst &, const struct asmjit::Operand_ *, unsigned long, struct asmjit::InstRWInfo *) --> unsigned int", pybind11::arg("arch"), pybind11::arg("inst"), pybind11::arg("operands"), pybind11::arg("opCount"), pybind11::arg("out"));
 
-
-
-
-
-
-		cl.def("reset", (void (asmjit::InstRWInfo::*)()) &asmjit::InstRWInfo::reset, "Resets this RW information to all zeros.\n\nC++: asmjit::InstRWInfo::reset() --> void");
-		cl.def("instFlags", (enum asmjit::InstRWFlags (asmjit::InstRWInfo::*)() const) &asmjit::InstRWInfo::instFlags, "Returns flags associated with the instruction, see \n\nC++: asmjit::InstRWInfo::instFlags() const --> enum asmjit::InstRWFlags");
-		cl.def("hasInstFlag", (bool (asmjit::InstRWInfo::*)(enum asmjit::InstRWFlags) const) &asmjit::InstRWInfo::hasInstFlag, "Tests whether the instruction flags contain `flag`.\n\nC++: asmjit::InstRWInfo::hasInstFlag(enum asmjit::InstRWFlags) const --> bool", pybind11::arg("flag"));
-		cl.def("isMovOp", (bool (asmjit::InstRWInfo::*)() const) &asmjit::InstRWInfo::isMovOp, "Tests whether the instruction flags contain \n\nC++: asmjit::InstRWInfo::isMovOp() const --> bool");
-		cl.def("readFlags", (enum asmjit::CpuRWFlags (asmjit::InstRWInfo::*)() const) &asmjit::InstRWInfo::readFlags, "Returns a mask of CPU flags read.\n\nC++: asmjit::InstRWInfo::readFlags() const --> enum asmjit::CpuRWFlags");
-		cl.def("writeFlags", (enum asmjit::CpuRWFlags (asmjit::InstRWInfo::*)() const) &asmjit::InstRWInfo::writeFlags, "Returns a mask of CPU flags written.\n\nC++: asmjit::InstRWInfo::writeFlags() const --> enum asmjit::CpuRWFlags");
-		cl.def("rmFeature", (unsigned int (asmjit::InstRWInfo::*)() const) &asmjit::InstRWInfo::rmFeature, "Returns the CPU feature required to replace a register operand with memory operand. If the returned feature is\n zero (none) then this instruction either doesn't provide memory operand combination or there is no extra CPU\n feature required.\n\n X86 Specific\n ------------\n\n Some AVX+ instructions may require extra features for replacing registers with memory operands, for example\n VPSLLDQ instruction only supports `vpslldq reg, reg, imm` combination on AVX/AVX2 capable CPUs and requires\n AVX-512 for `vpslldq reg, mem, imm` combination.\n\nC++: asmjit::InstRWInfo::rmFeature() const --> unsigned int");
-		cl.def("extraReg", (const struct asmjit::OpRWInfo & (asmjit::InstRWInfo::*)() const) &asmjit::InstRWInfo::extraReg, "Returns RW information of extra register operand (extraReg).\n\nC++: asmjit::InstRWInfo::extraReg() const --> const struct asmjit::OpRWInfo &", pybind11::return_value_policy::automatic);
-		cl.def("operands", (const struct asmjit::OpRWInfo * (asmjit::InstRWInfo::*)() const) &asmjit::InstRWInfo::operands, "Returns RW information of all instruction's operands.\n\nC++: asmjit::InstRWInfo::operands() const --> const struct asmjit::OpRWInfo *", pybind11::return_value_policy::automatic);
-		cl.def("operand", (const struct asmjit::OpRWInfo & (asmjit::InstRWInfo::*)(unsigned long) const) &asmjit::InstRWInfo::operand, "Returns RW information of the operand at the given `index`.\n\nC++: asmjit::InstRWInfo::operand(unsigned long) const --> const struct asmjit::OpRWInfo &", pybind11::return_value_policy::automatic, pybind11::arg("index"));
-		cl.def("opCount", (unsigned int (asmjit::InstRWInfo::*)() const) &asmjit::InstRWInfo::opCount, "Returns the number of operands this instruction has.\n\nC++: asmjit::InstRWInfo::opCount() const --> unsigned int");
-		cl.def("assign", (struct asmjit::InstRWInfo & (asmjit::InstRWInfo::*)(const struct asmjit::InstRWInfo &)) &asmjit::InstRWInfo::operator=, "C++: asmjit::InstRWInfo::operator=(const struct asmjit::InstRWInfo &) --> struct asmjit::InstRWInfo &", pybind11::return_value_policy::automatic, pybind11::arg(""));
-	}
-	// asmjit::ValidationFlags file: line:760
-	pybind11::enum_<asmjit::ValidationFlags>(M("asmjit"), "ValidationFlags", "Validation flags that can be used with ")
-		.value("kNone", asmjit::ValidationFlags::kNone)
-		.value("kEnableVirtRegs", asmjit::ValidationFlags::kEnableVirtRegs);
-
-;
+	// asmjit::InstAPI::queryFeatures(enum asmjit::Arch, const class asmjit::BaseInst &, const struct asmjit::Operand_ *, unsigned long, class asmjit::CpuFeatures *) file: line:795
+	M("asmjit::InstAPI").def("queryFeatures", (unsigned int (*)(enum asmjit::Arch, const class asmjit::BaseInst &, const struct asmjit::Operand_ *, unsigned long, class asmjit::CpuFeatures *)) &asmjit::InstAPI::queryFeatures, "Gets CPU features required by the given instruction.\n\nC++: asmjit::InstAPI::queryFeatures(enum asmjit::Arch, const class asmjit::BaseInst &, const struct asmjit::Operand_ *, unsigned long, class asmjit::CpuFeatures *) --> unsigned int", pybind11::arg("arch"), pybind11::arg("inst"), pybind11::arg("operands"), pybind11::arg("opCount"), pybind11::arg("out"));
 
 }

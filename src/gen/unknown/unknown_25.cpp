@@ -16,116 +16,231 @@
 
 void bind_unknown_unknown_25(std::function< pybind11::module &(std::string const &namespace_) > &M)
 {
-	{ // asmjit::LabelLink file: line:573
-		pybind11::class_<asmjit::LabelLink, std::shared_ptr<asmjit::LabelLink>> cl(M("asmjit"), "LabelLink", "Data structure used to link either unbound labels or cross-section links.");
-		cl.def( pybind11::init( [](){ return new asmjit::LabelLink(); } ) );
-		cl.def_readwrite("sectionId", &asmjit::LabelLink::sectionId);
-		cl.def_readwrite("relocId", &asmjit::LabelLink::relocId);
-		cl.def_readwrite("offset", &asmjit::LabelLink::offset);
-		cl.def_readwrite("rel", &asmjit::LabelLink::rel);
-		cl.def_readwrite("format", &asmjit::LabelLink::format);
+	// asmjit::InstIdParts file: line:34
+	pybind11::enum_<asmjit::InstIdParts>(M("asmjit"), "InstIdParts", "Instruction id parts.\n\n A mask that specifies a bit-layout of ")
+		.value("kRealId", asmjit::InstIdParts::kRealId)
+		.value("kAbstract", asmjit::InstIdParts::kAbstract)
+		.value("kA32_DT", asmjit::InstIdParts::kA32_DT)
+		.value("kA32_DT2", asmjit::InstIdParts::kA32_DT2)
+		.value("kARM_Cond", asmjit::InstIdParts::kARM_Cond);
+
+;
+
+	// asmjit::InstOptions file: line:57
+	pybind11::enum_<asmjit::InstOptions>(M("asmjit"), "InstOptions", "Instruction options.\n\n Instruction options complement instruction identifier and attributes.")
+		.value("kNone", asmjit::InstOptions::kNone)
+		.value("kReserved", asmjit::InstOptions::kReserved)
+		.value("kUnfollow", asmjit::InstOptions::kUnfollow)
+		.value("kOverwrite", asmjit::InstOptions::kOverwrite)
+		.value("kShortForm", asmjit::InstOptions::kShortForm)
+		.value("kLongForm", asmjit::InstOptions::kLongForm)
+		.value("kTaken", asmjit::InstOptions::kTaken)
+		.value("kNotTaken", asmjit::InstOptions::kNotTaken)
+		.value("kX86_ModMR", asmjit::InstOptions::kX86_ModMR)
+		.value("kX86_ModRM", asmjit::InstOptions::kX86_ModRM)
+		.value("kX86_Vex3", asmjit::InstOptions::kX86_Vex3)
+		.value("kX86_Vex", asmjit::InstOptions::kX86_Vex)
+		.value("kX86_Evex", asmjit::InstOptions::kX86_Evex)
+		.value("kX86_Lock", asmjit::InstOptions::kX86_Lock)
+		.value("kX86_Rep", asmjit::InstOptions::kX86_Rep)
+		.value("kX86_Repne", asmjit::InstOptions::kX86_Repne)
+		.value("kX86_XAcquire", asmjit::InstOptions::kX86_XAcquire)
+		.value("kX86_XRelease", asmjit::InstOptions::kX86_XRelease)
+		.value("kX86_ER", asmjit::InstOptions::kX86_ER)
+		.value("kX86_SAE", asmjit::InstOptions::kX86_SAE)
+		.value("kX86_RN_SAE", asmjit::InstOptions::kX86_RN_SAE)
+		.value("kX86_RD_SAE", asmjit::InstOptions::kX86_RD_SAE)
+		.value("kX86_RU_SAE", asmjit::InstOptions::kX86_RU_SAE)
+		.value("kX86_RZ_SAE", asmjit::InstOptions::kX86_RZ_SAE)
+		.value("kX86_ZMask", asmjit::InstOptions::kX86_ZMask)
+		.value("kX86_ERMask", asmjit::InstOptions::kX86_ERMask)
+		.value("kX86_AVX512Mask", asmjit::InstOptions::kX86_AVX512Mask)
+		.value("kX86_OpCodeB", asmjit::InstOptions::kX86_OpCodeB)
+		.value("kX86_OpCodeX", asmjit::InstOptions::kX86_OpCodeX)
+		.value("kX86_OpCodeR", asmjit::InstOptions::kX86_OpCodeR)
+		.value("kX86_OpCodeW", asmjit::InstOptions::kX86_OpCodeW)
+		.value("kX86_Rex", asmjit::InstOptions::kX86_Rex)
+		.value("kX86_InvalidRex", asmjit::InstOptions::kX86_InvalidRex);
+
+;
+
+	// asmjit::InstControlFlow file: line:174
+	pybind11::enum_<asmjit::InstControlFlow>(M("asmjit"), "InstControlFlow", "Instruction control flow.")
+		.value("kRegular", asmjit::InstControlFlow::kRegular)
+		.value("kJump", asmjit::InstControlFlow::kJump)
+		.value("kBranch", asmjit::InstControlFlow::kBranch)
+		.value("kCall", asmjit::InstControlFlow::kCall)
+		.value("kReturn", asmjit::InstControlFlow::kReturn)
+		.value("kMaxValue", asmjit::InstControlFlow::kMaxValue);
+
+;
+
+	// asmjit::InstSameRegHint file: line:195
+	pybind11::enum_<asmjit::InstSameRegHint>(M("asmjit"), "InstSameRegHint", "Hint that is used when both input operands to the instruction are the same.\n\n Provides hints to the instruction RW query regarding special cases in which two or more operands are the same\n registers. This is required by instructions such as XOR, AND, OR, SUB, etc... These hints will influence the\n RW operations query.")
+		.value("kNone", asmjit::InstSameRegHint::kNone)
+		.value("kRO", asmjit::InstSameRegHint::kRO)
+		.value("kWO", asmjit::InstSameRegHint::kWO);
+
+;
+
+	{ // asmjit::BaseInst file: line:206
+		pybind11::class_<asmjit::BaseInst, std::shared_ptr<asmjit::BaseInst>> cl(M("asmjit"), "BaseInst", "Instruction id, options, and extraReg in a single structure. This structure exists mainly to simplify analysis\n and validation API that requires `BaseInst` and `Operand[]` array.");
+		cl.def( pybind11::init( [](){ return new asmjit::BaseInst(); } ), "doc" );
+		cl.def( pybind11::init( [](unsigned int const & a0){ return new asmjit::BaseInst(a0); } ), "doc" , pybind11::arg("instId"));
+		cl.def( pybind11::init<unsigned int, enum asmjit::InstOptions>(), pybind11::arg("instId"), pybind11::arg("options") );
+
+		cl.def( pybind11::init<unsigned int, enum asmjit::InstOptions, const struct asmjit::RegOnly &>(), pybind11::arg("instId"), pybind11::arg("options"), pybind11::arg("extraReg") );
+
+		cl.def( pybind11::init<unsigned int, enum asmjit::InstOptions, const class asmjit::BaseReg &>(), pybind11::arg("instId"), pybind11::arg("options"), pybind11::arg("extraReg") );
+
+		cl.def( pybind11::init( [](asmjit::BaseInst const &o){ return new asmjit::BaseInst(o); } ) );
+
+		pybind11::enum_<asmjit::BaseInst::Id>(cl, "Id", pybind11::arithmetic(), "")
+			.value("kIdNone", asmjit::BaseInst::kIdNone)
+			.value("kIdAbstract", asmjit::BaseInst::kIdAbstract)
+			.export_values();
+
+
+
+
+		cl.def("getInstIdPart", (unsigned int (asmjit::BaseInst::*)() const) &asmjit::BaseInst::getInstIdPart<asmjit::InstIdParts::kARM_Cond>, "C++: asmjit::BaseInst::getInstIdPart() const --> unsigned int");
+		cl.def("getInstIdPart", (unsigned int (asmjit::BaseInst::*)() const) &asmjit::BaseInst::getInstIdPart<asmjit::InstIdParts::kA32_DT>, "C++: asmjit::BaseInst::getInstIdPart() const --> unsigned int");
+		cl.def("getInstIdPart", (unsigned int (asmjit::BaseInst::*)() const) &asmjit::BaseInst::getInstIdPart<asmjit::InstIdParts::kA32_DT2>, "C++: asmjit::BaseInst::getInstIdPart() const --> unsigned int");
+		cl.def("setInstIdPart", (void (asmjit::BaseInst::*)(unsigned int)) &asmjit::BaseInst::setInstIdPart<asmjit::InstIdParts::kARM_Cond>, "C++: asmjit::BaseInst::setInstIdPart(unsigned int) --> void", pybind11::arg("value"));
+		cl.def("id", (unsigned int (asmjit::BaseInst::*)() const) &asmjit::BaseInst::id, "Returns the instruction id with modifiers.\n\nC++: asmjit::BaseInst::id() const --> unsigned int");
+		cl.def("setId", (void (asmjit::BaseInst::*)(unsigned int)) &asmjit::BaseInst::setId, "Sets the instruction id and modiiers from `id`.\n\nC++: asmjit::BaseInst::setId(unsigned int) --> void", pybind11::arg("id"));
+		cl.def("resetId", (void (asmjit::BaseInst::*)()) &asmjit::BaseInst::resetId, "Resets the instruction id and modifiers to zero, see \n\nC++: asmjit::BaseInst::resetId() --> void");
+		cl.def("realId", (unsigned int (asmjit::BaseInst::*)() const) &asmjit::BaseInst::realId, "Returns a real instruction id that doesn't contain any modifiers.\n\nC++: asmjit::BaseInst::realId() const --> unsigned int");
+		cl.def("options", (enum asmjit::InstOptions (asmjit::BaseInst::*)() const) &asmjit::BaseInst::options, "\\{\n\nC++: asmjit::BaseInst::options() const --> enum asmjit::InstOptions");
+		cl.def("hasOption", (bool (asmjit::BaseInst::*)(enum asmjit::InstOptions) const) &asmjit::BaseInst::hasOption, "C++: asmjit::BaseInst::hasOption(enum asmjit::InstOptions) const --> bool", pybind11::arg("option"));
+		cl.def("setOptions", (void (asmjit::BaseInst::*)(enum asmjit::InstOptions)) &asmjit::BaseInst::setOptions, "C++: asmjit::BaseInst::setOptions(enum asmjit::InstOptions) --> void", pybind11::arg("options"));
+		cl.def("addOptions", (void (asmjit::BaseInst::*)(enum asmjit::InstOptions)) &asmjit::BaseInst::addOptions, "C++: asmjit::BaseInst::addOptions(enum asmjit::InstOptions) --> void", pybind11::arg("options"));
+		cl.def("clearOptions", (void (asmjit::BaseInst::*)(enum asmjit::InstOptions)) &asmjit::BaseInst::clearOptions, "C++: asmjit::BaseInst::clearOptions(enum asmjit::InstOptions) --> void", pybind11::arg("options"));
+		cl.def("resetOptions", (void (asmjit::BaseInst::*)()) &asmjit::BaseInst::resetOptions, "C++: asmjit::BaseInst::resetOptions() --> void");
+		cl.def("hasExtraReg", (bool (asmjit::BaseInst::*)() const) &asmjit::BaseInst::hasExtraReg, "\\{\n\nC++: asmjit::BaseInst::hasExtraReg() const --> bool");
+		cl.def("extraReg", (struct asmjit::RegOnly & (asmjit::BaseInst::*)()) &asmjit::BaseInst::extraReg, "C++: asmjit::BaseInst::extraReg() --> struct asmjit::RegOnly &", pybind11::return_value_policy::automatic);
+		cl.def("setExtraReg", (void (asmjit::BaseInst::*)(const class asmjit::BaseReg &)) &asmjit::BaseInst::setExtraReg, "C++: asmjit::BaseInst::setExtraReg(const class asmjit::BaseReg &) --> void", pybind11::arg("reg"));
+		cl.def("setExtraReg", (void (asmjit::BaseInst::*)(const struct asmjit::RegOnly &)) &asmjit::BaseInst::setExtraReg, "C++: asmjit::BaseInst::setExtraReg(const struct asmjit::RegOnly &) --> void", pybind11::arg("reg"));
+		cl.def("resetExtraReg", (void (asmjit::BaseInst::*)()) &asmjit::BaseInst::resetExtraReg, "C++: asmjit::BaseInst::resetExtraReg() --> void");
+		cl.def("armCondCode", (enum asmjit::arm::CondCode (asmjit::BaseInst::*)() const) &asmjit::BaseInst::armCondCode, "\\{\n\nC++: asmjit::BaseInst::armCondCode() const --> enum asmjit::arm::CondCode");
+		cl.def("setArmCondCode", (void (asmjit::BaseInst::*)(enum asmjit::arm::CondCode)) &asmjit::BaseInst::setArmCondCode, "C++: asmjit::BaseInst::setArmCondCode(enum asmjit::arm::CondCode) --> void", pybind11::arg("cc"));
+		cl.def("armDt", (enum asmjit::a32::DataType (asmjit::BaseInst::*)() const) &asmjit::BaseInst::armDt, "C++: asmjit::BaseInst::armDt() const --> enum asmjit::a32::DataType");
+		cl.def("armDt2", (enum asmjit::a32::DataType (asmjit::BaseInst::*)() const) &asmjit::BaseInst::armDt2, "C++: asmjit::BaseInst::armDt2() const --> enum asmjit::a32::DataType");
+		cl.def_static("composeARMInstId", (unsigned int (*)(unsigned int, enum asmjit::arm::CondCode)) &asmjit::BaseInst::composeARMInstId, "\\{\n\nC++: asmjit::BaseInst::composeARMInstId(unsigned int, enum asmjit::arm::CondCode) --> unsigned int", pybind11::arg("id"), pybind11::arg("cc"));
+		cl.def_static("composeARMInstId", [](unsigned int const & a0, enum asmjit::a32::DataType const & a1) -> unsigned int { return asmjit::BaseInst::composeARMInstId(a0, a1); }, "", pybind11::arg("id"), pybind11::arg("dt"));
+		cl.def_static("composeARMInstId", (unsigned int (*)(unsigned int, enum asmjit::a32::DataType, enum asmjit::arm::CondCode)) &asmjit::BaseInst::composeARMInstId, "C++: asmjit::BaseInst::composeARMInstId(unsigned int, enum asmjit::a32::DataType, enum asmjit::arm::CondCode) --> unsigned int", pybind11::arg("id"), pybind11::arg("dt"), pybind11::arg("cc"));
+		cl.def_static("composeARMInstId", [](unsigned int const & a0, enum asmjit::a32::DataType const & a1, enum asmjit::a32::DataType const & a2) -> unsigned int { return asmjit::BaseInst::composeARMInstId(a0, a1, a2); }, "", pybind11::arg("id"), pybind11::arg("dt"), pybind11::arg("dt2"));
+		cl.def_static("composeARMInstId", (unsigned int (*)(unsigned int, enum asmjit::a32::DataType, enum asmjit::a32::DataType, enum asmjit::arm::CondCode)) &asmjit::BaseInst::composeARMInstId, "C++: asmjit::BaseInst::composeARMInstId(unsigned int, enum asmjit::a32::DataType, enum asmjit::a32::DataType, enum asmjit::arm::CondCode) --> unsigned int", pybind11::arg("id"), pybind11::arg("dt"), pybind11::arg("dt2"), pybind11::arg("cc"));
+		cl.def_static("extractRealId", (unsigned int (*)(unsigned int)) &asmjit::BaseInst::extractRealId, "C++: asmjit::BaseInst::extractRealId(unsigned int) --> unsigned int", pybind11::arg("id"));
+		cl.def_static("extractARMCondCode", (enum asmjit::arm::CondCode (*)(unsigned int)) &asmjit::BaseInst::extractARMCondCode, "C++: asmjit::BaseInst::extractARMCondCode(unsigned int) --> enum asmjit::arm::CondCode", pybind11::arg("id"));
+		cl.def("assign", (class asmjit::BaseInst & (asmjit::BaseInst::*)(const class asmjit::BaseInst &)) &asmjit::BaseInst::operator=, "C++: asmjit::BaseInst::operator=(const class asmjit::BaseInst &) --> class asmjit::BaseInst &", pybind11::return_value_policy::automatic, pybind11::arg(""));
 	}
-	{ // asmjit::LabelEntry file: line:601
-		pybind11::class_<asmjit::LabelEntry, std::shared_ptr<asmjit::LabelEntry>> cl(M("asmjit"), "LabelEntry", "Label entry.\n\n Contains the following properties:\n   - Label id - This is the only thing that is set to the `Label` operand.\n   - Label name - Optional, used mostly to create executables and libraries.\n   - Label type - Type of the label, default `LabelType::kAnonymous`.\n   - Label parent id - Derived from many assemblers that allow to define a local label that falls under a global\n     label. This allows to define many labels of the same name that have different parent (global) label.\n   - Offset - offset of the label bound by `Assembler`.\n   - Links - single-linked list that contains locations of code that has to be patched when the label gets bound.\n     Every use of unbound label adds one link to `_links` list.\n   - HVal - Hash value of label's name and optionally parentId.\n   - HashNext - Hash-table implementation detail.");
-		cl.def( pybind11::init( [](){ return new asmjit::LabelEntry(); } ) );
+	// asmjit::CpuRWFlags file: line:343
+	pybind11::enum_<asmjit::CpuRWFlags>(M("asmjit"), "CpuRWFlags", "CPU read/write flags used by \n\n These flags can be used to get a basic overview about CPU specifics flags used by instructions.")
+		.value("kNone", asmjit::CpuRWFlags::kNone)
+		.value("kOF", asmjit::CpuRWFlags::kOF)
+		.value("kCF", asmjit::CpuRWFlags::kCF)
+		.value("kZF", asmjit::CpuRWFlags::kZF)
+		.value("kSF", asmjit::CpuRWFlags::kSF)
+		.value("kX86_CF", asmjit::CpuRWFlags::kX86_CF)
+		.value("kX86_OF", asmjit::CpuRWFlags::kX86_OF)
+		.value("kX86_SF", asmjit::CpuRWFlags::kX86_SF)
+		.value("kX86_ZF", asmjit::CpuRWFlags::kX86_ZF)
+		.value("kX86_AF", asmjit::CpuRWFlags::kX86_AF)
+		.value("kX86_PF", asmjit::CpuRWFlags::kX86_PF)
+		.value("kX86_DF", asmjit::CpuRWFlags::kX86_DF)
+		.value("kX86_IF", asmjit::CpuRWFlags::kX86_IF)
+		.value("kX86_AC", asmjit::CpuRWFlags::kX86_AC)
+		.value("kX86_C0", asmjit::CpuRWFlags::kX86_C0)
+		.value("kX86_C1", asmjit::CpuRWFlags::kX86_C1)
+		.value("kX86_C2", asmjit::CpuRWFlags::kX86_C2)
+		.value("kX86_C3", asmjit::CpuRWFlags::kX86_C3)
+		.value("kARM_V", asmjit::CpuRWFlags::kARM_V)
+		.value("kARM_C", asmjit::CpuRWFlags::kARM_C)
+		.value("kARM_Z", asmjit::CpuRWFlags::kARM_Z)
+		.value("kARM_N", asmjit::CpuRWFlags::kARM_N)
+		.value("kARM_Q", asmjit::CpuRWFlags::kARM_Q)
+		.value("kARM_GE", asmjit::CpuRWFlags::kARM_GE);
+
+;
+
+	// asmjit::OpRWFlags file: line:405
+	pybind11::enum_<asmjit::OpRWFlags>(M("asmjit"), "OpRWFlags", "Operand read/write flags describe how the operand is accessed and some additional features.")
+		.value("kNone", asmjit::OpRWFlags::kNone)
+		.value("kRead", asmjit::OpRWFlags::kRead)
+		.value("kWrite", asmjit::OpRWFlags::kWrite)
+		.value("kRW", asmjit::OpRWFlags::kRW)
+		.value("kRegMem", asmjit::OpRWFlags::kRegMem)
+		.value("kConsecutive", asmjit::OpRWFlags::kConsecutive)
+		.value("kZExt", asmjit::OpRWFlags::kZExt)
+		.value("kUnique", asmjit::OpRWFlags::kUnique)
+		.value("kRegPhysId", asmjit::OpRWFlags::kRegPhysId)
+		.value("kMemPhysId", asmjit::OpRWFlags::kMemPhysId)
+		.value("kMemFake", asmjit::OpRWFlags::kMemFake)
+		.value("kMemBaseRead", asmjit::OpRWFlags::kMemBaseRead)
+		.value("kMemBaseWrite", asmjit::OpRWFlags::kMemBaseWrite)
+		.value("kMemBaseRW", asmjit::OpRWFlags::kMemBaseRW)
+		.value("kMemIndexRead", asmjit::OpRWFlags::kMemIndexRead)
+		.value("kMemIndexWrite", asmjit::OpRWFlags::kMemIndexWrite)
+		.value("kMemIndexRW", asmjit::OpRWFlags::kMemIndexRW)
+		.value("kMemBasePreModify", asmjit::OpRWFlags::kMemBasePreModify)
+		.value("kMemBasePostModify", asmjit::OpRWFlags::kMemBasePostModify);
+
+;
+
+	{ // asmjit::OpRWInfo file: line:477
+		pybind11::class_<asmjit::OpRWInfo, std::shared_ptr<asmjit::OpRWInfo>> cl(M("asmjit"), "OpRWInfo", "Read/Write information related to a single operand, used by ");
+		cl.def( pybind11::init( [](){ return new asmjit::OpRWInfo(); } ) );
 
 
 
 
-		cl.def("id", (unsigned int (asmjit::LabelEntry::*)() const) &asmjit::LabelEntry::id, "Returns label id.\n\nC++: asmjit::LabelEntry::id() const --> unsigned int");
-
-		cl.def("type", (enum asmjit::LabelType (asmjit::LabelEntry::*)() const) &asmjit::LabelEntry::type, "Returns label type.\n\nC++: asmjit::LabelEntry::type() const --> enum asmjit::LabelType");
-		cl.def("hasParent", (bool (asmjit::LabelEntry::*)() const) &asmjit::LabelEntry::hasParent, "Tests whether the label has a parent label.\n\nC++: asmjit::LabelEntry::hasParent() const --> bool");
-		cl.def("parentId", (unsigned int (asmjit::LabelEntry::*)() const) &asmjit::LabelEntry::parentId, "Returns label's parent id.\n\nC++: asmjit::LabelEntry::parentId() const --> unsigned int");
-		cl.def("section", (class asmjit::Section * (asmjit::LabelEntry::*)() const) &asmjit::LabelEntry::section, "Returns the section where the label was bound.\n\n If the label was not yet bound the return value is `nullptr`.\n\nC++: asmjit::LabelEntry::section() const --> class asmjit::Section *", pybind11::return_value_policy::automatic);
-		cl.def("hasName", (bool (asmjit::LabelEntry::*)() const) &asmjit::LabelEntry::hasName, "Tests whether the label has name.\n\nC++: asmjit::LabelEntry::hasName() const --> bool");
-		cl.def("name", (const char * (asmjit::LabelEntry::*)() const) &asmjit::LabelEntry::name, "Returns the label's name.\n\n \n Local labels will return their local name without their parent part, for example \".L1\".\n\nC++: asmjit::LabelEntry::name() const --> const char *", pybind11::return_value_policy::automatic);
-		cl.def("nameSize", (unsigned int (asmjit::LabelEntry::*)() const) &asmjit::LabelEntry::nameSize, "Returns size of label's name.\n\n \n Label name is always null terminated, so you can use `strlen()` to get it, however, it's also cached in\n `LabelEntry` itself, so if you want to know the size the fastest way is to call `LabelEntry::nameSize()`.\n\nC++: asmjit::LabelEntry::nameSize() const --> unsigned int");
-		cl.def("links", (struct asmjit::LabelLink * (asmjit::LabelEntry::*)() const) &asmjit::LabelEntry::links, "Returns links associated with this label.\n\nC++: asmjit::LabelEntry::links() const --> struct asmjit::LabelLink *", pybind11::return_value_policy::automatic);
-		cl.def("isBound", (bool (asmjit::LabelEntry::*)() const) &asmjit::LabelEntry::isBound, "Tests whether the label is bound.\n\nC++: asmjit::LabelEntry::isBound() const --> bool");
-		cl.def("isBoundTo", (bool (asmjit::LabelEntry::*)(class asmjit::Section *) const) &asmjit::LabelEntry::isBoundTo, "Tests whether the label is bound to a the given `sectionId`.\n\nC++: asmjit::LabelEntry::isBoundTo(class asmjit::Section *) const --> bool", pybind11::arg("section"));
-		cl.def("offset", (unsigned long (asmjit::LabelEntry::*)() const) &asmjit::LabelEntry::offset, "Returns the label offset (only useful if the label is bound).\n\nC++: asmjit::LabelEntry::offset() const --> unsigned long");
-		cl.def("hashCode", (unsigned int (asmjit::LabelEntry::*)() const) &asmjit::LabelEntry::hashCode, "Returns the hash-value of label's name and its parent label (if any).\n\n Label hash is calculated as `HASH(Name) ^ ParentId`. The hash function is implemented in `Support::hashString()`\n and `Support::hashRound()`.\n\nC++: asmjit::LabelEntry::hashCode() const --> unsigned int");
-	}
-	{ // asmjit::CodeHolder file: line:714
-		pybind11::class_<asmjit::CodeHolder, std::shared_ptr<asmjit::CodeHolder>> cl(M("asmjit"), "CodeHolder", "Holds assembled code and data (including sections, labels, and relocation information).\n\n CodeHolder connects emitters with their targets. It provides them interface that can be used to query information\n about the target environment (architecture, etc...) and API to create labels, sections, relocations, and to write\n data to a  which is always part of  More than one emitter can be attached to a single\n CodeHolder instance at a time, which is used in practice\n\n CodeHolder provides interface for all emitter types. Assemblers use CodeHolder to write into  and\n higher level emitters like Builder and Compiler use CodeHolder to manage labels and sections so higher level code\n can be serialized to Assembler by  and \n\n In order to use CodeHolder, it must be first initialized by  After the CodeHolder has been successfully\n initialized it can be used to hold assembled code, sections, labels, relocations, and to attach / detach code\n emitters. After the end of code generation it can be used to query physical locations of labels and to relocate\n the assembled code into the right address.\n\n \n  has an ability to attach an  however, the error handler is not triggered\n by  itself, it's instead propagated to all emitters that attach to it.");
 
 
 
+		cl.def("reset", (void (asmjit::OpRWInfo::*)()) &asmjit::OpRWInfo::reset, "Resets this operand information to all zeros.\n\nC++: asmjit::OpRWInfo::reset() --> void");
+		cl.def("reset", [](asmjit::OpRWInfo &o, enum asmjit::OpRWFlags const & a0, unsigned int const & a1) -> void { return o.reset(a0, a1); }, "", pybind11::arg("opFlags"), pybind11::arg("regSize"));
+		cl.def("reset", (void (asmjit::OpRWInfo::*)(enum asmjit::OpRWFlags, unsigned int, unsigned int)) &asmjit::OpRWInfo::reset, "Resets this operand info (resets all members) and set common information\n to the given `opFlags`, `regSize`, and possibly `physId`.\n\nC++: asmjit::OpRWInfo::reset(enum asmjit::OpRWFlags, unsigned int, unsigned int) --> void", pybind11::arg("opFlags"), pybind11::arg("regSize"), pybind11::arg("physId"));
 
-
-
-
-
-
-
-
-
-
-		cl.def("isInitialized", (bool (asmjit::CodeHolder::*)() const) &asmjit::CodeHolder::isInitialized, "Tests whether the `CodeHolder` has been initialized.\n\n Emitters can be only attached to initialized `CodeHolder` instances.\n\nC++: asmjit::CodeHolder::isInitialized() const --> bool");
-		cl.def("init", [](asmjit::CodeHolder &o, const class asmjit::Environment & a0) -> unsigned int { return o.init(a0); }, "", pybind11::arg("environment"));
-		cl.def("init", (unsigned int (asmjit::CodeHolder::*)(const class asmjit::Environment &, unsigned long)) &asmjit::CodeHolder::init, "Initializes CodeHolder to hold code described by the given `environment` and `baseAddress`.\n\nC++: asmjit::CodeHolder::init(const class asmjit::Environment &, unsigned long) --> unsigned int", pybind11::arg("environment"), pybind11::arg("baseAddress"));
-		cl.def("init", [](asmjit::CodeHolder &o, const class asmjit::Environment & a0, const class asmjit::CpuFeatures & a1) -> unsigned int { return o.init(a0, a1); }, "", pybind11::arg("environment"), pybind11::arg("cpuFeatures"));
-		cl.def("init", (unsigned int (asmjit::CodeHolder::*)(const class asmjit::Environment &, const class asmjit::CpuFeatures &, unsigned long)) &asmjit::CodeHolder::init, "Initializes CodeHolder to hold code described by the given `environment`, `cpuFeatures`, and `baseAddress`.\n\nC++: asmjit::CodeHolder::init(const class asmjit::Environment &, const class asmjit::CpuFeatures &, unsigned long) --> unsigned int", pybind11::arg("environment"), pybind11::arg("cpuFeatures"), pybind11::arg("baseAddress"));
-		cl.def("reset", [](asmjit::CodeHolder &o) -> void { return o.reset(); }, "");
-		cl.def("reset", (void (asmjit::CodeHolder::*)(enum asmjit::ResetPolicy)) &asmjit::CodeHolder::reset, "Detaches all code-generators attached and resets the `CodeHolder`.\n\nC++: asmjit::CodeHolder::reset(enum asmjit::ResetPolicy) --> void", pybind11::arg("resetPolicy"));
-		cl.def("attach", (unsigned int (asmjit::CodeHolder::*)(class asmjit::BaseEmitter *)) &asmjit::CodeHolder::attach, "Attaches an emitter to this `CodeHolder`.\n\nC++: asmjit::CodeHolder::attach(class asmjit::BaseEmitter *) --> unsigned int", pybind11::arg("emitter"));
-		cl.def("detach", (unsigned int (asmjit::CodeHolder::*)(class asmjit::BaseEmitter *)) &asmjit::CodeHolder::detach, "Detaches an emitter from this `CodeHolder`.\n\nC++: asmjit::CodeHolder::detach(class asmjit::BaseEmitter *) --> unsigned int", pybind11::arg("emitter"));
-		cl.def("environment", (const class asmjit::Environment & (asmjit::CodeHolder::*)() const) &asmjit::CodeHolder::environment, "Returns the target environment information.\n\nC++: asmjit::CodeHolder::environment() const --> const class asmjit::Environment &", pybind11::return_value_policy::automatic);
-		cl.def("arch", (enum asmjit::Arch (asmjit::CodeHolder::*)() const) &asmjit::CodeHolder::arch, "Returns the target architecture.\n\nC++: asmjit::CodeHolder::arch() const --> enum asmjit::Arch");
-		cl.def("subArch", (enum asmjit::SubArch (asmjit::CodeHolder::*)() const) &asmjit::CodeHolder::subArch, "Returns the target sub-architecture.\n\nC++: asmjit::CodeHolder::subArch() const --> enum asmjit::SubArch");
-		cl.def("cpuFeatures", (const class asmjit::CpuFeatures & (asmjit::CodeHolder::*)() const) &asmjit::CodeHolder::cpuFeatures, "Returns the minimum CPU features of the target architecture.\n\nC++: asmjit::CodeHolder::cpuFeatures() const --> const class asmjit::CpuFeatures &", pybind11::return_value_policy::automatic);
-		cl.def("hasBaseAddress", (bool (asmjit::CodeHolder::*)() const) &asmjit::CodeHolder::hasBaseAddress, "Tests whether a static base-address is set.\n\nC++: asmjit::CodeHolder::hasBaseAddress() const --> bool");
-		cl.def("baseAddress", (unsigned long (asmjit::CodeHolder::*)() const) &asmjit::CodeHolder::baseAddress, "Returns a static base-address or  if not set.\n\nC++: asmjit::CodeHolder::baseAddress() const --> unsigned long");
-		cl.def("logger", (class asmjit::Logger * (asmjit::CodeHolder::*)() const) &asmjit::CodeHolder::logger, "Returns the attached logger.\n\nC++: asmjit::CodeHolder::logger() const --> class asmjit::Logger *", pybind11::return_value_policy::automatic);
-		cl.def("setLogger", (void (asmjit::CodeHolder::*)(class asmjit::Logger *)) &asmjit::CodeHolder::setLogger, "Attaches a `logger` to CodeHolder and propagates it to all attached emitters.\n\nC++: asmjit::CodeHolder::setLogger(class asmjit::Logger *) --> void", pybind11::arg("logger"));
-		cl.def("resetLogger", (void (asmjit::CodeHolder::*)()) &asmjit::CodeHolder::resetLogger, "Resets the logger to none.\n\nC++: asmjit::CodeHolder::resetLogger() --> void");
-		cl.def("hasErrorHandler", (bool (asmjit::CodeHolder::*)() const) &asmjit::CodeHolder::hasErrorHandler, "Tests whether the CodeHolder has an attached error handler, see \n\nC++: asmjit::CodeHolder::hasErrorHandler() const --> bool");
-		cl.def("errorHandler", (class asmjit::ErrorHandler * (asmjit::CodeHolder::*)() const) &asmjit::CodeHolder::errorHandler, "Returns the attached error handler.\n\nC++: asmjit::CodeHolder::errorHandler() const --> class asmjit::ErrorHandler *", pybind11::return_value_policy::automatic);
-		cl.def("setErrorHandler", (void (asmjit::CodeHolder::*)(class asmjit::ErrorHandler *)) &asmjit::CodeHolder::setErrorHandler, "Attach an error handler to this `CodeHolder`.\n\nC++: asmjit::CodeHolder::setErrorHandler(class asmjit::ErrorHandler *) --> void", pybind11::arg("errorHandler"));
-		cl.def("resetErrorHandler", (void (asmjit::CodeHolder::*)()) &asmjit::CodeHolder::resetErrorHandler, "Resets the error handler to none.\n\nC++: asmjit::CodeHolder::resetErrorHandler() --> void");
-		cl.def("growBuffer", (unsigned int (asmjit::CodeHolder::*)(struct asmjit::CodeBuffer *, unsigned long)) &asmjit::CodeHolder::growBuffer, "Makes sure that at least `n` bytes can be added to CodeHolder's buffer `cb`.\n\n \n The buffer `cb` must be managed by `CodeHolder` - otherwise the behavior of the function is undefined.\n\nC++: asmjit::CodeHolder::growBuffer(struct asmjit::CodeBuffer *, unsigned long) --> unsigned int", pybind11::arg("cb"), pybind11::arg("n"));
-		cl.def("reserveBuffer", (unsigned int (asmjit::CodeHolder::*)(struct asmjit::CodeBuffer *, unsigned long)) &asmjit::CodeHolder::reserveBuffer, "Reserves the size of `cb` to at least `n` bytes.\n\n \n The buffer `cb` must be managed by `CodeHolder` - otherwise the behavior of the function is undefined.\n\nC++: asmjit::CodeHolder::reserveBuffer(struct asmjit::CodeBuffer *, unsigned long) --> unsigned int", pybind11::arg("cb"), pybind11::arg("n"));
-		cl.def("sectionCount", (unsigned int (asmjit::CodeHolder::*)() const) &asmjit::CodeHolder::sectionCount, "Returns the number of sections.\n\nC++: asmjit::CodeHolder::sectionCount() const --> unsigned int");
-		cl.def("isSectionValid", (bool (asmjit::CodeHolder::*)(unsigned int) const) &asmjit::CodeHolder::isSectionValid, "Tests whether the given `sectionId` is valid.\n\nC++: asmjit::CodeHolder::isSectionValid(unsigned int) const --> bool", pybind11::arg("sectionId"));
-		cl.def("sectionById", (class asmjit::Section * (asmjit::CodeHolder::*)(unsigned int) const) &asmjit::CodeHolder::sectionById, "Returns a section entry of the given index.\n\nC++: asmjit::CodeHolder::sectionById(unsigned int) const --> class asmjit::Section *", pybind11::return_value_policy::automatic, pybind11::arg("sectionId"));
-		cl.def("sectionByName", [](asmjit::CodeHolder const &o, const char * a0) -> asmjit::Section * { return o.sectionByName(a0); }, "", pybind11::return_value_policy::automatic, pybind11::arg("name"));
-		cl.def("sectionByName", (class asmjit::Section * (asmjit::CodeHolder::*)(const char *, unsigned long) const) &asmjit::CodeHolder::sectionByName, "Returns section-id that matches the given `name`.\n\n If there is no such section `Section::kInvalidId` is returned.\n\nC++: asmjit::CodeHolder::sectionByName(const char *, unsigned long) const --> class asmjit::Section *", pybind11::return_value_policy::automatic, pybind11::arg("name"), pybind11::arg("nameSize"));
-		cl.def("textSection", (class asmjit::Section * (asmjit::CodeHolder::*)() const) &asmjit::CodeHolder::textSection, "Returns '.text' section (section that commonly represents code).\n\n \n Text section is always the first section in  array.\n\nC++: asmjit::CodeHolder::textSection() const --> class asmjit::Section *", pybind11::return_value_policy::automatic);
-		cl.def("hasAddressTable", (bool (asmjit::CodeHolder::*)() const) &asmjit::CodeHolder::hasAddressTable, "Tests whether '.addrtab' section exists.\n\nC++: asmjit::CodeHolder::hasAddressTable() const --> bool");
-		cl.def("addressTableSection", (class asmjit::Section * (asmjit::CodeHolder::*)() const) &asmjit::CodeHolder::addressTableSection, "Returns '.addrtab' section.\n\n This section is used exclusively by AsmJit to store absolute 64-bit\n addresses that cannot be encoded in instructions like 'jmp' or 'call'.\n\n \n This section is created on demand, the returned pointer can be null.\n\nC++: asmjit::CodeHolder::addressTableSection() const --> class asmjit::Section *", pybind11::return_value_policy::automatic);
-		cl.def("ensureAddressTableSection", (class asmjit::Section * (asmjit::CodeHolder::*)()) &asmjit::CodeHolder::ensureAddressTableSection, "Ensures that '.addrtab' section exists (creates it if it doesn't) and\n returns it. Can return `nullptr` on out of memory condition.\n\nC++: asmjit::CodeHolder::ensureAddressTableSection() --> class asmjit::Section *", pybind11::return_value_policy::automatic);
-		cl.def("addAddressToAddressTable", (unsigned int (asmjit::CodeHolder::*)(unsigned long)) &asmjit::CodeHolder::addAddressToAddressTable, "Used to add an address to an address table.\n\n This implicitly calls `ensureAddressTableSection()` and then creates `AddressTableEntry` that is inserted\n to `_addressTableEntries`. If the address already exists this operation does nothing as the same addresses\n use the same slot.\n\n This function should be considered internal as it's used by assemblers to insert an absolute address into the\n address table. Inserting address into address table without creating a particular relocation entry makes no sense.\n\nC++: asmjit::CodeHolder::addAddressToAddressTable(unsigned long) --> unsigned int", pybind11::arg("address"));
-		cl.def("labelCount", (unsigned int (asmjit::CodeHolder::*)() const) &asmjit::CodeHolder::labelCount, "Returns number of labels created.\n\nC++: asmjit::CodeHolder::labelCount() const --> unsigned int");
-		cl.def("isLabelValid", (bool (asmjit::CodeHolder::*)(unsigned int) const) &asmjit::CodeHolder::isLabelValid, "Tests whether the label having `id` is valid (i.e. created by `newLabelEntry()`).\n\nC++: asmjit::CodeHolder::isLabelValid(unsigned int) const --> bool", pybind11::arg("labelId"));
-		cl.def("isLabelValid", (bool (asmjit::CodeHolder::*)(const class asmjit::Label &) const) &asmjit::CodeHolder::isLabelValid, "Tests whether the `label` is valid (i.e. created by `newLabelEntry()`).\n\nC++: asmjit::CodeHolder::isLabelValid(const class asmjit::Label &) const --> bool", pybind11::arg("label"));
-		cl.def("isLabelBound", (bool (asmjit::CodeHolder::*)(unsigned int) const) &asmjit::CodeHolder::isLabelBound, "C++: asmjit::CodeHolder::isLabelBound(unsigned int) const --> bool", pybind11::arg("labelId"));
-		cl.def("isLabelBound", (bool (asmjit::CodeHolder::*)(const class asmjit::Label &) const) &asmjit::CodeHolder::isLabelBound, "Tests whether the `label` is already bound.\n\n Returns `false` if the `label` is not valid.\n\nC++: asmjit::CodeHolder::isLabelBound(const class asmjit::Label &) const --> bool", pybind11::arg("label"));
-		cl.def("labelEntry", (class asmjit::LabelEntry * (asmjit::CodeHolder::*)(unsigned int) const) &asmjit::CodeHolder::labelEntry, "Returns LabelEntry of the given label `id`.\n\nC++: asmjit::CodeHolder::labelEntry(unsigned int) const --> class asmjit::LabelEntry *", pybind11::return_value_policy::automatic, pybind11::arg("labelId"));
-		cl.def("labelEntry", (class asmjit::LabelEntry * (asmjit::CodeHolder::*)(const class asmjit::Label &) const) &asmjit::CodeHolder::labelEntry, "Returns LabelEntry of the given `label`.\n\nC++: asmjit::CodeHolder::labelEntry(const class asmjit::Label &) const --> class asmjit::LabelEntry *", pybind11::return_value_policy::automatic, pybind11::arg("label"));
-		cl.def("labelOffset", (unsigned long (asmjit::CodeHolder::*)(unsigned int) const) &asmjit::CodeHolder::labelOffset, "Returns offset of a `Label` by its `labelId`.\n\n The offset returned is relative to the start of the section. Zero offset is returned for unbound labels,\n which is their initial offset value.\n\nC++: asmjit::CodeHolder::labelOffset(unsigned int) const --> unsigned long", pybind11::arg("labelId"));
-		cl.def("labelOffset", (unsigned long (asmjit::CodeHolder::*)(const class asmjit::Label &) const) &asmjit::CodeHolder::labelOffset, "C++: asmjit::CodeHolder::labelOffset(const class asmjit::Label &) const --> unsigned long", pybind11::arg("label"));
-		cl.def("labelOffsetFromBase", (unsigned long (asmjit::CodeHolder::*)(unsigned int) const) &asmjit::CodeHolder::labelOffsetFromBase, "Returns offset of a label by it's `labelId` relative to the base offset.\n\n \n The offset of the section where the label is bound must be valid in order to use this function,\n otherwise the value returned will not be reliable.\n\nC++: asmjit::CodeHolder::labelOffsetFromBase(unsigned int) const --> unsigned long", pybind11::arg("labelId"));
-		cl.def("labelOffsetFromBase", (unsigned long (asmjit::CodeHolder::*)(const class asmjit::Label &) const) &asmjit::CodeHolder::labelOffsetFromBase, "C++: asmjit::CodeHolder::labelOffsetFromBase(const class asmjit::Label &) const --> unsigned long", pybind11::arg("label"));
-		cl.def("labelByName", [](asmjit::CodeHolder &o, const char * a0) -> asmjit::Label { return o.labelByName(a0); }, "", pybind11::arg("name"));
-		cl.def("labelByName", [](asmjit::CodeHolder &o, const char * a0, unsigned long const & a1) -> asmjit::Label { return o.labelByName(a0, a1); }, "", pybind11::arg("name"), pybind11::arg("nameSize"));
-		cl.def("labelByName", (class asmjit::Label (asmjit::CodeHolder::*)(const char *, unsigned long, unsigned int)) &asmjit::CodeHolder::labelByName, "Returns a label by name.\n\n If the named label doesn't a default constructed  is returned,\n which has its id set to \n\nC++: asmjit::CodeHolder::labelByName(const char *, unsigned long, unsigned int) --> class asmjit::Label", pybind11::arg("name"), pybind11::arg("nameSize"), pybind11::arg("parentId"));
-		cl.def("labelIdByName", [](asmjit::CodeHolder &o, const char * a0) -> unsigned int { return o.labelIdByName(a0); }, "", pybind11::arg("name"));
-		cl.def("labelIdByName", [](asmjit::CodeHolder &o, const char * a0, unsigned long const & a1) -> unsigned int { return o.labelIdByName(a0, a1); }, "", pybind11::arg("name"), pybind11::arg("nameSize"));
-		cl.def("labelIdByName", (unsigned int (asmjit::CodeHolder::*)(const char *, unsigned long, unsigned int)) &asmjit::CodeHolder::labelIdByName, "Returns a label id by name.\n\n If the named label doesn't exist  is returned.\n\nC++: asmjit::CodeHolder::labelIdByName(const char *, unsigned long, unsigned int) --> unsigned int", pybind11::arg("name"), pybind11::arg("nameSize"), pybind11::arg("parentId"));
-		cl.def("hasUnresolvedLinks", (bool (asmjit::CodeHolder::*)() const) &asmjit::CodeHolder::hasUnresolvedLinks, "Tests whether there are any unresolved label links.\n\nC++: asmjit::CodeHolder::hasUnresolvedLinks() const --> bool");
-		cl.def("unresolvedLinkCount", (unsigned long (asmjit::CodeHolder::*)() const) &asmjit::CodeHolder::unresolvedLinkCount, "Returns the number of label links, which are unresolved.\n\nC++: asmjit::CodeHolder::unresolvedLinkCount() const --> unsigned long");
-		cl.def("newLabelLink", (struct asmjit::LabelLink * (asmjit::CodeHolder::*)(class asmjit::LabelEntry *, unsigned int, unsigned long, long, const struct asmjit::OffsetFormat &)) &asmjit::CodeHolder::newLabelLink, "Creates a new label-link used to store information about yet unbound labels.\n\n Returns `null` if the allocation failed.\n\nC++: asmjit::CodeHolder::newLabelLink(class asmjit::LabelEntry *, unsigned int, unsigned long, long, const struct asmjit::OffsetFormat &) --> struct asmjit::LabelLink *", pybind11::return_value_policy::automatic, pybind11::arg("le"), pybind11::arg("sectionId"), pybind11::arg("offset"), pybind11::arg("rel"), pybind11::arg("format"));
-		cl.def("resolveUnresolvedLinks", (unsigned int (asmjit::CodeHolder::*)()) &asmjit::CodeHolder::resolveUnresolvedLinks, "Resolves cross-section links (`LabelLink`) associated with each label that was used as a destination in code\n of a different section. It's only useful to people that use multiple sections as it will do nothing if the code\n only contains a single section in which cross-section links are not possible.\n\nC++: asmjit::CodeHolder::resolveUnresolvedLinks() --> unsigned int");
-		cl.def("bindLabel", (unsigned int (asmjit::CodeHolder::*)(const class asmjit::Label &, unsigned int, unsigned long)) &asmjit::CodeHolder::bindLabel, "Binds a label to a given `sectionId` and `offset` (relative to start of the section).\n\n This function is generally used by `BaseAssembler::bind()` to do the heavy lifting.\n\nC++: asmjit::CodeHolder::bindLabel(const class asmjit::Label &, unsigned int, unsigned long) --> unsigned int", pybind11::arg("label"), pybind11::arg("sectionId"), pybind11::arg("offset"));
-		cl.def("hasRelocEntries", (bool (asmjit::CodeHolder::*)() const) &asmjit::CodeHolder::hasRelocEntries, "Tests whether the code contains relocation entries.\n\nC++: asmjit::CodeHolder::hasRelocEntries() const --> bool");
-		cl.def("relocEntry", (struct asmjit::RelocEntry * (asmjit::CodeHolder::*)(unsigned int) const) &asmjit::CodeHolder::relocEntry, "Returns a RelocEntry of the given `id`.\n\nC++: asmjit::CodeHolder::relocEntry(unsigned int) const --> struct asmjit::RelocEntry *", pybind11::return_value_policy::automatic, pybind11::arg("id"));
-		cl.def("flatten", (unsigned int (asmjit::CodeHolder::*)()) &asmjit::CodeHolder::flatten, "Flattens all sections by recalculating their offsets, starting at 0.\n\n \n This should never be called more than once.\n\nC++: asmjit::CodeHolder::flatten() --> unsigned int");
-		cl.def("codeSize", (unsigned long (asmjit::CodeHolder::*)() const) &asmjit::CodeHolder::codeSize, "Returns computed the size of code & data of all sections.\n\n \n All sections will be iterated over and the code size returned would represent the minimum code size of\n all combined sections after applying minimum alignment. Code size may decrease after calling `flatten()` and\n `relocateToBase()`.\n\nC++: asmjit::CodeHolder::codeSize() const --> unsigned long");
-		cl.def("relocateToBase", (unsigned int (asmjit::CodeHolder::*)(unsigned long)) &asmjit::CodeHolder::relocateToBase, "Relocates the code to the given `baseAddress`.\n\n \n Absolute base address where the code will be relocated to. Please note that nothing is\n copied to such base address, it's just an absolute value used by the relocation code to resolve all stored\n relocations.\n\n \n This should never be called more than once.\n\nC++: asmjit::CodeHolder::relocateToBase(unsigned long) --> unsigned int", pybind11::arg("baseAddress"));
-		cl.def("copySectionData", [](asmjit::CodeHolder &o, void * a0, unsigned long const & a1, unsigned int const & a2) -> unsigned int { return o.copySectionData(a0, a1, a2); }, "", pybind11::arg("dst"), pybind11::arg("dstSize"), pybind11::arg("sectionId"));
-		cl.def("copySectionData", (unsigned int (asmjit::CodeHolder::*)(void *, unsigned long, unsigned int, enum asmjit::CopySectionFlags)) &asmjit::CodeHolder::copySectionData, "Copies a single section into `dst`.\n\nC++: asmjit::CodeHolder::copySectionData(void *, unsigned long, unsigned int, enum asmjit::CopySectionFlags) --> unsigned int", pybind11::arg("dst"), pybind11::arg("dstSize"), pybind11::arg("sectionId"), pybind11::arg("copyFlags"));
-		cl.def("copyFlattenedData", [](asmjit::CodeHolder &o, void * a0, unsigned long const & a1) -> unsigned int { return o.copyFlattenedData(a0, a1); }, "", pybind11::arg("dst"), pybind11::arg("dstSize"));
-		cl.def("copyFlattenedData", (unsigned int (asmjit::CodeHolder::*)(void *, unsigned long, enum asmjit::CopySectionFlags)) &asmjit::CodeHolder::copyFlattenedData, "Copies all sections into `dst`.\n\n This should only be used if the data was flattened and there are no gaps between the sections. The `dstSize`\n is always checked and the copy will never write anything outside the provided buffer.\n\nC++: asmjit::CodeHolder::copyFlattenedData(void *, unsigned long, enum asmjit::CopySectionFlags) --> unsigned int", pybind11::arg("dst"), pybind11::arg("dstSize"), pybind11::arg("copyFlags"));
+		cl.def("opFlags", (enum asmjit::OpRWFlags (asmjit::OpRWInfo::*)() const) &asmjit::OpRWInfo::opFlags, "Returns operand flags.\n\nC++: asmjit::OpRWInfo::opFlags() const --> enum asmjit::OpRWFlags");
+		cl.def("hasOpFlag", (bool (asmjit::OpRWInfo::*)(enum asmjit::OpRWFlags) const) &asmjit::OpRWInfo::hasOpFlag, "Tests whether operand flags contain the given `flag`.\n\nC++: asmjit::OpRWInfo::hasOpFlag(enum asmjit::OpRWFlags) const --> bool", pybind11::arg("flag"));
+		cl.def("addOpFlags", (void (asmjit::OpRWInfo::*)(enum asmjit::OpRWFlags)) &asmjit::OpRWInfo::addOpFlags, "Adds the given `flags` to operand flags.\n\nC++: asmjit::OpRWInfo::addOpFlags(enum asmjit::OpRWFlags) --> void", pybind11::arg("flags"));
+		cl.def("clearOpFlags", (void (asmjit::OpRWInfo::*)(enum asmjit::OpRWFlags)) &asmjit::OpRWInfo::clearOpFlags, "Removes the given `flags` from operand flags.\n\nC++: asmjit::OpRWInfo::clearOpFlags(enum asmjit::OpRWFlags) --> void", pybind11::arg("flags"));
+		cl.def("isRead", (bool (asmjit::OpRWInfo::*)() const) &asmjit::OpRWInfo::isRead, "Tests whether this operand is read from.\n\nC++: asmjit::OpRWInfo::isRead() const --> bool");
+		cl.def("isWrite", (bool (asmjit::OpRWInfo::*)() const) &asmjit::OpRWInfo::isWrite, "Tests whether this operand is written to.\n\nC++: asmjit::OpRWInfo::isWrite() const --> bool");
+		cl.def("isReadWrite", (bool (asmjit::OpRWInfo::*)() const) &asmjit::OpRWInfo::isReadWrite, "Tests whether this operand is both read and write.\n\nC++: asmjit::OpRWInfo::isReadWrite() const --> bool");
+		cl.def("isReadOnly", (bool (asmjit::OpRWInfo::*)() const) &asmjit::OpRWInfo::isReadOnly, "Tests whether this operand is read only.\n\nC++: asmjit::OpRWInfo::isReadOnly() const --> bool");
+		cl.def("isWriteOnly", (bool (asmjit::OpRWInfo::*)() const) &asmjit::OpRWInfo::isWriteOnly, "Tests whether this operand is write only.\n\nC++: asmjit::OpRWInfo::isWriteOnly() const --> bool");
+		cl.def("consecutiveLeadCount", (unsigned int (asmjit::OpRWInfo::*)() const) &asmjit::OpRWInfo::consecutiveLeadCount, "Returns the type of a lead register, which is followed by consecutive registers.\n\nC++: asmjit::OpRWInfo::consecutiveLeadCount() const --> unsigned int");
+		cl.def("isRm", (bool (asmjit::OpRWInfo::*)() const) &asmjit::OpRWInfo::isRm, "Tests whether this operand is Reg/Mem\n\n Reg/Mem operands can use either register or memory.\n\nC++: asmjit::OpRWInfo::isRm() const --> bool");
+		cl.def("isZExt", (bool (asmjit::OpRWInfo::*)() const) &asmjit::OpRWInfo::isZExt, "Tests whether the operand will be zero extended.\n\nC++: asmjit::OpRWInfo::isZExt() const --> bool");
+		cl.def("isUnique", (bool (asmjit::OpRWInfo::*)() const) &asmjit::OpRWInfo::isUnique, "Tests whether the operand must have allocated a unique physical id that cannot be shared with other register\n operands.\n\nC++: asmjit::OpRWInfo::isUnique() const --> bool");
+		cl.def("isMemFake", (bool (asmjit::OpRWInfo::*)() const) &asmjit::OpRWInfo::isMemFake, "Tests whether this is a fake memory operand, which is only used, because of encoding. Fake memory operands do\n not access any memory, they are only used to encode registers.\n\nC++: asmjit::OpRWInfo::isMemFake() const --> bool");
+		cl.def("isMemBaseUsed", (bool (asmjit::OpRWInfo::*)() const) &asmjit::OpRWInfo::isMemBaseUsed, "Tests whether the instruction's memory BASE register is used.\n\nC++: asmjit::OpRWInfo::isMemBaseUsed() const --> bool");
+		cl.def("isMemBaseRead", (bool (asmjit::OpRWInfo::*)() const) &asmjit::OpRWInfo::isMemBaseRead, "Tests whether the instruction reads from its BASE registers.\n\nC++: asmjit::OpRWInfo::isMemBaseRead() const --> bool");
+		cl.def("isMemBaseWrite", (bool (asmjit::OpRWInfo::*)() const) &asmjit::OpRWInfo::isMemBaseWrite, "Tests whether the instruction writes to its BASE registers.\n\nC++: asmjit::OpRWInfo::isMemBaseWrite() const --> bool");
+		cl.def("isMemBaseReadWrite", (bool (asmjit::OpRWInfo::*)() const) &asmjit::OpRWInfo::isMemBaseReadWrite, "Tests whether the instruction reads and writes from/to its BASE registers.\n\nC++: asmjit::OpRWInfo::isMemBaseReadWrite() const --> bool");
+		cl.def("isMemBaseReadOnly", (bool (asmjit::OpRWInfo::*)() const) &asmjit::OpRWInfo::isMemBaseReadOnly, "Tests whether the instruction only reads from its BASE registers.\n\nC++: asmjit::OpRWInfo::isMemBaseReadOnly() const --> bool");
+		cl.def("isMemBaseWriteOnly", (bool (asmjit::OpRWInfo::*)() const) &asmjit::OpRWInfo::isMemBaseWriteOnly, "Tests whether the instruction only writes to its BASE registers.\n\nC++: asmjit::OpRWInfo::isMemBaseWriteOnly() const --> bool");
+		cl.def("isMemBasePreModify", (bool (asmjit::OpRWInfo::*)() const) &asmjit::OpRWInfo::isMemBasePreModify, "Tests whether the instruction modifies the BASE register before it uses it to calculate the target address.\n\nC++: asmjit::OpRWInfo::isMemBasePreModify() const --> bool");
+		cl.def("isMemBasePostModify", (bool (asmjit::OpRWInfo::*)() const) &asmjit::OpRWInfo::isMemBasePostModify, "Tests whether the instruction modifies the BASE register after it uses it to calculate the target address.\n\nC++: asmjit::OpRWInfo::isMemBasePostModify() const --> bool");
+		cl.def("isMemIndexUsed", (bool (asmjit::OpRWInfo::*)() const) &asmjit::OpRWInfo::isMemIndexUsed, "Tests whether the instruction's memory INDEX register is used.\n\nC++: asmjit::OpRWInfo::isMemIndexUsed() const --> bool");
+		cl.def("isMemIndexRead", (bool (asmjit::OpRWInfo::*)() const) &asmjit::OpRWInfo::isMemIndexRead, "Tests whether the instruction reads the INDEX registers.\n\nC++: asmjit::OpRWInfo::isMemIndexRead() const --> bool");
+		cl.def("isMemIndexWrite", (bool (asmjit::OpRWInfo::*)() const) &asmjit::OpRWInfo::isMemIndexWrite, "Tests whether the instruction writes to its INDEX registers.\n\nC++: asmjit::OpRWInfo::isMemIndexWrite() const --> bool");
+		cl.def("isMemIndexReadWrite", (bool (asmjit::OpRWInfo::*)() const) &asmjit::OpRWInfo::isMemIndexReadWrite, "Tests whether the instruction reads and writes from/to its INDEX registers.\n\nC++: asmjit::OpRWInfo::isMemIndexReadWrite() const --> bool");
+		cl.def("isMemIndexReadOnly", (bool (asmjit::OpRWInfo::*)() const) &asmjit::OpRWInfo::isMemIndexReadOnly, "Tests whether the instruction only reads from its INDEX registers.\n\nC++: asmjit::OpRWInfo::isMemIndexReadOnly() const --> bool");
+		cl.def("isMemIndexWriteOnly", (bool (asmjit::OpRWInfo::*)() const) &asmjit::OpRWInfo::isMemIndexWriteOnly, "Tests whether the instruction only writes to its INDEX registers.\n\nC++: asmjit::OpRWInfo::isMemIndexWriteOnly() const --> bool");
+		cl.def("physId", (unsigned int (asmjit::OpRWInfo::*)() const) &asmjit::OpRWInfo::physId, "Returns a physical id of the register that is fixed for this operand.\n\n Returns  if any register can be used.\n\nC++: asmjit::OpRWInfo::physId() const --> unsigned int");
+		cl.def("hasPhysId", (bool (asmjit::OpRWInfo::*)() const) &asmjit::OpRWInfo::hasPhysId, "Tests whether  would return a valid physical register id.\n\nC++: asmjit::OpRWInfo::hasPhysId() const --> bool");
+		cl.def("setPhysId", (void (asmjit::OpRWInfo::*)(unsigned int)) &asmjit::OpRWInfo::setPhysId, "Sets physical register id, which would be fixed for this operand.\n\nC++: asmjit::OpRWInfo::setPhysId(unsigned int) --> void", pybind11::arg("physId"));
+		cl.def("rmSize", (unsigned int (asmjit::OpRWInfo::*)() const) &asmjit::OpRWInfo::rmSize, "Returns Reg/Mem size of the operand.\n\nC++: asmjit::OpRWInfo::rmSize() const --> unsigned int");
+		cl.def("setRmSize", (void (asmjit::OpRWInfo::*)(unsigned int)) &asmjit::OpRWInfo::setRmSize, "Sets Reg/Mem size of the operand.\n\nC++: asmjit::OpRWInfo::setRmSize(unsigned int) --> void", pybind11::arg("rmSize"));
+		cl.def("readByteMask", (unsigned long (asmjit::OpRWInfo::*)() const) &asmjit::OpRWInfo::readByteMask, "Returns read mask.\n\nC++: asmjit::OpRWInfo::readByteMask() const --> unsigned long");
+		cl.def("writeByteMask", (unsigned long (asmjit::OpRWInfo::*)() const) &asmjit::OpRWInfo::writeByteMask, "Returns write mask.\n\nC++: asmjit::OpRWInfo::writeByteMask() const --> unsigned long");
+		cl.def("extendByteMask", (unsigned long (asmjit::OpRWInfo::*)() const) &asmjit::OpRWInfo::extendByteMask, "Returns extend mask.\n\nC++: asmjit::OpRWInfo::extendByteMask() const --> unsigned long");
+		cl.def("setReadByteMask", (void (asmjit::OpRWInfo::*)(unsigned long)) &asmjit::OpRWInfo::setReadByteMask, "Sets read mask.\n\nC++: asmjit::OpRWInfo::setReadByteMask(unsigned long) --> void", pybind11::arg("mask"));
+		cl.def("setWriteByteMask", (void (asmjit::OpRWInfo::*)(unsigned long)) &asmjit::OpRWInfo::setWriteByteMask, "Sets write mask.\n\nC++: asmjit::OpRWInfo::setWriteByteMask(unsigned long) --> void", pybind11::arg("mask"));
+		cl.def("setExtendByteMask", (void (asmjit::OpRWInfo::*)(unsigned long)) &asmjit::OpRWInfo::setExtendByteMask, "Sets extend mask.\n\nC++: asmjit::OpRWInfo::setExtendByteMask(unsigned long) --> void", pybind11::arg("mask"));
+		cl.def("assign", (struct asmjit::OpRWInfo & (asmjit::OpRWInfo::*)(const struct asmjit::OpRWInfo &)) &asmjit::OpRWInfo::operator=, "C++: asmjit::OpRWInfo::operator=(const struct asmjit::OpRWInfo &) --> struct asmjit::OpRWInfo &", pybind11::return_value_policy::automatic, pybind11::arg(""));
 	}
 }

@@ -1,3 +1,4 @@
+#include <sstream> // __str__
 
 #include <functional>
 #include <pybind11/pybind11.h>
@@ -15,20 +16,56 @@
 
 void bind_unknown_unknown_28(std::function< pybind11::module &(std::string const &namespace_) > &M)
 {
-	// asmjit::InstAPI::instIdToString(enum asmjit::Arch, unsigned int, class asmjit::String &) file: line:776
-	M("asmjit::InstAPI").def("instIdToString", (unsigned int (*)(enum asmjit::Arch, unsigned int, class asmjit::String &)) &asmjit::InstAPI::instIdToString, "Appends the name of the instruction specified by `instId` and `instOptions` into the `output` string.\n\n \n Instruction options would only affect instruction prefix & suffix, other options would be ignored.\n If `instOptions` is zero then only raw instruction name (without any additional text) will be appended.\n\nC++: asmjit::InstAPI::instIdToString(enum asmjit::Arch, unsigned int, class asmjit::String &) --> unsigned int", pybind11::arg("arch"), pybind11::arg("instId"), pybind11::arg("output"));
+	// asmjit::FormatFlags file: line:25
+	pybind11::enum_<asmjit::FormatFlags>(M("asmjit"), "FormatFlags", "Format flags used by  and ")
+		.value("kNone", asmjit::FormatFlags::kNone)
+		.value("kMachineCode", asmjit::FormatFlags::kMachineCode)
+		.value("kExplainImms", asmjit::FormatFlags::kExplainImms)
+		.value("kHexImms", asmjit::FormatFlags::kHexImms)
+		.value("kHexOffsets", asmjit::FormatFlags::kHexOffsets)
+		.value("kRegCasts", asmjit::FormatFlags::kRegCasts)
+		.value("kPositions", asmjit::FormatFlags::kPositions)
+		.value("kRegType", asmjit::FormatFlags::kRegType);
 
-	// asmjit::InstAPI::stringToInstId(enum asmjit::Arch, const char *, unsigned long) file: line:782
-	M("asmjit::InstAPI").def("stringToInstId", (unsigned int (*)(enum asmjit::Arch, const char *, unsigned long)) &asmjit::InstAPI::stringToInstId, "Parses an instruction name in the given string `s`. Length is specified by `len` argument, which can be\n `SIZE_MAX` if `s` is known to be null terminated.\n\n Returns the parsed instruction id or  if no such instruction exists.\n\nC++: asmjit::InstAPI::stringToInstId(enum asmjit::Arch, const char *, unsigned long) --> unsigned int", pybind11::arg("arch"), pybind11::arg("s"), pybind11::arg("len"));
+;
 
-	// asmjit::InstAPI::validate(enum asmjit::Arch, const class asmjit::BaseInst &, const struct asmjit::Operand_ *, unsigned long, enum asmjit::ValidationFlags) file: line:787
-	M("asmjit::InstAPI").def("validate", [](enum asmjit::Arch const & a0, const class asmjit::BaseInst & a1, const struct asmjit::Operand_ * a2, unsigned long const & a3) -> unsigned int { return asmjit::InstAPI::validate(a0, a1, a2, a3); }, "", pybind11::arg("arch"), pybind11::arg("inst"), pybind11::arg("operands"), pybind11::arg("opCount"));
-	M("asmjit::InstAPI").def("validate", (unsigned int (*)(enum asmjit::Arch, const class asmjit::BaseInst &, const struct asmjit::Operand_ *, unsigned long, enum asmjit::ValidationFlags)) &asmjit::InstAPI::validate, "Validates the given instruction considering the given `validationFlags`.\n\nC++: asmjit::InstAPI::validate(enum asmjit::Arch, const class asmjit::BaseInst &, const struct asmjit::Operand_ *, unsigned long, enum asmjit::ValidationFlags) --> unsigned int", pybind11::arg("arch"), pybind11::arg("inst"), pybind11::arg("operands"), pybind11::arg("opCount"), pybind11::arg("validationFlags"));
+	// asmjit::FormatIndentationGroup file: line:47
+	pybind11::enum_<asmjit::FormatIndentationGroup>(M("asmjit"), "FormatIndentationGroup", "Format indentation group, used by ")
+		.value("kCode", asmjit::FormatIndentationGroup::kCode)
+		.value("kLabel", asmjit::FormatIndentationGroup::kLabel)
+		.value("kComment", asmjit::FormatIndentationGroup::kComment)
+		.value("kReserved", asmjit::FormatIndentationGroup::kReserved)
+		.value("kMaxValue", asmjit::FormatIndentationGroup::kMaxValue);
 
-	// asmjit::InstAPI::queryRWInfo(enum asmjit::Arch, const class asmjit::BaseInst &, const struct asmjit::Operand_ *, unsigned long, struct asmjit::InstRWInfo *) file: line:792
-	M("asmjit::InstAPI").def("queryRWInfo", (unsigned int (*)(enum asmjit::Arch, const class asmjit::BaseInst &, const struct asmjit::Operand_ *, unsigned long, struct asmjit::InstRWInfo *)) &asmjit::InstAPI::queryRWInfo, "Gets Read/Write information of the given instruction.\n\nC++: asmjit::InstAPI::queryRWInfo(enum asmjit::Arch, const class asmjit::BaseInst &, const struct asmjit::Operand_ *, unsigned long, struct asmjit::InstRWInfo *) --> unsigned int", pybind11::arg("arch"), pybind11::arg("inst"), pybind11::arg("operands"), pybind11::arg("opCount"), pybind11::arg("out"));
+;
 
-	// asmjit::InstAPI::queryFeatures(enum asmjit::Arch, const class asmjit::BaseInst &, const struct asmjit::Operand_ *, unsigned long, class asmjit::CpuFeatures *) file: line:795
-	M("asmjit::InstAPI").def("queryFeatures", (unsigned int (*)(enum asmjit::Arch, const class asmjit::BaseInst &, const struct asmjit::Operand_ *, unsigned long, class asmjit::CpuFeatures *)) &asmjit::InstAPI::queryFeatures, "Gets CPU features required by the given instruction.\n\nC++: asmjit::InstAPI::queryFeatures(enum asmjit::Arch, const class asmjit::BaseInst &, const struct asmjit::Operand_ *, unsigned long, class asmjit::CpuFeatures *) --> unsigned int", pybind11::arg("arch"), pybind11::arg("inst"), pybind11::arg("operands"), pybind11::arg("opCount"), pybind11::arg("out"));
+	// asmjit::FormatPaddingGroup file: line:65
+	pybind11::enum_<asmjit::FormatPaddingGroup>(M("asmjit"), "FormatPaddingGroup", "Format padding group, used by ")
+		.value("kRegularLine", asmjit::FormatPaddingGroup::kRegularLine)
+		.value("kMachineCode", asmjit::FormatPaddingGroup::kMachineCode)
+		.value("kMaxValue", asmjit::FormatPaddingGroup::kMaxValue);
 
+;
+
+	{ // asmjit::FormatOptions file: line:76
+		pybind11::class_<asmjit::FormatOptions, std::shared_ptr<asmjit::FormatOptions>> cl(M("asmjit"), "FormatOptions", "Formatting options used by  and ");
+		cl.def( pybind11::init( [](){ return new asmjit::FormatOptions(); } ) );
+		cl.def( pybind11::init( [](asmjit::FormatOptions const &o){ return new asmjit::FormatOptions(o); } ) );
+
+
+
+		cl.def("reset", (void (asmjit::FormatOptions::*)()) &asmjit::FormatOptions::reset, "Resets FormatOptions to its default initialized state.\n\nC++: asmjit::FormatOptions::reset() --> void");
+		cl.def("flags", (enum asmjit::FormatFlags (asmjit::FormatOptions::*)() const) &asmjit::FormatOptions::flags, "Returns format flags.\n\nC++: asmjit::FormatOptions::flags() const --> enum asmjit::FormatFlags");
+		cl.def("hasFlag", (bool (asmjit::FormatOptions::*)(enum asmjit::FormatFlags) const) &asmjit::FormatOptions::hasFlag, "Tests whether the given `flag` is set in format flags.\n\nC++: asmjit::FormatOptions::hasFlag(enum asmjit::FormatFlags) const --> bool", pybind11::arg("flag"));
+		cl.def("setFlags", (void (asmjit::FormatOptions::*)(enum asmjit::FormatFlags)) &asmjit::FormatOptions::setFlags, "Resets all format flags to `flags`.\n\nC++: asmjit::FormatOptions::setFlags(enum asmjit::FormatFlags) --> void", pybind11::arg("flags"));
+		cl.def("addFlags", (void (asmjit::FormatOptions::*)(enum asmjit::FormatFlags)) &asmjit::FormatOptions::addFlags, "Adds `flags` to format flags.\n\nC++: asmjit::FormatOptions::addFlags(enum asmjit::FormatFlags) --> void", pybind11::arg("flags"));
+		cl.def("clearFlags", (void (asmjit::FormatOptions::*)(enum asmjit::FormatFlags)) &asmjit::FormatOptions::clearFlags, "Removes `flags` from format flags.\n\nC++: asmjit::FormatOptions::clearFlags(enum asmjit::FormatFlags) --> void", pybind11::arg("flags"));
+		cl.def("indentation", (unsigned char (asmjit::FormatOptions::*)(enum asmjit::FormatIndentationGroup) const) &asmjit::FormatOptions::indentation, "Returns indentation for the given indentation `group`.\n\nC++: asmjit::FormatOptions::indentation(enum asmjit::FormatIndentationGroup) const --> unsigned char", pybind11::arg("group"));
+		cl.def("setIndentation", (void (asmjit::FormatOptions::*)(enum asmjit::FormatIndentationGroup, unsigned int)) &asmjit::FormatOptions::setIndentation, "Sets indentation for the given indentation `group`.\n\nC++: asmjit::FormatOptions::setIndentation(enum asmjit::FormatIndentationGroup, unsigned int) --> void", pybind11::arg("group"), pybind11::arg("n"));
+		cl.def("resetIndentation", (void (asmjit::FormatOptions::*)(enum asmjit::FormatIndentationGroup)) &asmjit::FormatOptions::resetIndentation, "Resets indentation for the given indentation `group` to zero.\n\nC++: asmjit::FormatOptions::resetIndentation(enum asmjit::FormatIndentationGroup) --> void", pybind11::arg("group"));
+		cl.def("padding", (unsigned long (asmjit::FormatOptions::*)(enum asmjit::FormatPaddingGroup) const) &asmjit::FormatOptions::padding, "Returns padding for the given padding `group`.\n\nC++: asmjit::FormatOptions::padding(enum asmjit::FormatPaddingGroup) const --> unsigned long", pybind11::arg("group"));
+		cl.def("setPadding", (void (asmjit::FormatOptions::*)(enum asmjit::FormatPaddingGroup, unsigned long)) &asmjit::FormatOptions::setPadding, "Sets padding for the given padding `group`.\n\nC++: asmjit::FormatOptions::setPadding(enum asmjit::FormatPaddingGroup, unsigned long) --> void", pybind11::arg("group"), pybind11::arg("n"));
+		cl.def("resetPadding", (void (asmjit::FormatOptions::*)(enum asmjit::FormatPaddingGroup)) &asmjit::FormatOptions::resetPadding, "Resets padding for the given padding `group` to zero, which means that a default padding will be used\n based on the target architecture properties.\n\nC++: asmjit::FormatOptions::resetPadding(enum asmjit::FormatPaddingGroup) --> void", pybind11::arg("group"));
+		cl.def("assign", (class asmjit::FormatOptions & (asmjit::FormatOptions::*)(const class asmjit::FormatOptions &)) &asmjit::FormatOptions::operator=, "C++: asmjit::FormatOptions::operator=(const class asmjit::FormatOptions &) --> class asmjit::FormatOptions &", pybind11::return_value_policy::automatic, pybind11::arg(""));
+	}
 }

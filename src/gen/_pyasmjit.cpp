@@ -90,12 +90,10 @@ void bind_unknown_unknown_75(std::function< pybind11::module &(std::string const
 void bind_unknown_unknown_76(std::function< pybind11::module &(std::string const &namespace_) > &M);
 void bind_unknown_unknown_77(std::function< pybind11::module &(std::string const &namespace_) > &M);
 void bind_unknown_unknown_78(std::function< pybind11::module &(std::string const &namespace_) > &M);
-void bind_unknown_unknown_79(std::function< pybind11::module &(std::string const &namespace_) > &M);
-void bind_unknown_unknown_80(std::function< pybind11::module &(std::string const &namespace_) > &M);
 
 
-PYBIND11_MODULE(asmjit, root_module) {
-	root_module.doc() = "asmjit module";
+PYBIND11_MODULE(_pyasmjit, root_module) {
+	root_module.doc() = "_pyasmjit module";
 
 	std::map <std::string, pybind11::module> modules;
 	ModuleGetter M = [&](std::string const &namespace_) -> pybind11::module & {
@@ -119,7 +117,6 @@ PYBIND11_MODULE(asmjit, root_module) {
 		{"", "asmjit"},
 		{"asmjit", "ArchUtils"},
 		{"asmjit", "DebugUtils"},
-		{"asmjit", "Formatter"},
 		{"asmjit", "Globals"},
 		{"asmjit", "InstAPI"},
 		{"asmjit", "Type"},
@@ -219,7 +216,5 @@ PYBIND11_MODULE(asmjit, root_module) {
 	bind_unknown_unknown_76(M);
 	bind_unknown_unknown_77(M);
 	bind_unknown_unknown_78(M);
-	bind_unknown_unknown_79(M);
-	bind_unknown_unknown_80(M);
 
 }

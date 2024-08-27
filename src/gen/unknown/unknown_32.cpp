@@ -14,364 +14,135 @@
 	PYBIND11_MAKE_OPAQUE(std::shared_ptr<void>)
 #endif
 
-// asmjit::BaseAssembler file: line:29
-struct PyCallBack_asmjit_BaseAssembler : public asmjit::BaseAssembler {
-	using asmjit::BaseAssembler::BaseAssembler;
-
-	unsigned int section(class asmjit::Section * a0) override {
-		pybind11::gil_scoped_acquire gil;
-		pybind11::function overload = pybind11::get_overload(static_cast<const asmjit::BaseAssembler *>(this), "section");
-		if (overload) {
-			auto o = overload.operator()<pybind11::return_value_policy::reference>(a0);
-			if (pybind11::detail::cast_is_temporary_value_reference<unsigned int>::value) {
-				static pybind11::detail::override_caster_t<unsigned int> caster;
-				return pybind11::detail::cast_ref<unsigned int>(std::move(o), caster);
-			}
-			return pybind11::detail::cast_safe<unsigned int>(std::move(o));
-		}
-		return BaseAssembler::section(a0);
-	}
-	class asmjit::Label newLabel() override {
-		pybind11::gil_scoped_acquire gil;
-		pybind11::function overload = pybind11::get_overload(static_cast<const asmjit::BaseAssembler *>(this), "newLabel");
-		if (overload) {
-			auto o = overload.operator()<pybind11::return_value_policy::reference>();
-			if (pybind11::detail::cast_is_temporary_value_reference<class asmjit::Label>::value) {
-				static pybind11::detail::override_caster_t<class asmjit::Label> caster;
-				return pybind11::detail::cast_ref<class asmjit::Label>(std::move(o), caster);
-			}
-			return pybind11::detail::cast_safe<class asmjit::Label>(std::move(o));
-		}
-		return BaseAssembler::newLabel();
-	}
-	class asmjit::Label newNamedLabel(const char * a0, unsigned long a1, enum asmjit::LabelType a2, unsigned int a3) override {
-		pybind11::gil_scoped_acquire gil;
-		pybind11::function overload = pybind11::get_overload(static_cast<const asmjit::BaseAssembler *>(this), "newNamedLabel");
-		if (overload) {
-			auto o = overload.operator()<pybind11::return_value_policy::reference>(a0, a1, a2, a3);
-			if (pybind11::detail::cast_is_temporary_value_reference<class asmjit::Label>::value) {
-				static pybind11::detail::override_caster_t<class asmjit::Label> caster;
-				return pybind11::detail::cast_ref<class asmjit::Label>(std::move(o), caster);
-			}
-			return pybind11::detail::cast_safe<class asmjit::Label>(std::move(o));
-		}
-		return BaseAssembler::newNamedLabel(a0, a1, a2, a3);
-	}
-	unsigned int bind(const class asmjit::Label & a0) override {
-		pybind11::gil_scoped_acquire gil;
-		pybind11::function overload = pybind11::get_overload(static_cast<const asmjit::BaseAssembler *>(this), "bind");
-		if (overload) {
-			auto o = overload.operator()<pybind11::return_value_policy::reference>(a0);
-			if (pybind11::detail::cast_is_temporary_value_reference<unsigned int>::value) {
-				static pybind11::detail::override_caster_t<unsigned int> caster;
-				return pybind11::detail::cast_ref<unsigned int>(std::move(o), caster);
-			}
-			return pybind11::detail::cast_safe<unsigned int>(std::move(o));
-		}
-		return BaseAssembler::bind(a0);
-	}
-	unsigned int embed(const void * a0, unsigned long a1) override {
-		pybind11::gil_scoped_acquire gil;
-		pybind11::function overload = pybind11::get_overload(static_cast<const asmjit::BaseAssembler *>(this), "embed");
-		if (overload) {
-			auto o = overload.operator()<pybind11::return_value_policy::reference>(a0, a1);
-			if (pybind11::detail::cast_is_temporary_value_reference<unsigned int>::value) {
-				static pybind11::detail::override_caster_t<unsigned int> caster;
-				return pybind11::detail::cast_ref<unsigned int>(std::move(o), caster);
-			}
-			return pybind11::detail::cast_safe<unsigned int>(std::move(o));
-		}
-		return BaseAssembler::embed(a0, a1);
-	}
-	unsigned int embedDataArray(enum asmjit::TypeId a0, const void * a1, unsigned long a2, unsigned long a3) override {
-		pybind11::gil_scoped_acquire gil;
-		pybind11::function overload = pybind11::get_overload(static_cast<const asmjit::BaseAssembler *>(this), "embedDataArray");
-		if (overload) {
-			auto o = overload.operator()<pybind11::return_value_policy::reference>(a0, a1, a2, a3);
-			if (pybind11::detail::cast_is_temporary_value_reference<unsigned int>::value) {
-				static pybind11::detail::override_caster_t<unsigned int> caster;
-				return pybind11::detail::cast_ref<unsigned int>(std::move(o), caster);
-			}
-			return pybind11::detail::cast_safe<unsigned int>(std::move(o));
-		}
-		return BaseAssembler::embedDataArray(a0, a1, a2, a3);
-	}
-	unsigned int embedConstPool(const class asmjit::Label & a0, const class asmjit::ConstPool & a1) override {
-		pybind11::gil_scoped_acquire gil;
-		pybind11::function overload = pybind11::get_overload(static_cast<const asmjit::BaseAssembler *>(this), "embedConstPool");
-		if (overload) {
-			auto o = overload.operator()<pybind11::return_value_policy::reference>(a0, a1);
-			if (pybind11::detail::cast_is_temporary_value_reference<unsigned int>::value) {
-				static pybind11::detail::override_caster_t<unsigned int> caster;
-				return pybind11::detail::cast_ref<unsigned int>(std::move(o), caster);
-			}
-			return pybind11::detail::cast_safe<unsigned int>(std::move(o));
-		}
-		return BaseAssembler::embedConstPool(a0, a1);
-	}
-	unsigned int embedLabel(const class asmjit::Label & a0, unsigned long a1) override {
-		pybind11::gil_scoped_acquire gil;
-		pybind11::function overload = pybind11::get_overload(static_cast<const asmjit::BaseAssembler *>(this), "embedLabel");
-		if (overload) {
-			auto o = overload.operator()<pybind11::return_value_policy::reference>(a0, a1);
-			if (pybind11::detail::cast_is_temporary_value_reference<unsigned int>::value) {
-				static pybind11::detail::override_caster_t<unsigned int> caster;
-				return pybind11::detail::cast_ref<unsigned int>(std::move(o), caster);
-			}
-			return pybind11::detail::cast_safe<unsigned int>(std::move(o));
-		}
-		return BaseAssembler::embedLabel(a0, a1);
-	}
-	unsigned int embedLabelDelta(const class asmjit::Label & a0, const class asmjit::Label & a1, unsigned long a2) override {
-		pybind11::gil_scoped_acquire gil;
-		pybind11::function overload = pybind11::get_overload(static_cast<const asmjit::BaseAssembler *>(this), "embedLabelDelta");
-		if (overload) {
-			auto o = overload.operator()<pybind11::return_value_policy::reference>(a0, a1, a2);
-			if (pybind11::detail::cast_is_temporary_value_reference<unsigned int>::value) {
-				static pybind11::detail::override_caster_t<unsigned int> caster;
-				return pybind11::detail::cast_ref<unsigned int>(std::move(o), caster);
-			}
-			return pybind11::detail::cast_safe<unsigned int>(std::move(o));
-		}
-		return BaseAssembler::embedLabelDelta(a0, a1, a2);
-	}
-	unsigned int comment(const char * a0, unsigned long a1) override {
-		pybind11::gil_scoped_acquire gil;
-		pybind11::function overload = pybind11::get_overload(static_cast<const asmjit::BaseAssembler *>(this), "comment");
-		if (overload) {
-			auto o = overload.operator()<pybind11::return_value_policy::reference>(a0, a1);
-			if (pybind11::detail::cast_is_temporary_value_reference<unsigned int>::value) {
-				static pybind11::detail::override_caster_t<unsigned int> caster;
-				return pybind11::detail::cast_ref<unsigned int>(std::move(o), caster);
-			}
-			return pybind11::detail::cast_safe<unsigned int>(std::move(o));
-		}
-		return BaseAssembler::comment(a0, a1);
-	}
-	unsigned int onAttach(class asmjit::CodeHolder * a0) throw() override {
-		pybind11::gil_scoped_acquire gil;
-		pybind11::function overload = pybind11::get_overload(static_cast<const asmjit::BaseAssembler *>(this), "onAttach");
-		if (overload) {
-			auto o = overload.operator()<pybind11::return_value_policy::reference>(a0);
-			if (pybind11::detail::cast_is_temporary_value_reference<unsigned int>::value) {
-				static pybind11::detail::override_caster_t<unsigned int> caster;
-				return pybind11::detail::cast_ref<unsigned int>(std::move(o), caster);
-			}
-			return pybind11::detail::cast_safe<unsigned int>(std::move(o));
-		}
-		return BaseAssembler::onAttach(a0);
-	}
-	unsigned int onDetach(class asmjit::CodeHolder * a0) throw() override {
-		pybind11::gil_scoped_acquire gil;
-		pybind11::function overload = pybind11::get_overload(static_cast<const asmjit::BaseAssembler *>(this), "onDetach");
-		if (overload) {
-			auto o = overload.operator()<pybind11::return_value_policy::reference>(a0);
-			if (pybind11::detail::cast_is_temporary_value_reference<unsigned int>::value) {
-				static pybind11::detail::override_caster_t<unsigned int> caster;
-				return pybind11::detail::cast_ref<unsigned int>(std::move(o), caster);
-			}
-			return pybind11::detail::cast_safe<unsigned int>(std::move(o));
-		}
-		return BaseAssembler::onDetach(a0);
-	}
-	unsigned int finalize() override {
-		pybind11::gil_scoped_acquire gil;
-		pybind11::function overload = pybind11::get_overload(static_cast<const asmjit::BaseAssembler *>(this), "finalize");
-		if (overload) {
-			auto o = overload.operator()<pybind11::return_value_policy::reference>();
-			if (pybind11::detail::cast_is_temporary_value_reference<unsigned int>::value) {
-				static pybind11::detail::override_caster_t<unsigned int> caster;
-				return pybind11::detail::cast_ref<unsigned int>(std::move(o), caster);
-			}
-			return pybind11::detail::cast_safe<unsigned int>(std::move(o));
-		}
-		return BaseEmitter::finalize();
-	}
-	unsigned int _emit(unsigned int a0, const struct asmjit::Operand_ & a1, const struct asmjit::Operand_ & a2, const struct asmjit::Operand_ & a3, const struct asmjit::Operand_ * a4) override {
-		pybind11::gil_scoped_acquire gil;
-		pybind11::function overload = pybind11::get_overload(static_cast<const asmjit::BaseAssembler *>(this), "_emit");
-		if (overload) {
-			auto o = overload.operator()<pybind11::return_value_policy::reference>(a0, a1, a2, a3, a4);
-			if (pybind11::detail::cast_is_temporary_value_reference<unsigned int>::value) {
-				static pybind11::detail::override_caster_t<unsigned int> caster;
-				return pybind11::detail::cast_ref<unsigned int>(std::move(o), caster);
-			}
-			return pybind11::detail::cast_safe<unsigned int>(std::move(o));
-		}
-		return BaseEmitter::_emit(a0, a1, a2, a3, a4);
-	}
-	unsigned int _emitOpArray(unsigned int a0, const struct asmjit::Operand_ * a1, unsigned long a2) override {
-		pybind11::gil_scoped_acquire gil;
-		pybind11::function overload = pybind11::get_overload(static_cast<const asmjit::BaseAssembler *>(this), "_emitOpArray");
-		if (overload) {
-			auto o = overload.operator()<pybind11::return_value_policy::reference>(a0, a1, a2);
-			if (pybind11::detail::cast_is_temporary_value_reference<unsigned int>::value) {
-				static pybind11::detail::override_caster_t<unsigned int> caster;
-				return pybind11::detail::cast_ref<unsigned int>(std::move(o), caster);
-			}
-			return pybind11::detail::cast_safe<unsigned int>(std::move(o));
-		}
-		return BaseEmitter::_emitOpArray(a0, a1, a2);
-	}
-	unsigned int align(enum asmjit::AlignMode a0, unsigned int a1) override {
-		pybind11::gil_scoped_acquire gil;
-		pybind11::function overload = pybind11::get_overload(static_cast<const asmjit::BaseAssembler *>(this), "align");
-		if (overload) {
-			auto o = overload.operator()<pybind11::return_value_policy::reference>(a0, a1);
-			if (pybind11::detail::cast_is_temporary_value_reference<unsigned int>::value) {
-				static pybind11::detail::override_caster_t<unsigned int> caster;
-				return pybind11::detail::cast_ref<unsigned int>(std::move(o), caster);
-			}
-			return pybind11::detail::cast_safe<unsigned int>(std::move(o));
-		}
-		return BaseEmitter::align(a0, a1);
-	}
-	void onSettingsUpdated() throw() override {
-		pybind11::gil_scoped_acquire gil;
-		pybind11::function overload = pybind11::get_overload(static_cast<const asmjit::BaseAssembler *>(this), "onSettingsUpdated");
-		if (overload) {
-			auto o = overload.operator()<pybind11::return_value_policy::reference>();
-			if (pybind11::detail::cast_is_temporary_value_reference<void>::value) {
-				static pybind11::detail::override_caster_t<void> caster;
-				return pybind11::detail::cast_ref<void>(std::move(o), caster);
-			}
-			return pybind11::detail::cast_safe<void>(std::move(o));
-		}
-		return BaseEmitter::onSettingsUpdated();
-	}
-};
-
 void bind_unknown_unknown_32(std::function< pybind11::module &(std::string const &namespace_) > &M)
 {
-	{ // asmjit::BaseAssembler file: line:29
-		pybind11::class_<asmjit::BaseAssembler, std::shared_ptr<asmjit::BaseAssembler>, PyCallBack_asmjit_BaseAssembler, asmjit::BaseEmitter> cl(M("asmjit"), "BaseAssembler", "Base assembler.\n\n This is a base class that provides interface used by architecture specific\n assembler implementations. Assembler doesn't hold any data, instead it's\n attached to  which provides all the data that Assembler\n needs and which can be altered by it.\n\n Check out architecture specific assemblers for more details and examples:\n\n   -  - X86/X64 assembler implementation.\n   -  - AArch64 assembler implementation.");
-		cl.def( pybind11::init( [](){ return new asmjit::BaseAssembler(); }, [](){ return new PyCallBack_asmjit_BaseAssembler(); } ) );
-		cl.def("bufferCapacity", (unsigned long (asmjit::BaseAssembler::*)() const) &asmjit::BaseAssembler::bufferCapacity, "Returns the capacity of the current CodeBuffer.\n\nC++: asmjit::BaseAssembler::bufferCapacity() const --> unsigned long");
-		cl.def("remainingSpace", (unsigned long (asmjit::BaseAssembler::*)() const) &asmjit::BaseAssembler::remainingSpace, "Returns the number of remaining bytes in the current CodeBuffer.\n\nC++: asmjit::BaseAssembler::remainingSpace() const --> unsigned long");
-		cl.def("offset", (unsigned long (asmjit::BaseAssembler::*)() const) &asmjit::BaseAssembler::offset, "Returns the current position in the CodeBuffer.\n\nC++: asmjit::BaseAssembler::offset() const --> unsigned long");
-		cl.def("setOffset", (unsigned int (asmjit::BaseAssembler::*)(unsigned long)) &asmjit::BaseAssembler::setOffset, "Sets the current position in the CodeBuffer to `offset`.\n\n \n The `offset` cannot be greater than buffer size even if it's\n within the buffer's capacity.\n\nC++: asmjit::BaseAssembler::setOffset(unsigned long) --> unsigned int", pybind11::arg("offset"));
-		cl.def("bufferData", (unsigned char * (asmjit::BaseAssembler::*)() const) &asmjit::BaseAssembler::bufferData, "Returns the start of the CodeBuffer in the current section.\n\nC++: asmjit::BaseAssembler::bufferData() const --> unsigned char *", pybind11::return_value_policy::automatic);
-		cl.def("bufferEnd", (unsigned char * (asmjit::BaseAssembler::*)() const) &asmjit::BaseAssembler::bufferEnd, "Returns the end (first invalid byte) in the current section.\n\nC++: asmjit::BaseAssembler::bufferEnd() const --> unsigned char *", pybind11::return_value_policy::automatic);
-		cl.def("bufferPtr", (unsigned char * (asmjit::BaseAssembler::*)() const) &asmjit::BaseAssembler::bufferPtr, "Returns the current pointer in the CodeBuffer in the current section.\n\nC++: asmjit::BaseAssembler::bufferPtr() const --> unsigned char *", pybind11::return_value_policy::automatic);
-		cl.def("currentSection", (class asmjit::Section * (asmjit::BaseAssembler::*)() const) &asmjit::BaseAssembler::currentSection, "Returns the current section.\n\nC++: asmjit::BaseAssembler::currentSection() const --> class asmjit::Section *", pybind11::return_value_policy::automatic);
-		cl.def("section", (unsigned int (asmjit::BaseAssembler::*)(class asmjit::Section *)) &asmjit::BaseAssembler::section, "C++: asmjit::BaseAssembler::section(class asmjit::Section *) --> unsigned int", pybind11::arg("section"));
-		cl.def("newLabel", (class asmjit::Label (asmjit::BaseAssembler::*)()) &asmjit::BaseAssembler::newLabel, "\\{\n\nC++: asmjit::BaseAssembler::newLabel() --> class asmjit::Label");
-		cl.def("newNamedLabel", [](asmjit::BaseAssembler &o, const char * a0) -> asmjit::Label { return o.newNamedLabel(a0); }, "", pybind11::arg("name"));
-		cl.def("newNamedLabel", [](asmjit::BaseAssembler &o, const char * a0, unsigned long const & a1) -> asmjit::Label { return o.newNamedLabel(a0, a1); }, "", pybind11::arg("name"), pybind11::arg("nameSize"));
-		cl.def("newNamedLabel", [](asmjit::BaseAssembler &o, const char * a0, unsigned long const & a1, enum asmjit::LabelType const & a2) -> asmjit::Label { return o.newNamedLabel(a0, a1, a2); }, "", pybind11::arg("name"), pybind11::arg("nameSize"), pybind11::arg("type"));
-		cl.def("newNamedLabel", (class asmjit::Label (asmjit::BaseAssembler::*)(const char *, unsigned long, enum asmjit::LabelType, unsigned int)) &asmjit::BaseAssembler::newNamedLabel, "C++: asmjit::BaseAssembler::newNamedLabel(const char *, unsigned long, enum asmjit::LabelType, unsigned int) --> class asmjit::Label", pybind11::arg("name"), pybind11::arg("nameSize"), pybind11::arg("type"), pybind11::arg("parentId"));
-		cl.def("bind", (unsigned int (asmjit::BaseAssembler::*)(const class asmjit::Label &)) &asmjit::BaseAssembler::bind, "C++: asmjit::BaseAssembler::bind(const class asmjit::Label &) --> unsigned int", pybind11::arg("label"));
-		cl.def("embed", (unsigned int (asmjit::BaseAssembler::*)(const void *, unsigned long)) &asmjit::BaseAssembler::embed, "\\{\n\nC++: asmjit::BaseAssembler::embed(const void *, unsigned long) --> unsigned int", pybind11::arg("data"), pybind11::arg("dataSize"));
-		cl.def("embedDataArray", [](asmjit::BaseAssembler &o, enum asmjit::TypeId const & a0, const void * a1, unsigned long const & a2) -> unsigned int { return o.embedDataArray(a0, a1, a2); }, "", pybind11::arg("typeId"), pybind11::arg("data"), pybind11::arg("itemCount"));
-		cl.def("embedDataArray", (unsigned int (asmjit::BaseAssembler::*)(enum asmjit::TypeId, const void *, unsigned long, unsigned long)) &asmjit::BaseAssembler::embedDataArray, "C++: asmjit::BaseAssembler::embedDataArray(enum asmjit::TypeId, const void *, unsigned long, unsigned long) --> unsigned int", pybind11::arg("typeId"), pybind11::arg("data"), pybind11::arg("itemCount"), pybind11::arg("repeatCount"));
-		cl.def("embedConstPool", (unsigned int (asmjit::BaseAssembler::*)(const class asmjit::Label &, const class asmjit::ConstPool &)) &asmjit::BaseAssembler::embedConstPool, "C++: asmjit::BaseAssembler::embedConstPool(const class asmjit::Label &, const class asmjit::ConstPool &) --> unsigned int", pybind11::arg("label"), pybind11::arg("pool"));
-		cl.def("embedLabel", [](asmjit::BaseAssembler &o, const class asmjit::Label & a0) -> unsigned int { return o.embedLabel(a0); }, "", pybind11::arg("label"));
-		cl.def("embedLabel", (unsigned int (asmjit::BaseAssembler::*)(const class asmjit::Label &, unsigned long)) &asmjit::BaseAssembler::embedLabel, "C++: asmjit::BaseAssembler::embedLabel(const class asmjit::Label &, unsigned long) --> unsigned int", pybind11::arg("label"), pybind11::arg("dataSize"));
-		cl.def("embedLabelDelta", [](asmjit::BaseAssembler &o, const class asmjit::Label & a0, const class asmjit::Label & a1) -> unsigned int { return o.embedLabelDelta(a0, a1); }, "", pybind11::arg("label"), pybind11::arg("base"));
-		cl.def("embedLabelDelta", (unsigned int (asmjit::BaseAssembler::*)(const class asmjit::Label &, const class asmjit::Label &, unsigned long)) &asmjit::BaseAssembler::embedLabelDelta, "C++: asmjit::BaseAssembler::embedLabelDelta(const class asmjit::Label &, const class asmjit::Label &, unsigned long) --> unsigned int", pybind11::arg("label"), pybind11::arg("base"), pybind11::arg("dataSize"));
-		cl.def("comment", [](asmjit::BaseAssembler &o, const char * a0) -> unsigned int { return o.comment(a0); }, "", pybind11::arg("data"));
-		cl.def("comment", (unsigned int (asmjit::BaseAssembler::*)(const char *, unsigned long)) &asmjit::BaseAssembler::comment, "\\{\n\nC++: asmjit::BaseAssembler::comment(const char *, unsigned long) --> unsigned int", pybind11::arg("data"), pybind11::arg("size"));
-		cl.def("onAttach", (unsigned int (asmjit::BaseAssembler::*)(class asmjit::CodeHolder *)) &asmjit::BaseAssembler::onAttach, "\\{\n\nC++: asmjit::BaseAssembler::onAttach(class asmjit::CodeHolder *) --> unsigned int", pybind11::arg("code"));
-		cl.def("onDetach", (unsigned int (asmjit::BaseAssembler::*)(class asmjit::CodeHolder *)) &asmjit::BaseAssembler::onDetach, "C++: asmjit::BaseAssembler::onDetach(class asmjit::CodeHolder *) --> unsigned int", pybind11::arg("code"));
+	{ // asmjit::BaseNode file: line:472
+		pybind11::class_<asmjit::BaseNode, std::shared_ptr<asmjit::BaseNode>> cl(M("asmjit"), "BaseNode", "Base node.\n\n Every node represents a building-block used by  It can be instruction, data, label, comment,\n directive, or any other high-level representation that can be transformed to the building blocks mentioned.\n Every class that inherits  can define its own high-level nodes that can be later lowered to\n basic nodes like instructions.");
+		cl.def( pybind11::init( [](class asmjit::BaseBuilder * a0, enum asmjit::NodeType const & a1){ return new asmjit::BaseNode(a0, a1); } ), "doc" , pybind11::arg("cb"), pybind11::arg("nodeType"));
+		cl.def( pybind11::init<class asmjit::BaseBuilder *, enum asmjit::NodeType, enum asmjit::NodeFlags>(), pybind11::arg("cb"), pybind11::arg("nodeType"), pybind11::arg("nodeFlags") );
+
+
+		cl.def("prev", (class asmjit::BaseNode * (asmjit::BaseNode::*)() const) &asmjit::BaseNode::prev, "Returns previous node or `nullptr` if this node is either first or not\n part of Builder/Compiler node-list.\n\nC++: asmjit::BaseNode::prev() const --> class asmjit::BaseNode *", pybind11::return_value_policy::automatic);
+		cl.def("next", (class asmjit::BaseNode * (asmjit::BaseNode::*)() const) &asmjit::BaseNode::next, "Returns next node or `nullptr` if this node is either last or not part\n of Builder/Compiler node-list.\n\nC++: asmjit::BaseNode::next() const --> class asmjit::BaseNode *", pybind11::return_value_policy::automatic);
+		cl.def("type", (enum asmjit::NodeType (asmjit::BaseNode::*)() const) &asmjit::BaseNode::type, "Returns the type of the node, see `NodeType`.\n\nC++: asmjit::BaseNode::type() const --> enum asmjit::NodeType");
+		cl.def("setType", (void (asmjit::BaseNode::*)(enum asmjit::NodeType)) &asmjit::BaseNode::setType, "Sets the type of the node, see `NodeType` (internal).\n\n \n You should never set a type of a node to anything else than the initial value. This function is only\n provided for users that use custom nodes and need to change the type either during construction or later.\n\nC++: asmjit::BaseNode::setType(enum asmjit::NodeType) --> void", pybind11::arg("type"));
+		cl.def("isInst", (bool (asmjit::BaseNode::*)() const) &asmjit::BaseNode::isInst, "Tests whether this node is either `InstNode` or extends it.\n\nC++: asmjit::BaseNode::isInst() const --> bool");
+		cl.def("isSection", (bool (asmjit::BaseNode::*)() const) &asmjit::BaseNode::isSection, "Tests whether this node is `SectionNode`.\n\nC++: asmjit::BaseNode::isSection() const --> bool");
+		cl.def("isLabel", (bool (asmjit::BaseNode::*)() const) &asmjit::BaseNode::isLabel, "Tests whether this node is either `LabelNode` or extends it.\n\nC++: asmjit::BaseNode::isLabel() const --> bool");
+		cl.def("isAlign", (bool (asmjit::BaseNode::*)() const) &asmjit::BaseNode::isAlign, "Tests whether this node is `AlignNode`.\n\nC++: asmjit::BaseNode::isAlign() const --> bool");
+		cl.def("isEmbedData", (bool (asmjit::BaseNode::*)() const) &asmjit::BaseNode::isEmbedData, "Tests whether this node is `EmbedDataNode`.\n\nC++: asmjit::BaseNode::isEmbedData() const --> bool");
+		cl.def("isEmbedLabel", (bool (asmjit::BaseNode::*)() const) &asmjit::BaseNode::isEmbedLabel, "Tests whether this node is `EmbedLabelNode`.\n\nC++: asmjit::BaseNode::isEmbedLabel() const --> bool");
+		cl.def("isEmbedLabelDelta", (bool (asmjit::BaseNode::*)() const) &asmjit::BaseNode::isEmbedLabelDelta, "Tests whether this node is `EmbedLabelDeltaNode`.\n\nC++: asmjit::BaseNode::isEmbedLabelDelta() const --> bool");
+		cl.def("isConstPool", (bool (asmjit::BaseNode::*)() const) &asmjit::BaseNode::isConstPool, "Tests whether this node is `ConstPoolNode`.\n\nC++: asmjit::BaseNode::isConstPool() const --> bool");
+		cl.def("isComment", (bool (asmjit::BaseNode::*)() const) &asmjit::BaseNode::isComment, "Tests whether this node is `CommentNode`.\n\nC++: asmjit::BaseNode::isComment() const --> bool");
+		cl.def("isSentinel", (bool (asmjit::BaseNode::*)() const) &asmjit::BaseNode::isSentinel, "Tests whether this node is `SentinelNode`.\n\nC++: asmjit::BaseNode::isSentinel() const --> bool");
+		cl.def("isFunc", (bool (asmjit::BaseNode::*)() const) &asmjit::BaseNode::isFunc, "Tests whether this node is `FuncNode`.\n\nC++: asmjit::BaseNode::isFunc() const --> bool");
+		cl.def("isFuncRet", (bool (asmjit::BaseNode::*)() const) &asmjit::BaseNode::isFuncRet, "Tests whether this node is `FuncRetNode`.\n\nC++: asmjit::BaseNode::isFuncRet() const --> bool");
+		cl.def("isInvoke", (bool (asmjit::BaseNode::*)() const) &asmjit::BaseNode::isInvoke, "Tests whether this node is `InvokeNode`.\n\nC++: asmjit::BaseNode::isInvoke() const --> bool");
+		cl.def("flags", (enum asmjit::NodeFlags (asmjit::BaseNode::*)() const) &asmjit::BaseNode::flags, "Returns the node flags.\n\nC++: asmjit::BaseNode::flags() const --> enum asmjit::NodeFlags");
+		cl.def("hasFlag", (bool (asmjit::BaseNode::*)(enum asmjit::NodeFlags) const) &asmjit::BaseNode::hasFlag, "Tests whether the node has the given `flag` set.\n\nC++: asmjit::BaseNode::hasFlag(enum asmjit::NodeFlags) const --> bool", pybind11::arg("flag"));
+		cl.def("setFlags", (void (asmjit::BaseNode::*)(enum asmjit::NodeFlags)) &asmjit::BaseNode::setFlags, "Replaces node flags with `flags`.\n\nC++: asmjit::BaseNode::setFlags(enum asmjit::NodeFlags) --> void", pybind11::arg("flags"));
+		cl.def("addFlags", (void (asmjit::BaseNode::*)(enum asmjit::NodeFlags)) &asmjit::BaseNode::addFlags, "Adds the given `flags` to node flags.\n\nC++: asmjit::BaseNode::addFlags(enum asmjit::NodeFlags) --> void", pybind11::arg("flags"));
+		cl.def("clearFlags", (void (asmjit::BaseNode::*)(enum asmjit::NodeFlags)) &asmjit::BaseNode::clearFlags, "Clears the given `flags` from node flags.\n\nC++: asmjit::BaseNode::clearFlags(enum asmjit::NodeFlags) --> void", pybind11::arg("flags"));
+		cl.def("isCode", (bool (asmjit::BaseNode::*)() const) &asmjit::BaseNode::isCode, "Tests whether the node is code that can be executed.\n\nC++: asmjit::BaseNode::isCode() const --> bool");
+		cl.def("isData", (bool (asmjit::BaseNode::*)() const) &asmjit::BaseNode::isData, "Tests whether the node is data that cannot be executed.\n\nC++: asmjit::BaseNode::isData() const --> bool");
+		cl.def("isInformative", (bool (asmjit::BaseNode::*)() const) &asmjit::BaseNode::isInformative, "Tests whether the node is informative only (is never encoded like comment, etc...).\n\nC++: asmjit::BaseNode::isInformative() const --> bool");
+		cl.def("isRemovable", (bool (asmjit::BaseNode::*)() const) &asmjit::BaseNode::isRemovable, "Tests whether the node is removable if it's in an unreachable code block.\n\nC++: asmjit::BaseNode::isRemovable() const --> bool");
+		cl.def("hasNoEffect", (bool (asmjit::BaseNode::*)() const) &asmjit::BaseNode::hasNoEffect, "Tests whether the node has no effect when executed (label, .align, nop, ...).\n\nC++: asmjit::BaseNode::hasNoEffect() const --> bool");
+		cl.def("isActive", (bool (asmjit::BaseNode::*)() const) &asmjit::BaseNode::isActive, "Tests whether the node is part of the code.\n\nC++: asmjit::BaseNode::isActive() const --> bool");
+		cl.def("hasPosition", (bool (asmjit::BaseNode::*)() const) &asmjit::BaseNode::hasPosition, "Tests whether the node has a position assigned.\n\n \n Returns `true` if node position is non-zero.\n\nC++: asmjit::BaseNode::hasPosition() const --> bool");
+		cl.def("position", (unsigned int (asmjit::BaseNode::*)() const) &asmjit::BaseNode::position, "Returns node position.\n\nC++: asmjit::BaseNode::position() const --> unsigned int");
+		cl.def("setPosition", (void (asmjit::BaseNode::*)(unsigned int)) &asmjit::BaseNode::setPosition, "Sets node position.\n\n Node position is a 32-bit unsigned integer that is used by Compiler to track where the node is relatively to\n the start of the function. It doesn't describe a byte position in a binary, instead it's just a pseudo position\n used by liveness analysis and other tools around Compiler.\n\n If you don't use Compiler then you may use `position()` and `setPosition()` freely for your own purposes if\n the 32-bit value limit is okay for you.\n\nC++: asmjit::BaseNode::setPosition(unsigned int) --> void", pybind11::arg("position"));
+		cl.def("userDataAsInt64", (long (asmjit::BaseNode::*)() const) &asmjit::BaseNode::userDataAsInt64, "Returns user data casted to `int64_t`.\n\nC++: asmjit::BaseNode::userDataAsInt64() const --> long");
+		cl.def("userDataAsUInt64", (unsigned long (asmjit::BaseNode::*)() const) &asmjit::BaseNode::userDataAsUInt64, "Returns user data casted to `uint64_t`.\n\nC++: asmjit::BaseNode::userDataAsUInt64() const --> unsigned long");
+		cl.def("setUserDataAsInt64", (void (asmjit::BaseNode::*)(long)) &asmjit::BaseNode::setUserDataAsInt64, "Sets used data to the given 64-bit signed `value`.\n\nC++: asmjit::BaseNode::setUserDataAsInt64(long) --> void", pybind11::arg("value"));
+		cl.def("setUserDataAsUInt64", (void (asmjit::BaseNode::*)(unsigned long)) &asmjit::BaseNode::setUserDataAsUInt64, "Sets used data to the given 64-bit unsigned `value`.\n\nC++: asmjit::BaseNode::setUserDataAsUInt64(unsigned long) --> void", pybind11::arg("value"));
+		cl.def("resetUserData", (void (asmjit::BaseNode::*)()) &asmjit::BaseNode::resetUserData, "Resets user data to zero / nullptr.\n\nC++: asmjit::BaseNode::resetUserData() --> void");
+		cl.def("hasPassData", (bool (asmjit::BaseNode::*)() const) &asmjit::BaseNode::hasPassData, "Tests whether the node has an associated pass data.\n\nC++: asmjit::BaseNode::hasPassData() const --> bool");
+		cl.def("resetPassData", (void (asmjit::BaseNode::*)()) &asmjit::BaseNode::resetPassData, "Resets the node pass data to nullptr.\n\nC++: asmjit::BaseNode::resetPassData() --> void");
+		cl.def("hasInlineComment", (bool (asmjit::BaseNode::*)() const) &asmjit::BaseNode::hasInlineComment, "Tests whether the node has an inline comment/annotation.\n\nC++: asmjit::BaseNode::hasInlineComment() const --> bool");
+		cl.def("inlineComment", (const char * (asmjit::BaseNode::*)() const) &asmjit::BaseNode::inlineComment, "Returns an inline comment/annotation string.\n\nC++: asmjit::BaseNode::inlineComment() const --> const char *", pybind11::return_value_policy::automatic);
+		cl.def("setInlineComment", (void (asmjit::BaseNode::*)(const char *)) &asmjit::BaseNode::setInlineComment, "Sets an inline comment/annotation string to `s`.\n\nC++: asmjit::BaseNode::setInlineComment(const char *) --> void", pybind11::arg("s"));
+		cl.def("resetInlineComment", (void (asmjit::BaseNode::*)()) &asmjit::BaseNode::resetInlineComment, "Resets an inline comment/annotation string to nullptr.\n\nC++: asmjit::BaseNode::resetInlineComment() --> void");
+
+		{ // asmjit::BaseNode::(anonymous union at extern/asmjit/src/asmjit/./core/builder.h:479:3) file: line:479
+
+			{ // asmjit::BaseNode::(anonymous union)::(anonymous struct at extern/asmjit/src/asmjit/./core/builder.h:480:5) file: line:480
+			}
+
+		}
+
+		{ // asmjit::BaseNode::AnyData file: line:491
+			auto & enclosing_class = cl;
+			pybind11::class_<asmjit::BaseNode::AnyData, std::shared_ptr<asmjit::BaseNode::AnyData>> cl(enclosing_class, "AnyData", "Data shared between all types of nodes.");
+			cl.def( pybind11::init( [](){ return new asmjit::BaseNode::AnyData(); } ) );
+			cl.def( pybind11::init( [](asmjit::BaseNode::AnyData const &o){ return new asmjit::BaseNode::AnyData(o); } ) );
+
+
+
+
+			cl.def("assign", (struct asmjit::BaseNode::AnyData & (asmjit::BaseNode::AnyData::*)(const struct asmjit::BaseNode::AnyData &)) &asmjit::BaseNode::AnyData::operator=, "C++: asmjit::BaseNode::AnyData::operator=(const struct asmjit::BaseNode::AnyData &) --> struct asmjit::BaseNode::AnyData &", pybind11::return_value_policy::automatic, pybind11::arg(""));
+		}
+
+		{ // asmjit::BaseNode::AlignData file: line:503
+			auto & enclosing_class = cl;
+			pybind11::class_<asmjit::BaseNode::AlignData, std::shared_ptr<asmjit::BaseNode::AlignData>> cl(enclosing_class, "AlignData", "Data used by ");
+			cl.def( pybind11::init( [](){ return new asmjit::BaseNode::AlignData(); } ) );
+			cl.def( pybind11::init( [](asmjit::BaseNode::AlignData const &o){ return new asmjit::BaseNode::AlignData(o); } ) );
+
+
+
+
+			cl.def("assign", (struct asmjit::BaseNode::AlignData & (asmjit::BaseNode::AlignData::*)(const struct asmjit::BaseNode::AlignData &)) &asmjit::BaseNode::AlignData::operator=, "C++: asmjit::BaseNode::AlignData::operator=(const struct asmjit::BaseNode::AlignData &) --> struct asmjit::BaseNode::AlignData &", pybind11::return_value_policy::automatic, pybind11::arg(""));
+		}
+
+		{ // asmjit::BaseNode::InstData file: line:515
+			auto & enclosing_class = cl;
+			pybind11::class_<asmjit::BaseNode::InstData, std::shared_ptr<asmjit::BaseNode::InstData>> cl(enclosing_class, "InstData", "Data used by ");
+			cl.def( pybind11::init( [](){ return new asmjit::BaseNode::InstData(); } ) );
+			cl.def( pybind11::init( [](asmjit::BaseNode::InstData const &o){ return new asmjit::BaseNode::InstData(o); } ) );
+
+
+
+
+			cl.def("assign", (struct asmjit::BaseNode::InstData & (asmjit::BaseNode::InstData::*)(const struct asmjit::BaseNode::InstData &)) &asmjit::BaseNode::InstData::operator=, "C++: asmjit::BaseNode::InstData::operator=(const struct asmjit::BaseNode::InstData &) --> struct asmjit::BaseNode::InstData &", pybind11::return_value_policy::automatic, pybind11::arg(""));
+		}
+
+		{ // asmjit::BaseNode::EmbedData file: line:527
+			auto & enclosing_class = cl;
+			pybind11::class_<asmjit::BaseNode::EmbedData, std::shared_ptr<asmjit::BaseNode::EmbedData>> cl(enclosing_class, "EmbedData", "Data used by ");
+			cl.def( pybind11::init( [](){ return new asmjit::BaseNode::EmbedData(); } ) );
+			cl.def( pybind11::init( [](asmjit::BaseNode::EmbedData const &o){ return new asmjit::BaseNode::EmbedData(o); } ) );
+
+
+
+
+			cl.def("assign", (struct asmjit::BaseNode::EmbedData & (asmjit::BaseNode::EmbedData::*)(const struct asmjit::BaseNode::EmbedData &)) &asmjit::BaseNode::EmbedData::operator=, "C++: asmjit::BaseNode::EmbedData::operator=(const struct asmjit::BaseNode::EmbedData &) --> struct asmjit::BaseNode::EmbedData &", pybind11::return_value_policy::automatic, pybind11::arg(""));
+		}
+
+		{ // asmjit::BaseNode::SentinelData file: line:539
+			auto & enclosing_class = cl;
+			pybind11::class_<asmjit::BaseNode::SentinelData, std::shared_ptr<asmjit::BaseNode::SentinelData>> cl(enclosing_class, "SentinelData", "Data used by ");
+			cl.def( pybind11::init( [](){ return new asmjit::BaseNode::SentinelData(); } ) );
+			cl.def( pybind11::init( [](asmjit::BaseNode::SentinelData const &o){ return new asmjit::BaseNode::SentinelData(o); } ) );
+
+
+
+
+			cl.def("assign", (struct asmjit::BaseNode::SentinelData & (asmjit::BaseNode::SentinelData::*)(const struct asmjit::BaseNode::SentinelData &)) &asmjit::BaseNode::SentinelData::operator=, "C++: asmjit::BaseNode::SentinelData::operator=(const struct asmjit::BaseNode::SentinelData &) --> struct asmjit::BaseNode::SentinelData &", pybind11::return_value_policy::automatic, pybind11::arg(""));
+		}
+
+		{ // asmjit::BaseNode::(anonymous union at extern/asmjit/src/asmjit/./core/builder.h:551:3) file: line:551
+
+
+
+
+
+		}
+
+		{ // asmjit::BaseNode::(anonymous union at extern/asmjit/src/asmjit/./core/builder.h:568:3) file: line:568
+
+		}
+
 	}
-	// asmjit::ConstPoolScope file: line:19
-	pybind11::enum_<asmjit::ConstPoolScope>(M("asmjit"), "ConstPoolScope", "Constant pool scope.")
-		.value("kLocal", asmjit::ConstPoolScope::kLocal)
-		.value("kGlobal", asmjit::ConstPoolScope::kGlobal)
-		.value("kMaxValue", asmjit::ConstPoolScope::kMaxValue);
-
-;
-
-	{ // asmjit::ConstPool file: line:33
-		pybind11::class_<asmjit::ConstPool, std::shared_ptr<asmjit::ConstPool>> cl(M("asmjit"), "ConstPool", "Constant pool.\n\n Constant pool is designed to hold 1, 2, 4, 8, 16, 32, and 64 byte constants. It's not designed to hold constants\n having arbitrary length like strings and arrays.");
-
-		pybind11::enum_<asmjit::ConstPool::Index>(cl, "Index", pybind11::arithmetic(), "Index of a given size in const-pool table.")
-			.value("kIndex1", asmjit::ConstPool::kIndex1)
-			.value("kIndex2", asmjit::ConstPool::kIndex2)
-			.value("kIndex4", asmjit::ConstPool::kIndex4)
-			.value("kIndex8", asmjit::ConstPool::kIndex8)
-			.value("kIndex16", asmjit::ConstPool::kIndex16)
-			.value("kIndex32", asmjit::ConstPool::kIndex32)
-			.value("kIndex64", asmjit::ConstPool::kIndex64)
-			.value("kIndexCount", asmjit::ConstPool::kIndexCount)
-			.export_values();
-
-
-
-
-		cl.def("empty", (bool (asmjit::ConstPool::*)() const) &asmjit::ConstPool::empty, "Tests whether the constant-pool is empty.\n\nC++: asmjit::ConstPool::empty() const --> bool");
-		cl.def("size", (unsigned long (asmjit::ConstPool::*)() const) &asmjit::ConstPool::size, "Returns the size of the constant-pool in bytes.\n\nC++: asmjit::ConstPool::size() const --> unsigned long");
-		cl.def("alignment", (unsigned long (asmjit::ConstPool::*)() const) &asmjit::ConstPool::alignment, "Returns minimum alignment.\n\nC++: asmjit::ConstPool::alignment() const --> unsigned long");
-		cl.def("minItemSize", (unsigned long (asmjit::ConstPool::*)() const) &asmjit::ConstPool::minItemSize, "Returns the minimum size of all items added to the constant pool.\n\nC++: asmjit::ConstPool::minItemSize() const --> unsigned long");
-		cl.def("add", (unsigned int (asmjit::ConstPool::*)(const void *, unsigned long, unsigned long &)) &asmjit::ConstPool::add, "Adds a constant to the constant pool.\n\n The constant must have known size, which is 1, 2, 4, 8, 16 or 32 bytes. The constant is added to the pool only\n if it doesn't not exist, otherwise cached value is returned.\n\n AsmJit is able to subdivide added constants, so for example if you add 8-byte constant 0x1122334455667788 it\n will create the following slots:\n\n   8-byte: 0x1122334455667788\n   4-byte: 0x11223344, 0x55667788\n\n The reason is that when combining MMX/SSE/AVX code some patterns are used frequently. However, AsmJit is not\n able to reallocate a constant that has been already added. For example if you try to add 4-byte constant and\n then 8-byte constant having the same 4-byte pattern as the previous one, two independent slots will be used.\n\nC++: asmjit::ConstPool::add(const void *, unsigned long, unsigned long &) --> unsigned int", pybind11::arg("data"), pybind11::arg("size"), pybind11::arg("dstOffset"));
-		cl.def("fill", (void (asmjit::ConstPool::*)(void *) const) &asmjit::ConstPool::fill, "Fills the destination with the content of this constant pool.\n\nC++: asmjit::ConstPool::fill(void *) const --> void", pybind11::arg("dst"));
-
-		{ // asmjit::ConstPool::Gap file: line:52
-			auto & enclosing_class = cl;
-			pybind11::class_<asmjit::ConstPool::Gap, std::shared_ptr<asmjit::ConstPool::Gap>> cl(enclosing_class, "Gap", "Zone-allocated const-pool gap created by two differently aligned constants.");
-			cl.def( pybind11::init( [](){ return new asmjit::ConstPool::Gap(); } ) );
-
-
-		}
-
-		{ // asmjit::ConstPool::Node file: line:62
-			auto & enclosing_class = cl;
-			pybind11::class_<asmjit::ConstPool::Node, std::shared_ptr<asmjit::ConstPool::Node>> cl(enclosing_class, "Node", "Zone-allocated const-pool node.");
-			cl.def( pybind11::init<unsigned long, bool>(), pybind11::arg("offset"), pybind11::arg("shared") );
-
-
-
-			cl.def("data", (void * (asmjit::ConstPool::Node::*)() const) &asmjit::ConstPool::Node::data, "C++: asmjit::ConstPool::Node::data() const --> void *", pybind11::return_value_policy::automatic);
-		}
-
-		{ // asmjit::ConstPool::Compare file: line:82
-			auto & enclosing_class = cl;
-			pybind11::class_<asmjit::ConstPool::Compare, std::shared_ptr<asmjit::ConstPool::Compare>> cl(enclosing_class, "Compare", "Data comparer used internally.");
-			cl.def( pybind11::init<unsigned long>(), pybind11::arg("dataSize") );
-
-			cl.def( pybind11::init( [](asmjit::ConstPool::Compare const &o){ return new asmjit::ConstPool::Compare(o); } ) );
-
-			cl.def("__call__", (int (asmjit::ConstPool::Compare::*)(const class asmjit::ConstPool::Node &, const class asmjit::ConstPool::Node &) const) &asmjit::ConstPool::Compare::operator(), "C++: asmjit::ConstPool::Compare::operator()(const class asmjit::ConstPool::Node &, const class asmjit::ConstPool::Node &) const --> int", pybind11::arg("a"), pybind11::arg("b"));
-			cl.def("__call__", (int (asmjit::ConstPool::Compare::*)(const class asmjit::ConstPool::Node &, const void *) const) &asmjit::ConstPool::Compare::operator(), "C++: asmjit::ConstPool::Compare::operator()(const class asmjit::ConstPool::Node &, const void *) const --> int", pybind11::arg("a"), pybind11::arg("data"));
-		}
-
-		{ // asmjit::ConstPool::Tree file: line:99
-			auto & enclosing_class = cl;
-			pybind11::class_<asmjit::ConstPool::Tree, std::shared_ptr<asmjit::ConstPool::Tree>> cl(enclosing_class, "Tree", "Zone-allocated const-pool tree.");
-			cl.def( pybind11::init( [](){ return new asmjit::ConstPool::Tree(); } ), "doc" );
-			cl.def( pybind11::init<unsigned long>(), pybind11::arg("dataSize") );
-
-
-
-
-			cl.def("reset", (void (asmjit::ConstPool::Tree::*)()) &asmjit::ConstPool::Tree::reset, "C++: asmjit::ConstPool::Tree::reset() --> void");
-			cl.def("empty", (bool (asmjit::ConstPool::Tree::*)() const) &asmjit::ConstPool::Tree::empty, "C++: asmjit::ConstPool::Tree::empty() const --> bool");
-			cl.def("size", (unsigned long (asmjit::ConstPool::Tree::*)() const) &asmjit::ConstPool::Tree::size, "C++: asmjit::ConstPool::Tree::size() const --> unsigned long");
-			cl.def("setDataSize", (void (asmjit::ConstPool::Tree::*)(unsigned long)) &asmjit::ConstPool::Tree::setDataSize, "C++: asmjit::ConstPool::Tree::setDataSize(unsigned long) --> void", pybind11::arg("dataSize"));
-			cl.def("get", (class asmjit::ConstPool::Node * (asmjit::ConstPool::Tree::*)(const void *)) &asmjit::ConstPool::Tree::get, "C++: asmjit::ConstPool::Tree::get(const void *) --> class asmjit::ConstPool::Node *", pybind11::return_value_policy::automatic, pybind11::arg("data"));
-			cl.def("insert", (void (asmjit::ConstPool::Tree::*)(class asmjit::ConstPool::Node *)) &asmjit::ConstPool::Tree::insert, "C++: asmjit::ConstPool::Tree::insert(class asmjit::ConstPool::Node *) --> void", pybind11::arg("node"));
-		}
-
-	}
-	// asmjit::NodeType file: line:45
-	pybind11::enum_<asmjit::NodeType>(M("asmjit"), "NodeType", "Type of node used by  and ")
-		.value("kNone", asmjit::NodeType::kNone)
-		.value("kInst", asmjit::NodeType::kInst)
-		.value("kSection", asmjit::NodeType::kSection)
-		.value("kLabel", asmjit::NodeType::kLabel)
-		.value("kAlign", asmjit::NodeType::kAlign)
-		.value("kEmbedData", asmjit::NodeType::kEmbedData)
-		.value("kEmbedLabel", asmjit::NodeType::kEmbedLabel)
-		.value("kEmbedLabelDelta", asmjit::NodeType::kEmbedLabelDelta)
-		.value("kConstPool", asmjit::NodeType::kConstPool)
-		.value("kComment", asmjit::NodeType::kComment)
-		.value("kSentinel", asmjit::NodeType::kSentinel)
-		.value("kJump", asmjit::NodeType::kJump)
-		.value("kFunc", asmjit::NodeType::kFunc)
-		.value("kFuncRet", asmjit::NodeType::kFuncRet)
-		.value("kInvoke", asmjit::NodeType::kInvoke)
-		.value("kUser", asmjit::NodeType::kUser);
-
-;
-
 }

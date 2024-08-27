@@ -78,139 +78,166 @@ void bind_unknown_unknown_17(std::function< pybind11::module &(std::string const
 
 ;
 
-	{ // asmjit::FixedString file: line:34
-		pybind11::class_<asmjit::FixedString<16UL>, std::shared_ptr<asmjit::FixedString<16UL>>> cl(M("asmjit"), "FixedString_16UL_t", "");
-		cl.def( pybind11::init( [](){ return new asmjit::FixedString<16UL>(); } ) );
-		cl.def( pybind11::init( [](asmjit::FixedString<16UL> const &o){ return new asmjit::FixedString<16UL>(o); } ) );
-		cl.def("equals", (bool (asmjit::FixedString<16UL>::*)(const char *) const) &asmjit::FixedString<16>::equals, "C++: asmjit::FixedString<16>::equals(const char *) const --> bool", pybind11::arg("other"));
-		cl.def("assign", (union asmjit::FixedString<16> & (asmjit::FixedString<16UL>::*)(const union asmjit::FixedString<16> &)) &asmjit::FixedString<16>::operator=, "C++: asmjit::FixedString<16>::operator=(const union asmjit::FixedString<16> &) --> union asmjit::FixedString<16> &", pybind11::return_value_policy::automatic, pybind11::arg(""));
-	}
-	{ // asmjit::FixedString file: line:34
-		pybind11::class_<asmjit::FixedString<64UL>, std::shared_ptr<asmjit::FixedString<64UL>>> cl(M("asmjit"), "FixedString_64UL_t", "");
-		cl.def( pybind11::init( [](){ return new asmjit::FixedString<64UL>(); } ) );
-		cl.def( pybind11::init( [](asmjit::FixedString<64UL> const &o){ return new asmjit::FixedString<64UL>(o); } ) );
-		cl.def("equals", (bool (asmjit::FixedString<64UL>::*)(const char *) const) &asmjit::FixedString<64>::equals, "C++: asmjit::FixedString<64>::equals(const char *) const --> bool", pybind11::arg("other"));
-		cl.def("assign", (union asmjit::FixedString<64> & (asmjit::FixedString<64UL>::*)(const union asmjit::FixedString<64> &)) &asmjit::FixedString<64>::operator=, "C++: asmjit::FixedString<64>::operator=(const union asmjit::FixedString<64> &) --> union asmjit::FixedString<64> &", pybind11::return_value_policy::automatic, pybind11::arg(""));
-	}
-	{ // asmjit::FixedString file: line:34
-		pybind11::class_<asmjit::FixedString<36UL>, std::shared_ptr<asmjit::FixedString<36UL>>> cl(M("asmjit"), "FixedString_36UL_t", "");
-		cl.def( pybind11::init( [](){ return new asmjit::FixedString<36UL>(); } ) );
-		cl.def("equals", (bool (asmjit::FixedString<36UL>::*)(const char *) const) &asmjit::FixedString<36>::equals, "C++: asmjit::FixedString<36>::equals(const char *) const --> bool", pybind11::arg("other"));
-	}
-	{ // asmjit::String file: line:80
-		pybind11::class_<asmjit::String, std::shared_ptr<asmjit::String>> cl(M("asmjit"), "String", "A simple non-reference counted string that uses small string optimization (SSO).\n\n This string has 3 allocation possibilities:\n\n   1. Small    - embedded buffer is used for up to `kSSOCapacity` characters. This should handle most small\n                 strings and thus avoid dynamic memory allocation for most use-cases.\n\n   2. Large    - string that doesn't fit into an embedded buffer (or string that was truncated from a larger\n                 buffer) and is owned by AsmJit. When you destroy the string AsmJit would automatically\n                 release the large buffer.\n\n   3. External - like Large (2), however, the large buffer is not owned by AsmJit and won't be released when\n                 the string is destroyed or reallocated. This is mostly useful for working with larger temporary\n                 strings allocated on stack or with immutable strings.");
-		cl.def( pybind11::init( [](){ return new asmjit::String(); } ) );
+	// asmjit::Vendor file: line:23
+	pybind11::enum_<asmjit::Vendor>(M("asmjit"), "Vendor", "Vendor.\n\n \n AsmJit doesn't use vendor information at the moment. It's provided for future use, if required.")
+		.value("kUnknown", asmjit::Vendor::kUnknown)
+		.value("kMaxValue", asmjit::Vendor::kMaxValue)
+		.value("kHost", asmjit::Vendor::kHost);
 
-		pybind11::enum_<asmjit::String::ModifyOp>(cl, "ModifyOp", "String operation.")
-			.value("kAssign", asmjit::String::ModifyOp::kAssign)
-			.value("kAppend", asmjit::String::ModifyOp::kAppend);
+;
 
+	// asmjit::Platform file: line:40
+	pybind11::enum_<asmjit::Platform>(M("asmjit"), "Platform", "Platform - runtime environment or operating system.")
+		.value("kUnknown", asmjit::Platform::kUnknown)
+		.value("kWindows", asmjit::Platform::kWindows)
+		.value("kOther", asmjit::Platform::kOther)
+		.value("kLinux", asmjit::Platform::kLinux)
+		.value("kHurd", asmjit::Platform::kHurd)
+		.value("kFreeBSD", asmjit::Platform::kFreeBSD)
+		.value("kOpenBSD", asmjit::Platform::kOpenBSD)
+		.value("kNetBSD", asmjit::Platform::kNetBSD)
+		.value("kDragonFlyBSD", asmjit::Platform::kDragonFlyBSD)
+		.value("kHaiku", asmjit::Platform::kHaiku)
+		.value("kOSX", asmjit::Platform::kOSX)
+		.value("kIOS", asmjit::Platform::kIOS)
+		.value("kTVOS", asmjit::Platform::kTVOS)
+		.value("kWatchOS", asmjit::Platform::kWatchOS)
+		.value("kEmscripten", asmjit::Platform::kEmscripten)
+		.value("kMaxValue", asmjit::Platform::kMaxValue)
+		.value("kHost", asmjit::Platform::kHost);
 
-		pybind11::enum_<asmjit::String::Type>(cl, "Type", pybind11::arithmetic(), "String type.")
-			.value("kTypeLarge", asmjit::String::kTypeLarge)
-			.value("kTypeExternal", asmjit::String::kTypeExternal)
-			.export_values();
+;
 
-		cl.def("reset", (unsigned int (asmjit::String::*)()) &asmjit::String::reset, "Reset the string into a construction state.\n\nC++: asmjit::String::reset() --> unsigned int");
-		cl.def("__eq__", (bool (asmjit::String::*)(const char *) const) &asmjit::String::operator==, "C++: asmjit::String::operator==(const char *) const --> bool", pybind11::arg("other"));
-		cl.def("__ne__", (bool (asmjit::String::*)(const char *) const) &asmjit::String::operator!=, "C++: asmjit::String::operator!=(const char *) const --> bool", pybind11::arg("other"));
-		cl.def("__eq__", (bool (asmjit::String::*)(const class asmjit::String &) const) &asmjit::String::operator==, "C++: asmjit::String::operator==(const class asmjit::String &) const --> bool", pybind11::arg("other"));
-		cl.def("__ne__", (bool (asmjit::String::*)(const class asmjit::String &) const) &asmjit::String::operator!=, "C++: asmjit::String::operator!=(const class asmjit::String &) const --> bool", pybind11::arg("other"));
-		cl.def("isExternal", (bool (asmjit::String::*)() const) &asmjit::String::isExternal, "\\{\n\nC++: asmjit::String::isExternal() const --> bool");
-		cl.def("isLargeOrExternal", (bool (asmjit::String::*)() const) &asmjit::String::isLargeOrExternal, "C++: asmjit::String::isLargeOrExternal() const --> bool");
-		cl.def("empty", (bool (asmjit::String::*)() const) &asmjit::String::empty, "Tests whether the string is empty.\n\nC++: asmjit::String::empty() const --> bool");
-		cl.def("size", (unsigned long (asmjit::String::*)() const) &asmjit::String::size, "Returns the size of the string.\n\nC++: asmjit::String::size() const --> unsigned long");
-		cl.def("capacity", (unsigned long (asmjit::String::*)() const) &asmjit::String::capacity, "Returns the capacity of the string.\n\nC++: asmjit::String::capacity() const --> unsigned long");
-		cl.def("data", (char * (asmjit::String::*)()) &asmjit::String::data, "Returns the data of the string.\n\nC++: asmjit::String::data() --> char *", pybind11::return_value_policy::automatic);
-		cl.def("start", (char * (asmjit::String::*)()) &asmjit::String::start, "C++: asmjit::String::start() --> char *", pybind11::return_value_policy::automatic);
-		cl.def("end", (char * (asmjit::String::*)()) &asmjit::String::end, "C++: asmjit::String::end() --> char *", pybind11::return_value_policy::automatic);
-		cl.def("swap", (void (asmjit::String::*)(class asmjit::String &)) &asmjit::String::swap, "Swaps the content of this string with `other`.\n\nC++: asmjit::String::swap(class asmjit::String &) --> void", pybind11::arg("other"));
-		cl.def("clear", (unsigned int (asmjit::String::*)()) &asmjit::String::clear, "Clears the content of the string.\n\nC++: asmjit::String::clear() --> unsigned int");
-		cl.def("prepare", (char * (asmjit::String::*)(enum asmjit::String::ModifyOp, unsigned long)) &asmjit::String::prepare, "C++: asmjit::String::prepare(enum asmjit::String::ModifyOp, unsigned long) --> char *", pybind11::return_value_policy::automatic, pybind11::arg("op"), pybind11::arg("size"));
+	// asmjit::PlatformABI file: line:118
+	pybind11::enum_<asmjit::PlatformABI>(M("asmjit"), "PlatformABI", "Platform ABI (application binary interface).")
+		.value("kUnknown", asmjit::PlatformABI::kUnknown)
+		.value("kMSVC", asmjit::PlatformABI::kMSVC)
+		.value("kGNU", asmjit::PlatformABI::kGNU)
+		.value("kAndroid", asmjit::PlatformABI::kAndroid)
+		.value("kCygwin", asmjit::PlatformABI::kCygwin)
+		.value("kDarwin", asmjit::PlatformABI::kDarwin)
+		.value("kMaxValue", asmjit::PlatformABI::kMaxValue)
+		.value("kHost", asmjit::PlatformABI::kHost);
 
+;
 
+	// asmjit::FloatABI file: line:155
+	pybind11::enum_<asmjit::FloatABI>(M("asmjit"), "FloatABI", "Floating point ABI (ARM).")
+		.value("kHardFloat", asmjit::FloatABI::kHardFloat)
+		.value("kSoftFloat", asmjit::FloatABI::kSoftFloat)
+		.value("kHost", asmjit::FloatABI::kHost);
 
+;
 
+	// asmjit::ObjectFormat file: line:172
+	pybind11::enum_<asmjit::ObjectFormat>(M("asmjit"), "ObjectFormat", "Object format.\n\n \n AsmJit doesn't really use anything except  and  at\n the moment. Object file formats are provided for future extensibility and a possibility to generate object\n files at some point.")
+		.value("kUnknown", asmjit::ObjectFormat::kUnknown)
+		.value("kJIT", asmjit::ObjectFormat::kJIT)
+		.value("kELF", asmjit::ObjectFormat::kELF)
+		.value("kCOFF", asmjit::ObjectFormat::kCOFF)
+		.value("kXCOFF", asmjit::ObjectFormat::kXCOFF)
+		.value("kMachO", asmjit::ObjectFormat::kMachO)
+		.value("kMaxValue", asmjit::ObjectFormat::kMaxValue);
 
+;
 
-
-
-
-
-
-		cl.def("assign", [](asmjit::String &o, const char * a0) -> unsigned int { return o.assign(a0); }, "", pybind11::arg("data"));
-		cl.def("assign", (unsigned int (asmjit::String::*)(const char *, unsigned long)) &asmjit::String::assign, "Replaces the current of the string with `data` of the given `size`.\n\n Null terminated strings can set `size` to `SIZE_MAX`.\n\nC++: asmjit::String::assign(const char *, unsigned long) --> unsigned int", pybind11::arg("data"), pybind11::arg("size"));
-		cl.def("assign", (unsigned int (asmjit::String::*)(const class asmjit::String &)) &asmjit::String::assign, "Replaces the current of the string with `other` string.\n\nC++: asmjit::String::assign(const class asmjit::String &) --> unsigned int", pybind11::arg("other"));
-		cl.def("assign", (unsigned int (asmjit::String::*)(char)) &asmjit::String::assign, "Replaces the current of the string by a single `c` character.\n\nC++: asmjit::String::assign(char) --> unsigned int", pybind11::arg("c"));
-		cl.def("assignChars", (unsigned int (asmjit::String::*)(char, unsigned long)) &asmjit::String::assignChars, "Replaces the current of the string by a `c` character, repeated `n` times.\n\nC++: asmjit::String::assignChars(char, unsigned long) --> unsigned int", pybind11::arg("c"), pybind11::arg("n"));
-		cl.def("assignInt", [](asmjit::String &o, long const & a0) -> unsigned int { return o.assignInt(a0); }, "", pybind11::arg("i"));
-		cl.def("assignInt", [](asmjit::String &o, long const & a0, unsigned int const & a1) -> unsigned int { return o.assignInt(a0, a1); }, "", pybind11::arg("i"), pybind11::arg("base"));
-		cl.def("assignInt", [](asmjit::String &o, long const & a0, unsigned int const & a1, unsigned long const & a2) -> unsigned int { return o.assignInt(a0, a1, a2); }, "", pybind11::arg("i"), pybind11::arg("base"), pybind11::arg("width"));
-		cl.def("assignInt", (unsigned int (asmjit::String::*)(long, unsigned int, unsigned long, enum asmjit::StringFormatFlags)) &asmjit::String::assignInt, "Replaces the current of the string by a formatted integer `i` (signed).\n\nC++: asmjit::String::assignInt(long, unsigned int, unsigned long, enum asmjit::StringFormatFlags) --> unsigned int", pybind11::arg("i"), pybind11::arg("base"), pybind11::arg("width"), pybind11::arg("flags"));
-		cl.def("assignUInt", [](asmjit::String &o, unsigned long const & a0) -> unsigned int { return o.assignUInt(a0); }, "", pybind11::arg("i"));
-		cl.def("assignUInt", [](asmjit::String &o, unsigned long const & a0, unsigned int const & a1) -> unsigned int { return o.assignUInt(a0, a1); }, "", pybind11::arg("i"), pybind11::arg("base"));
-		cl.def("assignUInt", [](asmjit::String &o, unsigned long const & a0, unsigned int const & a1, unsigned long const & a2) -> unsigned int { return o.assignUInt(a0, a1, a2); }, "", pybind11::arg("i"), pybind11::arg("base"), pybind11::arg("width"));
-		cl.def("assignUInt", (unsigned int (asmjit::String::*)(unsigned long, unsigned int, unsigned long, enum asmjit::StringFormatFlags)) &asmjit::String::assignUInt, "Replaces the current of the string by a formatted integer `i` (unsigned).\n\nC++: asmjit::String::assignUInt(unsigned long, unsigned int, unsigned long, enum asmjit::StringFormatFlags) --> unsigned int", pybind11::arg("i"), pybind11::arg("base"), pybind11::arg("width"), pybind11::arg("flags"));
-		cl.def("assignHex", [](asmjit::String &o, const void * a0, unsigned long const & a1) -> unsigned int { return o.assignHex(a0, a1); }, "", pybind11::arg("data"), pybind11::arg("size"));
-		cl.def("assignHex", (unsigned int (asmjit::String::*)(const void *, unsigned long, char)) &asmjit::String::assignHex, "Replaces the current of the string by the given `data` converted to a HEX string.\n\nC++: asmjit::String::assignHex(const void *, unsigned long, char) --> unsigned int", pybind11::arg("data"), pybind11::arg("size"), pybind11::arg("separator"));
-		cl.def("append", [](asmjit::String &o, const char * a0) -> unsigned int { return o.append(a0); }, "", pybind11::arg("str"));
-		cl.def("append", (unsigned int (asmjit::String::*)(const char *, unsigned long)) &asmjit::String::append, "Appends `str` having the given size `size` to the string.\n\n Null terminated strings can set `size` to `SIZE_MAX`.\n\nC++: asmjit::String::append(const char *, unsigned long) --> unsigned int", pybind11::arg("str"), pybind11::arg("size"));
-		cl.def("append", (unsigned int (asmjit::String::*)(const class asmjit::String &)) &asmjit::String::append, "Appends `other` string to this string.\n\nC++: asmjit::String::append(const class asmjit::String &) --> unsigned int", pybind11::arg("other"));
-		cl.def("append", (unsigned int (asmjit::String::*)(char)) &asmjit::String::append, "Appends a single `c` character.\n\nC++: asmjit::String::append(char) --> unsigned int", pybind11::arg("c"));
-		cl.def("appendChars", (unsigned int (asmjit::String::*)(char, unsigned long)) &asmjit::String::appendChars, "Appends `c` character repeated `n` times.\n\nC++: asmjit::String::appendChars(char, unsigned long) --> unsigned int", pybind11::arg("c"), pybind11::arg("n"));
-		cl.def("appendInt", [](asmjit::String &o, long const & a0) -> unsigned int { return o.appendInt(a0); }, "", pybind11::arg("i"));
-		cl.def("appendInt", [](asmjit::String &o, long const & a0, unsigned int const & a1) -> unsigned int { return o.appendInt(a0, a1); }, "", pybind11::arg("i"), pybind11::arg("base"));
-		cl.def("appendInt", [](asmjit::String &o, long const & a0, unsigned int const & a1, unsigned long const & a2) -> unsigned int { return o.appendInt(a0, a1, a2); }, "", pybind11::arg("i"), pybind11::arg("base"), pybind11::arg("width"));
-		cl.def("appendInt", (unsigned int (asmjit::String::*)(long, unsigned int, unsigned long, enum asmjit::StringFormatFlags)) &asmjit::String::appendInt, "Appends a formatted integer `i` (signed).\n\nC++: asmjit::String::appendInt(long, unsigned int, unsigned long, enum asmjit::StringFormatFlags) --> unsigned int", pybind11::arg("i"), pybind11::arg("base"), pybind11::arg("width"), pybind11::arg("flags"));
-		cl.def("appendUInt", [](asmjit::String &o, unsigned long const & a0) -> unsigned int { return o.appendUInt(a0); }, "", pybind11::arg("i"));
-		cl.def("appendUInt", [](asmjit::String &o, unsigned long const & a0, unsigned int const & a1) -> unsigned int { return o.appendUInt(a0, a1); }, "", pybind11::arg("i"), pybind11::arg("base"));
-		cl.def("appendUInt", [](asmjit::String &o, unsigned long const & a0, unsigned int const & a1, unsigned long const & a2) -> unsigned int { return o.appendUInt(a0, a1, a2); }, "", pybind11::arg("i"), pybind11::arg("base"), pybind11::arg("width"));
-		cl.def("appendUInt", (unsigned int (asmjit::String::*)(unsigned long, unsigned int, unsigned long, enum asmjit::StringFormatFlags)) &asmjit::String::appendUInt, "Appends a formatted integer `i` (unsigned).\n\nC++: asmjit::String::appendUInt(unsigned long, unsigned int, unsigned long, enum asmjit::StringFormatFlags) --> unsigned int", pybind11::arg("i"), pybind11::arg("base"), pybind11::arg("width"), pybind11::arg("flags"));
-		cl.def("appendHex", [](asmjit::String &o, const void * a0, unsigned long const & a1) -> unsigned int { return o.appendHex(a0, a1); }, "", pybind11::arg("data"), pybind11::arg("size"));
-		cl.def("appendHex", (unsigned int (asmjit::String::*)(const void *, unsigned long, char)) &asmjit::String::appendHex, "Appends the given `data` converted to a HEX string.\n\nC++: asmjit::String::appendHex(const void *, unsigned long, char) --> unsigned int", pybind11::arg("data"), pybind11::arg("size"), pybind11::arg("separator"));
-		cl.def("padEnd", [](asmjit::String &o, unsigned long const & a0) -> unsigned int { return o.padEnd(a0); }, "", pybind11::arg("n"));
-		cl.def("padEnd", (unsigned int (asmjit::String::*)(unsigned long, char)) &asmjit::String::padEnd, "C++: asmjit::String::padEnd(unsigned long, char) --> unsigned int", pybind11::arg("n"), pybind11::arg("c"));
-		cl.def("truncate", (unsigned int (asmjit::String::*)(unsigned long)) &asmjit::String::truncate, "Truncate the string length into `newSize`.\n\nC++: asmjit::String::truncate(unsigned long) --> unsigned int", pybind11::arg("newSize"));
-		cl.def("equals", [](asmjit::String const &o, const char * a0) -> bool { return o.equals(a0); }, "", pybind11::arg("other"));
-		cl.def("equals", (bool (asmjit::String::*)(const char *, unsigned long) const) &asmjit::String::equals, "C++: asmjit::String::equals(const char *, unsigned long) const --> bool", pybind11::arg("other"), pybind11::arg("size"));
-		cl.def("equals", (bool (asmjit::String::*)(const class asmjit::String &) const) &asmjit::String::equals, "C++: asmjit::String::equals(const class asmjit::String &) const --> bool", pybind11::arg("other"));
-
-
-
-		{ // asmjit::String::Raw file: line:106
-			auto & enclosing_class = cl;
-			pybind11::class_<asmjit::String::Raw, std::shared_ptr<asmjit::String::Raw>> cl(enclosing_class, "Raw", "");
-			cl.def( pybind11::init( [](asmjit::String::Raw const &o){ return new asmjit::String::Raw(o); } ) );
-			cl.def( pybind11::init( [](){ return new asmjit::String::Raw(); } ) );
-			cl.def("assign", (union asmjit::String::Raw & (asmjit::String::Raw::*)(const union asmjit::String::Raw &)) &asmjit::String::Raw::operator=, "C++: asmjit::String::Raw::operator=(const union asmjit::String::Raw &) --> union asmjit::String::Raw &", pybind11::return_value_policy::automatic, pybind11::arg(""));
-		}
-
-		{ // asmjit::String::Small file: line:112
-			auto & enclosing_class = cl;
-			pybind11::class_<asmjit::String::Small, std::shared_ptr<asmjit::String::Small>> cl(enclosing_class, "Small", "");
-			cl.def( pybind11::init( [](){ return new asmjit::String::Small(); } ) );
-			cl.def( pybind11::init( [](asmjit::String::Small const &o){ return new asmjit::String::Small(o); } ) );
-			cl.def_readwrite("type", &asmjit::String::Small::type);
-			cl.def("assign", (struct asmjit::String::Small & (asmjit::String::Small::*)(const struct asmjit::String::Small &)) &asmjit::String::Small::operator=, "C++: asmjit::String::Small::operator=(const struct asmjit::String::Small &) --> struct asmjit::String::Small &", pybind11::return_value_policy::automatic, pybind11::arg(""));
-		}
-
-		{ // asmjit::String::Large file: line:117
-			auto & enclosing_class = cl;
-			pybind11::class_<asmjit::String::Large, std::shared_ptr<asmjit::String::Large>> cl(enclosing_class, "Large", "");
-			cl.def( pybind11::init( [](){ return new asmjit::String::Large(); } ) );
-			cl.def( pybind11::init( [](asmjit::String::Large const &o){ return new asmjit::String::Large(o); } ) );
-			cl.def_readwrite("type", &asmjit::String::Large::type);
-			cl.def_readwrite("size", &asmjit::String::Large::size);
-			cl.def_readwrite("capacity", &asmjit::String::Large::capacity);
-			cl.def("assign", (struct asmjit::String::Large & (asmjit::String::Large::*)(const struct asmjit::String::Large &)) &asmjit::String::Large::operator=, "C++: asmjit::String::Large::operator=(const struct asmjit::String::Large &) --> struct asmjit::String::Large &", pybind11::return_value_policy::automatic, pybind11::arg(""));
-		}
-
-		{ // asmjit::String::(anonymous union at extern/asmjit/src/asmjit/./core/../core/../core/string.h:125:3) file: line:125
+	{ // asmjit::Environment file: line:200
+		pybind11::class_<asmjit::Environment, std::shared_ptr<asmjit::Environment>> cl(M("asmjit"), "Environment", "Represents an environment, which is usually related to a \n\n Environment has usually an 'arch-subarch-vendor-os-abi' format, which is sometimes called \"Triple\" (historically\n it used to be 3 only parts) or \"Tuple\", which is a convention used by Debian Linux.\n\n AsmJit doesn't support all possible combinations or architectures and ABIs, however, it models the environment\n similarly to other compilers for future extensibility.");
+		cl.def( pybind11::init( [](){ return new asmjit::Environment(); } ) );
+		cl.def( pybind11::init( [](asmjit::Environment const &o){ return new asmjit::Environment(o); } ) );
+		cl.def( pybind11::init( [](enum asmjit::Arch const & a0){ return new asmjit::Environment(a0); } ), "doc" , pybind11::arg("arch"));
+		cl.def( pybind11::init( [](enum asmjit::Arch const & a0, enum asmjit::SubArch const & a1){ return new asmjit::Environment(a0, a1); } ), "doc" , pybind11::arg("arch"), pybind11::arg("subArch"));
+		cl.def( pybind11::init( [](enum asmjit::Arch const & a0, enum asmjit::SubArch const & a1, enum asmjit::Vendor const & a2){ return new asmjit::Environment(a0, a1, a2); } ), "doc" , pybind11::arg("arch"), pybind11::arg("subArch"), pybind11::arg("vendor"));
+		cl.def( pybind11::init( [](enum asmjit::Arch const & a0, enum asmjit::SubArch const & a1, enum asmjit::Vendor const & a2, enum asmjit::Platform const & a3){ return new asmjit::Environment(a0, a1, a2, a3); } ), "doc" , pybind11::arg("arch"), pybind11::arg("subArch"), pybind11::arg("vendor"), pybind11::arg("platform"));
+		cl.def( pybind11::init( [](enum asmjit::Arch const & a0, enum asmjit::SubArch const & a1, enum asmjit::Vendor const & a2, enum asmjit::Platform const & a3, enum asmjit::PlatformABI const & a4){ return new asmjit::Environment(a0, a1, a2, a3, a4); } ), "doc" , pybind11::arg("arch"), pybind11::arg("subArch"), pybind11::arg("vendor"), pybind11::arg("platform"), pybind11::arg("platformABI"));
+		cl.def( pybind11::init( [](enum asmjit::Arch const & a0, enum asmjit::SubArch const & a1, enum asmjit::Vendor const & a2, enum asmjit::Platform const & a3, enum asmjit::PlatformABI const & a4, enum asmjit::ObjectFormat const & a5){ return new asmjit::Environment(a0, a1, a2, a3, a4, a5); } ), "doc" , pybind11::arg("arch"), pybind11::arg("subArch"), pybind11::arg("vendor"), pybind11::arg("platform"), pybind11::arg("platformABI"), pybind11::arg("objectFormat"));
+		cl.def( pybind11::init<enum asmjit::Arch, enum asmjit::SubArch, enum asmjit::Vendor, enum asmjit::Platform, enum asmjit::PlatformABI, enum asmjit::ObjectFormat, enum asmjit::FloatABI>(), pybind11::arg("arch"), pybind11::arg("subArch"), pybind11::arg("vendor"), pybind11::arg("platform"), pybind11::arg("platformABI"), pybind11::arg("objectFormat"), pybind11::arg("floatABI") );
 
 
 
 
-		}
 
+
+
+
+
+		cl.def_static("host", (class asmjit::Environment (*)()) &asmjit::Environment::host, "Returns the host environment constructed from preprocessor macros defined by the compiler.\n\n The returned environment should precisely match the target host architecture, sub-architecture, platform,\n and ABI.\n\nC++: asmjit::Environment::host() --> class asmjit::Environment");
+		cl.def("assign", (class asmjit::Environment & (asmjit::Environment::*)(const class asmjit::Environment &)) &asmjit::Environment::operator=, "\\{\n\nC++: asmjit::Environment::operator=(const class asmjit::Environment &) --> class asmjit::Environment &", pybind11::return_value_policy::automatic, pybind11::arg("other"));
+		cl.def("__eq__", (bool (asmjit::Environment::*)(const class asmjit::Environment &) const) &asmjit::Environment::operator==, "C++: asmjit::Environment::operator==(const class asmjit::Environment &) const --> bool", pybind11::arg("other"));
+		cl.def("__ne__", (bool (asmjit::Environment::*)(const class asmjit::Environment &) const) &asmjit::Environment::operator!=, "C++: asmjit::Environment::operator!=(const class asmjit::Environment &) const --> bool", pybind11::arg("other"));
+		cl.def("empty", (bool (asmjit::Environment::*)() const) &asmjit::Environment::empty, "Tests whether the environment is not set up.\n\n Returns true if all members are zero, and thus unknown.\n\nC++: asmjit::Environment::empty() const --> bool");
+		cl.def("isInitialized", (bool (asmjit::Environment::*)() const) &asmjit::Environment::isInitialized, "Tests whether the environment is initialized, which means it must have\n a valid architecture.\n\nC++: asmjit::Environment::isInitialized() const --> bool");
+
+		cl.def("reset", (void (asmjit::Environment::*)()) &asmjit::Environment::reset, "Resets all members of the environment to zero / unknown.\n\nC++: asmjit::Environment::reset() --> void");
+		cl.def("equals", (bool (asmjit::Environment::*)(const class asmjit::Environment &) const) &asmjit::Environment::equals, "Tests whether this environment is equal to `other`.\n\nC++: asmjit::Environment::equals(const class asmjit::Environment &) const --> bool", pybind11::arg("other"));
+		cl.def("arch", (enum asmjit::Arch (asmjit::Environment::*)() const) &asmjit::Environment::arch, "Returns the architecture.\n\nC++: asmjit::Environment::arch() const --> enum asmjit::Arch");
+		cl.def("subArch", (enum asmjit::SubArch (asmjit::Environment::*)() const) &asmjit::Environment::subArch, "Returns the sub-architecture.\n\nC++: asmjit::Environment::subArch() const --> enum asmjit::SubArch");
+		cl.def("vendor", (enum asmjit::Vendor (asmjit::Environment::*)() const) &asmjit::Environment::vendor, "Returns vendor.\n\nC++: asmjit::Environment::vendor() const --> enum asmjit::Vendor");
+		cl.def("platform", (enum asmjit::Platform (asmjit::Environment::*)() const) &asmjit::Environment::platform, "Returns target's platform or operating system.\n\nC++: asmjit::Environment::platform() const --> enum asmjit::Platform");
+		cl.def("platformABI", (enum asmjit::PlatformABI (asmjit::Environment::*)() const) &asmjit::Environment::platformABI, "Returns target's ABI.\n\nC++: asmjit::Environment::platformABI() const --> enum asmjit::PlatformABI");
+		cl.def("objectFormat", (enum asmjit::ObjectFormat (asmjit::Environment::*)() const) &asmjit::Environment::objectFormat, "Returns target's object format.\n\nC++: asmjit::Environment::objectFormat() const --> enum asmjit::ObjectFormat");
+		cl.def("floatABI", (enum asmjit::FloatABI (asmjit::Environment::*)() const) &asmjit::Environment::floatABI, "Returns floating point ABI.\n\nC++: asmjit::Environment::floatABI() const --> enum asmjit::FloatABI");
+		cl.def("init", [](asmjit::Environment &o, enum asmjit::Arch const & a0) -> void { return o.init(a0); }, "", pybind11::arg("arch"));
+		cl.def("init", [](asmjit::Environment &o, enum asmjit::Arch const & a0, enum asmjit::SubArch const & a1) -> void { return o.init(a0, a1); }, "", pybind11::arg("arch"), pybind11::arg("subArch"));
+		cl.def("init", [](asmjit::Environment &o, enum asmjit::Arch const & a0, enum asmjit::SubArch const & a1, enum asmjit::Vendor const & a2) -> void { return o.init(a0, a1, a2); }, "", pybind11::arg("arch"), pybind11::arg("subArch"), pybind11::arg("vendor"));
+		cl.def("init", [](asmjit::Environment &o, enum asmjit::Arch const & a0, enum asmjit::SubArch const & a1, enum asmjit::Vendor const & a2, enum asmjit::Platform const & a3) -> void { return o.init(a0, a1, a2, a3); }, "", pybind11::arg("arch"), pybind11::arg("subArch"), pybind11::arg("vendor"), pybind11::arg("platform"));
+		cl.def("init", [](asmjit::Environment &o, enum asmjit::Arch const & a0, enum asmjit::SubArch const & a1, enum asmjit::Vendor const & a2, enum asmjit::Platform const & a3, enum asmjit::PlatformABI const & a4) -> void { return o.init(a0, a1, a2, a3, a4); }, "", pybind11::arg("arch"), pybind11::arg("subArch"), pybind11::arg("vendor"), pybind11::arg("platform"), pybind11::arg("platformABI"));
+		cl.def("init", [](asmjit::Environment &o, enum asmjit::Arch const & a0, enum asmjit::SubArch const & a1, enum asmjit::Vendor const & a2, enum asmjit::Platform const & a3, enum asmjit::PlatformABI const & a4, enum asmjit::ObjectFormat const & a5) -> void { return o.init(a0, a1, a2, a3, a4, a5); }, "", pybind11::arg("arch"), pybind11::arg("subArch"), pybind11::arg("vendor"), pybind11::arg("platform"), pybind11::arg("platformABI"), pybind11::arg("objectFormat"));
+		cl.def("init", (void (asmjit::Environment::*)(enum asmjit::Arch, enum asmjit::SubArch, enum asmjit::Vendor, enum asmjit::Platform, enum asmjit::PlatformABI, enum asmjit::ObjectFormat, enum asmjit::FloatABI)) &asmjit::Environment::init, "Initializes  to `arch`, `subArch`, `vendor`, `platform`, `platformABI`, `objectFormat`,\n and `floatABI`.\n\nC++: asmjit::Environment::init(enum asmjit::Arch, enum asmjit::SubArch, enum asmjit::Vendor, enum asmjit::Platform, enum asmjit::PlatformABI, enum asmjit::ObjectFormat, enum asmjit::FloatABI) --> void", pybind11::arg("arch"), pybind11::arg("subArch"), pybind11::arg("vendor"), pybind11::arg("platform"), pybind11::arg("platformABI"), pybind11::arg("objectFormat"), pybind11::arg("floatABI"));
+		cl.def("isArchX86", (bool (asmjit::Environment::*)() const) &asmjit::Environment::isArchX86, "Tests whether this environment describes a 32-bit X86.\n\nC++: asmjit::Environment::isArchX86() const --> bool");
+		cl.def("isArchX64", (bool (asmjit::Environment::*)() const) &asmjit::Environment::isArchX64, "Tests whether this environment describes a 64-bit X86.\n\nC++: asmjit::Environment::isArchX64() const --> bool");
+		cl.def("isArchARM", (bool (asmjit::Environment::*)() const) &asmjit::Environment::isArchARM, "Tests whether this environment describes a 32-bit ARM.\n\nC++: asmjit::Environment::isArchARM() const --> bool");
+		cl.def("isArchThumb", (bool (asmjit::Environment::*)() const) &asmjit::Environment::isArchThumb, "Tests whether this environment describes a 32-bit ARM in THUMB mode.\n\nC++: asmjit::Environment::isArchThumb() const --> bool");
+		cl.def("isArchAArch64", (bool (asmjit::Environment::*)() const) &asmjit::Environment::isArchAArch64, "Tests whether this environment describes a 64-bit X86.\n\nC++: asmjit::Environment::isArchAArch64() const --> bool");
+		cl.def("isArchMIPS32", (bool (asmjit::Environment::*)() const) &asmjit::Environment::isArchMIPS32, "Tests whether this environment describes a 32-bit MIPS.\n\nC++: asmjit::Environment::isArchMIPS32() const --> bool");
+		cl.def("isArchMIPS64", (bool (asmjit::Environment::*)() const) &asmjit::Environment::isArchMIPS64, "Tests whether this environment describes a 64-bit MIPS.\n\nC++: asmjit::Environment::isArchMIPS64() const --> bool");
+		cl.def("isArchRISCV32", (bool (asmjit::Environment::*)() const) &asmjit::Environment::isArchRISCV32, "Tests whether this environment describes a 32-bit RISC-V.\n\nC++: asmjit::Environment::isArchRISCV32() const --> bool");
+		cl.def("isArchRISCV64", (bool (asmjit::Environment::*)() const) &asmjit::Environment::isArchRISCV64, "Tests whether this environment describes a 64-bit RISC-V.\n\nC++: asmjit::Environment::isArchRISCV64() const --> bool");
+		cl.def("is32Bit", (bool (asmjit::Environment::*)() const) &asmjit::Environment::is32Bit, "Tests whether the architecture is 32-bit.\n\nC++: asmjit::Environment::is32Bit() const --> bool");
+		cl.def("is64Bit", (bool (asmjit::Environment::*)() const) &asmjit::Environment::is64Bit, "Tests whether the architecture is 64-bit.\n\nC++: asmjit::Environment::is64Bit() const --> bool");
+		cl.def("isLittleEndian", (bool (asmjit::Environment::*)() const) &asmjit::Environment::isLittleEndian, "Tests whether the architecture is little endian.\n\nC++: asmjit::Environment::isLittleEndian() const --> bool");
+		cl.def("isBigEndian", (bool (asmjit::Environment::*)() const) &asmjit::Environment::isBigEndian, "Tests whether the architecture is big endian.\n\nC++: asmjit::Environment::isBigEndian() const --> bool");
+		cl.def("isFamilyX86", (bool (asmjit::Environment::*)() const) &asmjit::Environment::isFamilyX86, "Tests whether this architecture is of X86 family.\n\nC++: asmjit::Environment::isFamilyX86() const --> bool");
+		cl.def("isFamilyARM", (bool (asmjit::Environment::*)() const) &asmjit::Environment::isFamilyARM, "Tests whether this architecture family is ARM, THUMB, or AArch64.\n\nC++: asmjit::Environment::isFamilyARM() const --> bool");
+		cl.def("isFamilyAArch32", (bool (asmjit::Environment::*)() const) &asmjit::Environment::isFamilyAArch32, "Tests whether this architecture family is AArch32 (ARM or THUMB).\n\nC++: asmjit::Environment::isFamilyAArch32() const --> bool");
+		cl.def("isFamilyAArch64", (bool (asmjit::Environment::*)() const) &asmjit::Environment::isFamilyAArch64, "Tests whether this architecture family is AArch64.\n\nC++: asmjit::Environment::isFamilyAArch64() const --> bool");
+		cl.def("isFamilyMIPS", (bool (asmjit::Environment::*)() const) &asmjit::Environment::isFamilyMIPS, "Tests whether this architecture family is MISP or MIPS64.\n\nC++: asmjit::Environment::isFamilyMIPS() const --> bool");
+		cl.def("isFamilyRISCV", (bool (asmjit::Environment::*)() const) &asmjit::Environment::isFamilyRISCV, "Tests whether this architecture family is RISC-V (both 32-bit and 64-bit).\n\nC++: asmjit::Environment::isFamilyRISCV() const --> bool");
+		cl.def("isPlatformWindows", (bool (asmjit::Environment::*)() const) &asmjit::Environment::isPlatformWindows, "Tests whether the environment platform is Windows.\n\nC++: asmjit::Environment::isPlatformWindows() const --> bool");
+		cl.def("isPlatformLinux", (bool (asmjit::Environment::*)() const) &asmjit::Environment::isPlatformLinux, "Tests whether the environment platform is Linux.\n\nC++: asmjit::Environment::isPlatformLinux() const --> bool");
+		cl.def("isPlatformHurd", (bool (asmjit::Environment::*)() const) &asmjit::Environment::isPlatformHurd, "Tests whether the environment platform is Hurd.\n\nC++: asmjit::Environment::isPlatformHurd() const --> bool");
+		cl.def("isPlatformHaiku", (bool (asmjit::Environment::*)() const) &asmjit::Environment::isPlatformHaiku, "Tests whether the environment platform is Haiku.\n\nC++: asmjit::Environment::isPlatformHaiku() const --> bool");
+		cl.def("isPlatformBSD", (bool (asmjit::Environment::*)() const) &asmjit::Environment::isPlatformBSD, "Tests whether the environment platform is any BSD.\n\nC++: asmjit::Environment::isPlatformBSD() const --> bool");
+		cl.def("isPlatformApple", (bool (asmjit::Environment::*)() const) &asmjit::Environment::isPlatformApple, "Tests whether the environment platform is any Apple platform (OSX, iOS, TVOS, WatchOS).\n\nC++: asmjit::Environment::isPlatformApple() const --> bool");
+		cl.def("isMSVC", (bool (asmjit::Environment::*)() const) &asmjit::Environment::isMSVC, "Tests whether the ABI is MSVC.\n\nC++: asmjit::Environment::isMSVC() const --> bool");
+		cl.def("isGNU", (bool (asmjit::Environment::*)() const) &asmjit::Environment::isGNU, "Tests whether the ABI is GNU.\n\nC++: asmjit::Environment::isGNU() const --> bool");
+		cl.def("isDarwin", (bool (asmjit::Environment::*)() const) &asmjit::Environment::isDarwin, "Tests whether the ABI is GNU.\n\nC++: asmjit::Environment::isDarwin() const --> bool");
+		cl.def("stackAlignment", (unsigned int (asmjit::Environment::*)() const) &asmjit::Environment::stackAlignment, "Returns a calculated stack alignment for this environment.\n\nC++: asmjit::Environment::stackAlignment() const --> unsigned int");
+		cl.def("registerSize", (unsigned int (asmjit::Environment::*)() const) &asmjit::Environment::registerSize, "Returns a native register size of this architecture.\n\nC++: asmjit::Environment::registerSize() const --> unsigned int");
+		cl.def("setArch", (void (asmjit::Environment::*)(enum asmjit::Arch)) &asmjit::Environment::setArch, "Sets the architecture to `arch`.\n\nC++: asmjit::Environment::setArch(enum asmjit::Arch) --> void", pybind11::arg("arch"));
+		cl.def("setSubArch", (void (asmjit::Environment::*)(enum asmjit::SubArch)) &asmjit::Environment::setSubArch, "Sets the sub-architecture to `subArch`.\n\nC++: asmjit::Environment::setSubArch(enum asmjit::SubArch) --> void", pybind11::arg("subArch"));
+		cl.def("setVendor", (void (asmjit::Environment::*)(enum asmjit::Vendor)) &asmjit::Environment::setVendor, "Sets the vendor to `vendor`.\n\nC++: asmjit::Environment::setVendor(enum asmjit::Vendor) --> void", pybind11::arg("vendor"));
+		cl.def("setPlatform", (void (asmjit::Environment::*)(enum asmjit::Platform)) &asmjit::Environment::setPlatform, "Sets the platform to `platform`.\n\nC++: asmjit::Environment::setPlatform(enum asmjit::Platform) --> void", pybind11::arg("platform"));
+		cl.def("setPlatformABI", (void (asmjit::Environment::*)(enum asmjit::PlatformABI)) &asmjit::Environment::setPlatformABI, "Sets the ABI to `platformABI`.\n\nC++: asmjit::Environment::setPlatformABI(enum asmjit::PlatformABI) --> void", pybind11::arg("platformABI"));
+		cl.def("setObjectFormat", (void (asmjit::Environment::*)(enum asmjit::ObjectFormat)) &asmjit::Environment::setObjectFormat, "Sets the object format to `objectFormat`.\n\nC++: asmjit::Environment::setObjectFormat(enum asmjit::ObjectFormat) --> void", pybind11::arg("objectFormat"));
+		cl.def("setFloatABI", (void (asmjit::Environment::*)(enum asmjit::FloatABI)) &asmjit::Environment::setFloatABI, "Sets floating point ABI to `floatABI`.\n\nC++: asmjit::Environment::setFloatABI(enum asmjit::FloatABI) --> void", pybind11::arg("floatABI"));
+		cl.def_static("isDefinedArch", (bool (*)(enum asmjit::Arch)) &asmjit::Environment::isDefinedArch, "\\{\n\nC++: asmjit::Environment::isDefinedArch(enum asmjit::Arch) --> bool", pybind11::arg("arch"));
+		cl.def_static("isValidArch", (bool (*)(enum asmjit::Arch)) &asmjit::Environment::isValidArch, "C++: asmjit::Environment::isValidArch(enum asmjit::Arch) --> bool", pybind11::arg("arch"));
+		cl.def_static("isArchitecture32Bit", (bool (*)(enum asmjit::Arch)) &asmjit::Environment::is32Bit, "Tests whether the given architecture `arch` is 32-bit.\n\nC++: asmjit::Environment::is32Bit(enum asmjit::Arch) --> bool", pybind11::arg("arch"));
+		cl.def_static("isArchitecture64Bit", (bool (*)(enum asmjit::Arch)) &asmjit::Environment::is64Bit, "Tests whether the given architecture `arch` is 64-bit.\n\nC++: asmjit::Environment::is64Bit(enum asmjit::Arch) --> bool", pybind11::arg("arch"));
+		cl.def_static("isArchitectureLittleEndian", (bool (*)(enum asmjit::Arch)) &asmjit::Environment::isLittleEndian, "Tests whether the given architecture `arch` is little endian.\n\nC++: asmjit::Environment::isLittleEndian(enum asmjit::Arch) --> bool", pybind11::arg("arch"));
+		cl.def_static("isArchitectureBigEndian", (bool (*)(enum asmjit::Arch)) &asmjit::Environment::isBigEndian, "Tests whether the given architecture `arch` is big endian.\n\nC++: asmjit::Environment::isBigEndian(enum asmjit::Arch) --> bool", pybind11::arg("arch"));
+		cl.def_static("isArchitectureThumb", (bool (*)(enum asmjit::Arch)) &asmjit::Environment::isArchThumb, "Tests whether the given architecture is Thumb or Thumb_BE.\n\nC++: asmjit::Environment::isArchThumb(enum asmjit::Arch) --> bool", pybind11::arg("arch"));
+		cl.def_static("isArchitectureARM", (bool (*)(enum asmjit::Arch)) &asmjit::Environment::isArchARM, "Tests whether the given architecture is ARM or ARM_BE.\n\nC++: asmjit::Environment::isArchARM(enum asmjit::Arch) --> bool", pybind11::arg("arch"));
+		cl.def_static("isArchitectureAArch64", (bool (*)(enum asmjit::Arch)) &asmjit::Environment::isArchAArch64, "Tests whether the given architecture is AArch64 or AArch64_BE.\n\nC++: asmjit::Environment::isArchAArch64(enum asmjit::Arch) --> bool", pybind11::arg("arch"));
+		cl.def_static("isArchitectureMIPS32", (bool (*)(enum asmjit::Arch)) &asmjit::Environment::isArchMIPS32, "Tests whether the given architecture is MIPS32_LE or MIPS32_BE.\n\nC++: asmjit::Environment::isArchMIPS32(enum asmjit::Arch) --> bool", pybind11::arg("arch"));
+		cl.def_static("isArchitectureMIPS64", (bool (*)(enum asmjit::Arch)) &asmjit::Environment::isArchMIPS64, "Tests whether the given architecture is MIPS64_LE or MIPS64_BE.\n\nC++: asmjit::Environment::isArchMIPS64(enum asmjit::Arch) --> bool", pybind11::arg("arch"));
+		cl.def_static("isArchitectureFamilyX86", (bool (*)(enum asmjit::Arch)) &asmjit::Environment::isFamilyX86, "Tests whether the given architecture family is X86 or X64.\n\nC++: asmjit::Environment::isFamilyX86(enum asmjit::Arch) --> bool", pybind11::arg("arch"));
+		cl.def_static("isArchitectureFamilyAArch32", (bool (*)(enum asmjit::Arch)) &asmjit::Environment::isFamilyAArch32, "Tests whether the given architecture family is AArch32 (ARM or THUMB).\n\nC++: asmjit::Environment::isFamilyAArch32(enum asmjit::Arch) --> bool", pybind11::arg("arch"));
+		cl.def_static("isArchitectureFamilyAArch64", (bool (*)(enum asmjit::Arch)) &asmjit::Environment::isFamilyAArch64, "Tests whether the given architecture family is AArch64.\n\nC++: asmjit::Environment::isFamilyAArch64(enum asmjit::Arch) --> bool", pybind11::arg("arch"));
+		cl.def_static("isArchitectureFamilyARM", (bool (*)(enum asmjit::Arch)) &asmjit::Environment::isFamilyARM, "Tests whether the given architecture family is ARM, THUMB, or AArch64.\n\nC++: asmjit::Environment::isFamilyARM(enum asmjit::Arch) --> bool", pybind11::arg("arch"));
+		cl.def_static("isArchitectureFamilyMIPS", (bool (*)(enum asmjit::Arch)) &asmjit::Environment::isFamilyMIPS, "Tests whether the given architecture family is MIPS or MIPS64.\n\nC++: asmjit::Environment::isFamilyMIPS(enum asmjit::Arch) --> bool", pybind11::arg("arch"));
+		cl.def_static("isArchitectureFamilyRISCV", (bool (*)(enum asmjit::Arch)) &asmjit::Environment::isFamilyRISCV, "Tests whether the given architecture family is RISC-V (both 32-bit and 64-bit).\n\nC++: asmjit::Environment::isFamilyRISCV(enum asmjit::Arch) --> bool", pybind11::arg("arch"));
+		cl.def_static("registerSizeFromArch", (unsigned int (*)(enum asmjit::Arch)) &asmjit::Environment::registerSizeFromArch, "Returns a native general purpose register size from the given architecture.\n\nC++: asmjit::Environment::registerSizeFromArch(enum asmjit::Arch) --> unsigned int", pybind11::arg("arch"));
 	}
 }

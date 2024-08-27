@@ -16,155 +16,103 @@
 
 void bind_unknown_unknown_20(std::function< pybind11::module &(std::string const &namespace_) > &M)
 {
-	{ // asmjit::CpuInfo file: line:1044
-		pybind11::class_<asmjit::CpuInfo, std::shared_ptr<asmjit::CpuInfo>> cl(M("asmjit"), "CpuInfo", "CPU information.");
-		cl.def( pybind11::init( [](){ return new asmjit::CpuInfo(); } ) );
-		cl.def( pybind11::init( [](asmjit::CpuInfo const &o){ return new asmjit::CpuInfo(o); } ) );
-		cl.def( pybind11::init<struct asmjit::Globals::NoInit_>(), pybind11::arg("") );
+	{ // asmjit::FuncSignature file: line:372
+		pybind11::class_<asmjit::FuncSignature, std::shared_ptr<asmjit::FuncSignature>> cl(M("asmjit"), "FuncSignature", "Function signature.\n\n Contains information about a function return type, count of arguments, and their TypeIds. Function signature\n is a low level structure which doesn't contain platform specific or calling convention specific information.\n It's typically used to describe function arguments in a C-API like form, which is then used to calculate a\n  instance, which then maps function signature into a platform and calling convention specific\n format.\n\n Function signature can be built either dynamically by using  and  functionality,\n or dynamically by using a template-based  function, which maps template types\n into a function signature.");
+		cl.def( pybind11::init( [](){ return new asmjit::FuncSignature(); } ) );
+		cl.def( pybind11::init( [](asmjit::FuncSignature const &o){ return new asmjit::FuncSignature(o); } ) );
+		cl.def( pybind11::init( [](enum asmjit::CallConvId const & a0){ return new asmjit::FuncSignature(a0); } ), "doc" , pybind11::arg("ccId"));
+		cl.def( pybind11::init<enum asmjit::CallConvId, unsigned int>(), pybind11::arg("ccId"), pybind11::arg("vaIndex") );
 
 
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-		cl.def_static("host", (const class asmjit::CpuInfo & (*)()) &asmjit::CpuInfo::host, "Returns the host CPU information.\n\n \n The returned reference is global - it's setup only once and then shared.\n\nC++: asmjit::CpuInfo::host() --> const class asmjit::CpuInfo &", pybind11::return_value_policy::automatic);
-		cl.def("assign", (class asmjit::CpuInfo & (asmjit::CpuInfo::*)(const class asmjit::CpuInfo &)) &asmjit::CpuInfo::operator=, "Copy assignment.\n\nC++: asmjit::CpuInfo::operator=(const class asmjit::CpuInfo &) --> class asmjit::CpuInfo &", pybind11::return_value_policy::automatic, pybind11::arg("other"));
-		cl.def("initArch", [](asmjit::CpuInfo &o, enum asmjit::Arch const & a0) -> void { return o.initArch(a0); }, "", pybind11::arg("arch"));
-		cl.def("initArch", (void (asmjit::CpuInfo::*)(enum asmjit::Arch, enum asmjit::SubArch)) &asmjit::CpuInfo::initArch, "Initializes CpuInfo architecture and sub-architecture members to `arch` and `subArch`, respectively.\n\nC++: asmjit::CpuInfo::initArch(enum asmjit::Arch, enum asmjit::SubArch) --> void", pybind11::arg("arch"), pybind11::arg("subArch"));
-		cl.def("reset", (void (asmjit::CpuInfo::*)()) &asmjit::CpuInfo::reset, "Resets this  to a default constructed state.\n\nC++: asmjit::CpuInfo::reset() --> void");
-		cl.def("arch", (enum asmjit::Arch (asmjit::CpuInfo::*)() const) &asmjit::CpuInfo::arch, "Returns the CPU architecture this information relates to.\n\nC++: asmjit::CpuInfo::arch() const --> enum asmjit::Arch");
-		cl.def("subArch", (enum asmjit::SubArch (asmjit::CpuInfo::*)() const) &asmjit::CpuInfo::subArch, "Returns the CPU sub-architecture this information relates to.\n\nC++: asmjit::CpuInfo::subArch() const --> enum asmjit::SubArch");
-		cl.def("wasDetected", (bool (asmjit::CpuInfo::*)() const) &asmjit::CpuInfo::wasDetected, "Returns whether the CPU was detected successfully.\n\n If the returned value is false it means that AsmJit either failed to detect the CPU or it doesn't have\n implementation targeting the host architecture and operating system.\n\nC++: asmjit::CpuInfo::wasDetected() const --> bool");
-		cl.def("familyId", (unsigned int (asmjit::CpuInfo::*)() const) &asmjit::CpuInfo::familyId, "Returns the CPU family ID.\n\n The information provided depends on architecture and OS:\n   - X86:\n     - Family identifier matches the FamilyId read by using CPUID.\n   - ARM:\n     - Apple - returns Apple Family identifier returned by sysctlbyname(\"hw.cpufamily\").\n\nC++: asmjit::CpuInfo::familyId() const --> unsigned int");
-		cl.def("modelId", (unsigned int (asmjit::CpuInfo::*)() const) &asmjit::CpuInfo::modelId, "Returns the CPU model ID.\n\n The information provided depends on architecture and OS:\n   - X86:\n     - Model identifier matches the ModelId read by using CPUID.\n\nC++: asmjit::CpuInfo::modelId() const --> unsigned int");
-		cl.def("brandId", (unsigned int (asmjit::CpuInfo::*)() const) &asmjit::CpuInfo::brandId, "Returns the CPU brand id.\n\n The information provided depends on architecture and OS:\n   - X86:\n     - Brand identifier matches the BrandId read by using CPUID.\n\nC++: asmjit::CpuInfo::brandId() const --> unsigned int");
-		cl.def("stepping", (unsigned int (asmjit::CpuInfo::*)() const) &asmjit::CpuInfo::stepping, "Returns the CPU stepping.\n\n The information provided depends on architecture and OS:\n   - X86:\n     - Stepping identifier matches the Stepping information read by using CPUID.\n\nC++: asmjit::CpuInfo::stepping() const --> unsigned int");
-		cl.def("processorType", (unsigned int (asmjit::CpuInfo::*)() const) &asmjit::CpuInfo::processorType, "Returns the processor type.\n\n The information provided depends on architecture and OS:\n   - X86:\n     - Processor type identifier matches the ProcessorType read by using CPUID.\n\nC++: asmjit::CpuInfo::processorType() const --> unsigned int");
-		cl.def("maxLogicalProcessors", (unsigned int (asmjit::CpuInfo::*)() const) &asmjit::CpuInfo::maxLogicalProcessors, "Returns the maximum number of logical processors.\n\nC++: asmjit::CpuInfo::maxLogicalProcessors() const --> unsigned int");
-		cl.def("cacheLineSize", (unsigned int (asmjit::CpuInfo::*)() const) &asmjit::CpuInfo::cacheLineSize, "Returns the size of a CPU cache line.\n\n On a multi-architecture system this should return the smallest cache line of all CPUs.\n\nC++: asmjit::CpuInfo::cacheLineSize() const --> unsigned int");
-		cl.def("hwThreadCount", (unsigned int (asmjit::CpuInfo::*)() const) &asmjit::CpuInfo::hwThreadCount, "Returns number of hardware threads available.\n\nC++: asmjit::CpuInfo::hwThreadCount() const --> unsigned int");
-		cl.def("vendor", (const char * (asmjit::CpuInfo::*)() const) &asmjit::CpuInfo::vendor, "Returns a CPU vendor string.\n\nC++: asmjit::CpuInfo::vendor() const --> const char *", pybind11::return_value_policy::automatic);
-		cl.def("isVendor", (bool (asmjit::CpuInfo::*)(const char *) const) &asmjit::CpuInfo::isVendor, "Tests whether the CPU vendor string is equal to `s`.\n\nC++: asmjit::CpuInfo::isVendor(const char *) const --> bool", pybind11::arg("s"));
-		cl.def("brand", (const char * (asmjit::CpuInfo::*)() const) &asmjit::CpuInfo::brand, "Returns a CPU brand string.\n\nC++: asmjit::CpuInfo::brand() const --> const char *", pybind11::return_value_policy::automatic);
-		cl.def("features", (class asmjit::CpuFeatures & (asmjit::CpuInfo::*)()) &asmjit::CpuInfo::features, "Returns CPU features.\n\nC++: asmjit::CpuInfo::features() --> class asmjit::CpuFeatures &", pybind11::return_value_policy::automatic);
+		cl.def("assign", (struct asmjit::FuncSignature & (asmjit::FuncSignature::*)(const struct asmjit::FuncSignature &)) &asmjit::FuncSignature::operator=, "Copy assignment - function signature can be copied by value.\n\nC++: asmjit::FuncSignature::operator=(const struct asmjit::FuncSignature &) --> struct asmjit::FuncSignature &", pybind11::return_value_policy::automatic, pybind11::arg("other"));
+		cl.def("__eq__", (bool (asmjit::FuncSignature::*)(const struct asmjit::FuncSignature &) const) &asmjit::FuncSignature::operator==, "Compares this function signature with `other` for equality..\n\nC++: asmjit::FuncSignature::operator==(const struct asmjit::FuncSignature &) const --> bool", pybind11::arg("other"));
+		cl.def("__ne__", (bool (asmjit::FuncSignature::*)(const struct asmjit::FuncSignature &) const) &asmjit::FuncSignature::operator!=, "Compares this function signature with `other` for inequality..\n\nC++: asmjit::FuncSignature::operator!=(const struct asmjit::FuncSignature &) const --> bool", pybind11::arg("other"));
+		cl.def("reset", (void (asmjit::FuncSignature::*)()) &asmjit::FuncSignature::reset, "Resets this function signature to a default constructed state.\n\nC++: asmjit::FuncSignature::reset() --> void");
+		cl.def("equals", (bool (asmjit::FuncSignature::*)(const struct asmjit::FuncSignature &) const) &asmjit::FuncSignature::equals, "Compares this function signature with `other` for equality..\n\nC++: asmjit::FuncSignature::equals(const struct asmjit::FuncSignature &) const --> bool", pybind11::arg("other"));
+		cl.def("callConvId", (enum asmjit::CallConvId (asmjit::FuncSignature::*)() const) &asmjit::FuncSignature::callConvId, "Returns the calling convention.\n\nC++: asmjit::FuncSignature::callConvId() const --> enum asmjit::CallConvId");
+		cl.def("setCallConvId", (void (asmjit::FuncSignature::*)(enum asmjit::CallConvId)) &asmjit::FuncSignature::setCallConvId, "Sets the calling convention to `ccId`;\n\nC++: asmjit::FuncSignature::setCallConvId(enum asmjit::CallConvId) --> void", pybind11::arg("ccId"));
+		cl.def("hasRet", (bool (asmjit::FuncSignature::*)() const) &asmjit::FuncSignature::hasRet, "Tests whether the function signature has a return value.\n\nC++: asmjit::FuncSignature::hasRet() const --> bool");
+		cl.def("ret", (enum asmjit::TypeId (asmjit::FuncSignature::*)() const) &asmjit::FuncSignature::ret, "Returns the type of the return value.\n\nC++: asmjit::FuncSignature::ret() const --> enum asmjit::TypeId");
+		cl.def("setRet", (void (asmjit::FuncSignature::*)(enum asmjit::TypeId)) &asmjit::FuncSignature::setRet, "Sets the return type to `retType`.\n\nC++: asmjit::FuncSignature::setRet(enum asmjit::TypeId) --> void", pybind11::arg("retType"));
+		cl.def("args", (const enum asmjit::TypeId * (asmjit::FuncSignature::*)() const) &asmjit::FuncSignature::args, "Returns the array of function arguments' types.\n\nC++: asmjit::FuncSignature::args() const --> const enum asmjit::TypeId *", pybind11::return_value_policy::automatic);
+		cl.def("argCount", (unsigned int (asmjit::FuncSignature::*)() const) &asmjit::FuncSignature::argCount, "Returns the number of function arguments.\n\nC++: asmjit::FuncSignature::argCount() const --> unsigned int");
+		cl.def("arg", (enum asmjit::TypeId (asmjit::FuncSignature::*)(unsigned int) const) &asmjit::FuncSignature::arg, "Returns the type of the argument at index `i`.\n\nC++: asmjit::FuncSignature::arg(unsigned int) const --> enum asmjit::TypeId", pybind11::arg("i"));
+		cl.def("setArg", (void (asmjit::FuncSignature::*)(unsigned int, enum asmjit::TypeId)) &asmjit::FuncSignature::setArg, "Sets the argument at index `index` to `argType`.\n\nC++: asmjit::FuncSignature::setArg(unsigned int, enum asmjit::TypeId) --> void", pybind11::arg("index"), pybind11::arg("argType"));
+		cl.def("canAddArg", (bool (asmjit::FuncSignature::*)() const) &asmjit::FuncSignature::canAddArg, "Tests whether an argument can be added to the signature, use before calling  and \n\n \n If you know that you are not adding more arguments than  then it's not necessary\n to use this function. However, if you are adding arguments based on user input, for example, then either check\n the number of arguments before using function signature or use  before actually adding them to\n the function signature.\n\nC++: asmjit::FuncSignature::canAddArg() const --> bool");
+		cl.def("addArg", (void (asmjit::FuncSignature::*)(enum asmjit::TypeId)) &asmjit::FuncSignature::addArg, "Appends an argument of `type` to the function prototype.\n\nC++: asmjit::FuncSignature::addArg(enum asmjit::TypeId) --> void", pybind11::arg("type"));
+		cl.def("hasVarArgs", (bool (asmjit::FuncSignature::*)() const) &asmjit::FuncSignature::hasVarArgs, "Tests whether the function has variable number of arguments (...).\n\nC++: asmjit::FuncSignature::hasVarArgs() const --> bool");
+		cl.def("vaIndex", (unsigned int (asmjit::FuncSignature::*)() const) &asmjit::FuncSignature::vaIndex, "Returns the variable arguments (...) index, `kNoVarArgs` if none.\n\nC++: asmjit::FuncSignature::vaIndex() const --> unsigned int");
+		cl.def("setVaIndex", (void (asmjit::FuncSignature::*)(unsigned int)) &asmjit::FuncSignature::setVaIndex, "Sets the variable arguments (...) index to `index`.\n\nC++: asmjit::FuncSignature::setVaIndex(unsigned int) --> void", pybind11::arg("index"));
+		cl.def("resetVaIndex", (void (asmjit::FuncSignature::*)()) &asmjit::FuncSignature::resetVaIndex, "Resets the variable arguments index (making it a non-va function).\n\nC++: asmjit::FuncSignature::resetVaIndex() --> void");
 	}
-	// asmjit::CallConvId file: line:30
-	pybind11::enum_<asmjit::CallConvId>(M("asmjit"), "CallConvId", "Calling convention id.\n\n Calling conventions can be divided into the following groups:\n\n   - Universal - calling conventions are applicable to any target. They will be converted to a target dependent\n     calling convention at runtime by  with some help from  The purpose of\n     these calling conventions is to make using functions less target dependent and closer to C and C++.\n\n   - Target specific - calling conventions that are used by a particular architecture and ABI. For example\n     Windows 64-bit calling convention and AMD64 SystemV calling convention.")
-		.value("kCDecl", asmjit::CallConvId::kCDecl)
-		.value("kStdCall", asmjit::CallConvId::kStdCall)
-		.value("kFastCall", asmjit::CallConvId::kFastCall)
-		.value("kVectorCall", asmjit::CallConvId::kVectorCall)
-		.value("kThisCall", asmjit::CallConvId::kThisCall)
-		.value("kRegParm1", asmjit::CallConvId::kRegParm1)
-		.value("kRegParm2", asmjit::CallConvId::kRegParm2)
-		.value("kRegParm3", asmjit::CallConvId::kRegParm3)
-		.value("kLightCall2", asmjit::CallConvId::kLightCall2)
-		.value("kLightCall3", asmjit::CallConvId::kLightCall3)
-		.value("kLightCall4", asmjit::CallConvId::kLightCall4)
-		.value("kSoftFloat", asmjit::CallConvId::kSoftFloat)
-		.value("kHardFloat", asmjit::CallConvId::kHardFloat)
-		.value("kX64SystemV", asmjit::CallConvId::kX64SystemV)
-		.value("kX64Windows", asmjit::CallConvId::kX64Windows)
-		.value("kMaxValue", asmjit::CallConvId::kMaxValue);
+	{ // asmjit::FuncValue file: line:554
+		pybind11::class_<asmjit::FuncValue, std::shared_ptr<asmjit::FuncValue>> cl(M("asmjit"), "FuncValue", "Argument or return value (or its part) as defined by `FuncSignature`, but with register or stack address\n (and other metadata) assigned.");
+		cl.def( pybind11::init( [](){ return new asmjit::FuncValue(); } ) );
+		cl.def( pybind11::init( [](asmjit::FuncValue const &o){ return new asmjit::FuncValue(o); } ) );
 
-;
-
-	// asmjit::CallConvStrategy file: line:115
-	pybind11::enum_<asmjit::CallConvStrategy>(M("asmjit"), "CallConvStrategy", "Strategy used by calling conventions to assign registers to function arguments.\n\n Calling convention strategy describes how AsmJit should convert function arguments used by \n into register identifiers and stack offsets. The  strategy assigns registers\n and then stack whereas  strategy does register shadowing as defined by WIN64\n calling convention, which is only used by 64-bit Windows.")
-		.value("kDefault", asmjit::CallConvStrategy::kDefault)
-		.value("kX64Windows", asmjit::CallConvStrategy::kX64Windows)
-		.value("kX64VectorCall", asmjit::CallConvStrategy::kX64VectorCall)
-		.value("kAArch64Apple", asmjit::CallConvStrategy::kAArch64Apple)
-		.value("kMaxValue", asmjit::CallConvStrategy::kMaxValue);
-
-;
-
-	// asmjit::CallConvFlags file: line:130
-	pybind11::enum_<asmjit::CallConvFlags>(M("asmjit"), "CallConvFlags", "Calling convention flags.")
-		.value("kNone", asmjit::CallConvFlags::kNone)
-		.value("kCalleePopsStack", asmjit::CallConvFlags::kCalleePopsStack)
-		.value("kIndirectVecArgs", asmjit::CallConvFlags::kIndirectVecArgs)
-		.value("kPassFloatsByVec", asmjit::CallConvFlags::kPassFloatsByVec)
-		.value("kPassVecByStackIfVA", asmjit::CallConvFlags::kPassVecByStackIfVA)
-		.value("kPassMmxByGp", asmjit::CallConvFlags::kPassMmxByGp)
-		.value("kPassMmxByXmm", asmjit::CallConvFlags::kPassMmxByXmm)
-		.value("kVarArgCompatible", asmjit::CallConvFlags::kVarArgCompatible);
-
-;
-
-	{ // asmjit::CallConv file: line:155
-		pybind11::class_<asmjit::CallConv, std::shared_ptr<asmjit::CallConv>> cl(M("asmjit"), "CallConv", "Function calling convention.\n\n Function calling convention is a scheme that defines how function parameters are passed and how function\n returns its result. AsmJit defines a variety of architecture and OS specific calling conventions and also\n provides a compile time detection to make the code-generation easier.");
-		cl.def( pybind11::init( [](){ return new asmjit::CallConv(); } ) );
-		cl.def( pybind11::init( [](asmjit::CallConv const &o){ return new asmjit::CallConv(o); } ) );
+		pybind11::enum_<asmjit::FuncValue::Bits>(cl, "Bits", pybind11::arithmetic(), "\\{")
+			.value("kTypeIdShift", asmjit::FuncValue::kTypeIdShift)
+			.value("kTypeIdMask", asmjit::FuncValue::kTypeIdMask)
+			.value("kFlagIsReg", asmjit::FuncValue::kFlagIsReg)
+			.value("kFlagIsStack", asmjit::FuncValue::kFlagIsStack)
+			.value("kFlagIsIndirect", asmjit::FuncValue::kFlagIsIndirect)
+			.value("kFlagIsDone", asmjit::FuncValue::kFlagIsDone)
+			.value("kStackOffsetShift", asmjit::FuncValue::kStackOffsetShift)
+			.value("kStackOffsetMask", asmjit::FuncValue::kStackOffsetMask)
+			.value("kRegIdShift", asmjit::FuncValue::kRegIdShift)
+			.value("kRegIdMask", asmjit::FuncValue::kRegIdMask)
+			.value("kRegTypeShift", asmjit::FuncValue::kRegTypeShift)
+			.value("kRegTypeMask", asmjit::FuncValue::kRegTypeMask)
+			.export_values();
 
 
+		cl.def("initTypeId", (void (asmjit::FuncValue::*)(enum asmjit::TypeId)) &asmjit::FuncValue::initTypeId, "Initializes this `FuncValue` only to the `typeId` provided - the rest of the values will be cleared.\n\nC++: asmjit::FuncValue::initTypeId(enum asmjit::TypeId) --> void", pybind11::arg("typeId"));
+		cl.def("initReg", [](asmjit::FuncValue &o, enum asmjit::RegType const & a0, unsigned int const & a1, enum asmjit::TypeId const & a2) -> void { return o.initReg(a0, a1, a2); }, "", pybind11::arg("regType"), pybind11::arg("regId"), pybind11::arg("typeId"));
+		cl.def("initReg", (void (asmjit::FuncValue::*)(enum asmjit::RegType, unsigned int, enum asmjit::TypeId, unsigned int)) &asmjit::FuncValue::initReg, "Initializes this `FuncValue` to a register of `regType`, `regId`, and assigns its `typeId` and `flags`.\n\nC++: asmjit::FuncValue::initReg(enum asmjit::RegType, unsigned int, enum asmjit::TypeId, unsigned int) --> void", pybind11::arg("regType"), pybind11::arg("regId"), pybind11::arg("typeId"), pybind11::arg("flags"));
+		cl.def("initStack", (void (asmjit::FuncValue::*)(int, enum asmjit::TypeId)) &asmjit::FuncValue::initStack, "Initializes this `FuncValue` to a stack at the given `offset` and assigns its `typeId`.\n\nC++: asmjit::FuncValue::initStack(int, enum asmjit::TypeId) --> void", pybind11::arg("offset"), pybind11::arg("typeId"));
+		cl.def("reset", (void (asmjit::FuncValue::*)()) &asmjit::FuncValue::reset, "Resets the value to its unassigned state.\n\nC++: asmjit::FuncValue::reset() --> void");
+		cl.def("assignRegData", (void (asmjit::FuncValue::*)(enum asmjit::RegType, unsigned int)) &asmjit::FuncValue::assignRegData, "Assigns a register of `regType` and `regId`.\n\nC++: asmjit::FuncValue::assignRegData(enum asmjit::RegType, unsigned int) --> void", pybind11::arg("regType"), pybind11::arg("regId"));
+		cl.def("assignStackOffset", (void (asmjit::FuncValue::*)(int)) &asmjit::FuncValue::assignStackOffset, "Assigns a stack location at `offset`.\n\nC++: asmjit::FuncValue::assignStackOffset(int) --> void", pybind11::arg("offset"));
 
-
-
-
-
-
-
-
-
-
-		cl.def("init", (unsigned int (asmjit::CallConv::*)(enum asmjit::CallConvId, const class asmjit::Environment &)) &asmjit::CallConv::init, "Initializes this calling convention to the given `ccId` based on the `environment`.\n\n See  and  for more details.\n\nC++: asmjit::CallConv::init(enum asmjit::CallConvId, const class asmjit::Environment &) --> unsigned int", pybind11::arg("ccId"), pybind11::arg("environment"));
-		cl.def("reset", (void (asmjit::CallConv::*)()) &asmjit::CallConv::reset, "Resets this CallConv struct into a defined state.\n\n It's recommended to reset the  struct in case you would like create a custom calling convention\n as it prevents from using an uninitialized data (CallConv doesn't have a constructor that would initialize it,\n it's just a struct).\n\nC++: asmjit::CallConv::reset() --> void");
-		cl.def("arch", (enum asmjit::Arch (asmjit::CallConv::*)() const) &asmjit::CallConv::arch, "Returns the target architecture of this calling convention.\n\nC++: asmjit::CallConv::arch() const --> enum asmjit::Arch");
-		cl.def("setArch", (void (asmjit::CallConv::*)(enum asmjit::Arch)) &asmjit::CallConv::setArch, "Sets the target architecture of this calling convention.\n\nC++: asmjit::CallConv::setArch(enum asmjit::Arch) --> void", pybind11::arg("arch"));
-		cl.def("id", (enum asmjit::CallConvId (asmjit::CallConv::*)() const) &asmjit::CallConv::id, "Returns the calling convention id.\n\nC++: asmjit::CallConv::id() const --> enum asmjit::CallConvId");
-		cl.def("setId", (void (asmjit::CallConv::*)(enum asmjit::CallConvId)) &asmjit::CallConv::setId, "Sets the calling convention id.\n\nC++: asmjit::CallConv::setId(enum asmjit::CallConvId) --> void", pybind11::arg("ccId"));
-		cl.def("strategy", (enum asmjit::CallConvStrategy (asmjit::CallConv::*)() const) &asmjit::CallConv::strategy, "Returns the strategy used to assign registers to arguments.\n\nC++: asmjit::CallConv::strategy() const --> enum asmjit::CallConvStrategy");
-		cl.def("setStrategy", (void (asmjit::CallConv::*)(enum asmjit::CallConvStrategy)) &asmjit::CallConv::setStrategy, "Sets the strategy used to assign registers to arguments.\n\nC++: asmjit::CallConv::setStrategy(enum asmjit::CallConvStrategy) --> void", pybind11::arg("ccStrategy"));
-		cl.def("hasFlag", (bool (asmjit::CallConv::*)(enum asmjit::CallConvFlags) const) &asmjit::CallConv::hasFlag, "Tests whether the calling convention has the given `flag` set.\n\nC++: asmjit::CallConv::hasFlag(enum asmjit::CallConvFlags) const --> bool", pybind11::arg("flag"));
-		cl.def("flags", (enum asmjit::CallConvFlags (asmjit::CallConv::*)() const) &asmjit::CallConv::flags, "Returns the calling convention flags, see `Flags`.\n\nC++: asmjit::CallConv::flags() const --> enum asmjit::CallConvFlags");
-		cl.def("setFlags", (void (asmjit::CallConv::*)(enum asmjit::CallConvFlags)) &asmjit::CallConv::setFlags, "Adds the calling convention flags, see `Flags`.\n\nC++: asmjit::CallConv::setFlags(enum asmjit::CallConvFlags) --> void", pybind11::arg("flag"));
-		cl.def("addFlags", (void (asmjit::CallConv::*)(enum asmjit::CallConvFlags)) &asmjit::CallConv::addFlags, "Adds the calling convention flags, see `Flags`.\n\nC++: asmjit::CallConv::addFlags(enum asmjit::CallConvFlags) --> void", pybind11::arg("flags"));
-		cl.def("hasRedZone", (bool (asmjit::CallConv::*)() const) &asmjit::CallConv::hasRedZone, "Tests whether this calling convention specifies 'RedZone'.\n\nC++: asmjit::CallConv::hasRedZone() const --> bool");
-		cl.def("hasSpillZone", (bool (asmjit::CallConv::*)() const) &asmjit::CallConv::hasSpillZone, "Tests whether this calling convention specifies 'SpillZone'.\n\nC++: asmjit::CallConv::hasSpillZone() const --> bool");
-		cl.def("redZoneSize", (unsigned int (asmjit::CallConv::*)() const) &asmjit::CallConv::redZoneSize, "Returns size of 'RedZone'.\n\nC++: asmjit::CallConv::redZoneSize() const --> unsigned int");
-		cl.def("spillZoneSize", (unsigned int (asmjit::CallConv::*)() const) &asmjit::CallConv::spillZoneSize, "Returns size of 'SpillZone'.\n\nC++: asmjit::CallConv::spillZoneSize() const --> unsigned int");
-		cl.def("setRedZoneSize", (void (asmjit::CallConv::*)(unsigned int)) &asmjit::CallConv::setRedZoneSize, "Sets size of 'RedZone'.\n\nC++: asmjit::CallConv::setRedZoneSize(unsigned int) --> void", pybind11::arg("size"));
-		cl.def("setSpillZoneSize", (void (asmjit::CallConv::*)(unsigned int)) &asmjit::CallConv::setSpillZoneSize, "Sets size of 'SpillZone'.\n\nC++: asmjit::CallConv::setSpillZoneSize(unsigned int) --> void", pybind11::arg("size"));
-		cl.def("naturalStackAlignment", (unsigned int (asmjit::CallConv::*)() const) &asmjit::CallConv::naturalStackAlignment, "Returns a natural stack alignment.\n\nC++: asmjit::CallConv::naturalStackAlignment() const --> unsigned int");
-		cl.def("setNaturalStackAlignment", (void (asmjit::CallConv::*)(unsigned int)) &asmjit::CallConv::setNaturalStackAlignment, "Sets a natural stack alignment.\n\n This function can be used to override the default stack alignment in case that you know that it's alignment is\n different. For example it allows to implement custom calling conventions that guarantee higher stack alignment.\n\nC++: asmjit::CallConv::setNaturalStackAlignment(unsigned int) --> void", pybind11::arg("value"));
-		cl.def("saveRestoreRegSize", (unsigned int (asmjit::CallConv::*)(enum asmjit::RegGroup) const) &asmjit::CallConv::saveRestoreRegSize, "Returns the size of a register (or its part) to be saved and restored of the given `group`.\n\nC++: asmjit::CallConv::saveRestoreRegSize(enum asmjit::RegGroup) const --> unsigned int", pybind11::arg("group"));
-		cl.def("setSaveRestoreRegSize", (void (asmjit::CallConv::*)(enum asmjit::RegGroup, unsigned int)) &asmjit::CallConv::setSaveRestoreRegSize, "Sets the size of a vector register (or its part) to be saved and restored.\n\nC++: asmjit::CallConv::setSaveRestoreRegSize(enum asmjit::RegGroup, unsigned int) --> void", pybind11::arg("group"), pybind11::arg("size"));
-		cl.def("saveRestoreAlignment", (unsigned int (asmjit::CallConv::*)(enum asmjit::RegGroup) const) &asmjit::CallConv::saveRestoreAlignment, "Returns the alignment of a save-restore area of the given `group`.\n\nC++: asmjit::CallConv::saveRestoreAlignment(enum asmjit::RegGroup) const --> unsigned int", pybind11::arg("group"));
-		cl.def("setSaveRestoreAlignment", (void (asmjit::CallConv::*)(enum asmjit::RegGroup, unsigned int)) &asmjit::CallConv::setSaveRestoreAlignment, "Sets the alignment of a save-restore area of the given `group`.\n\nC++: asmjit::CallConv::setSaveRestoreAlignment(enum asmjit::RegGroup, unsigned int) --> void", pybind11::arg("group"), pybind11::arg("alignment"));
-		cl.def("passedOrder", (const unsigned char * (asmjit::CallConv::*)(enum asmjit::RegGroup) const) &asmjit::CallConv::passedOrder, "Returns the order of passed registers of the given `group`.\n\nC++: asmjit::CallConv::passedOrder(enum asmjit::RegGroup) const --> const unsigned char *", pybind11::return_value_policy::automatic, pybind11::arg("group"));
-		cl.def("passedRegs", (unsigned int (asmjit::CallConv::*)(enum asmjit::RegGroup) const) &asmjit::CallConv::passedRegs, "Returns the mask of passed registers of the given `group`.\n\nC++: asmjit::CallConv::passedRegs(enum asmjit::RegGroup) const --> unsigned int", pybind11::arg("group"));
-
-		cl.def("setPassedToNone", (void (asmjit::CallConv::*)(enum asmjit::RegGroup)) &asmjit::CallConv::setPassedToNone, "Resets the order and mask of passed registers.\n\nC++: asmjit::CallConv::setPassedToNone(enum asmjit::RegGroup) --> void", pybind11::arg("group"));
-		cl.def("setPassedOrder", [](asmjit::CallConv &o, enum asmjit::RegGroup const & a0, unsigned int const & a1) -> void { return o.setPassedOrder(a0, a1); }, "", pybind11::arg("group"), pybind11::arg("a0"));
-		cl.def("setPassedOrder", [](asmjit::CallConv &o, enum asmjit::RegGroup const & a0, unsigned int const & a1, unsigned int const & a2) -> void { return o.setPassedOrder(a0, a1, a2); }, "", pybind11::arg("group"), pybind11::arg("a0"), pybind11::arg("a1"));
-		cl.def("setPassedOrder", [](asmjit::CallConv &o, enum asmjit::RegGroup const & a0, unsigned int const & a1, unsigned int const & a2, unsigned int const & a3) -> void { return o.setPassedOrder(a0, a1, a2, a3); }, "", pybind11::arg("group"), pybind11::arg("a0"), pybind11::arg("a1"), pybind11::arg("a2"));
-		cl.def("setPassedOrder", [](asmjit::CallConv &o, enum asmjit::RegGroup const & a0, unsigned int const & a1, unsigned int const & a2, unsigned int const & a3, unsigned int const & a4) -> void { return o.setPassedOrder(a0, a1, a2, a3, a4); }, "", pybind11::arg("group"), pybind11::arg("a0"), pybind11::arg("a1"), pybind11::arg("a2"), pybind11::arg("a3"));
-		cl.def("setPassedOrder", [](asmjit::CallConv &o, enum asmjit::RegGroup const & a0, unsigned int const & a1, unsigned int const & a2, unsigned int const & a3, unsigned int const & a4, unsigned int const & a5) -> void { return o.setPassedOrder(a0, a1, a2, a3, a4, a5); }, "", pybind11::arg("group"), pybind11::arg("a0"), pybind11::arg("a1"), pybind11::arg("a2"), pybind11::arg("a3"), pybind11::arg("a4"));
-		cl.def("setPassedOrder", [](asmjit::CallConv &o, enum asmjit::RegGroup const & a0, unsigned int const & a1, unsigned int const & a2, unsigned int const & a3, unsigned int const & a4, unsigned int const & a5, unsigned int const & a6) -> void { return o.setPassedOrder(a0, a1, a2, a3, a4, a5, a6); }, "", pybind11::arg("group"), pybind11::arg("a0"), pybind11::arg("a1"), pybind11::arg("a2"), pybind11::arg("a3"), pybind11::arg("a4"), pybind11::arg("a5"));
-		cl.def("setPassedOrder", [](asmjit::CallConv &o, enum asmjit::RegGroup const & a0, unsigned int const & a1, unsigned int const & a2, unsigned int const & a3, unsigned int const & a4, unsigned int const & a5, unsigned int const & a6, unsigned int const & a7) -> void { return o.setPassedOrder(a0, a1, a2, a3, a4, a5, a6, a7); }, "", pybind11::arg("group"), pybind11::arg("a0"), pybind11::arg("a1"), pybind11::arg("a2"), pybind11::arg("a3"), pybind11::arg("a4"), pybind11::arg("a5"), pybind11::arg("a6"));
-		cl.def("setPassedOrder", (void (asmjit::CallConv::*)(enum asmjit::RegGroup, unsigned int, unsigned int, unsigned int, unsigned int, unsigned int, unsigned int, unsigned int, unsigned int)) &asmjit::CallConv::setPassedOrder, "Sets the order and mask of passed registers.\n\nC++: asmjit::CallConv::setPassedOrder(enum asmjit::RegGroup, unsigned int, unsigned int, unsigned int, unsigned int, unsigned int, unsigned int, unsigned int, unsigned int) --> void", pybind11::arg("group"), pybind11::arg("a0"), pybind11::arg("a1"), pybind11::arg("a2"), pybind11::arg("a3"), pybind11::arg("a4"), pybind11::arg("a5"), pybind11::arg("a6"), pybind11::arg("a7"));
-		cl.def("preservedRegs", (unsigned int (asmjit::CallConv::*)(enum asmjit::RegGroup) const) &asmjit::CallConv::preservedRegs, "Returns preserved register mask of the given `group`.\n\nC++: asmjit::CallConv::preservedRegs(enum asmjit::RegGroup) const --> unsigned int", pybind11::arg("group"));
-		cl.def("setPreservedRegs", (void (asmjit::CallConv::*)(enum asmjit::RegGroup, unsigned int)) &asmjit::CallConv::setPreservedRegs, "Sets preserved register mask of the given `group`.\n\nC++: asmjit::CallConv::setPreservedRegs(enum asmjit::RegGroup, unsigned int) --> void", pybind11::arg("group"), pybind11::arg("regs"));
-		cl.def("assign", (struct asmjit::CallConv & (asmjit::CallConv::*)(const struct asmjit::CallConv &)) &asmjit::CallConv::operator=, "C++: asmjit::CallConv::operator=(const struct asmjit::CallConv &) --> struct asmjit::CallConv &", pybind11::return_value_policy::automatic, pybind11::arg(""));
-
-		{ // asmjit::CallConv::RegOrder file: line:204
-			auto & enclosing_class = cl;
-			pybind11::class_<asmjit::CallConv::RegOrder, std::shared_ptr<asmjit::CallConv::RegOrder>> cl(enclosing_class, "RegOrder", "Passed registers' order.");
-			cl.def( pybind11::init( [](){ return new asmjit::CallConv::RegOrder(); } ) );
-			cl.def( pybind11::init( [](asmjit::CallConv::RegOrder const &o){ return new asmjit::CallConv::RegOrder(o); } ) );
-			cl.def("assign", (union asmjit::CallConv::RegOrder & (asmjit::CallConv::RegOrder::*)(const union asmjit::CallConv::RegOrder &)) &asmjit::CallConv::RegOrder::operator=, "C++: asmjit::CallConv::RegOrder::operator=(const union asmjit::CallConv::RegOrder &) --> union asmjit::CallConv::RegOrder &", pybind11::return_value_policy::automatic, pybind11::arg(""));
-		}
-
+		cl.def("hasFlag", (bool (asmjit::FuncValue::*)(unsigned int) const) &asmjit::FuncValue::hasFlag, "Tests whether the `FuncValue` has a flag `flag` set.\n\nC++: asmjit::FuncValue::hasFlag(unsigned int) const --> bool", pybind11::arg("flag"));
+		cl.def("addFlags", (void (asmjit::FuncValue::*)(unsigned int)) &asmjit::FuncValue::addFlags, "Adds `flags` to `FuncValue`.\n\nC++: asmjit::FuncValue::addFlags(unsigned int) --> void", pybind11::arg("flags"));
+		cl.def("clearFlags", (void (asmjit::FuncValue::*)(unsigned int)) &asmjit::FuncValue::clearFlags, "Clears `flags` of `FuncValue`.\n\nC++: asmjit::FuncValue::clearFlags(unsigned int) --> void", pybind11::arg("flags"));
+		cl.def("isInitialized", (bool (asmjit::FuncValue::*)() const) &asmjit::FuncValue::isInitialized, "Tests whether the value is initialized (i.e. contains a valid data).\n\nC++: asmjit::FuncValue::isInitialized() const --> bool");
+		cl.def("isReg", (bool (asmjit::FuncValue::*)() const) &asmjit::FuncValue::isReg, "Tests whether the argument is passed by register.\n\nC++: asmjit::FuncValue::isReg() const --> bool");
+		cl.def("isStack", (bool (asmjit::FuncValue::*)() const) &asmjit::FuncValue::isStack, "Tests whether the argument is passed by stack.\n\nC++: asmjit::FuncValue::isStack() const --> bool");
+		cl.def("isAssigned", (bool (asmjit::FuncValue::*)() const) &asmjit::FuncValue::isAssigned, "Tests whether the argument is passed by register.\n\nC++: asmjit::FuncValue::isAssigned() const --> bool");
+		cl.def("isIndirect", (bool (asmjit::FuncValue::*)() const) &asmjit::FuncValue::isIndirect, "Tests whether the argument is passed through a pointer (used by WIN64 to pass XMM|YMM|ZMM).\n\nC++: asmjit::FuncValue::isIndirect() const --> bool");
+		cl.def("isDone", (bool (asmjit::FuncValue::*)() const) &asmjit::FuncValue::isDone, "Tests whether the argument was already processed (used internally).\n\nC++: asmjit::FuncValue::isDone() const --> bool");
+		cl.def("regType", (enum asmjit::RegType (asmjit::FuncValue::*)() const) &asmjit::FuncValue::regType, "Returns a register type of the register used to pass function argument or return value.\n\nC++: asmjit::FuncValue::regType() const --> enum asmjit::RegType");
+		cl.def("setRegType", (void (asmjit::FuncValue::*)(enum asmjit::RegType)) &asmjit::FuncValue::setRegType, "Sets a register type of the register used to pass function argument or return value.\n\nC++: asmjit::FuncValue::setRegType(enum asmjit::RegType) --> void", pybind11::arg("regType"));
+		cl.def("regId", (unsigned int (asmjit::FuncValue::*)() const) &asmjit::FuncValue::regId, "Returns a physical id of the register used to pass function argument or return value.\n\nC++: asmjit::FuncValue::regId() const --> unsigned int");
+		cl.def("setRegId", (void (asmjit::FuncValue::*)(unsigned int)) &asmjit::FuncValue::setRegId, "Sets a physical id of the register used to pass function argument or return value.\n\nC++: asmjit::FuncValue::setRegId(unsigned int) --> void", pybind11::arg("regId"));
+		cl.def("stackOffset", (int (asmjit::FuncValue::*)() const) &asmjit::FuncValue::stackOffset, "Returns a stack offset of this argument.\n\nC++: asmjit::FuncValue::stackOffset() const --> int");
+		cl.def("setStackOffset", (void (asmjit::FuncValue::*)(int)) &asmjit::FuncValue::setStackOffset, "Sets a stack offset of this argument.\n\nC++: asmjit::FuncValue::setStackOffset(int) --> void", pybind11::arg("offset"));
+		cl.def("hasTypeId", (bool (asmjit::FuncValue::*)() const) &asmjit::FuncValue::hasTypeId, "Tests whether the argument or return value has associated `TypeId`.\n\nC++: asmjit::FuncValue::hasTypeId() const --> bool");
+		cl.def("typeId", (enum asmjit::TypeId (asmjit::FuncValue::*)() const) &asmjit::FuncValue::typeId, "Returns a TypeId of this argument or return value.\n\nC++: asmjit::FuncValue::typeId() const --> enum asmjit::TypeId");
+		cl.def("setTypeId", (void (asmjit::FuncValue::*)(enum asmjit::TypeId)) &asmjit::FuncValue::setTypeId, "Sets a TypeId of this argument or return value.\n\nC++: asmjit::FuncValue::setTypeId(enum asmjit::TypeId) --> void", pybind11::arg("typeId"));
+		cl.def("assign", (struct asmjit::FuncValue & (asmjit::FuncValue::*)(const struct asmjit::FuncValue &)) &asmjit::FuncValue::operator=, "C++: asmjit::FuncValue::operator=(const struct asmjit::FuncValue &) --> struct asmjit::FuncValue &", pybind11::return_value_policy::automatic, pybind11::arg(""));
+	}
+	{ // asmjit::FuncValuePack file: line:692
+		pybind11::class_<asmjit::FuncValuePack, std::shared_ptr<asmjit::FuncValuePack>> cl(M("asmjit"), "FuncValuePack", "Contains multiple `FuncValue` instances in an array so functions that use multiple registers for arguments or\n return values can represent all inputs and outputs.");
+		cl.def( pybind11::init( [](){ return new asmjit::FuncValuePack(); } ) );
+		cl.def( pybind11::init( [](asmjit::FuncValuePack const &o){ return new asmjit::FuncValuePack(o); } ) );
+		cl.def("reset", (void (asmjit::FuncValuePack::*)()) &asmjit::FuncValuePack::reset, "Resets all values in the pack.\n\nC++: asmjit::FuncValuePack::reset() --> void");
+		cl.def("count", (unsigned int (asmjit::FuncValuePack::*)() const) &asmjit::FuncValuePack::count, "Calculates how many values are in the pack, checking for non-values from the end.\n\nC++: asmjit::FuncValuePack::count() const --> unsigned int");
+		cl.def("values", (struct asmjit::FuncValue * (asmjit::FuncValuePack::*)()) &asmjit::FuncValuePack::values, "Returns values in this value in the pack.\n\n \n The returned array has exactly  elements.\n\nC++: asmjit::FuncValuePack::values() --> struct asmjit::FuncValue *", pybind11::return_value_policy::automatic);
+		cl.def("resetValue", (void (asmjit::FuncValuePack::*)(unsigned long)) &asmjit::FuncValuePack::resetValue, "Resets a value at the given `index` in the pack, which makes it unassigned.\n\nC++: asmjit::FuncValuePack::resetValue(unsigned long) --> void", pybind11::arg("index"));
+		cl.def("hasValue", (bool (asmjit::FuncValuePack::*)(unsigned long)) &asmjit::FuncValuePack::hasValue, "Tests whether the value at the given `index` in the pack is assigned.\n\nC++: asmjit::FuncValuePack::hasValue(unsigned long) --> bool", pybind11::arg("index"));
+		cl.def("assignReg", [](asmjit::FuncValuePack &o, unsigned long const & a0, const class asmjit::BaseReg & a1) -> void { return o.assignReg(a0, a1); }, "", pybind11::arg("index"), pybind11::arg("reg"));
+		cl.def("assignReg", (void (asmjit::FuncValuePack::*)(unsigned long, const class asmjit::BaseReg &, enum asmjit::TypeId)) &asmjit::FuncValuePack::assignReg, "Assigns a register at the given `index` to `reg` and an optional `typeId`.\n\nC++: asmjit::FuncValuePack::assignReg(unsigned long, const class asmjit::BaseReg &, enum asmjit::TypeId) --> void", pybind11::arg("index"), pybind11::arg("reg"), pybind11::arg("typeId"));
+		cl.def("assignReg", [](asmjit::FuncValuePack &o, unsigned long const & a0, enum asmjit::RegType const & a1, unsigned int const & a2) -> void { return o.assignReg(a0, a1, a2); }, "", pybind11::arg("index"), pybind11::arg("regType"), pybind11::arg("regId"));
+		cl.def("assignReg", (void (asmjit::FuncValuePack::*)(unsigned long, enum asmjit::RegType, unsigned int, enum asmjit::TypeId)) &asmjit::FuncValuePack::assignReg, "Assigns a register at the given `index` to `regType`, `regId`, and an optional `typeId`.\n\nC++: asmjit::FuncValuePack::assignReg(unsigned long, enum asmjit::RegType, unsigned int, enum asmjit::TypeId) --> void", pybind11::arg("index"), pybind11::arg("regType"), pybind11::arg("regId"), pybind11::arg("typeId"));
+		cl.def("assignStack", [](asmjit::FuncValuePack &o, unsigned long const & a0, int const & a1) -> void { return o.assignStack(a0, a1); }, "", pybind11::arg("index"), pybind11::arg("offset"));
+		cl.def("assignStack", (void (asmjit::FuncValuePack::*)(unsigned long, int, enum asmjit::TypeId)) &asmjit::FuncValuePack::assignStack, "Assigns a stack location at the given `index` to `offset` and an optional `typeId`.\n\nC++: asmjit::FuncValuePack::assignStack(unsigned long, int, enum asmjit::TypeId) --> void", pybind11::arg("index"), pybind11::arg("offset"), pybind11::arg("typeId"));
+		cl.def("__getitem__", (struct asmjit::FuncValue & (asmjit::FuncValuePack::*)(unsigned long)) &asmjit::FuncValuePack::operator[], "Accesses the value in the pack at the given `index`.\n\n \n The maximum index value is `Globals::kMaxValuePack - 1`.\n\nC++: asmjit::FuncValuePack::operator[](unsigned long) --> struct asmjit::FuncValue &", pybind11::return_value_policy::automatic, pybind11::arg("index"));
+		cl.def("assign", (struct asmjit::FuncValuePack & (asmjit::FuncValuePack::*)(const struct asmjit::FuncValuePack &)) &asmjit::FuncValuePack::operator=, "C++: asmjit::FuncValuePack::operator=(const struct asmjit::FuncValuePack &) --> struct asmjit::FuncValuePack &", pybind11::return_value_policy::automatic, pybind11::arg(""));
 	}
 }

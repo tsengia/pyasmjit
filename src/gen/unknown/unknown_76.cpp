@@ -16,206 +16,178 @@
 
 void bind_unknown_unknown_76(std::function< pybind11::module &(std::string const &namespace_) > &M)
 {
-	// asmjit::x86::InstDB::Mode file: line:20
-	pybind11::enum_<asmjit::x86::InstDB::Mode>(M("asmjit::x86::InstDB"), "Mode", "Describes which operation mode is supported by an instruction.")
-		.value("kNone", asmjit::x86::InstDB::Mode::kNone)
-		.value("kX86", asmjit::x86::InstDB::Mode::kX86)
-		.value("kX64", asmjit::x86::InstDB::Mode::kX64)
-		.value("kAny", asmjit::x86::InstDB::Mode::kAny);
-
-;
-
-	// asmjit::x86::InstDB::modeFromArch(enum asmjit::Arch) file: line:33
-	M("asmjit::x86::InstDB").def("modeFromArch", (enum asmjit::x86::InstDB::Mode (*)(enum asmjit::Arch)) &asmjit::x86::InstDB::modeFromArch, "Converts architecture to operation mode, see \n\nC++: asmjit::x86::InstDB::modeFromArch(enum asmjit::Arch) --> enum asmjit::x86::InstDB::Mode", pybind11::arg("arch"));
-
-	// asmjit::x86::InstDB::OpFlags file: line:39
-	pybind11::enum_<asmjit::x86::InstDB::OpFlags>(M("asmjit::x86::InstDB"), "OpFlags", "Operand signature flags used by ")
-		.value("kNone", asmjit::x86::InstDB::OpFlags::kNone)
-		.value("kRegGpbLo", asmjit::x86::InstDB::OpFlags::kRegGpbLo)
-		.value("kRegGpbHi", asmjit::x86::InstDB::OpFlags::kRegGpbHi)
-		.value("kRegGpw", asmjit::x86::InstDB::OpFlags::kRegGpw)
-		.value("kRegGpd", asmjit::x86::InstDB::OpFlags::kRegGpd)
-		.value("kRegGpq", asmjit::x86::InstDB::OpFlags::kRegGpq)
-		.value("kRegXmm", asmjit::x86::InstDB::OpFlags::kRegXmm)
-		.value("kRegYmm", asmjit::x86::InstDB::OpFlags::kRegYmm)
-		.value("kRegZmm", asmjit::x86::InstDB::OpFlags::kRegZmm)
-		.value("kRegMm", asmjit::x86::InstDB::OpFlags::kRegMm)
-		.value("kRegKReg", asmjit::x86::InstDB::OpFlags::kRegKReg)
-		.value("kRegSReg", asmjit::x86::InstDB::OpFlags::kRegSReg)
-		.value("kRegCReg", asmjit::x86::InstDB::OpFlags::kRegCReg)
-		.value("kRegDReg", asmjit::x86::InstDB::OpFlags::kRegDReg)
-		.value("kRegSt", asmjit::x86::InstDB::OpFlags::kRegSt)
-		.value("kRegBnd", asmjit::x86::InstDB::OpFlags::kRegBnd)
-		.value("kRegTmm", asmjit::x86::InstDB::OpFlags::kRegTmm)
-		.value("kRegMask", asmjit::x86::InstDB::OpFlags::kRegMask)
-		.value("kMemUnspecified", asmjit::x86::InstDB::OpFlags::kMemUnspecified)
-		.value("kMem8", asmjit::x86::InstDB::OpFlags::kMem8)
-		.value("kMem16", asmjit::x86::InstDB::OpFlags::kMem16)
-		.value("kMem32", asmjit::x86::InstDB::OpFlags::kMem32)
-		.value("kMem48", asmjit::x86::InstDB::OpFlags::kMem48)
-		.value("kMem64", asmjit::x86::InstDB::OpFlags::kMem64)
-		.value("kMem80", asmjit::x86::InstDB::OpFlags::kMem80)
-		.value("kMem128", asmjit::x86::InstDB::OpFlags::kMem128)
-		.value("kMem256", asmjit::x86::InstDB::OpFlags::kMem256)
-		.value("kMem512", asmjit::x86::InstDB::OpFlags::kMem512)
-		.value("kMem1024", asmjit::x86::InstDB::OpFlags::kMem1024)
-		.value("kMemMask", asmjit::x86::InstDB::OpFlags::kMemMask)
-		.value("kVm32x", asmjit::x86::InstDB::OpFlags::kVm32x)
-		.value("kVm32y", asmjit::x86::InstDB::OpFlags::kVm32y)
-		.value("kVm32z", asmjit::x86::InstDB::OpFlags::kVm32z)
-		.value("kVm64x", asmjit::x86::InstDB::OpFlags::kVm64x)
-		.value("kVm64y", asmjit::x86::InstDB::OpFlags::kVm64y)
-		.value("kVm64z", asmjit::x86::InstDB::OpFlags::kVm64z)
-		.value("kVmMask", asmjit::x86::InstDB::OpFlags::kVmMask)
-		.value("kImmI4", asmjit::x86::InstDB::OpFlags::kImmI4)
-		.value("kImmU4", asmjit::x86::InstDB::OpFlags::kImmU4)
-		.value("kImmI8", asmjit::x86::InstDB::OpFlags::kImmI8)
-		.value("kImmU8", asmjit::x86::InstDB::OpFlags::kImmU8)
-		.value("kImmI16", asmjit::x86::InstDB::OpFlags::kImmI16)
-		.value("kImmU16", asmjit::x86::InstDB::OpFlags::kImmU16)
-		.value("kImmI32", asmjit::x86::InstDB::OpFlags::kImmI32)
-		.value("kImmU32", asmjit::x86::InstDB::OpFlags::kImmU32)
-		.value("kImmI64", asmjit::x86::InstDB::OpFlags::kImmI64)
-		.value("kImmU64", asmjit::x86::InstDB::OpFlags::kImmU64)
-		.value("kImmMask", asmjit::x86::InstDB::OpFlags::kImmMask)
-		.value("kRel8", asmjit::x86::InstDB::OpFlags::kRel8)
-		.value("kRel32", asmjit::x86::InstDB::OpFlags::kRel32)
-		.value("kRelMask", asmjit::x86::InstDB::OpFlags::kRelMask)
-		.value("kFlagMemBase", asmjit::x86::InstDB::OpFlags::kFlagMemBase)
-		.value("kFlagMemDs", asmjit::x86::InstDB::OpFlags::kFlagMemDs)
-		.value("kFlagMemEs", asmjit::x86::InstDB::OpFlags::kFlagMemEs)
-		.value("kFlagMib", asmjit::x86::InstDB::OpFlags::kFlagMib)
-		.value("kFlagTMem", asmjit::x86::InstDB::OpFlags::kFlagTMem)
-		.value("kFlagImplicit", asmjit::x86::InstDB::OpFlags::kFlagImplicit)
-		.value("kFlagMask", asmjit::x86::InstDB::OpFlags::kFlagMask)
-		.value("kOpMask", asmjit::x86::InstDB::OpFlags::kOpMask);
-
-;
-
-	{ // asmjit::x86::InstDB::OpSignature file: line:117
-		pybind11::class_<asmjit::x86::InstDB::OpSignature, std::shared_ptr<asmjit::x86::InstDB::OpSignature>> cl(M("asmjit::x86::InstDB"), "OpSignature", "Operand signature.\n\n Contains all possible operand combinations, memory size information, and a fixed register id (or `BaseReg::kIdBad`\n if fixed id isn't required).");
-		cl.def( pybind11::init( [](){ return new asmjit::x86::InstDB::OpSignature(); } ) );
-
-
-		cl.def("flags", (enum asmjit::x86::InstDB::OpFlags (asmjit::x86::InstDB::OpSignature::*)() const) &asmjit::x86::InstDB::OpSignature::flags, "Returns operand signature flags.\n\nC++: asmjit::x86::InstDB::OpSignature::flags() const --> enum asmjit::x86::InstDB::OpFlags");
-		cl.def("hasFlag", (bool (asmjit::x86::InstDB::OpSignature::*)(enum asmjit::x86::InstDB::OpFlags) const) &asmjit::x86::InstDB::OpSignature::hasFlag, "Tests whether the given `flag` is set.\n\nC++: asmjit::x86::InstDB::OpSignature::hasFlag(enum asmjit::x86::InstDB::OpFlags) const --> bool", pybind11::arg("flag"));
-		cl.def("hasReg", (bool (asmjit::x86::InstDB::OpSignature::*)() const) &asmjit::x86::InstDB::OpSignature::hasReg, "Tests whether this signature contains at least one register operand of any type.\n\nC++: asmjit::x86::InstDB::OpSignature::hasReg() const --> bool");
-		cl.def("hasMem", (bool (asmjit::x86::InstDB::OpSignature::*)() const) &asmjit::x86::InstDB::OpSignature::hasMem, "Tests whether this signature contains at least one scalar memory operand of any type.\n\nC++: asmjit::x86::InstDB::OpSignature::hasMem() const --> bool");
-		cl.def("hasVm", (bool (asmjit::x86::InstDB::OpSignature::*)() const) &asmjit::x86::InstDB::OpSignature::hasVm, "Tests whether this signature contains at least one vector memory operand of any type.\n\nC++: asmjit::x86::InstDB::OpSignature::hasVm() const --> bool");
-		cl.def("hasImm", (bool (asmjit::x86::InstDB::OpSignature::*)() const) &asmjit::x86::InstDB::OpSignature::hasImm, "Tests whether this signature contains at least one immediate operand of any type.\n\nC++: asmjit::x86::InstDB::OpSignature::hasImm() const --> bool");
-		cl.def("hasRel", (bool (asmjit::x86::InstDB::OpSignature::*)() const) &asmjit::x86::InstDB::OpSignature::hasRel, "Tests whether this signature contains at least one relative displacement operand of any type.\n\nC++: asmjit::x86::InstDB::OpSignature::hasRel() const --> bool");
-		cl.def("isImplicit", (bool (asmjit::x86::InstDB::OpSignature::*)() const) &asmjit::x86::InstDB::OpSignature::isImplicit, "Tests whether the operand is implicit.\n\nC++: asmjit::x86::InstDB::OpSignature::isImplicit() const --> bool");
-		cl.def("regMask", (unsigned int (asmjit::x86::InstDB::OpSignature::*)() const) &asmjit::x86::InstDB::OpSignature::regMask, "Returns a physical register mask.\n\nC++: asmjit::x86::InstDB::OpSignature::regMask() const --> unsigned int");
+	{ // asmjit::arm::RegTraits file: line:1168
+		pybind11::class_<asmjit::arm::RegTraits<asmjit::RegType::kGp32>, std::shared_ptr<asmjit::arm::RegTraits<asmjit::RegType::kGp32>>> cl(M("asmjit::arm"), "RegTraits_asmjit_RegType_kGp32_t", "");
+		cl.def( pybind11::init( [](){ return new asmjit::arm::RegTraits<asmjit::RegType::kGp32>(); } ) );
 	}
-	{ // asmjit::x86::InstDB::InstSignature file: line:161
-		pybind11::class_<asmjit::x86::InstDB::InstSignature, std::shared_ptr<asmjit::x86::InstDB::InstSignature>> cl(M("asmjit::x86::InstDB"), "InstSignature", "Instruction signature.\n\n Contains a sequence of operands' combinations and other metadata that defines a single instruction. This data is\n used by instruction validator.");
-		cl.def( pybind11::init( [](){ return new asmjit::x86::InstDB::InstSignature(); } ) );
-
-
-
-
-		cl.def("mode", (enum asmjit::x86::InstDB::Mode (asmjit::x86::InstDB::InstSignature::*)() const) &asmjit::x86::InstDB::InstSignature::mode, "Returns instruction operation mode.\n\nC++: asmjit::x86::InstDB::InstSignature::mode() const --> enum asmjit::x86::InstDB::Mode");
-		cl.def("supportsMode", (bool (asmjit::x86::InstDB::InstSignature::*)(enum asmjit::x86::InstDB::Mode) const) &asmjit::x86::InstDB::InstSignature::supportsMode, "Tests whether the instruction supports the given operating mode.\n\nC++: asmjit::x86::InstDB::InstSignature::supportsMode(enum asmjit::x86::InstDB::Mode) const --> bool", pybind11::arg("mode"));
-		cl.def("opCount", (unsigned int (asmjit::x86::InstDB::InstSignature::*)() const) &asmjit::x86::InstDB::InstSignature::opCount, "Returns the number of operands of this signature.\n\nC++: asmjit::x86::InstDB::InstSignature::opCount() const --> unsigned int");
-		cl.def("implicitOpCount", (unsigned int (asmjit::x86::InstDB::InstSignature::*)() const) &asmjit::x86::InstDB::InstSignature::implicitOpCount, "Returns the number of implicit operands this signature has.\n\nC++: asmjit::x86::InstDB::InstSignature::implicitOpCount() const --> unsigned int");
-		cl.def("hasImplicitOperands", (bool (asmjit::x86::InstDB::InstSignature::*)() const) &asmjit::x86::InstDB::InstSignature::hasImplicitOperands, "Tests whether this instruction signature has at least one implicit operand.\n\nC++: asmjit::x86::InstDB::InstSignature::hasImplicitOperands() const --> bool");
-		cl.def("opSignatureIndexes", (const unsigned char * (asmjit::x86::InstDB::InstSignature::*)() const) &asmjit::x86::InstDB::InstSignature::opSignatureIndexes, "Returns indexes to  for each operand of the instruction.\n\n \n The returned array always provides indexes for all operands (see  even if the\n instruction provides less operands. Undefined operands have always index of zero.\n\nC++: asmjit::x86::InstDB::InstSignature::opSignatureIndexes() const --> const unsigned char *", pybind11::return_value_policy::automatic);
-		cl.def("opSignatureIndex", (unsigned char (asmjit::x86::InstDB::InstSignature::*)(unsigned long) const) &asmjit::x86::InstDB::InstSignature::opSignatureIndex, "Returns index to  corresponding to the requested operand `index` of the instruction.\n\nC++: asmjit::x86::InstDB::InstSignature::opSignatureIndex(unsigned long) const --> unsigned char", pybind11::arg("index"));
-		cl.def("opSignature", (const struct asmjit::x86::InstDB::OpSignature & (asmjit::x86::InstDB::InstSignature::*)(unsigned long) const) &asmjit::x86::InstDB::InstSignature::opSignature, "Returns  corresponding to the requested operand `index` of the instruction.\n\nC++: asmjit::x86::InstDB::InstSignature::opSignature(unsigned long) const --> const struct asmjit::x86::InstDB::OpSignature &", pybind11::return_value_policy::automatic, pybind11::arg("index"));
+	{ // asmjit::arm::RegTraits file: line:1168
+		pybind11::class_<asmjit::arm::RegTraits<asmjit::RegType::kGp64>, std::shared_ptr<asmjit::arm::RegTraits<asmjit::RegType::kGp64>>> cl(M("asmjit::arm"), "RegTraits_asmjit_RegType_kGp64_t", "");
+		cl.def( pybind11::init( [](){ return new asmjit::arm::RegTraits<asmjit::RegType::kGp64>(); } ) );
 	}
-	// asmjit::x86::InstDB::InstFlags file: line:219
-	pybind11::enum_<asmjit::x86::InstDB::InstFlags>(M("asmjit::x86::InstDB"), "InstFlags", "Instruction flags.\n\n Details about instruction encoding, operation, features, and some limitations.")
-		.value("kNone", asmjit::x86::InstDB::InstFlags::kNone)
-		.value("kFpu", asmjit::x86::InstDB::InstFlags::kFpu)
-		.value("kMmx", asmjit::x86::InstDB::InstFlags::kMmx)
-		.value("kVec", asmjit::x86::InstDB::InstFlags::kVec)
-		.value("kFpuM16", asmjit::x86::InstDB::InstFlags::kFpuM16)
-		.value("kFpuM32", asmjit::x86::InstDB::InstFlags::kFpuM32)
-		.value("kFpuM64", asmjit::x86::InstDB::InstFlags::kFpuM64)
-		.value("kFpuM80", asmjit::x86::InstDB::InstFlags::kFpuM80)
-		.value("kRep", asmjit::x86::InstDB::InstFlags::kRep)
-		.value("kRepIgnored", asmjit::x86::InstDB::InstFlags::kRepIgnored)
-		.value("kLock", asmjit::x86::InstDB::InstFlags::kLock)
-		.value("kXAcquire", asmjit::x86::InstDB::InstFlags::kXAcquire)
-		.value("kXRelease", asmjit::x86::InstDB::InstFlags::kXRelease)
-		.value("kMib", asmjit::x86::InstDB::InstFlags::kMib)
-		.value("kVsib", asmjit::x86::InstDB::InstFlags::kVsib)
-		.value("kTsib", asmjit::x86::InstDB::InstFlags::kTsib)
-		.value("kVex", asmjit::x86::InstDB::InstFlags::kVex)
-		.value("kEvex", asmjit::x86::InstDB::InstFlags::kEvex)
-		.value("kPreferEvex", asmjit::x86::InstDB::InstFlags::kPreferEvex)
-		.value("kEvexCompat", asmjit::x86::InstDB::InstFlags::kEvexCompat)
-		.value("kEvexKReg", asmjit::x86::InstDB::InstFlags::kEvexKReg)
-		.value("kEvexTwoOp", asmjit::x86::InstDB::InstFlags::kEvexTwoOp)
-		.value("kEvexTransformable", asmjit::x86::InstDB::InstFlags::kEvexTransformable)
-		.value("kConsecutiveRegs", asmjit::x86::InstDB::InstFlags::kConsecutiveRegs);
+	{ // asmjit::arm::RegTraits file: line:1168
+		pybind11::class_<asmjit::arm::RegTraits<asmjit::RegType::kVec8>, std::shared_ptr<asmjit::arm::RegTraits<asmjit::RegType::kVec8>>> cl(M("asmjit::arm"), "RegTraits_asmjit_RegType_kVec8_t", "");
+		cl.def( pybind11::init( [](){ return new asmjit::arm::RegTraits<asmjit::RegType::kVec8>(); } ) );
+	}
+	{ // asmjit::arm::RegTraits file: line:1168
+		pybind11::class_<asmjit::arm::RegTraits<asmjit::RegType::kVec16>, std::shared_ptr<asmjit::arm::RegTraits<asmjit::RegType::kVec16>>> cl(M("asmjit::arm"), "RegTraits_asmjit_RegType_kVec16_t", "");
+		cl.def( pybind11::init( [](){ return new asmjit::arm::RegTraits<asmjit::RegType::kVec16>(); } ) );
+	}
+	{ // asmjit::arm::RegTraits file: line:1168
+		pybind11::class_<asmjit::arm::RegTraits<asmjit::RegType::kVec32>, std::shared_ptr<asmjit::arm::RegTraits<asmjit::RegType::kVec32>>> cl(M("asmjit::arm"), "RegTraits_asmjit_RegType_kVec32_t", "");
+		cl.def( pybind11::init( [](){ return new asmjit::arm::RegTraits<asmjit::RegType::kVec32>(); } ) );
+	}
+	{ // asmjit::arm::RegTraits file: line:1168
+		pybind11::class_<asmjit::arm::RegTraits<asmjit::RegType::kVec64>, std::shared_ptr<asmjit::arm::RegTraits<asmjit::RegType::kVec64>>> cl(M("asmjit::arm"), "RegTraits_asmjit_RegType_kVec64_t", "");
+		cl.def( pybind11::init( [](){ return new asmjit::arm::RegTraits<asmjit::RegType::kVec64>(); } ) );
+	}
+	{ // asmjit::arm::RegTraits file: line:1168
+		pybind11::class_<asmjit::arm::RegTraits<asmjit::RegType::kVec128>, std::shared_ptr<asmjit::arm::RegTraits<asmjit::RegType::kVec128>>> cl(M("asmjit::arm"), "RegTraits_asmjit_RegType_kVec128_t", "");
+		cl.def( pybind11::init( [](){ return new asmjit::arm::RegTraits<asmjit::RegType::kVec128>(); } ) );
+	}
+	{ // asmjit::arm::RegTraits file: line:1168
+		pybind11::class_<asmjit::arm::RegTraits<asmjit::RegType::kPC>, std::shared_ptr<asmjit::arm::RegTraits<asmjit::RegType::kPC>>> cl(M("asmjit::arm"), "RegTraits_asmjit_RegType_kPC_t", "");
+		cl.def( pybind11::init( [](){ return new asmjit::arm::RegTraits<asmjit::RegType::kPC>(); } ) );
+	}
+	{ // asmjit::arm::Reg file: line:45
+		pybind11::class_<asmjit::arm::Reg, std::shared_ptr<asmjit::arm::Reg>, asmjit::BaseReg> cl(M("asmjit::arm"), "Reg", "Register operand that can represent AArch32 and AArch64 registers.");
+		cl.def( pybind11::init( [](){ return new asmjit::arm::Reg(); } ) );
+		cl.def( pybind11::init( [](asmjit::arm::Reg const &o){ return new asmjit::arm::Reg(o); } ) );
+		cl.def( pybind11::init<const class asmjit::BaseReg &, unsigned int>(), pybind11::arg("other"), pybind11::arg("id") );
 
-;
+		cl.def( pybind11::init<const struct asmjit::OperandSignature &, unsigned int>(), pybind11::arg("sgn"), pybind11::arg("id") );
 
-	// asmjit::x86::InstDB::Avx512Flags file: line:302
-	pybind11::enum_<asmjit::x86::InstDB::Avx512Flags>(M("asmjit::x86::InstDB"), "Avx512Flags", "AVX-512 flags.")
-		.value("kNone", asmjit::x86::InstDB::Avx512Flags::kNone)
-		.value("k_", asmjit::x86::InstDB::Avx512Flags::k_)
-		.value("kK", asmjit::x86::InstDB::Avx512Flags::kK)
-		.value("kZ", asmjit::x86::InstDB::Avx512Flags::kZ)
-		.value("kER", asmjit::x86::InstDB::Avx512Flags::kER)
-		.value("kSAE", asmjit::x86::InstDB::Avx512Flags::kSAE)
-		.value("kB16", asmjit::x86::InstDB::Avx512Flags::kB16)
-		.value("kB32", asmjit::x86::InstDB::Avx512Flags::kB32)
-		.value("kB64", asmjit::x86::InstDB::Avx512Flags::kB64)
-		.value("kT4X", asmjit::x86::InstDB::Avx512Flags::kT4X)
-		.value("kImplicitZ", asmjit::x86::InstDB::Avx512Flags::kImplicitZ);
+		cl.def( pybind11::init<struct asmjit::Globals::NoInit_>(), pybind11::arg("") );
 
-;
+		cl.def_static("fromTypeAndId", (class asmjit::arm::Reg (*)(enum asmjit::RegType, unsigned int)) &asmjit::arm::Reg::fromTypeAndId, "Creates a new register from register type and id. \n\nC++: asmjit::arm::Reg::fromTypeAndId(enum asmjit::RegType, unsigned int) --> class asmjit::arm::Reg", pybind11::arg("type"), pybind11::arg("id"));
+		cl.def("clone", (class asmjit::arm::Reg (asmjit::arm::Reg::*)() const) &asmjit::arm::Reg::clone, "C++: asmjit::arm::Reg::clone() const --> class asmjit::arm::Reg");
+		cl.def("assign", (class asmjit::arm::Reg & (asmjit::arm::Reg::*)(const class asmjit::arm::Reg &)) &asmjit::arm::Reg::operator=, "C++: asmjit::arm::Reg::operator=(const class asmjit::arm::Reg &) --> class asmjit::arm::Reg &", pybind11::return_value_policy::automatic, pybind11::arg("other"));
+		cl.def("isGpR", (bool (asmjit::arm::Reg::*)() const) &asmjit::arm::Reg::isGpR, "Gets whether the register is either `R` or `W` register (32-bit).\n\nC++: asmjit::arm::Reg::isGpR() const --> bool");
+		cl.def("isGpW", (bool (asmjit::arm::Reg::*)() const) &asmjit::arm::Reg::isGpW, "Gets whether the register is either `R` or `W` register (32-bit).\n\nC++: asmjit::arm::Reg::isGpW() const --> bool");
+		cl.def("isGpX", (bool (asmjit::arm::Reg::*)() const) &asmjit::arm::Reg::isGpX, "Gets whether the register is an `X` register (64-bit).\n\nC++: asmjit::arm::Reg::isGpX() const --> bool");
+		cl.def("isVecB", (bool (asmjit::arm::Reg::*)() const) &asmjit::arm::Reg::isVecB, "Gets whether the register is a VEC-B register (8-bit).\n\nC++: asmjit::arm::Reg::isVecB() const --> bool");
+		cl.def("isVecH", (bool (asmjit::arm::Reg::*)() const) &asmjit::arm::Reg::isVecH, "Gets whether the register is a VEC-H register (16-bit).\n\nC++: asmjit::arm::Reg::isVecH() const --> bool");
+		cl.def("isVecS", (bool (asmjit::arm::Reg::*)() const) &asmjit::arm::Reg::isVecS, "Gets whether the register is a VEC-S register (32-bit).\n\nC++: asmjit::arm::Reg::isVecS() const --> bool");
+		cl.def("isVecD", (bool (asmjit::arm::Reg::*)() const) &asmjit::arm::Reg::isVecD, "Gets whether the register is a VEC-D register (64-bit).\n\nC++: asmjit::arm::Reg::isVecD() const --> bool");
+		cl.def("isVecQ", (bool (asmjit::arm::Reg::*)() const) &asmjit::arm::Reg::isVecQ, "Gets whether the register is a VEC-Q register (128-bit).\n\nC++: asmjit::arm::Reg::isVecQ() const --> bool");
+		cl.def("isVecDOrQ", (bool (asmjit::arm::Reg::*)() const) &asmjit::arm::Reg::isVecDOrQ, "Gets whether the register is either VEC-D (64-bit) or VEC-Q (128-bit).\n\nC++: asmjit::arm::Reg::isVecDOrQ() const --> bool");
+		cl.def("isVecV", (bool (asmjit::arm::Reg::*)() const) &asmjit::arm::Reg::isVecV, "Gets whether the register is a VEC-V register (128-bit).\n\nC++: asmjit::arm::Reg::isVecV() const --> bool");
+		cl.def("isVec8", (bool (asmjit::arm::Reg::*)() const) &asmjit::arm::Reg::isVec8, "Gets whether the register is an 8-bit vector register or view, alias if \n\nC++: asmjit::arm::Reg::isVec8() const --> bool");
+		cl.def("isVec16", (bool (asmjit::arm::Reg::*)() const) &asmjit::arm::Reg::isVec16, "Gets whether the register is a 16-bit vector register or view, alias if \n\nC++: asmjit::arm::Reg::isVec16() const --> bool");
+		cl.def("isVec32", (bool (asmjit::arm::Reg::*)() const) &asmjit::arm::Reg::isVec32, "Gets whether the register is a 32-bit vector register or view, alias if \n\nC++: asmjit::arm::Reg::isVec32() const --> bool");
+		cl.def("isVec64", (bool (asmjit::arm::Reg::*)() const) &asmjit::arm::Reg::isVec64, "Gets whether the register is a 64-bit vector register or view, alias if \n\nC++: asmjit::arm::Reg::isVec64() const --> bool");
+		cl.def("isVec128", (bool (asmjit::arm::Reg::*)() const) &asmjit::arm::Reg::isVec128, "Gets whether the register is a 128-bit vector register or view, alias if \n\nC++: asmjit::arm::Reg::isVec128() const --> bool");
+		cl.def("setTypeAndId", (void (asmjit::arm::Reg::*)(enum asmjit::RegType, unsigned int)) &asmjit::arm::Reg::setTypeAndId, "C++: asmjit::arm::Reg::setTypeAndId(enum asmjit::RegType, unsigned int) --> void", pybind11::arg("type"), pybind11::arg("id"));
+		cl.def_static("groupOf", (enum asmjit::RegGroup (*)(enum asmjit::RegType)) &asmjit::arm::Reg::groupOf, "C++: asmjit::arm::Reg::groupOf(enum asmjit::RegType) --> enum asmjit::RegGroup", pybind11::arg("type"));
+		cl.def_static("typeIdOf", (enum asmjit::TypeId (*)(enum asmjit::RegType)) &asmjit::arm::Reg::typeIdOf, "C++: asmjit::arm::Reg::typeIdOf(enum asmjit::RegType) --> enum asmjit::TypeId", pybind11::arg("type"));
+		cl.def_static("signatureOf", (struct asmjit::OperandSignature (*)(enum asmjit::RegType)) &asmjit::arm::Reg::signatureOf, "C++: asmjit::arm::Reg::signatureOf(enum asmjit::RegType) --> struct asmjit::OperandSignature", pybind11::arg("type"));
+		cl.def_static("isOperandGpW", (bool (*)(const struct asmjit::Operand_ &)) &asmjit::arm::Reg::isGpW, "C++: asmjit::arm::Reg::isGpW(const struct asmjit::Operand_ &) --> bool", pybind11::arg("op"));
+		cl.def_static("isOperandGpX", (bool (*)(const struct asmjit::Operand_ &)) &asmjit::arm::Reg::isGpX, "C++: asmjit::arm::Reg::isGpX(const struct asmjit::Operand_ &) --> bool", pybind11::arg("op"));
+		cl.def_static("isOperandVecB", (bool (*)(const struct asmjit::Operand_ &)) &asmjit::arm::Reg::isVecB, "C++: asmjit::arm::Reg::isVecB(const struct asmjit::Operand_ &) --> bool", pybind11::arg("op"));
+		cl.def_static("isOperandVecH", (bool (*)(const struct asmjit::Operand_ &)) &asmjit::arm::Reg::isVecH, "C++: asmjit::arm::Reg::isVecH(const struct asmjit::Operand_ &) --> bool", pybind11::arg("op"));
+		cl.def_static("isOperandVecS", (bool (*)(const struct asmjit::Operand_ &)) &asmjit::arm::Reg::isVecS, "C++: asmjit::arm::Reg::isVecS(const struct asmjit::Operand_ &) --> bool", pybind11::arg("op"));
+		cl.def_static("isOperandVecD", (bool (*)(const struct asmjit::Operand_ &)) &asmjit::arm::Reg::isVecD, "C++: asmjit::arm::Reg::isVecD(const struct asmjit::Operand_ &) --> bool", pybind11::arg("op"));
+		cl.def_static("isOperandVecQ", (bool (*)(const struct asmjit::Operand_ &)) &asmjit::arm::Reg::isVecQ, "C++: asmjit::arm::Reg::isVecQ(const struct asmjit::Operand_ &) --> bool", pybind11::arg("op"));
+		cl.def_static("isOperandVecV", (bool (*)(const struct asmjit::Operand_ &)) &asmjit::arm::Reg::isVecV, "C++: asmjit::arm::Reg::isVecV(const struct asmjit::Operand_ &) --> bool", pybind11::arg("op"));
+		cl.def_static("isOperandGpW", (bool (*)(const struct asmjit::Operand_ &, unsigned int)) &asmjit::arm::Reg::isGpW, "C++: asmjit::arm::Reg::isGpW(const struct asmjit::Operand_ &, unsigned int) --> bool", pybind11::arg("op"), pybind11::arg("id"));
+		cl.def_static("isOperandGpX", (bool (*)(const struct asmjit::Operand_ &, unsigned int)) &asmjit::arm::Reg::isGpX, "C++: asmjit::arm::Reg::isGpX(const struct asmjit::Operand_ &, unsigned int) --> bool", pybind11::arg("op"), pybind11::arg("id"));
+		cl.def_static("isOperandVecB", (bool (*)(const struct asmjit::Operand_ &, unsigned int)) &asmjit::arm::Reg::isVecB, "C++: asmjit::arm::Reg::isVecB(const struct asmjit::Operand_ &, unsigned int) --> bool", pybind11::arg("op"), pybind11::arg("id"));
+		cl.def_static("isOperandVecH", (bool (*)(const struct asmjit::Operand_ &, unsigned int)) &asmjit::arm::Reg::isVecH, "C++: asmjit::arm::Reg::isVecH(const struct asmjit::Operand_ &, unsigned int) --> bool", pybind11::arg("op"), pybind11::arg("id"));
+		cl.def_static("isOperandVecS", (bool (*)(const struct asmjit::Operand_ &, unsigned int)) &asmjit::arm::Reg::isVecS, "C++: asmjit::arm::Reg::isVecS(const struct asmjit::Operand_ &, unsigned int) --> bool", pybind11::arg("op"), pybind11::arg("id"));
+		cl.def_static("isOperandVecD", (bool (*)(const struct asmjit::Operand_ &, unsigned int)) &asmjit::arm::Reg::isVecD, "C++: asmjit::arm::Reg::isVecD(const struct asmjit::Operand_ &, unsigned int) --> bool", pybind11::arg("op"), pybind11::arg("id"));
+		cl.def_static("isOperandVecQ", (bool (*)(const struct asmjit::Operand_ &, unsigned int)) &asmjit::arm::Reg::isVecQ, "C++: asmjit::arm::Reg::isVecQ(const struct asmjit::Operand_ &, unsigned int) --> bool", pybind11::arg("op"), pybind11::arg("id"));
+		cl.def_static("isOperandVecV", (bool (*)(const struct asmjit::Operand_ &, unsigned int)) &asmjit::arm::Reg::isVecV, "C++: asmjit::arm::Reg::isVecV(const struct asmjit::Operand_ &, unsigned int) --> bool", pybind11::arg("op"), pybind11::arg("id"));
+	}
+	{ // asmjit::arm::BaseVec file: line:126
+		pybind11::class_<asmjit::arm::BaseVec, std::shared_ptr<asmjit::arm::BaseVec>, asmjit::arm::Reg> cl(M("asmjit::arm"), "BaseVec", "Vector register base - a common base for both AArch32 & AArch64 vector register.");
+		cl.def( pybind11::init( [](){ return new asmjit::arm::BaseVec(); } ) );
+		cl.def( pybind11::init( [](asmjit::arm::BaseVec const &o){ return new asmjit::arm::BaseVec(o); } ) );
+		cl.def( pybind11::init<const class asmjit::BaseReg &, unsigned int>(), pybind11::arg("other"), pybind11::arg("id") );
 
-	{ // asmjit::x86::InstDB::CommonInfo file: line:333
-		pybind11::class_<asmjit::x86::InstDB::CommonInfo, std::shared_ptr<asmjit::x86::InstDB::CommonInfo>> cl(M("asmjit::x86::InstDB"), "CommonInfo", "Instruction common information.\n\n Aggregated information shared across one or more instruction.");
-		cl.def( pybind11::init( [](){ return new asmjit::x86::InstDB::CommonInfo(); } ) );
+		cl.def( pybind11::init<const struct asmjit::OperandSignature &, unsigned int>(), pybind11::arg("sgn"), pybind11::arg("id") );
+
+		cl.def( pybind11::init<struct asmjit::Globals::NoInit_>(), pybind11::arg("") );
 
 
+		pybind11::enum_<asmjit::arm::BaseVec::AdditionalBits>(cl, "AdditionalBits", pybind11::arithmetic(), "Additional signature bits used by a vector register.")
+			.value("kSignatureRegElementTypeShift", asmjit::arm::BaseVec::kSignatureRegElementTypeShift)
+			.value("kSignatureRegElementTypeMask", asmjit::arm::BaseVec::kSignatureRegElementTypeMask)
+			.value("kSignatureRegElementFlagShift", asmjit::arm::BaseVec::kSignatureRegElementFlagShift)
+			.value("kSignatureRegElementFlagMask", asmjit::arm::BaseVec::kSignatureRegElementFlagMask)
+			.value("kSignatureRegElementIndexShift", asmjit::arm::BaseVec::kSignatureRegElementIndexShift)
+			.value("kSignatureRegElementIndexMask", asmjit::arm::BaseVec::kSignatureRegElementIndexMask)
+			.export_values();
+
+		cl.def_static("fromTypeAndId", (class asmjit::arm::BaseVec (*)(enum asmjit::RegType, unsigned int)) &asmjit::arm::BaseVec::fromTypeAndId, "Creates a new register from register type and id. \n\nC++: asmjit::arm::BaseVec::fromTypeAndId(enum asmjit::RegType, unsigned int) --> class asmjit::arm::BaseVec", pybind11::arg("type"), pybind11::arg("id"));
+		cl.def("clone", (class asmjit::arm::BaseVec (asmjit::arm::BaseVec::*)() const) &asmjit::arm::BaseVec::clone, "C++: asmjit::arm::BaseVec::clone() const --> class asmjit::arm::BaseVec");
+		cl.def("assign", (class asmjit::arm::BaseVec & (asmjit::arm::BaseVec::*)(const class asmjit::arm::BaseVec &)) &asmjit::arm::BaseVec::operator=, "C++: asmjit::arm::BaseVec::operator=(const class asmjit::arm::BaseVec &) --> class asmjit::arm::BaseVec &", pybind11::return_value_policy::automatic, pybind11::arg("other"));
+		cl.def("hasElementIndex", (bool (asmjit::arm::BaseVec::*)() const) &asmjit::arm::BaseVec::hasElementIndex, "Returns whether the register has element index (it's an element index access).\n\nC++: asmjit::arm::BaseVec::hasElementIndex() const --> bool");
+		cl.def("elementIndex", (unsigned int (asmjit::arm::BaseVec::*)() const) &asmjit::arm::BaseVec::elementIndex, "Returns element index of the register.\n\nC++: asmjit::arm::BaseVec::elementIndex() const --> unsigned int");
+		cl.def("setElementIndex", (void (asmjit::arm::BaseVec::*)(unsigned int)) &asmjit::arm::BaseVec::setElementIndex, "Sets element index of the register to `elementType`.\n\nC++: asmjit::arm::BaseVec::setElementIndex(unsigned int) --> void", pybind11::arg("elementIndex"));
+		cl.def("resetElementIndex", (void (asmjit::arm::BaseVec::*)()) &asmjit::arm::BaseVec::resetElementIndex, "Resets element index of the register.\n\nC++: asmjit::arm::BaseVec::resetElementIndex() --> void");
+	}
+	{ // asmjit::arm::Mem file: line:164
+		pybind11::class_<asmjit::arm::Mem, std::shared_ptr<asmjit::arm::Mem>, asmjit::BaseMem> cl(M("asmjit::arm"), "Mem", "Memory operand (ARM).");
+		cl.def( pybind11::init( [](){ return new asmjit::arm::Mem(); } ) );
+		cl.def( pybind11::init( [](asmjit::arm::Mem const &o){ return new asmjit::arm::Mem(o); } ) );
+		cl.def( pybind11::init<struct asmjit::Globals::NoInit_>(), pybind11::arg("") );
+
+		cl.def( pybind11::init<const struct asmjit::OperandSignature &, unsigned int, unsigned int, int>(), pybind11::arg("signature"), pybind11::arg("baseId"), pybind11::arg("indexId"), pybind11::arg("offset") );
+
+		cl.def( pybind11::init( [](const class asmjit::Label & a0){ return new asmjit::arm::Mem(a0); } ), "doc" , pybind11::arg("base"));
+		cl.def( pybind11::init( [](const class asmjit::Label & a0, int const & a1){ return new asmjit::arm::Mem(a0, a1); } ), "doc" , pybind11::arg("base"), pybind11::arg("off"));
+		cl.def( pybind11::init<const class asmjit::Label &, int, struct asmjit::OperandSignature>(), pybind11::arg("base"), pybind11::arg("off"), pybind11::arg("signature") );
+
+		cl.def( pybind11::init( [](const class asmjit::BaseReg & a0){ return new asmjit::arm::Mem(a0); } ), "doc" , pybind11::arg("base"));
+		cl.def( pybind11::init( [](const class asmjit::BaseReg & a0, int const & a1){ return new asmjit::arm::Mem(a0, a1); } ), "doc" , pybind11::arg("base"), pybind11::arg("off"));
+		cl.def( pybind11::init<const class asmjit::BaseReg &, int, struct asmjit::OperandSignature>(), pybind11::arg("base"), pybind11::arg("off"), pybind11::arg("signature") );
+
+		cl.def( pybind11::init( [](const class asmjit::BaseReg & a0, const class asmjit::BaseReg & a1){ return new asmjit::arm::Mem(a0, a1); } ), "doc" , pybind11::arg("base"), pybind11::arg("index"));
+		cl.def( pybind11::init<const class asmjit::BaseReg &, const class asmjit::BaseReg &, struct asmjit::OperandSignature>(), pybind11::arg("base"), pybind11::arg("index"), pybind11::arg("signature") );
+
+		cl.def( pybind11::init( [](const class asmjit::BaseReg & a0, const class asmjit::BaseReg & a1, const class asmjit::arm::Shift & a2){ return new asmjit::arm::Mem(a0, a1, a2); } ), "doc" , pybind11::arg("base"), pybind11::arg("index"), pybind11::arg("shift"));
+		cl.def( pybind11::init<const class asmjit::BaseReg &, const class asmjit::BaseReg &, const class asmjit::arm::Shift &, struct asmjit::OperandSignature>(), pybind11::arg("base"), pybind11::arg("index"), pybind11::arg("shift"), pybind11::arg("signature") );
+
+		cl.def( pybind11::init( [](unsigned long const & a0){ return new asmjit::arm::Mem(a0); } ), "doc" , pybind11::arg("base"));
+		cl.def( pybind11::init<unsigned long, struct asmjit::OperandSignature>(), pybind11::arg("base"), pybind11::arg("signature") );
 
 
+		pybind11::enum_<asmjit::arm::Mem::AdditionalBits>(cl, "AdditionalBits", pybind11::arithmetic(), "Additional bits of operand's signature used by `arm::Mem`.")
+			.value("kSignatureMemShiftValueShift", asmjit::arm::Mem::kSignatureMemShiftValueShift)
+			.value("kSignatureMemShiftValueMask", asmjit::arm::Mem::kSignatureMemShiftValueMask)
+			.value("kSignatureMemShiftOpShift", asmjit::arm::Mem::kSignatureMemShiftOpShift)
+			.value("kSignatureMemShiftOpMask", asmjit::arm::Mem::kSignatureMemShiftOpMask)
+			.value("kSignatureMemOffsetModeShift", asmjit::arm::Mem::kSignatureMemOffsetModeShift)
+			.value("kSignatureMemOffsetModeMask", asmjit::arm::Mem::kSignatureMemOffsetModeMask)
+			.export_values();
 
-
-		cl.def("flags", (enum asmjit::x86::InstDB::InstFlags (asmjit::x86::InstDB::CommonInfo::*)() const) &asmjit::x86::InstDB::CommonInfo::flags, "Returns instruction flags.\n\nC++: asmjit::x86::InstDB::CommonInfo::flags() const --> enum asmjit::x86::InstDB::InstFlags");
-		cl.def("hasFlag", (bool (asmjit::x86::InstDB::CommonInfo::*)(enum asmjit::x86::InstDB::InstFlags) const) &asmjit::x86::InstDB::CommonInfo::hasFlag, "Tests whether the instruction has a `flag`.\n\nC++: asmjit::x86::InstDB::CommonInfo::hasFlag(enum asmjit::x86::InstDB::InstFlags) const --> bool", pybind11::arg("flag"));
-		cl.def("avx512Flags", (enum asmjit::x86::InstDB::Avx512Flags (asmjit::x86::InstDB::CommonInfo::*)() const) &asmjit::x86::InstDB::CommonInfo::avx512Flags, "Returns instruction AVX-512 flags.\n\nC++: asmjit::x86::InstDB::CommonInfo::avx512Flags() const --> enum asmjit::x86::InstDB::Avx512Flags");
-		cl.def("hasAvx512Flag", (bool (asmjit::x86::InstDB::CommonInfo::*)(enum asmjit::x86::InstDB::Avx512Flags) const) &asmjit::x86::InstDB::CommonInfo::hasAvx512Flag, "Tests whether the instruction has an AVX-512 `flag`.\n\nC++: asmjit::x86::InstDB::CommonInfo::hasAvx512Flag(enum asmjit::x86::InstDB::Avx512Flags) const --> bool", pybind11::arg("flag"));
-		cl.def("isFpu", (bool (asmjit::x86::InstDB::CommonInfo::*)() const) &asmjit::x86::InstDB::CommonInfo::isFpu, "Tests whether the instruction is FPU instruction.\n\nC++: asmjit::x86::InstDB::CommonInfo::isFpu() const --> bool");
-		cl.def("isMmx", (bool (asmjit::x86::InstDB::CommonInfo::*)() const) &asmjit::x86::InstDB::CommonInfo::isMmx, "Tests whether the instruction is MMX/3DNOW instruction that accesses MMX registers (includes EMMS and FEMMS).\n\nC++: asmjit::x86::InstDB::CommonInfo::isMmx() const --> bool");
-		cl.def("isVec", (bool (asmjit::x86::InstDB::CommonInfo::*)() const) &asmjit::x86::InstDB::CommonInfo::isVec, "Tests whether the instruction is SSE|AVX|AVX512 instruction that accesses XMM|YMM|ZMM registers.\n\nC++: asmjit::x86::InstDB::CommonInfo::isVec() const --> bool");
-		cl.def("isSse", (bool (asmjit::x86::InstDB::CommonInfo::*)() const) &asmjit::x86::InstDB::CommonInfo::isSse, "Tests whether the instruction is SSE+ (SSE4.2, AES, SHA included) instruction that accesses XMM registers.\n\nC++: asmjit::x86::InstDB::CommonInfo::isSse() const --> bool");
-		cl.def("isAvx", (bool (asmjit::x86::InstDB::CommonInfo::*)() const) &asmjit::x86::InstDB::CommonInfo::isAvx, "Tests whether the instruction is AVX+ (FMA included) instruction that accesses XMM|YMM|ZMM registers.\n\nC++: asmjit::x86::InstDB::CommonInfo::isAvx() const --> bool");
-		cl.def("hasLockPrefix", (bool (asmjit::x86::InstDB::CommonInfo::*)() const) &asmjit::x86::InstDB::CommonInfo::hasLockPrefix, "Tests whether the instruction can be prefixed with LOCK prefix.\n\nC++: asmjit::x86::InstDB::CommonInfo::hasLockPrefix() const --> bool");
-		cl.def("hasRepPrefix", (bool (asmjit::x86::InstDB::CommonInfo::*)() const) &asmjit::x86::InstDB::CommonInfo::hasRepPrefix, "Tests whether the instruction can be prefixed with REP (REPE|REPZ) prefix.\n\nC++: asmjit::x86::InstDB::CommonInfo::hasRepPrefix() const --> bool");
-		cl.def("hasXAcquirePrefix", (bool (asmjit::x86::InstDB::CommonInfo::*)() const) &asmjit::x86::InstDB::CommonInfo::hasXAcquirePrefix, "Tests whether the instruction can be prefixed with XACQUIRE prefix.\n\nC++: asmjit::x86::InstDB::CommonInfo::hasXAcquirePrefix() const --> bool");
-		cl.def("hasXReleasePrefix", (bool (asmjit::x86::InstDB::CommonInfo::*)() const) &asmjit::x86::InstDB::CommonInfo::hasXReleasePrefix, "Tests whether the instruction can be prefixed with XRELEASE prefix.\n\nC++: asmjit::x86::InstDB::CommonInfo::hasXReleasePrefix() const --> bool");
-		cl.def("isRepIgnored", (bool (asmjit::x86::InstDB::CommonInfo::*)() const) &asmjit::x86::InstDB::CommonInfo::isRepIgnored, "Tests whether the rep prefix is supported by the instruction, but ignored (has no effect).\n\nC++: asmjit::x86::InstDB::CommonInfo::isRepIgnored() const --> bool");
-		cl.def("isMibOp", (bool (asmjit::x86::InstDB::CommonInfo::*)() const) &asmjit::x86::InstDB::CommonInfo::isMibOp, "Tests whether the instruction uses MIB.\n\nC++: asmjit::x86::InstDB::CommonInfo::isMibOp() const --> bool");
-		cl.def("isVsibOp", (bool (asmjit::x86::InstDB::CommonInfo::*)() const) &asmjit::x86::InstDB::CommonInfo::isVsibOp, "Tests whether the instruction uses VSIB.\n\nC++: asmjit::x86::InstDB::CommonInfo::isVsibOp() const --> bool");
-		cl.def("isTsibOp", (bool (asmjit::x86::InstDB::CommonInfo::*)() const) &asmjit::x86::InstDB::CommonInfo::isTsibOp, "Tests whether the instruction uses TSIB (AMX, instruction requires MOD+SIB).\n\nC++: asmjit::x86::InstDB::CommonInfo::isTsibOp() const --> bool");
-		cl.def("isVex", (bool (asmjit::x86::InstDB::CommonInfo::*)() const) &asmjit::x86::InstDB::CommonInfo::isVex, "Tests whether the instruction uses VEX (can be set together with EVEX if both are encodable).\n\nC++: asmjit::x86::InstDB::CommonInfo::isVex() const --> bool");
-		cl.def("isEvex", (bool (asmjit::x86::InstDB::CommonInfo::*)() const) &asmjit::x86::InstDB::CommonInfo::isEvex, "Tests whether the instruction uses EVEX (can be set together with VEX if both are encodable).\n\nC++: asmjit::x86::InstDB::CommonInfo::isEvex() const --> bool");
-		cl.def("isVexOrEvex", (bool (asmjit::x86::InstDB::CommonInfo::*)() const) &asmjit::x86::InstDB::CommonInfo::isVexOrEvex, "Tests whether the instruction uses EVEX (can be set together with VEX if both are encodable).\n\nC++: asmjit::x86::InstDB::CommonInfo::isVexOrEvex() const --> bool");
-		cl.def("preferEvex", (bool (asmjit::x86::InstDB::CommonInfo::*)() const) &asmjit::x86::InstDB::CommonInfo::preferEvex, "Tests whether the instruction should prefer EVEX prefix instead of VEX prefix.\n\nC++: asmjit::x86::InstDB::CommonInfo::preferEvex() const --> bool");
-		cl.def("isEvexCompatible", (bool (asmjit::x86::InstDB::CommonInfo::*)() const) &asmjit::x86::InstDB::CommonInfo::isEvexCompatible, "C++: asmjit::x86::InstDB::CommonInfo::isEvexCompatible() const --> bool");
-		cl.def("isEvexKRegOnly", (bool (asmjit::x86::InstDB::CommonInfo::*)() const) &asmjit::x86::InstDB::CommonInfo::isEvexKRegOnly, "C++: asmjit::x86::InstDB::CommonInfo::isEvexKRegOnly() const --> bool");
-		cl.def("isEvexTwoOpOnly", (bool (asmjit::x86::InstDB::CommonInfo::*)() const) &asmjit::x86::InstDB::CommonInfo::isEvexTwoOpOnly, "C++: asmjit::x86::InstDB::CommonInfo::isEvexTwoOpOnly() const --> bool");
-		cl.def("isEvexTransformable", (bool (asmjit::x86::InstDB::CommonInfo::*)() const) &asmjit::x86::InstDB::CommonInfo::isEvexTransformable, "C++: asmjit::x86::InstDB::CommonInfo::isEvexTransformable() const --> bool");
-		cl.def("hasAvx512K", (bool (asmjit::x86::InstDB::CommonInfo::*)() const) &asmjit::x86::InstDB::CommonInfo::hasAvx512K, "Tests whether the instruction supports AVX512 masking {k}.\n\nC++: asmjit::x86::InstDB::CommonInfo::hasAvx512K() const --> bool");
-		cl.def("hasAvx512Z", (bool (asmjit::x86::InstDB::CommonInfo::*)() const) &asmjit::x86::InstDB::CommonInfo::hasAvx512Z, "Tests whether the instruction supports AVX512 zeroing {k}{z}.\n\nC++: asmjit::x86::InstDB::CommonInfo::hasAvx512Z() const --> bool");
-		cl.def("hasAvx512ER", (bool (asmjit::x86::InstDB::CommonInfo::*)() const) &asmjit::x86::InstDB::CommonInfo::hasAvx512ER, "Tests whether the instruction supports AVX512 embedded-rounding {er}.\n\nC++: asmjit::x86::InstDB::CommonInfo::hasAvx512ER() const --> bool");
-		cl.def("hasAvx512SAE", (bool (asmjit::x86::InstDB::CommonInfo::*)() const) &asmjit::x86::InstDB::CommonInfo::hasAvx512SAE, "Tests whether the instruction supports AVX512 suppress-all-exceptions {sae}.\n\nC++: asmjit::x86::InstDB::CommonInfo::hasAvx512SAE() const --> bool");
-		cl.def("hasAvx512B", (bool (asmjit::x86::InstDB::CommonInfo::*)() const) &asmjit::x86::InstDB::CommonInfo::hasAvx512B, "Tests whether the instruction supports AVX512 broadcast (either 32-bit or 64-bit).\n\nC++: asmjit::x86::InstDB::CommonInfo::hasAvx512B() const --> bool");
-		cl.def("hasAvx512B16", (bool (asmjit::x86::InstDB::CommonInfo::*)() const) &asmjit::x86::InstDB::CommonInfo::hasAvx512B16, "Tests whether the instruction supports AVX512 broadcast (16-bit).\n\nC++: asmjit::x86::InstDB::CommonInfo::hasAvx512B16() const --> bool");
-		cl.def("hasAvx512B32", (bool (asmjit::x86::InstDB::CommonInfo::*)() const) &asmjit::x86::InstDB::CommonInfo::hasAvx512B32, "Tests whether the instruction supports AVX512 broadcast (32-bit).\n\nC++: asmjit::x86::InstDB::CommonInfo::hasAvx512B32() const --> bool");
-		cl.def("hasAvx512B64", (bool (asmjit::x86::InstDB::CommonInfo::*)() const) &asmjit::x86::InstDB::CommonInfo::hasAvx512B64, "Tests whether the instruction supports AVX512 broadcast (64-bit).\n\nC++: asmjit::x86::InstDB::CommonInfo::hasAvx512B64() const --> bool");
-		cl.def("broadcastSize", (unsigned int (asmjit::x86::InstDB::CommonInfo::*)() const) &asmjit::x86::InstDB::CommonInfo::broadcastSize, "C++: asmjit::x86::InstDB::CommonInfo::broadcastSize() const --> unsigned int");
-		cl.def("signatureIndex", (unsigned int (asmjit::x86::InstDB::CommonInfo::*)() const) &asmjit::x86::InstDB::CommonInfo::signatureIndex, "C++: asmjit::x86::InstDB::CommonInfo::signatureIndex() const --> unsigned int");
-		cl.def("signatureCount", (unsigned int (asmjit::x86::InstDB::CommonInfo::*)() const) &asmjit::x86::InstDB::CommonInfo::signatureCount, "C++: asmjit::x86::InstDB::CommonInfo::signatureCount() const --> unsigned int");
-		cl.def("signatureData", (const struct asmjit::x86::InstDB::InstSignature * (asmjit::x86::InstDB::CommonInfo::*)() const) &asmjit::x86::InstDB::CommonInfo::signatureData, "C++: asmjit::x86::InstDB::CommonInfo::signatureData() const --> const struct asmjit::x86::InstDB::InstSignature *", pybind11::return_value_policy::automatic);
-		cl.def("signatureEnd", (const struct asmjit::x86::InstDB::InstSignature * (asmjit::x86::InstDB::CommonInfo::*)() const) &asmjit::x86::InstDB::CommonInfo::signatureEnd, "C++: asmjit::x86::InstDB::CommonInfo::signatureEnd() const --> const struct asmjit::x86::InstDB::InstSignature *", pybind11::return_value_policy::automatic);
-		cl.def("controlFlow", (enum asmjit::InstControlFlow (asmjit::x86::InstDB::CommonInfo::*)() const) &asmjit::x86::InstDB::CommonInfo::controlFlow, "Returns a control flow category of the instruction.\n\nC++: asmjit::x86::InstDB::CommonInfo::controlFlow() const --> enum asmjit::InstControlFlow");
-		cl.def("sameRegHint", (enum asmjit::InstSameRegHint (asmjit::x86::InstDB::CommonInfo::*)() const) &asmjit::x86::InstDB::CommonInfo::sameRegHint, "Returns a hint that can be used when both inputs are the same register.\n\nC++: asmjit::x86::InstDB::CommonInfo::sameRegHint() const --> enum asmjit::InstSameRegHint");
+		cl.def("setIndex", [](asmjit::arm::Mem &o, const class asmjit::BaseReg & a0) -> void { return o.setIndex(a0); }, "", pybind11::arg("index"));
+		cl.def("assign", (class asmjit::arm::Mem & (asmjit::arm::Mem::*)(const class asmjit::arm::Mem &)) &asmjit::arm::Mem::operator=, "\\{\n\nC++: asmjit::arm::Mem::operator=(const class asmjit::arm::Mem &) --> class asmjit::arm::Mem &", pybind11::return_value_policy::automatic, pybind11::arg("other"));
+		cl.def("clone", (class asmjit::arm::Mem (asmjit::arm::Mem::*)() const) &asmjit::arm::Mem::clone, "Clones the memory operand.\n\nC++: asmjit::arm::Mem::clone() const --> class asmjit::arm::Mem");
+		cl.def("cloneAdjusted", (class asmjit::arm::Mem (asmjit::arm::Mem::*)(long) const) &asmjit::arm::Mem::cloneAdjusted, "Gets new memory operand adjusted by `off`.\n\nC++: asmjit::arm::Mem::cloneAdjusted(long) const --> class asmjit::arm::Mem", pybind11::arg("off"));
+		cl.def("pre", (class asmjit::arm::Mem (asmjit::arm::Mem::*)() const) &asmjit::arm::Mem::pre, "Clones the memory operand and makes it pre-index.\n\nC++: asmjit::arm::Mem::pre() const --> class asmjit::arm::Mem");
+		cl.def("pre", (class asmjit::arm::Mem (asmjit::arm::Mem::*)(long) const) &asmjit::arm::Mem::pre, "Clones the memory operand, applies a given offset `off` and makes it pre-index.\n\nC++: asmjit::arm::Mem::pre(long) const --> class asmjit::arm::Mem", pybind11::arg("off"));
+		cl.def("post", (class asmjit::arm::Mem (asmjit::arm::Mem::*)() const) &asmjit::arm::Mem::post, "Clones the memory operand and makes it post-index.\n\nC++: asmjit::arm::Mem::post() const --> class asmjit::arm::Mem");
+		cl.def("post", (class asmjit::arm::Mem (asmjit::arm::Mem::*)(long) const) &asmjit::arm::Mem::post, "Clones the memory operand, applies a given offset `off` and makes it post-index.\n\nC++: asmjit::arm::Mem::post(long) const --> class asmjit::arm::Mem", pybind11::arg("off"));
+		cl.def("baseReg", (class asmjit::arm::Reg (asmjit::arm::Mem::*)() const) &asmjit::arm::Mem::baseReg, "Converts memory `baseType` and `baseId` to `arm::Reg` instance.\n\n The memory must have a valid base register otherwise the result will be wrong.\n\nC++: asmjit::arm::Mem::baseReg() const --> class asmjit::arm::Reg");
+		cl.def("indexReg", (class asmjit::arm::Reg (asmjit::arm::Mem::*)() const) &asmjit::arm::Mem::indexReg, "Converts memory `indexType` and `indexId` to `arm::Reg` instance.\n\n The memory must have a valid index register otherwise the result will be wrong.\n\nC++: asmjit::arm::Mem::indexReg() const --> class asmjit::arm::Reg");
+		cl.def("setIndex", (void (asmjit::arm::Mem::*)(const class asmjit::BaseReg &, unsigned int)) &asmjit::arm::Mem::setIndex, "C++: asmjit::arm::Mem::setIndex(const class asmjit::BaseReg &, unsigned int) --> void", pybind11::arg("index"), pybind11::arg("shift"));
+		cl.def("setIndex", (void (asmjit::arm::Mem::*)(const class asmjit::BaseReg &, class asmjit::arm::Shift)) &asmjit::arm::Mem::setIndex, "C++: asmjit::arm::Mem::setIndex(const class asmjit::BaseReg &, class asmjit::arm::Shift) --> void", pybind11::arg("index"), pybind11::arg("shift"));
+		cl.def("offsetMode", (enum asmjit::arm::OffsetMode (asmjit::arm::Mem::*)() const) &asmjit::arm::Mem::offsetMode, "Gets offset mode.\n\nC++: asmjit::arm::Mem::offsetMode() const --> enum asmjit::arm::OffsetMode");
+		cl.def("setOffsetMode", (void (asmjit::arm::Mem::*)(enum asmjit::arm::OffsetMode)) &asmjit::arm::Mem::setOffsetMode, "Sets offset mode to `mode`.\n\nC++: asmjit::arm::Mem::setOffsetMode(enum asmjit::arm::OffsetMode) --> void", pybind11::arg("mode"));
+		cl.def("resetOffsetMode", (void (asmjit::arm::Mem::*)()) &asmjit::arm::Mem::resetOffsetMode, "Resets offset mode to default (fixed offset, without write-back).\n\nC++: asmjit::arm::Mem::resetOffsetMode() --> void");
+		cl.def("isFixedOffset", (bool (asmjit::arm::Mem::*)() const) &asmjit::arm::Mem::isFixedOffset, "Tests whether the current memory offset mode is fixed (see \n\nC++: asmjit::arm::Mem::isFixedOffset() const --> bool");
+		cl.def("isPreOrPost", (bool (asmjit::arm::Mem::*)() const) &asmjit::arm::Mem::isPreOrPost, "Tests whether the current memory offset mode is either pre-index or post-index (write-back is used).\n\nC++: asmjit::arm::Mem::isPreOrPost() const --> bool");
+		cl.def("isPreIndex", (bool (asmjit::arm::Mem::*)() const) &asmjit::arm::Mem::isPreIndex, "Tests whether the current memory offset mode is pre-index (write-back is used).\n\nC++: asmjit::arm::Mem::isPreIndex() const --> bool");
+		cl.def("isPostIndex", (bool (asmjit::arm::Mem::*)() const) &asmjit::arm::Mem::isPostIndex, "Tests whether the current memory offset mode is post-index (write-back is used).\n\nC++: asmjit::arm::Mem::isPostIndex() const --> bool");
+		cl.def("makePreIndex", (void (asmjit::arm::Mem::*)()) &asmjit::arm::Mem::makePreIndex, "Sets offset mode of this memory operand to pre-index (write-back is used).\n\nC++: asmjit::arm::Mem::makePreIndex() --> void");
+		cl.def("makePostIndex", (void (asmjit::arm::Mem::*)()) &asmjit::arm::Mem::makePostIndex, "Sets offset mode of this memory operand to post-index (write-back is used).\n\nC++: asmjit::arm::Mem::makePostIndex() --> void");
+		cl.def("shiftOp", (enum asmjit::arm::ShiftOp (asmjit::arm::Mem::*)() const) &asmjit::arm::Mem::shiftOp, "Gets shift operation that is used by index register.\n\nC++: asmjit::arm::Mem::shiftOp() const --> enum asmjit::arm::ShiftOp");
+		cl.def("setShiftOp", (void (asmjit::arm::Mem::*)(enum asmjit::arm::ShiftOp)) &asmjit::arm::Mem::setShiftOp, "Sets shift operation that is used by index register.\n\nC++: asmjit::arm::Mem::setShiftOp(enum asmjit::arm::ShiftOp) --> void", pybind11::arg("sop"));
+		cl.def("resetShiftOp", (void (asmjit::arm::Mem::*)()) &asmjit::arm::Mem::resetShiftOp, "Resets shift operation that is used by index register to LSL (default value).\n\nC++: asmjit::arm::Mem::resetShiftOp() --> void");
+		cl.def("hasShift", (bool (asmjit::arm::Mem::*)() const) &asmjit::arm::Mem::hasShift, "Gets whether the memory operand has shift (aka scale) constant.\n\nC++: asmjit::arm::Mem::hasShift() const --> bool");
+		cl.def("shift", (unsigned int (asmjit::arm::Mem::*)() const) &asmjit::arm::Mem::shift, "Gets the memory operand's shift (aka scale) constant.\n\nC++: asmjit::arm::Mem::shift() const --> unsigned int");
+		cl.def("setShift", (void (asmjit::arm::Mem::*)(unsigned int)) &asmjit::arm::Mem::setShift, "Sets the memory operand's shift (aka scale) constant.\n\nC++: asmjit::arm::Mem::setShift(unsigned int) --> void", pybind11::arg("shift"));
+		cl.def("setShift", (void (asmjit::arm::Mem::*)(class asmjit::arm::Shift)) &asmjit::arm::Mem::setShift, "Sets the memory operand's shift and shift operation.\n\nC++: asmjit::arm::Mem::setShift(class asmjit::arm::Shift) --> void", pybind11::arg("shift"));
+		cl.def("resetShift", (void (asmjit::arm::Mem::*)()) &asmjit::arm::Mem::resetShift, "Resets the memory operand's shift (aka scale) constant to zero.\n\nC++: asmjit::arm::Mem::resetShift() --> void");
 	}
 }

@@ -16,178 +16,60 @@
 
 void bind_unknown_unknown_78(std::function< pybind11::module &(std::string const &namespace_) > &M)
 {
-	{ // asmjit::arm::RegTraits file: line:1168
-		pybind11::class_<asmjit::arm::RegTraits<asmjit::RegType::kGp32>, std::shared_ptr<asmjit::arm::RegTraits<asmjit::RegType::kGp32>>> cl(M("asmjit::arm"), "RegTraits_asmjit_RegType_kGp32_t", "");
-		cl.def( pybind11::init( [](){ return new asmjit::arm::RegTraits<asmjit::RegType::kGp32>(); } ) );
+	// asmjit::arm::Utils::encodeAArch32Imm(unsigned long, unsigned int *) file: line:22
+	M("asmjit::arm::Utils").def("encodeAArch32Imm", (bool (*)(unsigned long, unsigned int *)) &asmjit::arm::Utils::encodeAArch32Imm, "Encodes a 12-bit immediate part of opcode that ise used by a standard 32-bit ARM encoding.\n\nC++: asmjit::arm::Utils::encodeAArch32Imm(unsigned long, unsigned int *) --> bool", pybind11::arg("imm"), pybind11::arg("encodedImmOut"));
+
+	{ // asmjit::arm::Utils::LogicalImm file: line:53
+		pybind11::class_<asmjit::arm::Utils::LogicalImm, std::shared_ptr<asmjit::arm::Utils::LogicalImm>> cl(M("asmjit::arm::Utils"), "LogicalImm", "Decomposed fields of a logical immediate value.");
+		cl.def( pybind11::init( [](){ return new asmjit::arm::Utils::LogicalImm(); } ) );
+		cl.def( pybind11::init( [](asmjit::arm::Utils::LogicalImm const &o){ return new asmjit::arm::Utils::LogicalImm(o); } ) );
+		cl.def_readwrite("n", &asmjit::arm::Utils::LogicalImm::n);
+		cl.def_readwrite("s", &asmjit::arm::Utils::LogicalImm::s);
+		cl.def_readwrite("r", &asmjit::arm::Utils::LogicalImm::r);
 	}
-	{ // asmjit::arm::RegTraits file: line:1168
-		pybind11::class_<asmjit::arm::RegTraits<asmjit::RegType::kGp64>, std::shared_ptr<asmjit::arm::RegTraits<asmjit::RegType::kGp64>>> cl(M("asmjit::arm"), "RegTraits_asmjit_RegType_kGp64_t", "");
-		cl.def( pybind11::init( [](){ return new asmjit::arm::RegTraits<asmjit::RegType::kGp64>(); } ) );
-	}
-	{ // asmjit::arm::RegTraits file: line:1168
-		pybind11::class_<asmjit::arm::RegTraits<asmjit::RegType::kVec8>, std::shared_ptr<asmjit::arm::RegTraits<asmjit::RegType::kVec8>>> cl(M("asmjit::arm"), "RegTraits_asmjit_RegType_kVec8_t", "");
-		cl.def( pybind11::init( [](){ return new asmjit::arm::RegTraits<asmjit::RegType::kVec8>(); } ) );
-	}
-	{ // asmjit::arm::RegTraits file: line:1168
-		pybind11::class_<asmjit::arm::RegTraits<asmjit::RegType::kVec16>, std::shared_ptr<asmjit::arm::RegTraits<asmjit::RegType::kVec16>>> cl(M("asmjit::arm"), "RegTraits_asmjit_RegType_kVec16_t", "");
-		cl.def( pybind11::init( [](){ return new asmjit::arm::RegTraits<asmjit::RegType::kVec16>(); } ) );
-	}
-	{ // asmjit::arm::RegTraits file: line:1168
-		pybind11::class_<asmjit::arm::RegTraits<asmjit::RegType::kVec32>, std::shared_ptr<asmjit::arm::RegTraits<asmjit::RegType::kVec32>>> cl(M("asmjit::arm"), "RegTraits_asmjit_RegType_kVec32_t", "");
-		cl.def( pybind11::init( [](){ return new asmjit::arm::RegTraits<asmjit::RegType::kVec32>(); } ) );
-	}
-	{ // asmjit::arm::RegTraits file: line:1168
-		pybind11::class_<asmjit::arm::RegTraits<asmjit::RegType::kVec64>, std::shared_ptr<asmjit::arm::RegTraits<asmjit::RegType::kVec64>>> cl(M("asmjit::arm"), "RegTraits_asmjit_RegType_kVec64_t", "");
-		cl.def( pybind11::init( [](){ return new asmjit::arm::RegTraits<asmjit::RegType::kVec64>(); } ) );
-	}
-	{ // asmjit::arm::RegTraits file: line:1168
-		pybind11::class_<asmjit::arm::RegTraits<asmjit::RegType::kVec128>, std::shared_ptr<asmjit::arm::RegTraits<asmjit::RegType::kVec128>>> cl(M("asmjit::arm"), "RegTraits_asmjit_RegType_kVec128_t", "");
-		cl.def( pybind11::init( [](){ return new asmjit::arm::RegTraits<asmjit::RegType::kVec128>(); } ) );
-	}
-	{ // asmjit::arm::RegTraits file: line:1168
-		pybind11::class_<asmjit::arm::RegTraits<asmjit::RegType::kPC>, std::shared_ptr<asmjit::arm::RegTraits<asmjit::RegType::kPC>>> cl(M("asmjit::arm"), "RegTraits_asmjit_RegType_kPC_t", "");
-		cl.def( pybind11::init( [](){ return new asmjit::arm::RegTraits<asmjit::RegType::kPC>(); } ) );
-	}
-	{ // asmjit::arm::Reg file: line:45
-		pybind11::class_<asmjit::arm::Reg, std::shared_ptr<asmjit::arm::Reg>, asmjit::BaseReg> cl(M("asmjit::arm"), "Reg", "Register operand that can represent AArch32 and AArch64 registers.");
-		cl.def( pybind11::init( [](){ return new asmjit::arm::Reg(); } ) );
-		cl.def( pybind11::init( [](asmjit::arm::Reg const &o){ return new asmjit::arm::Reg(o); } ) );
-		cl.def( pybind11::init<const class asmjit::BaseReg &, unsigned int>(), pybind11::arg("other"), pybind11::arg("id") );
+	// asmjit::arm::Utils::encodeLogicalImm(unsigned long, unsigned int, struct asmjit::arm::Utils::LogicalImm *) file: line:77
+	M("asmjit::arm::Utils").def("encodeLogicalImm", (bool (*)(unsigned long, unsigned int, struct asmjit::arm::Utils::LogicalImm *)) &asmjit::arm::Utils::encodeLogicalImm, "Encodes the given `imm` value of the given `width` to a logical immediate value represented as N, S, and R fields\n and writes these fields to `out`.\n\n Encoding Table:\n\n ```\n +---+--------+--------+------+\n | N |  ImmS  |  ImmR  | Size |\n +---+--------+--------+------+\n | 1 | ssssss | rrrrrr |  64  |\n | 0 | 0sssss | .rrrrr |  32  |\n | 0 | 10ssss | ..rrrr |  16  |\n | 0 | 110sss | ...rrr |  8   |\n | 0 | 1110ss | ....rr |  4   |\n | 0 | 11110s | .....r |  2   |\n +---+--------+--------+------+\n ```\n\nC++: asmjit::arm::Utils::encodeLogicalImm(unsigned long, unsigned int, struct asmjit::arm::Utils::LogicalImm *) --> bool", pybind11::arg("imm"), pybind11::arg("width"), pybind11::arg("out"));
 
-		cl.def( pybind11::init<const struct asmjit::OperandSignature &, unsigned int>(), pybind11::arg("sgn"), pybind11::arg("id") );
+	// asmjit::arm::Utils::isLogicalImm(unsigned long, unsigned int) file: line:125
+	M("asmjit::arm::Utils").def("isLogicalImm", (bool (*)(unsigned long, unsigned int)) &asmjit::arm::Utils::isLogicalImm, "Returns true if the given `imm` value is encodable as a logical immediate. The `width` argument describes the\n width of the operation, and must be either 32 or 64. This function can be used to test whether an immediate\n value can be used with AND, ANDS, BIC, BICS, EON, EOR, ORN, and ORR instruction.\n\nC++: asmjit::arm::Utils::isLogicalImm(unsigned long, unsigned int) --> bool", pybind11::arg("imm"), pybind11::arg("width"));
 
-		cl.def( pybind11::init<struct asmjit::Globals::NoInit_>(), pybind11::arg("") );
+	// asmjit::arm::Utils::isAddSubImm(unsigned long) file: line:133
+	M("asmjit::arm::Utils").def("isAddSubImm", (bool (*)(unsigned long)) &asmjit::arm::Utils::isAddSubImm, "Returns true if the given `imm` value is encodable as an immediate with `add` and `sub` instructions on AArch64.\n These two instructions can encode 12-bit immediate value optionally shifted left by 12 bits.\n\nC++: asmjit::arm::Utils::isAddSubImm(unsigned long) --> bool", pybind11::arg("imm"));
 
-		cl.def_static("fromTypeAndId", (class asmjit::arm::Reg (*)(enum asmjit::RegType, unsigned int)) &asmjit::arm::Reg::fromTypeAndId, "Creates a new register from register type and id. \n\nC++: asmjit::arm::Reg::fromTypeAndId(enum asmjit::RegType, unsigned int) --> class asmjit::arm::Reg", pybind11::arg("type"), pybind11::arg("id"));
-		cl.def("clone", (class asmjit::arm::Reg (asmjit::arm::Reg::*)() const) &asmjit::arm::Reg::clone, "C++: asmjit::arm::Reg::clone() const --> class asmjit::arm::Reg");
-		cl.def("assign", (class asmjit::arm::Reg & (asmjit::arm::Reg::*)(const class asmjit::arm::Reg &)) &asmjit::arm::Reg::operator=, "C++: asmjit::arm::Reg::operator=(const class asmjit::arm::Reg &) --> class asmjit::arm::Reg &", pybind11::return_value_policy::automatic, pybind11::arg("other"));
-		cl.def("isGpR", (bool (asmjit::arm::Reg::*)() const) &asmjit::arm::Reg::isGpR, "Gets whether the register is either `R` or `W` register (32-bit).\n\nC++: asmjit::arm::Reg::isGpR() const --> bool");
-		cl.def("isGpW", (bool (asmjit::arm::Reg::*)() const) &asmjit::arm::Reg::isGpW, "Gets whether the register is either `R` or `W` register (32-bit).\n\nC++: asmjit::arm::Reg::isGpW() const --> bool");
-		cl.def("isGpX", (bool (asmjit::arm::Reg::*)() const) &asmjit::arm::Reg::isGpX, "Gets whether the register is an `X` register (64-bit).\n\nC++: asmjit::arm::Reg::isGpX() const --> bool");
-		cl.def("isVecB", (bool (asmjit::arm::Reg::*)() const) &asmjit::arm::Reg::isVecB, "Gets whether the register is a VEC-B register (8-bit).\n\nC++: asmjit::arm::Reg::isVecB() const --> bool");
-		cl.def("isVecH", (bool (asmjit::arm::Reg::*)() const) &asmjit::arm::Reg::isVecH, "Gets whether the register is a VEC-H register (16-bit).\n\nC++: asmjit::arm::Reg::isVecH() const --> bool");
-		cl.def("isVecS", (bool (asmjit::arm::Reg::*)() const) &asmjit::arm::Reg::isVecS, "Gets whether the register is a VEC-S register (32-bit).\n\nC++: asmjit::arm::Reg::isVecS() const --> bool");
-		cl.def("isVecD", (bool (asmjit::arm::Reg::*)() const) &asmjit::arm::Reg::isVecD, "Gets whether the register is a VEC-D register (64-bit).\n\nC++: asmjit::arm::Reg::isVecD() const --> bool");
-		cl.def("isVecQ", (bool (asmjit::arm::Reg::*)() const) &asmjit::arm::Reg::isVecQ, "Gets whether the register is a VEC-Q register (128-bit).\n\nC++: asmjit::arm::Reg::isVecQ() const --> bool");
-		cl.def("isVecDOrQ", (bool (asmjit::arm::Reg::*)() const) &asmjit::arm::Reg::isVecDOrQ, "Gets whether the register is either VEC-D (64-bit) or VEC-Q (128-bit).\n\nC++: asmjit::arm::Reg::isVecDOrQ() const --> bool");
-		cl.def("isVecV", (bool (asmjit::arm::Reg::*)() const) &asmjit::arm::Reg::isVecV, "Gets whether the register is a VEC-V register (128-bit).\n\nC++: asmjit::arm::Reg::isVecV() const --> bool");
-		cl.def("isVec8", (bool (asmjit::arm::Reg::*)() const) &asmjit::arm::Reg::isVec8, "Gets whether the register is an 8-bit vector register or view, alias if \n\nC++: asmjit::arm::Reg::isVec8() const --> bool");
-		cl.def("isVec16", (bool (asmjit::arm::Reg::*)() const) &asmjit::arm::Reg::isVec16, "Gets whether the register is a 16-bit vector register or view, alias if \n\nC++: asmjit::arm::Reg::isVec16() const --> bool");
-		cl.def("isVec32", (bool (asmjit::arm::Reg::*)() const) &asmjit::arm::Reg::isVec32, "Gets whether the register is a 32-bit vector register or view, alias if \n\nC++: asmjit::arm::Reg::isVec32() const --> bool");
-		cl.def("isVec64", (bool (asmjit::arm::Reg::*)() const) &asmjit::arm::Reg::isVec64, "Gets whether the register is a 64-bit vector register or view, alias if \n\nC++: asmjit::arm::Reg::isVec64() const --> bool");
-		cl.def("isVec128", (bool (asmjit::arm::Reg::*)() const) &asmjit::arm::Reg::isVec128, "Gets whether the register is a 128-bit vector register or view, alias if \n\nC++: asmjit::arm::Reg::isVec128() const --> bool");
-		cl.def("setTypeAndId", (void (asmjit::arm::Reg::*)(enum asmjit::RegType, unsigned int)) &asmjit::arm::Reg::setTypeAndId, "C++: asmjit::arm::Reg::setTypeAndId(enum asmjit::RegType, unsigned int) --> void", pybind11::arg("type"), pybind11::arg("id"));
-		cl.def_static("groupOf", (enum asmjit::RegGroup (*)(enum asmjit::RegType)) &asmjit::arm::Reg::groupOf, "C++: asmjit::arm::Reg::groupOf(enum asmjit::RegType) --> enum asmjit::RegGroup", pybind11::arg("type"));
-		cl.def_static("typeIdOf", (enum asmjit::TypeId (*)(enum asmjit::RegType)) &asmjit::arm::Reg::typeIdOf, "C++: asmjit::arm::Reg::typeIdOf(enum asmjit::RegType) --> enum asmjit::TypeId", pybind11::arg("type"));
-		cl.def_static("signatureOf", (struct asmjit::OperandSignature (*)(enum asmjit::RegType)) &asmjit::arm::Reg::signatureOf, "C++: asmjit::arm::Reg::signatureOf(enum asmjit::RegType) --> struct asmjit::OperandSignature", pybind11::arg("type"));
-		cl.def_static("isGpW", (bool (*)(const struct asmjit::Operand_ &)) &asmjit::arm::Reg::isGpW, "C++: asmjit::arm::Reg::isGpW(const struct asmjit::Operand_ &) --> bool", pybind11::arg("op"));
-		cl.def_static("isGpX", (bool (*)(const struct asmjit::Operand_ &)) &asmjit::arm::Reg::isGpX, "C++: asmjit::arm::Reg::isGpX(const struct asmjit::Operand_ &) --> bool", pybind11::arg("op"));
-		cl.def_static("isVecB", (bool (*)(const struct asmjit::Operand_ &)) &asmjit::arm::Reg::isVecB, "C++: asmjit::arm::Reg::isVecB(const struct asmjit::Operand_ &) --> bool", pybind11::arg("op"));
-		cl.def_static("isVecH", (bool (*)(const struct asmjit::Operand_ &)) &asmjit::arm::Reg::isVecH, "C++: asmjit::arm::Reg::isVecH(const struct asmjit::Operand_ &) --> bool", pybind11::arg("op"));
-		cl.def_static("isVecS", (bool (*)(const struct asmjit::Operand_ &)) &asmjit::arm::Reg::isVecS, "C++: asmjit::arm::Reg::isVecS(const struct asmjit::Operand_ &) --> bool", pybind11::arg("op"));
-		cl.def_static("isVecD", (bool (*)(const struct asmjit::Operand_ &)) &asmjit::arm::Reg::isVecD, "C++: asmjit::arm::Reg::isVecD(const struct asmjit::Operand_ &) --> bool", pybind11::arg("op"));
-		cl.def_static("isVecQ", (bool (*)(const struct asmjit::Operand_ &)) &asmjit::arm::Reg::isVecQ, "C++: asmjit::arm::Reg::isVecQ(const struct asmjit::Operand_ &) --> bool", pybind11::arg("op"));
-		cl.def_static("isVecV", (bool (*)(const struct asmjit::Operand_ &)) &asmjit::arm::Reg::isVecV, "C++: asmjit::arm::Reg::isVecV(const struct asmjit::Operand_ &) --> bool", pybind11::arg("op"));
-		cl.def_static("isGpW", (bool (*)(const struct asmjit::Operand_ &, unsigned int)) &asmjit::arm::Reg::isGpW, "C++: asmjit::arm::Reg::isGpW(const struct asmjit::Operand_ &, unsigned int) --> bool", pybind11::arg("op"), pybind11::arg("id"));
-		cl.def_static("isGpX", (bool (*)(const struct asmjit::Operand_ &, unsigned int)) &asmjit::arm::Reg::isGpX, "C++: asmjit::arm::Reg::isGpX(const struct asmjit::Operand_ &, unsigned int) --> bool", pybind11::arg("op"), pybind11::arg("id"));
-		cl.def_static("isVecB", (bool (*)(const struct asmjit::Operand_ &, unsigned int)) &asmjit::arm::Reg::isVecB, "C++: asmjit::arm::Reg::isVecB(const struct asmjit::Operand_ &, unsigned int) --> bool", pybind11::arg("op"), pybind11::arg("id"));
-		cl.def_static("isVecH", (bool (*)(const struct asmjit::Operand_ &, unsigned int)) &asmjit::arm::Reg::isVecH, "C++: asmjit::arm::Reg::isVecH(const struct asmjit::Operand_ &, unsigned int) --> bool", pybind11::arg("op"), pybind11::arg("id"));
-		cl.def_static("isVecS", (bool (*)(const struct asmjit::Operand_ &, unsigned int)) &asmjit::arm::Reg::isVecS, "C++: asmjit::arm::Reg::isVecS(const struct asmjit::Operand_ &, unsigned int) --> bool", pybind11::arg("op"), pybind11::arg("id"));
-		cl.def_static("isVecD", (bool (*)(const struct asmjit::Operand_ &, unsigned int)) &asmjit::arm::Reg::isVecD, "C++: asmjit::arm::Reg::isVecD(const struct asmjit::Operand_ &, unsigned int) --> bool", pybind11::arg("op"), pybind11::arg("id"));
-		cl.def_static("isVecQ", (bool (*)(const struct asmjit::Operand_ &, unsigned int)) &asmjit::arm::Reg::isVecQ, "C++: asmjit::arm::Reg::isVecQ(const struct asmjit::Operand_ &, unsigned int) --> bool", pybind11::arg("op"), pybind11::arg("id"));
-		cl.def_static("isVecV", (bool (*)(const struct asmjit::Operand_ &, unsigned int)) &asmjit::arm::Reg::isVecV, "C++: asmjit::arm::Reg::isVecV(const struct asmjit::Operand_ &, unsigned int) --> bool", pybind11::arg("op"), pybind11::arg("id"));
-	}
-	{ // asmjit::arm::BaseVec file: line:126
-		pybind11::class_<asmjit::arm::BaseVec, std::shared_ptr<asmjit::arm::BaseVec>, asmjit::arm::Reg> cl(M("asmjit::arm"), "BaseVec", "Vector register base - a common base for both AArch32 & AArch64 vector register.");
-		cl.def( pybind11::init( [](){ return new asmjit::arm::BaseVec(); } ) );
-		cl.def( pybind11::init( [](asmjit::arm::BaseVec const &o){ return new asmjit::arm::BaseVec(o); } ) );
-		cl.def( pybind11::init<const class asmjit::BaseReg &, unsigned int>(), pybind11::arg("other"), pybind11::arg("id") );
+	// asmjit::arm::Utils::encodeImm64ByteMaskToImm8(unsigned long) file: line:147
+	M("asmjit::arm::Utils").def("encodeImm64ByteMaskToImm8", (unsigned int (*)(unsigned long)) &asmjit::arm::Utils::encodeImm64ByteMaskToImm8, "C++: asmjit::arm::Utils::encodeImm64ByteMaskToImm8(unsigned long) --> unsigned int", pybind11::arg("imm"));
 
-		cl.def( pybind11::init<const struct asmjit::OperandSignature &, unsigned int>(), pybind11::arg("sgn"), pybind11::arg("id") );
+	// asmjit::arm::Utils::isFPImm8Generic(unsigned int) file: line:156
+	M("asmjit::arm::Utils").def("isFPImm8Generic", (bool (*)(unsigned int)) &asmjit::arm::Utils::isFPImm8Generic<unsigned int,3U,6U,6U>, "C++: asmjit::arm::Utils::isFPImm8Generic(unsigned int) --> bool", pybind11::arg("val"));
 
-		cl.def( pybind11::init<struct asmjit::Globals::NoInit_>(), pybind11::arg("") );
+	// asmjit::arm::Utils::isFPImm8Generic(unsigned int) file: line:156
+	M("asmjit::arm::Utils").def("isFPImm8Generic", (bool (*)(unsigned int)) &asmjit::arm::Utils::isFPImm8Generic<unsigned int,6U,6U,19U>, "C++: asmjit::arm::Utils::isFPImm8Generic(unsigned int) --> bool", pybind11::arg("val"));
 
+	// asmjit::arm::Utils::isFPImm8Generic(unsigned long) file: line:156
+	M("asmjit::arm::Utils").def("isFPImm8Generic", (bool (*)(unsigned long)) &asmjit::arm::Utils::isFPImm8Generic<unsigned long,9U,6U,48U>, "C++: asmjit::arm::Utils::isFPImm8Generic(unsigned long) --> bool", pybind11::arg("val"));
 
-		pybind11::enum_<asmjit::arm::BaseVec::AdditionalBits>(cl, "AdditionalBits", pybind11::arithmetic(), "Additional signature bits used by a vector register.")
-			.value("kSignatureRegElementTypeShift", asmjit::arm::BaseVec::kSignatureRegElementTypeShift)
-			.value("kSignatureRegElementTypeMask", asmjit::arm::BaseVec::kSignatureRegElementTypeMask)
-			.value("kSignatureRegElementFlagShift", asmjit::arm::BaseVec::kSignatureRegElementFlagShift)
-			.value("kSignatureRegElementFlagMask", asmjit::arm::BaseVec::kSignatureRegElementFlagMask)
-			.value("kSignatureRegElementIndexShift", asmjit::arm::BaseVec::kSignatureRegElementIndexShift)
-			.value("kSignatureRegElementIndexMask", asmjit::arm::BaseVec::kSignatureRegElementIndexMask)
-			.export_values();
+	// asmjit::arm::Utils::isFP16Imm8(unsigned int) file: line:177
+	M("asmjit::arm::Utils").def("isFP16Imm8", (bool (*)(unsigned int)) &asmjit::arm::Utils::isFP16Imm8, "Returns true if the given half precision floating point `val` can be encoded as ARM IMM8 value, which represents\n a limited set of floating point immediate values, which can be used with FMOV instruction.\n\n The floating point must have bits distributed in the following way:\n\n ```\n [aBbbcdef|gh000000]\n ```\n\nC++: asmjit::arm::Utils::isFP16Imm8(unsigned int) --> bool", pybind11::arg("val"));
 
-		cl.def_static("fromTypeAndId", (class asmjit::arm::BaseVec (*)(enum asmjit::RegType, unsigned int)) &asmjit::arm::BaseVec::fromTypeAndId, "Creates a new register from register type and id. \n\nC++: asmjit::arm::BaseVec::fromTypeAndId(enum asmjit::RegType, unsigned int) --> class asmjit::arm::BaseVec", pybind11::arg("type"), pybind11::arg("id"));
-		cl.def("clone", (class asmjit::arm::BaseVec (asmjit::arm::BaseVec::*)() const) &asmjit::arm::BaseVec::clone, "C++: asmjit::arm::BaseVec::clone() const --> class asmjit::arm::BaseVec");
-		cl.def("assign", (class asmjit::arm::BaseVec & (asmjit::arm::BaseVec::*)(const class asmjit::arm::BaseVec &)) &asmjit::arm::BaseVec::operator=, "C++: asmjit::arm::BaseVec::operator=(const class asmjit::arm::BaseVec &) --> class asmjit::arm::BaseVec &", pybind11::return_value_policy::automatic, pybind11::arg("other"));
-		cl.def("hasElementIndex", (bool (asmjit::arm::BaseVec::*)() const) &asmjit::arm::BaseVec::hasElementIndex, "Returns whether the register has element index (it's an element index access).\n\nC++: asmjit::arm::BaseVec::hasElementIndex() const --> bool");
-		cl.def("elementIndex", (unsigned int (asmjit::arm::BaseVec::*)() const) &asmjit::arm::BaseVec::elementIndex, "Returns element index of the register.\n\nC++: asmjit::arm::BaseVec::elementIndex() const --> unsigned int");
-		cl.def("setElementIndex", (void (asmjit::arm::BaseVec::*)(unsigned int)) &asmjit::arm::BaseVec::setElementIndex, "Sets element index of the register to `elementType`.\n\nC++: asmjit::arm::BaseVec::setElementIndex(unsigned int) --> void", pybind11::arg("elementIndex"));
-		cl.def("resetElementIndex", (void (asmjit::arm::BaseVec::*)()) &asmjit::arm::BaseVec::resetElementIndex, "Resets element index of the register.\n\nC++: asmjit::arm::BaseVec::resetElementIndex() --> void");
-	}
-	{ // asmjit::arm::Mem file: line:164
-		pybind11::class_<asmjit::arm::Mem, std::shared_ptr<asmjit::arm::Mem>, asmjit::BaseMem> cl(M("asmjit::arm"), "Mem", "Memory operand (ARM).");
-		cl.def( pybind11::init( [](){ return new asmjit::arm::Mem(); } ) );
-		cl.def( pybind11::init( [](asmjit::arm::Mem const &o){ return new asmjit::arm::Mem(o); } ) );
-		cl.def( pybind11::init<struct asmjit::Globals::NoInit_>(), pybind11::arg("") );
+	// asmjit::arm::Utils::isFP32Imm8(unsigned int) file: line:187
+	M("asmjit::arm::Utils").def("isFP32Imm8", (bool (*)(unsigned int)) &asmjit::arm::Utils::isFP32Imm8, "Returns true if the given single precision floating point `val` can be encoded as ARM IMM8 value, which represents\n a limited set of floating point immediate values, which can be used with FMOV instruction.\n\n The floating point must have bits distributed in the following way:\n\n ```\n [aBbbbbbc|defgh000|00000000|00000000]\n ```\n\nC++: asmjit::arm::Utils::isFP32Imm8(unsigned int) --> bool", pybind11::arg("val"));
 
-		cl.def( pybind11::init<const struct asmjit::OperandSignature &, unsigned int, unsigned int, int>(), pybind11::arg("signature"), pybind11::arg("baseId"), pybind11::arg("indexId"), pybind11::arg("offset") );
+	// asmjit::arm::Utils::isFP32Imm8(float) file: line:189
+	M("asmjit::arm::Utils").def("isFP32Imm8", (bool (*)(float)) &asmjit::arm::Utils::isFP32Imm8, "C++: asmjit::arm::Utils::isFP32Imm8(float) --> bool", pybind11::arg("val"));
 
-		cl.def( pybind11::init( [](const class asmjit::Label & a0){ return new asmjit::arm::Mem(a0); } ), "doc" , pybind11::arg("base"));
-		cl.def( pybind11::init( [](const class asmjit::Label & a0, int const & a1){ return new asmjit::arm::Mem(a0, a1); } ), "doc" , pybind11::arg("base"), pybind11::arg("off"));
-		cl.def( pybind11::init<const class asmjit::Label &, int, struct asmjit::OperandSignature>(), pybind11::arg("base"), pybind11::arg("off"), pybind11::arg("signature") );
+	// asmjit::arm::Utils::isFP64Imm8(unsigned long) file: line:199
+	M("asmjit::arm::Utils").def("isFP64Imm8", (bool (*)(unsigned long)) &asmjit::arm::Utils::isFP64Imm8, "Returns true if the given double precision floating point `val` can be encoded as ARM IMM8 value, which represents\n a limited set of floating point immediate values, which can be used with FMOV instruction.\n\n The floating point must have bits distributed in the following way:\n\n ```\n [aBbbbbbb|bbcdefgh|00000000|00000000|00000000|00000000|00000000|00000000]\n ```\n\nC++: asmjit::arm::Utils::isFP64Imm8(unsigned long) --> bool", pybind11::arg("val"));
 
-		cl.def( pybind11::init( [](const class asmjit::BaseReg & a0){ return new asmjit::arm::Mem(a0); } ), "doc" , pybind11::arg("base"));
-		cl.def( pybind11::init( [](const class asmjit::BaseReg & a0, int const & a1){ return new asmjit::arm::Mem(a0, a1); } ), "doc" , pybind11::arg("base"), pybind11::arg("off"));
-		cl.def( pybind11::init<const class asmjit::BaseReg &, int, struct asmjit::OperandSignature>(), pybind11::arg("base"), pybind11::arg("off"), pybind11::arg("signature") );
+	// asmjit::arm::Utils::isFP64Imm8(double) file: line:201
+	M("asmjit::arm::Utils").def("isFP64Imm8", (bool (*)(double)) &asmjit::arm::Utils::isFP64Imm8, "C++: asmjit::arm::Utils::isFP64Imm8(double) --> bool", pybind11::arg("val"));
 
-		cl.def( pybind11::init( [](const class asmjit::BaseReg & a0, const class asmjit::BaseReg & a1){ return new asmjit::arm::Mem(a0, a1); } ), "doc" , pybind11::arg("base"), pybind11::arg("index"));
-		cl.def( pybind11::init<const class asmjit::BaseReg &, const class asmjit::BaseReg &, struct asmjit::OperandSignature>(), pybind11::arg("base"), pybind11::arg("index"), pybind11::arg("signature") );
+	// asmjit::arm::Utils::encodeFPToImm8Generic(unsigned long) file: line:205
+	M("asmjit::arm::Utils").def("encodeFPToImm8Generic", (unsigned int (*)(unsigned long)) &asmjit::arm::Utils::encodeFPToImm8Generic<unsigned long,9U,6U,48U>, "C++: asmjit::arm::Utils::encodeFPToImm8Generic(unsigned long) --> unsigned int", pybind11::arg("val"));
 
-		cl.def( pybind11::init( [](const class asmjit::BaseReg & a0, const class asmjit::BaseReg & a1, const class asmjit::arm::Shift & a2){ return new asmjit::arm::Mem(a0, a1, a2); } ), "doc" , pybind11::arg("base"), pybind11::arg("index"), pybind11::arg("shift"));
-		cl.def( pybind11::init<const class asmjit::BaseReg &, const class asmjit::BaseReg &, const class asmjit::arm::Shift &, struct asmjit::OperandSignature>(), pybind11::arg("base"), pybind11::arg("index"), pybind11::arg("shift"), pybind11::arg("signature") );
+	// asmjit::arm::Utils::encodeFP64ToImm8(unsigned long) file: line:215
+	M("asmjit::arm::Utils").def("encodeFP64ToImm8", (unsigned int (*)(unsigned long)) &asmjit::arm::Utils::encodeFP64ToImm8, "Encodes a double precision floating point value into IMM8 format.\n\n \n This function expects that `isFP64Imm8(val) == true` so it doesn't perform any checks of the value and just\n rearranges some bits into Imm8 order.\n\nC++: asmjit::arm::Utils::encodeFP64ToImm8(unsigned long) --> unsigned int", pybind11::arg("val"));
 
-		cl.def( pybind11::init( [](unsigned long const & a0){ return new asmjit::arm::Mem(a0); } ), "doc" , pybind11::arg("base"));
-		cl.def( pybind11::init<unsigned long, struct asmjit::OperandSignature>(), pybind11::arg("base"), pybind11::arg("signature") );
+	// asmjit::arm::Utils::encodeFP64ToImm8(double) file: line:217
+	M("asmjit::arm::Utils").def("encodeFP64ToImm8", (unsigned int (*)(double)) &asmjit::arm::Utils::encodeFP64ToImm8, "C++: asmjit::arm::Utils::encodeFP64ToImm8(double) --> unsigned int", pybind11::arg("val"));
 
-
-		pybind11::enum_<asmjit::arm::Mem::AdditionalBits>(cl, "AdditionalBits", pybind11::arithmetic(), "Additional bits of operand's signature used by `arm::Mem`.")
-			.value("kSignatureMemShiftValueShift", asmjit::arm::Mem::kSignatureMemShiftValueShift)
-			.value("kSignatureMemShiftValueMask", asmjit::arm::Mem::kSignatureMemShiftValueMask)
-			.value("kSignatureMemShiftOpShift", asmjit::arm::Mem::kSignatureMemShiftOpShift)
-			.value("kSignatureMemShiftOpMask", asmjit::arm::Mem::kSignatureMemShiftOpMask)
-			.value("kSignatureMemOffsetModeShift", asmjit::arm::Mem::kSignatureMemOffsetModeShift)
-			.value("kSignatureMemOffsetModeMask", asmjit::arm::Mem::kSignatureMemOffsetModeMask)
-			.export_values();
-
-		cl.def("setIndex", [](asmjit::arm::Mem &o, const class asmjit::BaseReg & a0) -> void { return o.setIndex(a0); }, "", pybind11::arg("index"));
-		cl.def("assign", (class asmjit::arm::Mem & (asmjit::arm::Mem::*)(const class asmjit::arm::Mem &)) &asmjit::arm::Mem::operator=, "\\{\n\nC++: asmjit::arm::Mem::operator=(const class asmjit::arm::Mem &) --> class asmjit::arm::Mem &", pybind11::return_value_policy::automatic, pybind11::arg("other"));
-		cl.def("clone", (class asmjit::arm::Mem (asmjit::arm::Mem::*)() const) &asmjit::arm::Mem::clone, "Clones the memory operand.\n\nC++: asmjit::arm::Mem::clone() const --> class asmjit::arm::Mem");
-		cl.def("cloneAdjusted", (class asmjit::arm::Mem (asmjit::arm::Mem::*)(long) const) &asmjit::arm::Mem::cloneAdjusted, "Gets new memory operand adjusted by `off`.\n\nC++: asmjit::arm::Mem::cloneAdjusted(long) const --> class asmjit::arm::Mem", pybind11::arg("off"));
-		cl.def("pre", (class asmjit::arm::Mem (asmjit::arm::Mem::*)() const) &asmjit::arm::Mem::pre, "Clones the memory operand and makes it pre-index.\n\nC++: asmjit::arm::Mem::pre() const --> class asmjit::arm::Mem");
-		cl.def("pre", (class asmjit::arm::Mem (asmjit::arm::Mem::*)(long) const) &asmjit::arm::Mem::pre, "Clones the memory operand, applies a given offset `off` and makes it pre-index.\n\nC++: asmjit::arm::Mem::pre(long) const --> class asmjit::arm::Mem", pybind11::arg("off"));
-		cl.def("post", (class asmjit::arm::Mem (asmjit::arm::Mem::*)() const) &asmjit::arm::Mem::post, "Clones the memory operand and makes it post-index.\n\nC++: asmjit::arm::Mem::post() const --> class asmjit::arm::Mem");
-		cl.def("post", (class asmjit::arm::Mem (asmjit::arm::Mem::*)(long) const) &asmjit::arm::Mem::post, "Clones the memory operand, applies a given offset `off` and makes it post-index.\n\nC++: asmjit::arm::Mem::post(long) const --> class asmjit::arm::Mem", pybind11::arg("off"));
-		cl.def("baseReg", (class asmjit::arm::Reg (asmjit::arm::Mem::*)() const) &asmjit::arm::Mem::baseReg, "Converts memory `baseType` and `baseId` to `arm::Reg` instance.\n\n The memory must have a valid base register otherwise the result will be wrong.\n\nC++: asmjit::arm::Mem::baseReg() const --> class asmjit::arm::Reg");
-		cl.def("indexReg", (class asmjit::arm::Reg (asmjit::arm::Mem::*)() const) &asmjit::arm::Mem::indexReg, "Converts memory `indexType` and `indexId` to `arm::Reg` instance.\n\n The memory must have a valid index register otherwise the result will be wrong.\n\nC++: asmjit::arm::Mem::indexReg() const --> class asmjit::arm::Reg");
-		cl.def("setIndex", (void (asmjit::arm::Mem::*)(const class asmjit::BaseReg &, unsigned int)) &asmjit::arm::Mem::setIndex, "C++: asmjit::arm::Mem::setIndex(const class asmjit::BaseReg &, unsigned int) --> void", pybind11::arg("index"), pybind11::arg("shift"));
-		cl.def("setIndex", (void (asmjit::arm::Mem::*)(const class asmjit::BaseReg &, class asmjit::arm::Shift)) &asmjit::arm::Mem::setIndex, "C++: asmjit::arm::Mem::setIndex(const class asmjit::BaseReg &, class asmjit::arm::Shift) --> void", pybind11::arg("index"), pybind11::arg("shift"));
-		cl.def("offsetMode", (enum asmjit::arm::OffsetMode (asmjit::arm::Mem::*)() const) &asmjit::arm::Mem::offsetMode, "Gets offset mode.\n\nC++: asmjit::arm::Mem::offsetMode() const --> enum asmjit::arm::OffsetMode");
-		cl.def("setOffsetMode", (void (asmjit::arm::Mem::*)(enum asmjit::arm::OffsetMode)) &asmjit::arm::Mem::setOffsetMode, "Sets offset mode to `mode`.\n\nC++: asmjit::arm::Mem::setOffsetMode(enum asmjit::arm::OffsetMode) --> void", pybind11::arg("mode"));
-		cl.def("resetOffsetMode", (void (asmjit::arm::Mem::*)()) &asmjit::arm::Mem::resetOffsetMode, "Resets offset mode to default (fixed offset, without write-back).\n\nC++: asmjit::arm::Mem::resetOffsetMode() --> void");
-		cl.def("isFixedOffset", (bool (asmjit::arm::Mem::*)() const) &asmjit::arm::Mem::isFixedOffset, "Tests whether the current memory offset mode is fixed (see \n\nC++: asmjit::arm::Mem::isFixedOffset() const --> bool");
-		cl.def("isPreOrPost", (bool (asmjit::arm::Mem::*)() const) &asmjit::arm::Mem::isPreOrPost, "Tests whether the current memory offset mode is either pre-index or post-index (write-back is used).\n\nC++: asmjit::arm::Mem::isPreOrPost() const --> bool");
-		cl.def("isPreIndex", (bool (asmjit::arm::Mem::*)() const) &asmjit::arm::Mem::isPreIndex, "Tests whether the current memory offset mode is pre-index (write-back is used).\n\nC++: asmjit::arm::Mem::isPreIndex() const --> bool");
-		cl.def("isPostIndex", (bool (asmjit::arm::Mem::*)() const) &asmjit::arm::Mem::isPostIndex, "Tests whether the current memory offset mode is post-index (write-back is used).\n\nC++: asmjit::arm::Mem::isPostIndex() const --> bool");
-		cl.def("makePreIndex", (void (asmjit::arm::Mem::*)()) &asmjit::arm::Mem::makePreIndex, "Sets offset mode of this memory operand to pre-index (write-back is used).\n\nC++: asmjit::arm::Mem::makePreIndex() --> void");
-		cl.def("makePostIndex", (void (asmjit::arm::Mem::*)()) &asmjit::arm::Mem::makePostIndex, "Sets offset mode of this memory operand to post-index (write-back is used).\n\nC++: asmjit::arm::Mem::makePostIndex() --> void");
-		cl.def("shiftOp", (enum asmjit::arm::ShiftOp (asmjit::arm::Mem::*)() const) &asmjit::arm::Mem::shiftOp, "Gets shift operation that is used by index register.\n\nC++: asmjit::arm::Mem::shiftOp() const --> enum asmjit::arm::ShiftOp");
-		cl.def("setShiftOp", (void (asmjit::arm::Mem::*)(enum asmjit::arm::ShiftOp)) &asmjit::arm::Mem::setShiftOp, "Sets shift operation that is used by index register.\n\nC++: asmjit::arm::Mem::setShiftOp(enum asmjit::arm::ShiftOp) --> void", pybind11::arg("sop"));
-		cl.def("resetShiftOp", (void (asmjit::arm::Mem::*)()) &asmjit::arm::Mem::resetShiftOp, "Resets shift operation that is used by index register to LSL (default value).\n\nC++: asmjit::arm::Mem::resetShiftOp() --> void");
-		cl.def("hasShift", (bool (asmjit::arm::Mem::*)() const) &asmjit::arm::Mem::hasShift, "Gets whether the memory operand has shift (aka scale) constant.\n\nC++: asmjit::arm::Mem::hasShift() const --> bool");
-		cl.def("shift", (unsigned int (asmjit::arm::Mem::*)() const) &asmjit::arm::Mem::shift, "Gets the memory operand's shift (aka scale) constant.\n\nC++: asmjit::arm::Mem::shift() const --> unsigned int");
-		cl.def("setShift", (void (asmjit::arm::Mem::*)(unsigned int)) &asmjit::arm::Mem::setShift, "Sets the memory operand's shift (aka scale) constant.\n\nC++: asmjit::arm::Mem::setShift(unsigned int) --> void", pybind11::arg("shift"));
-		cl.def("setShift", (void (asmjit::arm::Mem::*)(class asmjit::arm::Shift)) &asmjit::arm::Mem::setShift, "Sets the memory operand's shift and shift operation.\n\nC++: asmjit::arm::Mem::setShift(class asmjit::arm::Shift) --> void", pybind11::arg("shift"));
-		cl.def("resetShift", (void (asmjit::arm::Mem::*)()) &asmjit::arm::Mem::resetShift, "Resets the memory operand's shift (aka scale) constant to zero.\n\nC++: asmjit::arm::Mem::resetShift() --> void");
-	}
 }
