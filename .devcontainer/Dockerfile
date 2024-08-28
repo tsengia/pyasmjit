@@ -3,9 +3,10 @@ FROM ubuntu:noble
 # Install C/C++ dev tools and basic tools (git, cmake, ripgrep, etc.)
 RUN apt-get update -y && \
     apt-get install -y --no-install-recommends \
-        build-essential cmake git gnupg2 \
+        build-essential llvm-18 clang-18 libclang-18-dev llvm-18-dev \
+        libstdc++-static ncurses-compat-libs \
         python3-pip python3-dev  \
-        ripgrep  && \
+        cmake git gnupg2 ripgrep  && \
     apt-get clean
 
 # Install python packages
