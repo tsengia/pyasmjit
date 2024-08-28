@@ -2,8 +2,8 @@
 Python 3.7+ bindings for [asmjit](https://github.com/asmjit/asmjit).
 
 ```python
-from pyasmjit import CodeHolder, JitRuntime
-from pyasmjit.x86 import Assembler
+from pyasmjit import *
+from pyasmjit.x86 import *
 
 rt = JitRuntime()
 c = CodeHolder(rt.environment())
@@ -15,7 +15,9 @@ a.push(zbp)
 a.mov(zbp, zsp)
 
 # TODO: Patch assembler to auto-cast ints + floats + bytes + char to Immutable values
-a.sub(zsp, pyasmjit.asmjit.Imm(32))
+# TODO: Imm() constructor defaults to casting ints to doubles immediately. Need to fix that.
+# TODO: Certain Imm::isInt() Imm:isXYZ() functions cast the boolean return values back to ints. Need to fix that.
+a.sub(zsp, Imm(32))
 
 # TODO: Fix imports to allow for referencing registers by static name
 a.xor_(pyasmjit.asmjit.x86.eax(), pyasmjit.asmjit.x86.eax())
