@@ -98,6 +98,7 @@ void bind_unknown_unknown_39(std::function< pybind11::module &(std::string const
 		cl.def( pybind11::init( [](){ return new asmjit::JitRuntime(); }, [](){ return new PyCallBack_asmjit_JitRuntime(); } ), "doc");
 		cl.def( pybind11::init<const struct asmjit::JitAllocator::CreateParams *>(), pybind11::arg("params") );
 
+		/// TODO: Implement bindings for the JitRuntime::add() method: https://asmjit.com/doc/classasmjit_1_1JitRuntime.html#a90f757302e3a617cc65cb18e9faf3a4a
 
 		cl.def("reset", [](asmjit::JitRuntime &o) -> void { return o.reset(); }, "");
 		cl.def("reset", (void (asmjit::JitRuntime::*)(enum asmjit::ResetPolicy)) &asmjit::JitRuntime::reset, "Resets the  freeing everything that was allocated by it.\n\n Depending on `resetPolicy` the currently held memory can be either freed entirely when ResetPolicy::kHard is used,\n or the allocator can keep some of it for next allocations when ResetPolicy::kSoft is used, which is the default\n behavior.\n\nC++: asmjit::JitRuntime::reset(enum asmjit::ResetPolicy) --> void", pybind11::arg("resetPolicy"));
