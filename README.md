@@ -25,7 +25,7 @@ a.ret()
 ```
 
 ## Build Instructions
-Code generation through [binder](https://cppbinder.readthedocs.io/en/latest/config.html).
+Code generation through [binder](https://cppbinder.readthedocs.io/en/latest/config.html), bindings by [pybind11](https://github.com/pybind/pybind11).
 
 ```bash
 # Generate the C++ pybind11 bindings using this `binder` command
@@ -47,3 +47,11 @@ cd build
 # Compile
 make -j $(nproc)
 ```
+
+During the CI build process, wheels will be built using [cibuildwheel](https://cibuildwheel.pypa.io/en/stable/).
+
+## Other Dev Notes
+- [https://learn.scientific-python.org/development/guides/packaging-compiled/](https://learn.scientific-python.org/development/guides/packaging-compiled/)
+- [Building Wheels on GitHub Actions](https://learn.scientific-python.org/development/guides/gha-wheels/)
+- [scikit_build_example repo](https://github.com/pybind/scikit_build_example/tree/master)
+- [pybind11 docs](https://pybind11.readthedocs.io/en/latest/classes.html)
