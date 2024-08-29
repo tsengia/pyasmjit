@@ -23,29 +23,16 @@ a.pop(zbp)
 a.ret()
 ```
 
+## TODO
+- Allow adding function to JitRuntime
+- Allow calling function that was added to JitRuntime
+- Allow releasing function from JitRuntime
+- Build wheel file
+
 ## Build Instructions
 Code generation through [binder](https://cppbinder.readthedocs.io/en/latest/config.html), bindings by [pybind11](https://github.com/pybind/pybind11).
 
-```bash
-# Generate the C++ pybind11 bindings using this `binder` command
-binder --root-module _pyasmjit --prefix src/gen/ --config binder.config src/all_includes.hpp -- -std=c++11 -Iextern/asmjit/src/ -DNDEBUG -iwithsysroot=/usr/local/c++/13/ -DASMJIT_NO_DEPRECATED
-
-# Remove private member accesses
-sed -i 's/^.*cl.def_readwrite("_[A-Za-z0-9]\+".*$//g' ./src/gen/unknown/*.cpp
-sed -i 's/^.*cl.def("_[A-Za-z0-9]\+".*$//g' ./src/gen/unknown/*.cpp
-sed -i 's/^.*cl.def_static("_[A-Za-z0-9]\+".*$//g' ./src/gen/unknown/*.cpp
-
-# Remove cend() and cbegin() functions
-sed -i 's/^.*cl.def("cend".*$//g' ./src/gen/unknown/*.cpp
-sed -i 's/^.*cl.def("cbegin".*$//g' ./src/gen/unknown/*.cpp
-
-# Configure the project with CMake
-cmake CMakeLists.txt -Bbuild
-cd build
-
-# Compile
-make -j $(nproc)
-```
+The `build.sh` script was used to generate the C++ code in the `src/gen` directory.
 
 During the CI build process, wheels will be built using [cibuildwheel](https://cibuildwheel.pypa.io/en/stable/).
 
