@@ -1,10 +1,11 @@
-from typing import Optional
+from typing import Optional, Union
 from .._pyasmjit.asmjit import CodeHolder as _CodeHolder
 from .._pyasmjit.asmjit import Environment
 from .._pyasmjit.asmjit import CpuFeatures
 from .._pyasmjit.asmjit import Label
 from .._pyasmjit.asmjit import Operand
-from .._pyasmjit.asmjit import Imm, ImmType
+from .._pyasmjit.asmjit import Imm as _Imm
+from .._pyasmjit.asmjit import ImmType
 from .._pyasmjit.asmjit import JumpAnnotation
 from .._pyasmjit.asmjit import FuncNode
 from .._pyasmjit.asmjit import FuncDetail
@@ -29,5 +30,30 @@ class CodeHolder(_CodeHolder):
             err_code = super().init(env, cpu, base_address)
 
         raise_exception_for_error_code(err_code)
+
+class Imm(_Imm):
+
+    def __init__(self, value: Union[int,float]):
+        if isinstance(value, int):
+            super().__init__()
+            super().setType(ImmType(ImmType.kInt))
+            super().setValue(value)
+
+        elif isinstance(value, float):
+            super().__init__()
+            super().setType(ImmType(ImmType.kDouble))
+            super().setValue(value)
+
+    @property
+    def value(self) -> Union[int, float]:
+         
+        if self.type == ImmType.kInt:
+            return super().value()
+        
+        return super().valueAsDouble()
+    
+    @property
+    def type(self) -> ImmType:
+        return super().type()
 
 __all__ = [ "CodeHolder", "Environment", "CpuFeatures", "Label", "JitRuntime", "Imm", "ImmType", "Operand", "JumpAnnotation" ]
