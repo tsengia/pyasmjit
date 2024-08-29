@@ -1,5 +1,6 @@
 from pyasmjit import JitRuntime, CodeHolder, Imm
 from pyasmjit.x86 import *
+from pyasmjit.x86.registers import *
 
 def test_assembler_example():
     rt = JitRuntime()
@@ -15,7 +16,7 @@ def test_assembler_example():
     a.sub(zsp, i)
 
     # TODO: Fix imports to allow for referencing registers by static name
-    #a.xor_(pyasmjit.asmjit.x86.eax(), pyasmjit.asmjit.x86.eax())
+    a.xor_(eax, eax)
     a.mov(zsp, zbp)
     a.pop(zbp)
     a.ret()
