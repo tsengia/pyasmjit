@@ -4,4 +4,4 @@ from .core import *
 
 from ._pyasmjit import asmjit
 
-__all__ = ["asmjit", "CpuFeatures", "CodeHolder", "Environment", "JitRuntime", "Label", "Imm", "Operand" ]
+__all__ = ["asmjit", "CpuFeatures", "CodeHolder", "Environment", "JitRuntime", "Label", "Imm", "ImmType", "Operand" ]
