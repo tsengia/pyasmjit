@@ -25,9 +25,6 @@ sed -i 's/cl.def_static("isVec"/cl.def_static("isOperandVec"/g' ./src/gen/unknow
 # Modified unknown_13.cpp
 #   Had to rename static functions of form `isGp` to `isOperandGp`
 
-# TODO: It would be nice if binder could auto-deconflict static method overloading. 
-#           This would remove the manual changes needed above
-
 # Modified unknown_24.cpp
 #   Had to add constructor for CodeHolder b/c constructor accepts a excluded class (asmjit::Support::Temporary) as an argument
 #   TODO: Check which other objects are lacking a constructor due to excluding the asmjit::Support namespace
@@ -35,6 +32,10 @@ sed -i 's/cl.def_static("isVec"/cl.def_static("isOperandVec"/g' ./src/gen/unknow
 # TODO: It would be nice if binder could include default constructors for classes with 
 #       type-excluded arguments which also have default values set
 #           This would remove the manual change needed above in unknown_24.cpp
+
+# Modified unknown_14.cpp
+#   Had to rename the multiple valueAs() methods to valueAsShort(), valueAsUnsignedShort(), etc.
+#   Had to add the valueAsDouble() method
 
 # Remove cend() and cbegin() functions
 sed -i 's/^.*cl.def("cend".*$//g' ./src/gen/unknown/*.cpp

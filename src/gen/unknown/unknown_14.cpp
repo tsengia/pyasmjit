@@ -89,11 +89,12 @@ void bind_unknown_unknown_14(std::function< pybind11::module &(std::string const
 
 		cl.def( pybind11::init<struct asmjit::Globals::NoInit_>(), pybind11::arg("") );
 
-		cl.def("valueAs", (signed char (asmjit::Imm::*)() const) &asmjit::Imm::valueAs<signed char>, "C++: asmjit::Imm::valueAs() const --> signed char");
-		cl.def("valueAs", (short (asmjit::Imm::*)() const) &asmjit::Imm::valueAs<short>, "C++: asmjit::Imm::valueAs() const --> short");
-		cl.def("valueAs", (int (asmjit::Imm::*)() const) &asmjit::Imm::valueAs<int>, "C++: asmjit::Imm::valueAs() const --> int");
-		cl.def("valueAs", (unsigned char (asmjit::Imm::*)() const) &asmjit::Imm::valueAs<unsigned char>, "C++: asmjit::Imm::valueAs() const --> unsigned char");
-		cl.def("valueAs", (unsigned short (asmjit::Imm::*)() const) &asmjit::Imm::valueAs<unsigned short>, "C++: asmjit::Imm::valueAs() const --> unsigned short");
+		cl.def("valueAsDouble", (double (asmjit::Imm::*)() const) &asmjit::Imm::valueAs<double>, "C++: asmjit::Imm::valueAs() const --> double");
+		cl.def("valueAsSignedChar", (signed char (asmjit::Imm::*)() const) &asmjit::Imm::valueAs<signed char>, "C++: asmjit::Imm::valueAs() const --> signed char");
+		cl.def("valueAsShort", (short (asmjit::Imm::*)() const) &asmjit::Imm::valueAs<short>, "C++: asmjit::Imm::valueAs() const --> short");
+		cl.def("valueAsInt", (int (asmjit::Imm::*)() const) &asmjit::Imm::valueAs<int>, "C++: asmjit::Imm::valueAs() const --> int");
+		cl.def("valueAsUnsignedChar", (unsigned char (asmjit::Imm::*)() const) &asmjit::Imm::valueAs<unsigned char>, "C++: asmjit::Imm::valueAs() const --> unsigned char");
+		cl.def("valueAsUnsignedShort", (unsigned short (asmjit::Imm::*)() const) &asmjit::Imm::valueAs<unsigned short>, "C++: asmjit::Imm::valueAs() const --> unsigned short");
 		cl.def("setValue", (void (asmjit::Imm::*)(const float &)) &asmjit::Imm::setValue<float>, "C++: asmjit::Imm::setValue(const float &) --> void", pybind11::arg("val"));
 		cl.def("setValue", (void (asmjit::Imm::*)(const double &)) &asmjit::Imm::setValue<double>, "C++: asmjit::Imm::setValue(const double &) --> void", pybind11::arg("val"));
 		cl.def("setValue", (void (asmjit::Imm::*)(const long &)) &asmjit::Imm::setValue<long>, "C++: asmjit::Imm::setValue(const long &) --> void", pybind11::arg("val"));
