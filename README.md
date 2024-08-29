@@ -24,7 +24,6 @@ a.ret()
 ```
 
 ## TODO
-- Allow adding function to JitRuntime
 - Allow calling function that was added to JitRuntime
 - Allow releasing function from JitRuntime
 - Build wheel file

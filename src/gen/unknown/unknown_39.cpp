@@ -19,16 +19,16 @@
 struct PyCallBack_asmjit_JitRuntime : public asmjit::JitRuntime {
 	using asmjit::JitRuntime::JitRuntime;
 
-	unsigned int _release(void * a0) throw() override {
+	asmjit::Error _release(void * a0) throw() override {
 		pybind11::gil_scoped_acquire gil;
 		pybind11::function overload = pybind11::get_overload(static_cast<const asmjit::JitRuntime *>(this), "_release");
 		if (overload) {
 			auto o = overload.operator()<pybind11::return_value_policy::reference>(a0);
-			if (pybind11::detail::cast_is_temporary_value_reference<unsigned int>::value) {
-				static pybind11::detail::override_caster_t<unsigned int> caster;
-				return pybind11::detail::cast_ref<unsigned int>(std::move(o), caster);
+			if (pybind11::detail::cast_is_temporary_value_reference<asmjit::Error>::value) {
+				static pybind11::detail::override_caster_t<asmjit::Error> caster;
+				return pybind11::detail::cast_ref<asmjit::Error>(std::move(o), caster);
 			}
-			return pybind11::detail::cast_safe<unsigned int>(std::move(o));
+			return pybind11::detail::cast_safe<asmjit::Error>(std::move(o));
 		}
 		return JitRuntime::_release(a0);
 	}
@@ -98,7 +98,23 @@ void bind_unknown_unknown_39(std::function< pybind11::module &(std::string const
 		cl.def( pybind11::init( [](){ return new asmjit::JitRuntime(); }, [](){ return new PyCallBack_asmjit_JitRuntime(); } ), "doc");
 		cl.def( pybind11::init<const struct asmjit::JitAllocator::CreateParams *>(), pybind11::arg("params") );
 
-		/// TODO: Implement bindings for the JitRuntime::add() method: https://asmjit.com/doc/classasmjit_1_1JitRuntime.html#a90f757302e3a617cc65cb18e9faf3a4a
+		cl.def("add", 
+			[](asmjit::JitRuntime& rt, pybind11::object& func, asmjit::CodeHolder* code) -> asmjit::Error { 
+				pybind11::gil_scoped_acquire gil;
+				void* function_handle = nullptr;
+				asmjit::Error e = rt._add(&function_handle, code);
+				if (e != asmjit::ErrorCode::kErrorOk) {
+					return e;
+				}
+
+				PyObject* long_object = PyLong_FromUnsignedLong((unsigned long) function_handle);
+				if (long_object == nullptr) {
+					throw std::bad_alloc();
+				}
+				PyObject_SetAttrString(func.ptr(), "_location", long_object);
+				return e;
+		}, "Add a function to the JitRuntime.");
+
 
 		cl.def("reset", [](asmjit::JitRuntime &o) -> void { return o.reset(); }, "");
 		cl.def("reset", (void (asmjit::JitRuntime::*)(enum asmjit::ResetPolicy)) &asmjit::JitRuntime::reset, "Resets the  freeing everything that was allocated by it.\n\n Depending on `resetPolicy` the currently held memory can be either freed entirely when ResetPolicy::kHard is used,\n or the allocator can keep some of it for next allocations when ResetPolicy::kSoft is used, which is the default\n behavior.\n\nC++: asmjit::JitRuntime::reset(enum asmjit::ResetPolicy) --> void", pybind11::arg("resetPolicy"));

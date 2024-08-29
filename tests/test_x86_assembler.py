@@ -15,8 +15,12 @@ def test_assembler_example():
     i = Imm(32)
     a.sub(zsp, i)
 
-    # TODO: Fix imports to allow for referencing registers by static name
     a.xor_(eax, eax)
     a.mov(zsp, zbp)
     a.pop(zbp)
     a.ret()
+
+    f = rt.add(c)
+    assert f is not None
+    assert f._location is not None
+    print(f"Function handle location: {f._location}")

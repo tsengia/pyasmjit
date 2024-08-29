@@ -13,7 +13,7 @@ from .._pyasmjit.asmjit import FuncFrame
 from .._pyasmjit.asmjit import CallConv
 from .._pyasmjit.asmjit import FuncValue
 from .._pyasmjit.asmjit import FuncSignature
-from .._pyasmjit.asmjit import JitRuntime
+from .._pyasmjit.asmjit import JitRuntime as _JitRuntime
 
 from ..error import raise_exception_for_error_code
 
@@ -58,7 +58,7 @@ class Imm(_Imm):
 
 class FunctionHandle():
 
-    def __init__(self, runtime: Optional[JitRuntime] = None):
+    def __init__(self, runtime = None):
         self._address: int = 0
         self.runtime: Optional[JitRuntime] = runtime
 
@@ -69,5 +69,14 @@ class FunctionHandle():
         if self.runtime is None:
             return
         self.runtime.release(self._address)
+
+class JitRuntime(_JitRuntime):
+
+    def add(self, code: CodeHolder) -> FunctionHandle:
+        f = FunctionHandle(self)
+
+        super().add(f, code)
+
+        return f
 
 __all__ = [ "CodeHolder", "Environment", "CpuFeatures", "Label", "JitRuntime", "Imm", "ImmType", "Operand", "JumpAnnotation" ]
