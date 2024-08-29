@@ -56,4 +56,18 @@ class Imm(_Imm):
     def type(self) -> ImmType:
         return super().type()
 
+class FunctionHandle():
+
+    def __init__(self, runtime: Optional[JitRuntime] = None):
+        self._address: int = 0
+        self.runtime: Optional[JitRuntime] = runtime
+
+        # TODO: Implement JitRuntime::add(self._address, code_holder)
+        # https://asmjit.com/doc/classasmjit_1_1JitRuntime.html#a8d0aaefc03ac97d845c9ebbc68358c4b
+
+    def release(self):
+        if self.runtime is None:
+            return
+        self.runtime.release(self._address)
+
 __all__ = [ "CodeHolder", "Environment", "CpuFeatures", "Label", "JitRuntime", "Imm", "ImmType", "Operand", "JumpAnnotation" ]
